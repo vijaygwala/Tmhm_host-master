@@ -34,7 +34,7 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 #DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['139.59.65.7', '127.0.0.1','www.learnopad.com','learnopad.com']
+ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '139.59.93.143', '127.0.0.1']
 
 # Application definition
 
