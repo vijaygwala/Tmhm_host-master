@@ -132,7 +132,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'learnopad',
             'USER': 'learnopad_admin',
-            'PASSWORD': 'learnopad@tmhmdocean#2020tm',
+            'PASSWORD': 'learnopad@tmhmdocean#2020adv',
             'HOST': 'localhost',
             'PORT': '',
         }
