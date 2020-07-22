@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
+    'rest_framework'
     # endVijay
     
 

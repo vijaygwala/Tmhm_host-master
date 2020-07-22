@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+{% load rest_framework %}
 <html>
 {% load static %}
+
 
 <head>
 
@@ -209,6 +211,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/categories">Categories</a>
                     </li>
+                   
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" data-toggle="modal" data-target="#exampl">
                         Free Content
@@ -226,7 +229,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li>
-                        <p>Welcome, {{ user.username }} !</p>
+                        <p>Welcome, {{ user.first_name }} !</p>
                     </li>
                     {% else %}
                     <li class="nav-item">
@@ -401,17 +404,32 @@
                         <h2>Request for a free <br> Online Councelling</h2>
                     </div>
                     <div class="col-12" id="query">
-                        <form action="" method="post" onSubmit="return check_ephone(this)" style="width: 20em">
+                        <form id="#msform"  method="POST" action="{% url 'councelling' %}"onSubmit="return check_ephone(this)" style="width: 20em">
                             {% csrf_token %}
-                                <input type="email" class="form-control" name="youremail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                
+                                <input class="form-control mb-2" name="name"type="text" placeholder="Name">
+                                
+                                <input type="email" class="form-control" name="email"  aria-describedby="emailHelp" placeholder="Enter email">
                                 <div class="input-group mb-3 mt-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">+91</span>
                                     </div>
-                                <input type="tel" class="form-control" name="yourphone" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon1">
+                                    
+                                <input type="tel" class="form-control" name="phone_number" placeholder="PhoneNumber" aria-label="PhoneNumber" aria-describedby="basic-addon1">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+ {% if messages %}
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+<div class="alert alert-success mt-2">{{message}} </div>
+{% endif %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+<div class="alert alert-danger mt-2">{{message}} </div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
                     </div>
                 </div>
             </div>
@@ -459,6 +477,9 @@
                 <a href="/facilitator">Facilitators</a>
                 </p>
                 <p>
+                <p>
+                <a href="/admin">Admin</a>
+                </p>
                 <a href="/campus">Campus</a>
                 </p>
                 <p>
@@ -540,6 +561,77 @@
     <script src="{% static '/LandingPage/js/owl.carousel.js' %}"></script>
 
     <script>
+
+
+ function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+}); 
+
+
+
+
+ {% comment %} $(document).ready(function(){
+  $("#smsg").css("display:None")
+    var $myForm = $('#msform')
+    $myForm.submit(function(event){
+        event.preventDefault()
+      
+       var $thisURL = $myForm.attr('action')
+       $.ajax({
+           url: {% url 'councelling' %},
+          type: "POST",
+           
+            
+          data:JSON.stringify($( this).serialize()),
+           dataType:'json',
+           contentType: "application/json; charset=utf-8",
+           success: handleFormSuccess,
+            error: handleFormError,
+        });
+    });
+
+    function handleFormSuccess(messages, textStatus, jqXHR){
+    
+        $('#smsg').text(messages.message);
+       $myForm.reset(); // reset form data
+         
+    }
+
+    function handleFormError(jqXHR, textStatus, errorThrown){
+        console.log(jqXHR)
+         console.log(textStatus)
+        console.log(errorThrown)
+        console.log($("#msform").serialize());
+    }
+ })
+  {% endcomment %}
+
 
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();

@@ -21,7 +21,10 @@ class CourseAdmin(admin.ModelAdmin):
 class offerAdmin(admin.ModelAdmin):
     list_display=('Fid','Cid')
 
+class CouncellingAdmin(admin.ModelAdmin):
+    list_display=('councelling_id','name','email','phone_number')
 
+admin.site.register(OnlineCounsellingDetails,CouncellingAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(SubCategory,SubCategoryAdmin)
 admin.site.register(Course,CourseAdmin)
