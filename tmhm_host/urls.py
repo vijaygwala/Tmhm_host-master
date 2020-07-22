@@ -21,6 +21,10 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
+=======
+    path('', include('myauth.api.urls')),
+>>>>>>> backend
     path('accounts/', include('allauth.urls')),
     path('', include('LandingPage.urls')),
     path('', include('facilitators.urls')),

@@ -26,14 +26,35 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
+<<<<<<< HEAD
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
+=======
+    list_display = ('email', 'first_name', 'last_name','get_phone', 'get_role')
+>>>>>>> backend
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     list_select_related = ('profile', )
 
+<<<<<<< HEAD
     def get_Address(self, instance):
         return instance.profile.Address
     get_Address.short_description = 'Location'
+=======
+    def get_role(self, instance):
+        value=instance.profile.role
+        if value==3:
+            return "Admin"
+        elif value==2:
+            return "Facilitator"
+        else:
+            return "Visiter"
+    get_role.short_description = 'Role'
+    def get_phone(self, instance):
+        return instance.profile.phone
+    get_phone.short_description = 'Phone'
+
+
+>>>>>>> backend
 
     def get_inline_instances(self, request, obj=None):
         if not obj:
