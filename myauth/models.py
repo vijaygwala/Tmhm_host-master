@@ -65,9 +65,9 @@ class Profile(models.Model):
     Address = models.CharField(max_length=30, blank=True)
     DOB = models.DateField(null=True, blank=True)
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
-    phone=models.CharField(max_length=13,blank=False)
-    portfolio = models.FileField(upload_to ='uploads/')
-    profile=models.ImageField(upload_to ='Mentor_profiles/',default='default.png')
+    phone=models.CharField(max_length=13,null=True, blank=True)
+    portfolio = models.FileField(upload_to ='uploads/',null=True, blank=True)
+    profile=models.ImageField(upload_to ='Mentor_profiles/',default='default.png',null=True, blank=True)
     intrest=models.CharField(max_length=250)
     def __str__(self):  # __unicode__ for Python 2
         return self.user.email

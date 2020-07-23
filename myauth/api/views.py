@@ -17,8 +17,12 @@ import io
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.views import View
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import FileUploadParser
+
 # Register API
 class FacilitatorRegisterAPI(APIView):
+    #parser_classes = [FileUploadParser]
     def get(self, request, *args, **kwargs):
         category=Category.objects.all()
         subcategory=SubCategory.objects.all()
@@ -29,42 +33,65 @@ class FacilitatorRegisterAPI(APIView):
     
         f=request.data.pop('facilitator')
         query_input=request.data.pop('fquery')
-        # print(f)
+        print(query_input)
         form = RegisterSerializer(data=request.data)
         
-        #phone=request.POST.get('phone','')
-        #portfolio = request.FILES.get('pro','')
+        phone=request.data.get('phone','')
+        #portfolio = request.data.get('file')
+        #print(portfolio)
         fquery=FacilitatorQueriesFormSerializer(data=query_input)
-        #course=request.POST.getlist('course','')
-        # catlist=""
-        # for cat in course: 
-        #     catlist+=cat+","
-        # print(course)
+        course=request.data.pop('course')
+        print(course)
+        catlist=""
+        for cat in course: 
+             catlist+=cat+","
+        print(course)
         user=None
-        try:
-            if form.is_valid(raise_exception=True):
-                user=form.save()
-                f["facilitator"]=user.id
-                query_input['user']=user.id
-            #     profile=Profile.objects.get(user=user.id)
-            #     profile.phone=phone
-            #     #profile.portfolio=portfolio
-            #     profile.role=2
-            #    #profile.intrest=catlist
-            #     profile.save()
-            else:
-                return Response({"messages":"something went wrong in form save method!"})
-        except:
-            return Response({'messages': 'Something went Wrong in form !'})
+        profile=None
+        
+        if form.is_valid(raise_exception=True):
+            user=form.save()
+            f["facilitator"]=user.id
+            query_input['user']=user.id
+            profile=Profile.objects.get(user=user.id)
+            #request["profile"]=profile
+            profile.phone=phone
+            #profile.portfolio=portfolio
+            profile.role=2
+            profile.intrest=catlist
+            
+          
         print(f)
         expform = ExperienceSerializer(data=f)
         
         if expform.is_valid(raise_exception=True):
             expform.save()
+        else:
+            messages.error(request, ('Invalid Experience Deatails !'))
+            return redirect('register')
         if fquery!=None:
             if fquery.is_valid(raise_exception=True):
                 fquery.save()
-        return Response({'messages': 'User Created successfully'})
+            else:
+                messages.error(request, ('Invalid Query Deatails !'))
+                return redirect('register')
+        profile.portfolio=FileView.post(self,request)
+        profile.save()
+        messages.success(request, ('Your profile was successfully Created!'))
+        return Response(status=204)
+
+class FileView(APIView):
+    parser_classes = [FileUploadParser]
+
+    def post(self, request):
+        
+        file_obj = request.data['file']
+        
+        
+        # ...
+        # do some stuff with uploaded file
+        # ...
+        return file_obj 
 
 
 from rest_framework.generics import CreateAPIView
@@ -85,7 +112,7 @@ class OnlineCouncelling(APIView):
 # class LoginAPI(KnoxLoginView):
 #     permission_classes = (permissions.AllowAny,)
 
-#     def post(self, request, format=None):
+#     def post(self, request):
 #         serializer = AuthTokenSerializer(data=request.data)
 #         serializer.is_valid(raise_exception=True)
 #         user = serializer.validated_data['user']
