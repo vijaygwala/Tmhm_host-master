@@ -293,7 +293,7 @@ body {
     <div class="form-group">
                         <div class="custom-file">
                             <label class="custom-file-label text-left" for="customFile">Upload Profile</label>
-                            <input type="file" class="custom-file-input" name="pro" id="customFile" title="Attach resume in doc/pdf format" accept=".pdf,.doc" >
+                            <input type="file" class="custom-file-input" name="file" id="customFile"  title="Attach resume in doc/pdf format" accept=".pdf,.doc" >
                              <i id="fwmyfile" aria-hidden="true"></i><span id="myfile" class="text-danger"></span>
                         </div>
         </div>
@@ -417,13 +417,13 @@ body {
     $myForm.submit(function(event){
         event.preventDefault()  
         var cat_list = $('#choose-category option:selected').toArray().map(item => item.text);
-                 
-        var input = document.querySelector('input[type="file"]') 
-        var fileName
-        $('input[type="file"]').change(function(e){
-            fileName = e.target.files[0].name;
-             });
-        console.log()
+         var fileName        
+      $('#customFile').on('change',function(e) {
+          var files = e.target.files;
+    fileName = files[0].name;
+  });
+  var mypdf='attachment; filename="'+$('#customFile').get(0).files[0].name+'"'
+        console.log($('#customFile').get(0).files[0].name+" "+fileName+" "+mypdf)
 var data = JSON.stringify({
   "first_name": $('#id_first_name').val(),
     "last_name": $('#id_last_name').val(),
@@ -432,9 +432,10 @@ var data = JSON.stringify({
     "password2":$('#id_password2').val(),
     "phone":$('#mobile').val(),
     "course":cat_list,
-    "file":input.files[0],
+    "file":$('#customFile').get(0).files[0],
+    "filename":$('#customFile').get(0).files[0].name,
     "facilitator": {"Linkedin_Url": $('#id_Linkedin_Url').val(), "Website_Url":$('#id_Website_Url').val() , "Youtube_Url":$('#id_Youtube_Url').val()  ,"RExperience":$('#id_RExperience').val(),"TExperience":$('#id_TExperience').val()},
-    "fquery":{"query":$('#id_query').val() }
+    "fquery":{"query":$.trim($("#id_query").val()), }
 })
 let csrftoken = getCookie('csrftoken');
 let response = fetch("{% url 'register' %}", {
@@ -443,7 +444,7 @@ let response = fetch("{% url 'register' %}", {
     headers: { 'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
         "X-CSRFToken": csrftoken,
-        "Content-Disposition":'attachment; filename="'+fileName+'"'},
+        "Content-Disposition":mypdf},
 })
 console.log(response)
     })

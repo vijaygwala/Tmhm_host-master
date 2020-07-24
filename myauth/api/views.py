@@ -22,7 +22,6 @@ from rest_framework.parsers import FileUploadParser
 
 # Register API
 class FacilitatorRegisterAPI(APIView):
-    #parser_classes = [FileUploadParser]
     def get(self, request, *args, **kwargs):
         category=Category.objects.all()
         subcategory=SubCategory.objects.all()
@@ -33,12 +32,11 @@ class FacilitatorRegisterAPI(APIView):
     
         f=request.data.pop('facilitator')
         query_input=request.data.pop('fquery')
+        filename=request.data.pop('filename')
         print(query_input)
         form = RegisterSerializer(data=request.data)
         
         phone=request.data.get('phone','')
-        #portfolio = request.data.get('file')
-        #print(portfolio)
         fquery=FacilitatorQueriesFormSerializer(data=query_input)
         course=request.data.pop('course')
         print(course)
@@ -54,12 +52,12 @@ class FacilitatorRegisterAPI(APIView):
             f["facilitator"]=user.id
             query_input['user']=user.id
             profile=Profile.objects.get(user=user.id)
-            #request["profile"]=profile
+            profile.portfolio=FileView.post(self,request,filename)
             profile.phone=phone
             #profile.portfolio=portfolio
             profile.role=2
             profile.intrest=catlist
-            
+            profile.save()
           
         print(f)
         expform = ExperienceSerializer(data=f)
@@ -75,15 +73,14 @@ class FacilitatorRegisterAPI(APIView):
             else:
                 messages.error(request, ('Invalid Query Deatails !'))
                 return redirect('register')
-        profile.portfolio=FileView.post(self,request)
-        profile.save()
+       
         messages.success(request, ('Your profile was successfully Created!'))
         return Response(status=204)
 
 class FileView(APIView):
     parser_classes = [FileUploadParser]
 
-    def post(self, request):
+    def post(self, request,filename):
         
         file_obj = request.data['file']
         
