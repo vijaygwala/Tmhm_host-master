@@ -3,10 +3,7 @@ from myauth.models import *
 # Create your models here.
 from django.db.models.signals import post_delete
 #from django.dispatch import receive
-<<<<<<< HEAD
 
-
-=======
 from django.core.validators import RegexValidator
 
 
@@ -19,7 +16,7 @@ class OnlineCounsellingDetails(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True) 
     def __str__(self):
         return self.name
->>>>>>> backend
+
 #this table contain all the categories
 class Category(models.Model):
     cat_id=models.AutoField(primary_key=True)
