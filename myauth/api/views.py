@@ -17,6 +17,10 @@ import io
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from django.views import View
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import FileUploadParser
+from django.core import serializers
+
 # Register API
 class FacilitatorRegisterAPI(APIView):
     def get(self, request, *args, **kwargs):
@@ -26,45 +30,69 @@ class FacilitatorRegisterAPI(APIView):
         return render(request, 'facilitators/register/mysignup.html', context)
 
     def post(self, request, *args, **kwargs):
-    
-        f=request.data.pop('facilitator')
-        query_input=request.data.pop('fquery')
-        # print(f)
-        form = RegisterSerializer(data=request.data)
+        file=request.FILES['file']
+        print(file)
+        print(type(file))
+        print(request.data)
+        personal_detail=json.loads(request.data.pop('data')[0])
+        print(personal_detail)
+        exp_form=personal_detail.pop('facilitator')
+        facilitator_query=personal_detail.pop('fquery')
+        expform = ExperienceSerializer(data=exp_form)
+        form = RegisterSerializer(data=personal_detail)
         
-        #phone=request.POST.get('phone','')
-        #portfolio = request.FILES.get('pro','')
-        fquery=FacilitatorQueriesFormSerializer(data=query_input)
-        #course=request.POST.getlist('course','')
-        # catlist=""
-        # for cat in course: 
-        #     catlist+=cat+","
-        # print(course)
+        phone=personal_detail.get('phone')
+        fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
+        course=personal_detail.get('course')
+        print(course)
+        catlist=""
+        for cat in course: 
+             catlist+=cat+","
+        print(course)
         user=None
-        try:
-            if form.is_valid(raise_exception=True):
-                user=form.save()
-                f["facilitator"]=user.id
-                query_input['user']=user.id
-            #     profile=Profile.objects.get(user=user.id)
-            #     profile.phone=phone
-            #     #profile.portfolio=portfolio
-            #     profile.role=2
-            #    #profile.intrest=catlist
-            #     profile.save()
-            else:
-                return Response({"messages":"something went wrong in form save method!"})
-        except:
-            return Response({'messages': 'Something went Wrong in form !'})
-        print(f)
-        expform = ExperienceSerializer(data=f)
+        profile=None
+        
+        if form.is_valid(raise_exception=True):
+            user=form.save()
+            exp_form["facilitator"]=user.id
+            facilitator_query['user']=user.id
+            profile=Profile.objects.get(user=user.id)
+            profile.portfolio=file
+            profile.phone=phone
+            #profile.portfolio=portfolio
+            profile.role=2
+            profile.intrest=catlist
+            profile.save()
+           
+        
         
         if expform.is_valid(raise_exception=True):
             expform.save()
+        else:
+            messages.error(request, ('Invalid Experience Deatails !'))
+            return redirect('register')
         if fquery!=None:
             if fquery.is_valid(raise_exception=True):
                 fquery.save()
-        return Response({'messages': 'User Created successfully'})
+            else:
+                messages.error(request, ('Invalid Query Deatails !'))
+                return redirect('register')
+       
+        messages.success(request, ('Your profile was successfully Created!'))
+        return Response({'redirect':'{% url "facilitator-register" %}'},status=201)
+
+class FileView(APIView):
+    parser_classes = [FileUploadParser]
+
+    def post(self, request,filename):
+        
+        file_obj = request.data['file']
+        
+        
+        # ...
+        # do some stuff with uploaded file
+        # ...
+        return file_obj 
 
 
 from rest_framework.generics import CreateAPIView
@@ -76,16 +104,16 @@ class OnlineCouncelling(APIView):
         if clForm.is_valid(raise_exception=True):
             clForm.save()
             messages.success(self.request, 'Thank You For Choosing Us!')
-            redirect('/')
-            return Response({})
+            # redirect('/')
+            return Response({'success':"Done"})
         else:
             messages.error(self.request, 'Invalid Form Detail')
-            redirect('/')
-            return Response({})
+            # redirect('/')
+            return Response({'error':"something went wrong"})
 # class LoginAPI(KnoxLoginView):
 #     permission_classes = (permissions.AllowAny,)
 
-#     def post(self, request, format=None):
+#     def post(self, request):
 #         serializer = AuthTokenSerializer(data=request.data)
 #         serializer.is_valid(raise_exception=True)
 #         user = serializer.validated_data['user']

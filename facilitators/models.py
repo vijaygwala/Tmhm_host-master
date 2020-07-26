@@ -14,19 +14,19 @@ from django.dispatch import receiver
 
 
 
-# #this relation contains all the facilitators
-# class Facilitator(models.Model):
-#     Fid=models.AutoField(primary_key=True)
-#     name=models.CharField(max_length=100,null=True,blank=True)
-#     DOB=models.DateField(blank=True,null=True)
-#     phone=models.CharField(max_length=13,blank=False)
-#     PAddress=models.TextField(blank=True,null=True)
-#     TAddress=models.TextField(blank=True,null=True)
-#     portfolio = models.FileField(upload_to ='uploads/% Y/% m/% d/')
-#     profile=models.ImageField(upload_to ='Mentor_profiles/% Y/% m/% d/',default='default.png')
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return self.name
+#this relation contains all the facilitators
+class Facilitator(models.Model):
+    Fid=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=100,null=True,blank=True)
+    DOB=models.DateField(blank=True,null=True)
+    phone=models.CharField(max_length=13,blank=False)
+    PAddress=models.TextField(blank=True,null=True)
+    TAddress=models.TextField(blank=True,null=True)
+
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,related_name = "user")
+    def __str__(self):
+        return self.name
+
 
 
 # #this relation contain experience info refers to the particuler Facilitator

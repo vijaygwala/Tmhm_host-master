@@ -404,7 +404,7 @@
                         <h2>Request for a free <br> Online Councelling</h2>
                     </div>
                     <div class="col-12" id="query">
-                        <form id="#msform"  method="POST" action="{% url 'councelling' %}"onSubmit="return check_ephone(this)" style="width: 20em">
+                        <form id="#csform"  method="POST" action="{% url 'councelling' %}"onSubmit="return check_ephone(this)" style="width: 20em">
                             {% csrf_token %}
                                 
                                 <input class="form-control mb-2" name="name"type="text" placeholder="Name">
@@ -594,9 +594,9 @@ $.ajaxSetup({
 
 
 
- {% comment %} $(document).ready(function(){
+  $(document).ready(function(){
   $("#smsg").css("display:None")
-    var $myForm = $('#msform')
+    var $myForm = $('#csform')
     $myForm.submit(function(event){
         event.preventDefault()
       
@@ -616,7 +616,7 @@ $.ajaxSetup({
 
     function handleFormSuccess(messages, textStatus, jqXHR){
     
-        $('#smsg').text(messages.message);
+        {% comment %} $('#smsg').text(messages.message); {% endcomment %}
        $myForm.reset(); // reset form data
          
     }
@@ -628,7 +628,7 @@ $.ajaxSetup({
         console.log($("#msform").serialize());
     }
  })
-  {% endcomment %}
+  
 
 
         $(".custom-file-input").on("change", function() {
