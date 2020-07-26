@@ -424,7 +424,7 @@ body {
   });
   var mypdf='attachment; filename="'+$('#customFile').get(0).files[0].name+'"'
         console.log($('#customFile').get(0).files[0].name+" "+fileName+" "+mypdf)
-var data = JSON.stringify({
+var data = {
   "first_name": $('#id_first_name').val(),
     "last_name": $('#id_last_name').val(),
     "email":$('#id_email').val(),
@@ -432,24 +432,40 @@ var data = JSON.stringify({
     "password2":$('#id_password2').val(),
     "phone":$('#mobile').val(),
     "course":cat_list,
-    "file":$('#customFile').get(0).files[0],
-    "filename":$('#customFile').get(0).files[0].name,
     "facilitator": {"Linkedin_Url": $('#id_Linkedin_Url').val(), "Website_Url":$('#id_Website_Url').val() , "Youtube_Url":$('#id_Youtube_Url').val()  ,"RExperience":$('#id_RExperience').val(),"TExperience":$('#id_TExperience').val()},
-    "fquery":{"query":$.trim($("#id_query").val()), }
-})
+    "fquery":{"query":$.trim($("#autoresizing").val()) }
+}
+var formData = new FormData();
+  formData.append('file',$('#customFile').get(0).files[0])
+  formData.append('data',JSON.stringify(data))
 let csrftoken = getCookie('csrftoken');
-let response = fetch("{% url 'register' %}", {
-    method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-        "X-CSRFToken": csrftoken,
-        "Content-Disposition":mypdf},
-})
-console.log(response)
-    })
-     })
+ $.ajaxSetup({async: false});
+$.ajax({
+    url: '{% url 'register' %}',
+    async: false,
+    data: formData,
+    contentType: false,
+    processData: false,
+    headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    type: 'POST',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+      if (response.redirect) {
+                window.location.href ='{% url "facilitator-register" %}';
+            } 
+    }
+});
 
+$.ajaxSetup({async: true}); 
+
+});
+});
 
 function getCookie(name) {
     var cookieValue = null;

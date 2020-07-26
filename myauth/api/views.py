@@ -19,6 +19,7 @@ from rest_framework.views import APIView
 from django.views import View
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FileUploadParser
+from django.core import serializers
 
 # Register API
 class FacilitatorRegisterAPI(APIView):
@@ -29,16 +30,20 @@ class FacilitatorRegisterAPI(APIView):
         return render(request, 'facilitators/register/mysignup.html', context)
 
     def post(self, request, *args, **kwargs):
-    
-        f=request.data.pop('facilitator')
-        query_input=request.data.pop('fquery')
-        filename=request.data.pop('filename')
-        print(query_input)
-        form = RegisterSerializer(data=request.data)
+        file=request.FILES['file']
+        print(file)
+        print(type(file))
+        print(request.data)
+        personal_detail=json.loads(request.data.pop('data')[0])
+        print(personal_detail)
+        exp_form=personal_detail.pop('facilitator')
+        facilitator_query=personal_detail.pop('fquery')
+        expform = ExperienceSerializer(data=exp_form)
+        form = RegisterSerializer(data=personal_detail)
         
-        phone=request.data.get('phone','')
-        fquery=FacilitatorQueriesFormSerializer(data=query_input)
-        course=request.data.pop('course')
+        phone=personal_detail.get('phone')
+        fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
+        course=personal_detail.get('course')
         print(course)
         catlist=""
         for cat in course: 
@@ -49,18 +54,17 @@ class FacilitatorRegisterAPI(APIView):
         
         if form.is_valid(raise_exception=True):
             user=form.save()
-            f["facilitator"]=user.id
-            query_input['user']=user.id
+            exp_form["facilitator"]=user.id
+            facilitator_query['user']=user.id
             profile=Profile.objects.get(user=user.id)
-            profile.portfolio=FileView.post(self,request,filename)
+            profile.portfolio=file
             profile.phone=phone
             #profile.portfolio=portfolio
             profile.role=2
             profile.intrest=catlist
             profile.save()
-          
-        print(f)
-        expform = ExperienceSerializer(data=f)
+           
+        
         
         if expform.is_valid(raise_exception=True):
             expform.save()
@@ -75,7 +79,7 @@ class FacilitatorRegisterAPI(APIView):
                 return redirect('register')
        
         messages.success(request, ('Your profile was successfully Created!'))
-        return Response(status=204)
+        return Response({'redirect':'{% url "facilitator-register" %}'},status=201)
 
 class FileView(APIView):
     parser_classes = [FileUploadParser]
@@ -100,12 +104,12 @@ class OnlineCouncelling(APIView):
         if clForm.is_valid(raise_exception=True):
             clForm.save()
             messages.success(self.request, 'Thank You For Choosing Us!')
-            redirect('/')
-            return Response({})
+            # redirect('/')
+            return Response({'success':"Done"})
         else:
             messages.error(self.request, 'Invalid Form Detail')
-            redirect('/')
-            return Response({})
+            # redirect('/')
+            return Response({'error':"something went wrong"})
 # class LoginAPI(KnoxLoginView):
 #     permission_classes = (permissions.AllowAny,)
 
