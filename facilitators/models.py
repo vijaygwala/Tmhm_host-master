@@ -22,6 +22,11 @@ class Facilitator(models.Model):
     phone=models.CharField(max_length=13,blank=False)
     PAddress=models.TextField(blank=True,null=True)
     TAddress=models.TextField(blank=True,null=True)
+    profile=models.ImageField(upload_to ='Mentor_profiles/',default='default.png',null=True, blank=True)
+    Bio=models.TextField(blank=True,null=True)
+    country=models.CharField(max_length=100,blank=True,null=True)
+    state=models.CharField(max_length=100,blank=True,null=True)
+    zipcode=models.IntegerField(blank=True,null=True)
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,related_name = "user")
     def __str__(self):
@@ -46,6 +51,7 @@ class Experience(models.Model):
     RExperience=models.CharField(max_length=1,choices=REXP)
     TExperience=models.CharField(max_length=1,choices=TEXP)
     facilitator= models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True)
+    
 
 # #this table contain all the categories
 # class Category(models.Model):

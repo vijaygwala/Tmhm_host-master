@@ -5,7 +5,6 @@ from django.db.models.signals import post_delete
 #from django.dispatch import receive
 from django.core.validators import RegexValidator
 
-
 #this table contain all the councelling releted details
 class OnlineCounsellingDetails(models.Model):
     councelling_id = models.AutoField(primary_key=True)
