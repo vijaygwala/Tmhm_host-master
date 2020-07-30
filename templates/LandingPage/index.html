@@ -227,18 +227,14 @@
                             <button class="btn my-sm-0" type="submit" style="color: black;s"><i class="fa fa-search"></i></button>
                         </form>
                     </li>
-                    {% if user.is_authenticated %}
-                    <li>
-                        <p>Welcome, {{ user.first_name }} !</p>
-                    </li>
-                    {% else %}
+                   
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
                     </li>
                     <li class="nav-item">
                         <a href="/signup" class="btn btn-primary rounded" style="color: white">Sign Up</a>
                     </li>
-                    {% endif %}
+            
                 </ul>
             </div>
         </div>
