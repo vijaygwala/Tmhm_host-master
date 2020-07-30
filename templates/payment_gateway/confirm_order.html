@@ -189,7 +189,7 @@ var options = {
     "currency": "INR",
     "name": "{{name}}",
     "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
+    "image": "{% static 'LandingPage/img/logotiny.png' %}",
     "order_id": "{{ order_id }}" , //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
     "handler": function (response){
       swal("Done!", "Your Payment is Successfull!", "success");
