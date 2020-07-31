@@ -230,18 +230,14 @@ footer #social i:hover{
 
                 <ul class="nav justify-content-end text-sm-left" id="navbar-left">
                     
-                    {% if user.is_authenticated %}
-                    <li>
-                        <p>Welcome, {{ user.username }} !</p>
-                    </li>
-                    {% else %}
+                   
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
                     </li>
                     <li class="nav-item">
                         <a href="/facilitator-register" class="btn btn-primary rounded" style="color: white">Register <i class="icofont-circled-right"></i></a>
                     </li>
-                    {% endif %}
+                   
                 </ul>
             </div>
         </div>

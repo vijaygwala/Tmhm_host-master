@@ -32,12 +32,16 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+<<<<<<< HEAD
 #DEBUG = True
 DEBUG = False
 
 ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '127.0.0.1']
 
 
+=======
+ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.42.126']
+>>>>>>> e80aec81e31632ca5d2a78533a3bc9476c4a99ba
 
 # Application definition
 
@@ -64,9 +68,15 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
+<<<<<<< HEAD
 
     'rest_framework'
 
+=======
+    'rest_framework',
+    'payment_gateway'
+    # endVijay
+>>>>>>> e80aec81e31632ca5d2a78533a3bc9476c4a99ba
     
 
 ]

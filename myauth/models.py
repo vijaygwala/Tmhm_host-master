@@ -56,18 +56,20 @@ class Profile(models.Model):
     LEARNER = 1
     FACILITATOR = 2
     ADMIN = 3
+    VISITER=4
     ROLE_CHOICES = (
+         (VISITER, 'Visiter'),
         (LEARNER, 'Learner'),
         (FACILITATOR, 'Facilitator'),
         (ADMIN, 'Admin'),
+
     )
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    Address = models.CharField(max_length=30, blank=True)
-    DOB = models.DateField(null=True, blank=True)
+    #Address = models.CharField(max_length=30, blank=True)
+    #DOB = models.DateField(null=True, blank=True)
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
     phone=models.CharField(max_length=13,null=True, blank=True)
     portfolio = models.FileField(upload_to ='uploads/',null=True, blank=True)
-    profile=models.ImageField(upload_to ='Mentor_profiles/',default='default.png',null=True, blank=True)
     intrest=models.CharField(max_length=250)
     def __str__(self):  # __unicode__ for Python 2
         return self.user.email

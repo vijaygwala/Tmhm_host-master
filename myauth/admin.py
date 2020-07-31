@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 from .models import *
+from facilitators.models import Facilitator
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
@@ -30,6 +31,7 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     list_select_related = ('profile', )
+   
 
     def get_role(self, instance):
         value=instance.profile.role
@@ -50,7 +52,13 @@ class CustomUserAdmin(UserAdmin):
         if not obj:
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
-
+    def approve_facilitator(self,request , queryset):
+        for user in queryset:
+            facilitator=Facilitator.objects.create(name=user.first_name+" "+user.last_name,phone=user.profile.phone,user=user)
+            facilitator.save()
+        
+    approve_facilitator.short_description = 'Approve as Facilitator'
+    actions = [approve_facilitator, ]
 
 
 admin.site.register(get_user_model(), CustomUserAdmin)
