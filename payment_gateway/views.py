@@ -6,14 +6,14 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
-
+# razor pay account setup
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
 
 
 
     
-
+#facilitator order subscription 
 def create_order(request):
     context={}
     if request.method=='POST':
@@ -87,7 +87,7 @@ def create_order(request):
 
 
 
-
+#Razor pay payment status after successfull payment
 def payment_status(request):
     print(request.POST)
     response = request.POST
