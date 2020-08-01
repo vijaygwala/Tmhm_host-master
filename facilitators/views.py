@@ -11,12 +11,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.template.defaulttags import register
 from LandingPage.models import *
 
-@register.filter
-def get_item(dictionary, key):
-    return dictionary.get(key)
 
 
-
+#facilitator page
 def facilitator_page(request):
     return render(request, 'facilitators/index.html')
 
@@ -25,11 +22,11 @@ def facilitator_page(request):
     
 from django.views.generic import CreateView
 from .mixins import AjaxFormMixin
-def signup(request):
-    context = {'form': UserForm(),'expform':ExperienceForm(),'fquery':FacilitatorQueriesForm()}
-    return render(request, 'facilitators/register/mysignup.html',context)
+# def signup(request):
+#     context = {'form': UserForm(),'expform':ExperienceForm(),'fquery':FacilitatorQueriesForm()}
+#     return render(request, 'facilitators/register/mysignup.html',context)
 
-
+# Facilitator registration code personal details , experience details and facilitator queries without Rest Api
 class RegisterLoginView(AjaxFormMixin,View):
     def get(self, request, *args, **kwargs):
         category=Category.objects.all()

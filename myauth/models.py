@@ -42,7 +42,7 @@ class CustomUserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-
+#  customize default user model as CustomUser
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
@@ -51,7 +51,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
-
+# extend the profile of User model
 class Profile(models.Model):
     LEARNER = 1
     FACILITATOR = 2

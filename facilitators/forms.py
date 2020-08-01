@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
 
-
+# form of personal details 
 class UserForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -25,7 +25,7 @@ class UserForm(UserCreationForm):
             user.save()
         return user
     
-     
+# Form of experience details  
 class ExperienceForm(ModelForm):
     class Meta:
         model = Experience
@@ -36,7 +36,7 @@ class ExperienceForm(ModelForm):
         self.fields['Website_Url'].widget.attrs.update({'placeholder': 'Website Url'})
         self.fields['Youtube_Url'].widget.attrs.update({'placeholder': 'Youtube Url'})
         
-
+#Form of query details
 class FacilitatorQueriesForm(ModelForm):
     class Meta:
         model=FacilitatorQueries
@@ -44,8 +44,4 @@ class FacilitatorQueriesForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(FacilitatorQueriesForm, self).__init__(*args, **kwargs)
         self.fields['query'].widget.attrs.update({'placeholder': 'Ask Your Question','id':'autoresizing'})
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ( 'phone',)
 

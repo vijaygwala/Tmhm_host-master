@@ -21,7 +21,7 @@ from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FileUploadParser
 from django.core import serializers
 
-# Register API
+# Facilitator Register API
 class FacilitatorRegisterAPI(APIView):
     def get(self, request, *args, **kwargs):
         category=Category.objects.all()
@@ -96,6 +96,7 @@ class FileView(APIView):
 
 
 from rest_framework.generics import CreateAPIView
+# councelling section api
 class OnlineCouncelling(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'LandingPage/index.html'
@@ -110,12 +111,3 @@ class OnlineCouncelling(APIView):
             messages.error(self.request, 'Invalid Form Detail')
             # redirect('/')
             return Response({'error':"something went wrong"})
-# class LoginAPI(KnoxLoginView):
-#     permission_classes = (permissions.AllowAny,)
-
-#     def post(self, request):
-#         serializer = AuthTokenSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.validated_data['user']
-#         login(request, user)
-#         return super(LoginAPI, self).post(request, format=None)

@@ -28,4 +28,5 @@ urlpatterns = [
     path('', include('facilitators.urls')),
     path('', include('learners.urls')),
     path('', include('campus.urls')),
+    path('', include('mailing.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

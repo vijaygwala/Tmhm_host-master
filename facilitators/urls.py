@@ -6,6 +6,6 @@ urlpatterns = [
     #path('facilitator/', views.facilitator_page),
     path('facilitator/', views.facilitator_page,name='facilitator'),
     path('facilitator-register/', views.RegisterLoginView.as_view(),name='facilitator-register'),
-    path('signupform/', views.signup,name='signupform'),
+    # path('signupform/', views.signup,name='signupform'),
     # #path('Registration/$', views.facilitatorRegistration,name='Registration'),
  ]

@@ -14,12 +14,19 @@ class OnlineCounsellingDetails(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True) 
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name='Free Councelling detail'
+        verbose_name_plural='Free Councelling details'
+
 #this table contain all the categories
 class Category(models.Model):
     cat_id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=False,blank=False)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name='Course Category'
+        verbose_name_plural='Course Categories'
 
 #this relation contains all the subcategories releted to particuler categories
 class SubCategory(models.Model):
@@ -28,6 +35,9 @@ class SubCategory(models.Model):
     cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name='Subcategories of Categories'
+        verbose_name_plural='Subcategories of Categories'
 
 #this relation contains all the courses releted to particuler subcategory
 class Course(models.Model):
@@ -38,6 +48,10 @@ class Course(models.Model):
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name='Courses'
+        verbose_name_plural='Courses'
+
 
 #this relation associate a particuler facilitator with particuler course
 class offer(models.Model):
@@ -45,29 +59,7 @@ class offer(models.Model):
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name='Details about Courses and Facilitator'
+        verbose_name_plural='Details about Courses and Facilitators'
 
-# class contact(models.Model):
-#     msg_id = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=50,default='')
-#     email = models.CharField(max_length=30,default='')
-#     msg = models.CharField(max_length=1000,default='')'''
-
-# class Signup(models.Model):
-#     Signup_id = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=60,default='')
-#     email = models.CharField(max_length=50,default='')
-#     phone= models.CharField(max_length=20,default='')
-#     city= models.CharField(max_length=100,default='')
-#     Poi=models.CharField(max_length=100,default='')
-
-#     def __str__(self):
-#         return self.email
-
-# class OnlineCounselling(models.Model):
-#     OC_id = models.AutoField(primary_key=True)
-#     phone = models.CharField(max_length=20,default='')
-
-# '''#Delete attached file when we delete a instance of object
-# @receiver(post_delete, sender=Signup)
-# def submission_delete(sender, instance, **kwargs):
-#     instance.file.delete(False)'''

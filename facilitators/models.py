@@ -29,6 +29,11 @@ class Facilitator(models.Model):
     zipcode=models.IntegerField(blank=True,null=True)
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,related_name = "user")
+    
+    class Meta:
+        
+        verbose_name='Approved Facilitator'
+        verbose_name_plural='Approved Facilitators'
     def __str__(self):
         return self.name
 
@@ -51,7 +56,10 @@ class Experience(models.Model):
     RExperience=models.CharField(max_length=1,choices=REXP)
     TExperience=models.CharField(max_length=1,choices=TEXP)
     facilitator= models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True)
-    
+    class Meta:
+        
+        verbose_name='Experience Detail'
+        verbose_name_plural='Experience Details'
 
 # #this table contain all the categories
 # class Category(models.Model):
@@ -94,7 +102,9 @@ class FacilitatorQueries(models.Model):
     user= models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.status
-
+    class Meta:
+        verbose_name='Queries by Facilitator'
+        verbose_name_plural='Queries by Facilitators'
 
 # #this relation contains all the answer releted to particuler question
 # class FacilitatorQueriesAnswer(models.Model):
