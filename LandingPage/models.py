@@ -55,7 +55,7 @@ class Course(models.Model):
 
 #this relation associate a particuler facilitator with particuler course
 class offer(models.Model):
-    Fid = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    Fid = models.ForeignKey(Facilitator, on_delete=models.CASCADE)
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
