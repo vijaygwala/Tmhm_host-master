@@ -89,3 +89,25 @@ class RegisterLoginView(AjaxFormMixin,View):
 
         messages.success(request, ('Your profile was successfully Created!'))
         return redirect('facilitator-register')
+
+def facilitator_Dashboard_Landing_page(request):
+    return render(request, 'facilitators/Dashboard/index.html')
+def facilitator_Dashboard_myearnings_page(request):
+    return render(request, 'facilitators/Dashboard/my_earnings.html')
+def facilitator_Dashboard_explore_courses_page(request):
+    return render(request, 'facilitators/Dashboard/explore_courses.html')
+def facilitator_Dashboard_support_page(request):
+    return render(request, 'facilitators/Dashboard/support.html')
+
+
+
+def facilitator_Dashboard_create_course_page(request):
+    return render(request, 'facilitators/Dashboard/create_course.html')
+
+def facilitator_Profile_page(request):
+    return render(request, 'facilitators/Dashboard/profile.html')
+
+def facilitator_Dashboard_settings_page(request):
+    return render(request, 'facilitators/Dashboard/settings.html')
+
+   
