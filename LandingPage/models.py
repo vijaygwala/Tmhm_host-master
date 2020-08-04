@@ -4,6 +4,7 @@ from myauth.models import *
 from django.db.models.signals import post_delete
 #from django.dispatch import receive
 from django.core.validators import RegexValidator
+from facilitators.models import Facilitator
 
 #this table contain all the councelling releted details
 class OnlineCounsellingDetails(models.Model):

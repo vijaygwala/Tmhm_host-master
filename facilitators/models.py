@@ -4,9 +4,18 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
-
-
+#this relation contains all the applicants who is registerd from facilitator registration form
+class Applicants(models.Model):
+    Aid=models.AutoField(primary_key=True)
+    name=models.CharField(max_length=100,null=True,blank=True)
+    phone=models.CharField(max_length=13,null=True, blank=True)
+    email = models.EmailField()
+    portfolio = models.FileField(upload_to ='uploads/',null=True, blank=True)
+    intrest=models.CharField(max_length=250)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    status = models.CharField(max_length=50, null=True, blank=True)
+    def __str__(self):  # __unicode__ for Python 2
+        return self.name
 
 
 
@@ -55,11 +64,16 @@ class Experience(models.Model):
     Youtube_Url= models.URLField(max_length=250,blank=True,null=True)
     RExperience=models.CharField(max_length=1,choices=REXP)
     TExperience=models.CharField(max_length=1,choices=TEXP)
-    facilitator= models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True)
+    facilitator= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     class Meta:
         
         verbose_name='Experience Detail'
         verbose_name_plural='Experience Details'
+@receiver(post_save, sender=Applicants)
+def create_or_update_user_facilitator(sender, instance, created, **kwargs):
+    if created:
+        Experience.objects.create(facilitator=instance)
+    instance.facilitator.save()
 
 # #this table contain all the categories
 # class Category(models.Model):
@@ -99,12 +113,17 @@ class FacilitatorQueries(models.Model):
     Qid=models.AutoField(primary_key=True)
     query=models.TextField(blank=True,null=True)
     status=models.CharField(max_length=10,choices=STATUS,default="Doubt")
-    user= models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.status
     class Meta:
         verbose_name='Queries by Facilitator'
         verbose_name_plural='Queries by Facilitators'
+@receiver(post_save, sender=Applicants)
+def create_or_update_user_user(sender, instance, created, **kwargs):
+    if created:
+        FacilitatorQueries.objects.create(user=instance)
+    instance.user.save()
 
 # #this relation contains all the answer releted to particuler question
 # class FacilitatorQueriesAnswer(models.Model):
