@@ -52,12 +52,12 @@ INSTALLED_APPS = [
     'facilitators.apps.FacilitatorsConfig',
     'learners',
     'campus',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     # By vijay
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
     'rest_framework',
@@ -225,4 +225,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'vijaygwala97@gmail.com'
-EMAIL_HOST_PASSWORD = 'jaibalaji@#97'
+EMAIL_HOST_PASSWORD = ''

@@ -9,13 +9,16 @@ class Applicants(models.Model):
     Aid=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=True,blank=True)
     phone=models.CharField(max_length=13,null=True, blank=True)
-    email = models.EmailField()
     portfolio = models.FileField(upload_to ='uploads/',null=True, blank=True)
     intrest=models.CharField(max_length=250)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
     status = models.CharField(max_length=50, null=True, blank=True)
     def __str__(self):  # __unicode__ for Python 2
-        return self.name
+        return self.user.email
+    class Meta:
+        
+        verbose_name='Registered Applicant'
+        verbose_name_plural='Registered Applicants'
 
 
 
@@ -36,8 +39,7 @@ class Facilitator(models.Model):
     country=models.CharField(max_length=100,blank=True,null=True)
     state=models.CharField(max_length=100,blank=True,null=True)
     zipcode=models.IntegerField(blank=True,null=True)
-
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,related_name = "user")
+    user = models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     
     class Meta:
         
@@ -65,15 +67,12 @@ class Experience(models.Model):
     RExperience=models.CharField(max_length=1,choices=REXP)
     TExperience=models.CharField(max_length=1,choices=TEXP)
     facilitator= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
-    class Meta:
-        
-        verbose_name='Experience Detail'
-        verbose_name_plural='Experience Details'
-@receiver(post_save, sender=Applicants)
-def create_or_update_user_facilitator(sender, instance, created, **kwargs):
-    if created:
-        Experience.objects.create(facilitator=instance)
-    instance.facilitator.save()
+    
+# @receiver(post_save, sender=Applicants)
+# def create_or_update_user_facilitator(sender, instance, created, **kwargs):
+#     if created:
+#         Experience.objects.create(facilitator=instance)
+#     instance.user.save()
 
 # #this table contain all the categories
 # class Category(models.Model):
@@ -116,14 +115,12 @@ class FacilitatorQueries(models.Model):
     user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.status
-    class Meta:
-        verbose_name='Queries by Facilitator'
-        verbose_name_plural='Queries by Facilitators'
-@receiver(post_save, sender=Applicants)
-def create_or_update_user_user(sender, instance, created, **kwargs):
-    if created:
-        FacilitatorQueries.objects.create(user=instance)
-    instance.user.save()
+    
+# @receiver(post_save, sender=Applicants)
+# def create_or_update_user_user(sender, instance, created, **kwargs):
+#     if created:
+#         FacilitatorQueries.objects.create(user=instance)
+#     instance.user.save()
 
 # #this relation contains all the answer releted to particuler question
 # class FacilitatorQueriesAnswer(models.Model):

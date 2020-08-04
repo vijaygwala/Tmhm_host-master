@@ -47,22 +47,28 @@ class FacilitatorRegisterAPI(APIView):
         print(course)
         catlist=""
         for cat in course: 
-             catlist+=cat+","
+            if cat!=course[len(course)-1]: 
+                catlist+=cat+","
+            else:
+                catlist+=cat
         print(course)
         user=None
         profile=None
         
         if form.is_valid(raise_exception=True):
             user=form.save()
-            exp_form["facilitator"]=user.id
-            facilitator_query['user']=user.id
-            profile=Profile.objects.get(user=user.id)
-            profile.portfolio=file
-            profile.phone=phone
-            #profile.portfolio=portfolio
-            profile.role=2
-            profile.intrest=catlist
-            profile.save()
+            applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Applicant")
+            applicant.save()
+            exp_form["facilitator"]=applicant.Aid
+            facilitator_query['user']=applicant.Aid
+           
+            # profile=Profile.objects.get(user=user.id)
+            # profile.portfolio=file
+            # profile.phone=phone
+            # #profile.portfolio=portfolio
+            # profile.role=2
+            # profile.intrest=catlist
+            # profile.save()
            
         
         
@@ -81,18 +87,6 @@ class FacilitatorRegisterAPI(APIView):
         messages.success(request, ('Your profile was successfully Created!'))
         return Response({'redirect':'{% url "facilitator-register" %}'},status=201)
 
-class FileView(APIView):
-    parser_classes = [FileUploadParser]
-
-    def post(self, request,filename):
-        
-        file_obj = request.data['file']
-        
-        
-        # ...
-        # do some stuff with uploaded file
-        # ...
-        return file_obj 
 
 
 from rest_framework.generics import CreateAPIView

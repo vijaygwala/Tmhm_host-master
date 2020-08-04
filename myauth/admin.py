@@ -52,13 +52,6 @@ class CustomUserAdmin(UserAdmin):
         if not obj:
             return list()
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
-    def approve_facilitator(self,request , queryset):
-        for user in queryset:
-            facilitator=Facilitator.objects.create(name=user.first_name+" "+user.last_name,phone=user.profile.phone,user=user)
-            facilitator.save()
-        
-    approve_facilitator.short_description = 'Approve as Facilitator'
-    actions = [approve_facilitator, ]
-
+   
 
 admin.site.register(get_user_model(), CustomUserAdmin)
