@@ -57,7 +57,7 @@ class FacilitatorRegisterAPI(APIView):
         
         if form.is_valid(raise_exception=True):
             user=form.save()
-            applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Applicant")
+            applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
             applicant.save()
             exp_form["facilitator"]=applicant.Aid
             facilitator_query['user']=applicant.Aid

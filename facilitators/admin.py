@@ -25,9 +25,17 @@ class ApplicantsAdmin(admin.ModelAdmin):
         for user in queryset:
             facilitator=Facilitator.objects.create(name=user.name,phone=user.phone,user=user)
             facilitator.save()
-        
-    approve_facilitator.short_description = 'Approve as Facilitator'
-    actions = [approve_facilitator, ]
+    def shortlisted_facilitator(self,request , queryset):
+        queryset.update(status="Shortlisted")
+    def OnHold_facilitator(self,request , queryset):
+        queryset.update(status="On Hold")
+    def Rejected_facilitator(self,request , queryset):
+        queryset.update(status="Rejected")
+    OnHold_facilitator.short_description = 'On Hold'
+    Rejected_facilitator.short_description = 'Rejected'        
+    shortlisted_facilitator.short_description = 'Shortlisted'       
+    approve_facilitator.short_description = 'Approve'
+    actions = [approve_facilitator, shortlisted_facilitator, OnHold_facilitator, Rejected_facilitator]
 
 
 # class ExperienceAdmin(admin.ModelAdmin):
