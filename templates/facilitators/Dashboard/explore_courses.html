@@ -414,63 +414,69 @@
                             <!--/card-block-->
                         </div>
                     </div>
-                    {% for cat in category %}
+                    {% for product, range, nSlides in category %}
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
-                            class="h6 d-inline-block mb-2">{{ cat }}</h6>
+                            class="h6 d-inline-block mb-2">{{ product.0.subCat_id.name }}</h6>
                     </div>
-
                     <div class="slider-area">
                         <div class="container">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div id="carouselExampleIndicators{{forloop.counter}}" class="carousel slide" data-ride="carousel">
                                 
                                 <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                    <li data-target="#carouselExampleIndicators{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                                    {% for i in range %}
+                                    <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to={{ i }}></li>
+                                    {% endfor %}
                                 </ol>
-            
                                 <div class='carousel-inner'>
                                     <div class='carousel-item active'>
                                         <div class='container'>
-                                            {% for course in category1 %}
-                                            {% if course.subCat_id.name == cat.name %}
                                             <div class='row text-center'>
-                                                
                                                 <div class='col-md-4 col-sm-12 mb-2'>
                                                     <div class="card border">
-                                                        <img class="card-img-top" src={{ course.thumbnail.url }} alt="Card image cap" height="250px">
+                                                        <img class="card-img-top" src={{ product.0.thumbnail.url }} alt="Card image cap" height="250px">
                                                         <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">{{ course.name }}</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">{{ course.title }}</h6>
+                                                            <h5 class="card-title" style="color:red;">{{ product.0.title }}</h5>
+                                                            <h6 style="color:#262626;font-size: 0.75em;">{{ product.0.name }}</h6>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
+                                                {% for i in product|slice:"1:" %}
+                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
+                                                    <div class="card border">
+                                                        <img class="card-img-top" src={{ i.thumbnail.url }} alt="Card image cap" height="250px">
+                                                        <div class="card-body" style="background-color:gainsboro">
+                                                            <h5 class="card-title" style="color:red;">{{ i.title }}</h5>
+                                                            <h6 style="color:#262626;font-size: 0.75em;">{{ i.name }}</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% if forloop.counter|divisibleby:2 and forloop.counter > 0 and not forloop.last %}
+                                                </div></div></div>
+                                                <div class='carousel-item'>
+                                                    <div class='container'>
+                                                        <div class='row text-center'>
+                                                {% endif %}
+                                                {% endfor %}
                                             </div>
-                                            {% endif %}
-                                            {% endfor %}
                                         </div>
                                     </div>
-                                    
+                                
                                 </div>
-                                
-                                
-                                <a class="carousel-control-prev primary" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
+                                <a class="carousel-control-prev primary" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <a class="carousel-control-next" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </div>
                         </div>
-                        
-                    </div> 
-                    {% endfor %}  
-                    <!-- </div>  -->
-                    
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -490,18 +496,6 @@
     <!-- Page level custom scripts -->
     <script src='{% static 'facilitators/js/demo/chart-area-demo.js'%}'></script>
     <script src='{% static 'facilitators/js/demo/chart-pie-demo.js'%}'></script>
-    <script>
-        $(document).ready(function(){
-            $.ajax({
-            type: "GET",
-            url: "http://127.0.0.1:8000/facilitator/api/dashboard/explore",
-            dataType: "json",
-            success: function(data) {
-                (data)
-            },
-            });
-        });
-    </script>
 
 </body>
 

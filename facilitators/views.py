@@ -11,6 +11,8 @@ from django.http.response import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.template.defaulttags import register
 from LandingPage.models import *
+from LandingPage.models import Course,Facilitator,offer,Category,SubCategory
+from math import ceil
 
 
 
@@ -102,11 +104,17 @@ def facilitator_Dashboard_explore_courses_page(request):
     data=json.loads(r.text)
     context={}
     for i in range(0,len(data)):
-        category=SubCategory.objects.get(subCat_id=data[i]['subCat_id'])
-        context.setdefault('category',set()).add(category)
-        val=Course.objects.get(name=data[i]['name'])
-        context.setdefault('category1', []).append(val)
-    print(context)
+        subcategory=SubCategory.objects.get(subCat_id=data[i]['subCat_id'])
+        context.setdefault('subcategory',set()).add(subcategory)
+    category=[]
+    for cat in context['subcategory']:
+        val=Course.objects.filter(subCat_id=cat.subCat_id)
+        n=len(val)
+        nSlides=(n//3)+ceil(n/3-n//3)
+        l=[val,range(1,nSlides),n]
+        category.append(l)
+    context.update({'category':category})
+    # print(context)
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
 def facilitator_Dashboard_support_page(request):
