@@ -94,14 +94,38 @@ def facilitator_Dashboard_Landing_page(request):
     return render(request, 'facilitators/Dashboard/index.html',context)
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
-def facilitator_Dashboard_explore_courses_page(request):
-    category=Category.objects.all()
-    subcategory=SubCategory.objects.all()
-    context={'category':category, 'subcategory':subcategory}
-
+def facilitator_Dashboard_explore_courses_page(request):   
+    r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
+    data=json.loads(r.text)
+    context={}
+    for i in range(0,len(data)):
+        subcategory=SubCategory.objects.get(subCat_id=data[i]['subCat_id'])
+        context.setdefault('subcategory',set()).add(subcategory)
+    category=[]
+    for cat in context['subcategory']:
+        val=Course.objects.filter(subCat_id=cat.subCat_id)
+        n=len(val)
+        nSlides=(n//3)+ceil(n/3-n//3)
+        l=[val,range(1,nSlides),n]
+        category.append(l)
+    context.update({'category':category})
+    # print(context)
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
+
 def facilitator_Dashboard_support_page(request):
-    return render(request, 'facilitators/Dashboard/support.html')
+    if request.method=='POST':
+        query=request.POST['Queries']
+        data={
+            'query':query
+        }
+        r=requests.post(url='http://127.0.0.1:8000/facilitator/api/support',data=data)
+        return redirect('support1')
+    context={
+        'data':Queries.objects.all()
+    }
+    
+    return render(request, 'facilitators/Dashboard/support.html',context)
+
 
 
 

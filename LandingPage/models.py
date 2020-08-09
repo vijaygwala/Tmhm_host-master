@@ -64,6 +64,7 @@ class Course(models.Model):
     description=models.TextField(blank=False,null=True)
     days=models.CharField(max_length=100,null=True,blank=True)
     months=models.CharField(max_length=100,null=True,blank=True)
+    thumbnail=models.ImageField(upload_to='courses/',blank=True, null=True)
     audience=models.CharField(choices=Audience,max_length=100,null=True,blank=True)
     takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
@@ -119,4 +120,16 @@ class offer(models.Model):
     class Meta:
         verbose_name='Details about Courses and Facilitator'
         verbose_name_plural='Details about Courses and Facilitators'
+
+class Queries(models.Model):
+    Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE)
+    query=models.TextField(max_length=500)
+    reply=models.TextField(max_length=500,blank=True, null=True)
+    def __str__(self):
+        return self.Fid.name
+
+    class Meta:
+        verbose_name='Support For Facilitators'
+        verbose_name_plural='Support For Facilitators'
+
 

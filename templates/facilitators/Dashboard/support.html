@@ -175,7 +175,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container">
-                    <form action="action_page.php">
+                    <form method='POST'>
+                        {% csrf_token %}
                         <h1>Need Help?</h1>
                         <p>Get in touch with us. Solve your problems by contacting our support team.
 
@@ -185,7 +186,7 @@
                             <br>
 
 
-                            <textarea id="subject" name="Queries" rows="4" cols="10" placeholder="Write down your Queries here.." style="height:150px" style="width:250px"></textarea>
+                            <textarea id="subject" name="Queries" required rows="4" cols="10" placeholder="Write down your Queries here.." style="height:150px" style="width:250px"></textarea>
                             <br>
                             <div style="text-align: center;">
                                 <button type="submit" class="btn btn-submit btn-default">Submit</button>
@@ -196,11 +197,29 @@
                     <br>
                     <br>
                     <br>
+                    {% for i in data %}
+                    <div class="card border-success mb-3">
+                            <div class="card-header" style="text-align: left"><strong>{{ i.Fid.name }}</strong></div>
+                            <div class="card-body" style="text-align: left">
+                              <p class="card-text"></p>Query: {{ i.query }}</p>
+                            </div>
+                            {% if i.reply == None %}
+                            <div class="card-footer" style="text-align: left">No replies yet</div>
+                            {% else %}
+                            <div class="card-footer" style="text-align: left">Reply: {{ i.reply }}</div>
+                            {% endif %}
+                          </div>
+                    <br>
+                    {% endfor %}
+                    <br>
+                    <br>
+                    <br>
                     <br>
                     <br>
                     <br>
                     <br>
 
+                    
 
                     <!-- Footer -->
                     <footer class="footer pt-0">
