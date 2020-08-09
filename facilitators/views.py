@@ -14,7 +14,9 @@ from myauth.models import *
 from django.http import JsonResponse
 from django.views.generic import View
 from passlib.hash import django_pbkdf2_sha256 as handler
-
+from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from django.contrib.auth import logout
 
 #facilitator page
 def facilitator_page(request):
@@ -96,18 +98,24 @@ class RegisterLoginView(AjaxFormMixin,View):
 def facilitator_Dashboard_Landing_page(request):
     print(request.user)
     instance = CustomUser.objects.get(email=request.user.email)
-    obj = instance.user.facilitator
-    print(obj)
-    pro = instance.userprofile
-    offr = offer.objects.filter(Fid=obj.Fid)
-    total_course = offr.count()
-    context = {
+    context = {}
+    try:
+        obj = instance.user.facilitator
+        print(obj)
+        pro = instance.userprofile
+        offr = offer.objects.filter(Fid=obj.Fid)
+        total_course = offr.count()
+        context = {
         "facilitator_name" : obj.name, 
         "Bio" : obj.Bio,
         "courses": offr,
         "total_course": total_course,
         "intrest": pro.intrest
-    }   
+    } 
+    except:
+        print('myauth.models.CustomUser.user.RelatedObjectDoesNotExist: CustomUser has no user')
+
+  
     return render(request, 'facilitators/Dashboard/index.html', context)
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
@@ -157,3 +165,8 @@ class ChangePassword(View):
                 'msg': msg
             }
         return JsonResponse(data)
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('facilitator'))
