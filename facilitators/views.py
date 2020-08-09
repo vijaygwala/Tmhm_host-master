@@ -118,7 +118,18 @@ def facilitator_Dashboard_explore_courses_page(request):
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
 def facilitator_Dashboard_support_page(request):
-    return render(request, 'facilitators/Dashboard/support.html')
+    if request.method=='POST':
+        query=request.POST['Queries']
+        data={
+            'query':query
+        }
+        r=requests.post(url='http://127.0.0.1:8000/facilitator/api/support',data=data)
+        return redirect('support1')
+    context={
+        'data':Queries.objects.all()
+    }
+    
+    return render(request, 'facilitators/Dashboard/support.html',context)
 
 
 

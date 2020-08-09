@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from LandingPage.models import Course,Category,SubCategory,offer,Facilitator
+from LandingPage.models import Course,Category,SubCategory,offer,Facilitator,Queries
 
 class CategorySerializers(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,9 @@ class offerSerializers(serializers.ModelSerializer):
     class Meta:
         model=offer
         fields=['Fid','Cid']
+
+class QueriesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model=Queries
+        fields=['query','reply']

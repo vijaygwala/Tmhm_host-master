@@ -3,7 +3,7 @@ from  facilitators.models import *
 from myauth.models import *
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-
+from  LandingPage.models import *
 
 # form of personal details 
 class UserForm(UserCreationForm):

@@ -10,5 +10,5 @@ urlpatterns = [
     path('facilitator-register/', views.RegisterLoginView.as_view(),name='facilitator-register'),
     path('facilitator/dashboard/settings/', views.facilitator_Dashboard_settings_page,name='settings'),
     path('facilitator/dashboard/profile/', views.facilitator_Profile_page,name='profile'),
-    path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support'),
+    path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support1'),
  ]

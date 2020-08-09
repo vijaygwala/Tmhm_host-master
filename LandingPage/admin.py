@@ -20,6 +20,8 @@ class CourseAdmin(admin.ModelAdmin):
     list_display=('Cid','name','title','description','subCat_id')
 class offerAdmin(admin.ModelAdmin):
     list_display=('Fid','Cid')
+class QueryAdmin(admin.ModelAdmin):
+    list_display=('Fid','query','reply')
 
 class CouncellingAdmin(admin.ModelAdmin):
     list_display=('councelling_id','name','email','phone_number')
@@ -29,3 +31,4 @@ admin.site.register(Category,CategoryAdmin)
 admin.site.register(SubCategory,SubCategoryAdmin)
 admin.site.register(Course,CourseAdmin)
 admin.site.register(offer,offerAdmin)
+admin.site.register(Queries,QueryAdmin)

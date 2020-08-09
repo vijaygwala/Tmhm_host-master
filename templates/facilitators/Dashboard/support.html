@@ -175,7 +175,8 @@
 
                 <!-- Begin Page Content -->
                 <div class="container">
-                    <form action="action_page.php">
+                    <form method='POST'>
+                        {% csrf_token %}
                         <h1>Need Help?</h1>
                         <p>Get in touch with us. Solve your problems by contacting our support team.
 
@@ -185,7 +186,7 @@
                             <br>
 
 
-                            <textarea id="subject" name="Queries" rows="4" cols="10" placeholder="Write down your Queries here.." style="height:150px" style="width:250px"></textarea>
+                            <textarea id="subject" name="Queries" required rows="4" cols="10" placeholder="Write down your Queries here.." style="height:150px" style="width:250px"></textarea>
                             <br>
                             <div style="text-align: center;">
                                 <button type="submit" class="btn btn-submit btn-default">Submit</button>
@@ -200,7 +201,11 @@
                     <br>
                     <br>
                     <br>
+                    <br>
+                    <br>
+                    <br>
 
+                    
 
                     <!-- Footer -->
                     <footer class="footer pt-0">

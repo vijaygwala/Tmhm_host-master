@@ -65,3 +65,15 @@ class offer(models.Model):
         verbose_name='Details about Courses and Facilitator'
         verbose_name_plural='Details about Courses and Facilitators'
 
+class Queries(models.Model):
+    Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE)
+    query=models.TextField(max_length=500)
+    reply=models.TextField(max_length=500,blank=True, null=True)
+    def __str__(self):
+        return self.Fid.name
+
+    class Meta:
+        verbose_name='Support For Facilitators'
+        verbose_name_plural='Support For Facilitators'
+
+
