@@ -13,12 +13,12 @@ class Applicants(models.Model):
     intrest=models.CharField(max_length=250)
     user = models.ForeignKey(CustomUser, related_name='applicant',on_delete=models.CASCADE,null=True)
     status = models.CharField(max_length=50, null=True, blank=True)
-    def __str__(self):  # __unicode__ for Python 2
-        return self.user.email
     class Meta:
         
         verbose_name='Registered Applicant'
         verbose_name_plural='Registered Applicants'
+    def __str__(self):  # __unicode__ for Python 2
+        return self.user.email
 
 
 
@@ -32,13 +32,15 @@ class Facilitator(models.Model):
     name=models.CharField(max_length=100,null=True,blank=True)
     DOB=models.DateField(blank=True,null=True)
     phone=models.CharField(max_length=13,blank=False)
+    country=models.TextField(blank=True, null=True)
+    state=models.TextField(blank=True, null=True)
     PAddress=models.TextField(blank=True,null=True)
     TAddress=models.TextField(blank=True,null=True)
     profile=models.ImageField(upload_to ='Mentor_profiles/',default='default.png',null=True, blank=True)
     Bio=models.TextField(blank=True,null=True)
     country=models.CharField(max_length=100,blank=True,null=True)
     state=models.CharField(max_length=100,blank=True,null=True)
-    zipcode=models.IntegerField(blank=True,null=True)
+    zipcode=models.CharField(max_length=7,blank=True,null=True)
     user = models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     
     class Meta:

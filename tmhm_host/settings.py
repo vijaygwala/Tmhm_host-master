@@ -62,10 +62,9 @@ INSTALLED_APPS = [
     'myauth',
     'rest_framework',
     'payment_gateway',
-    'mailing'
+    'mailing',
     # endVijay
-    
-
+    'rest_framework.authtoken',
 ]
 # for go
 # By vijay
@@ -73,6 +72,16 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 X_FRAME_OPTIONS='SAMEORIGIN'
 # endvijay
+
+#REST_FRAMEWORK = {
+#    'DEFAULT_AUTHENTICATION_CLASSES': (
+ #              'rest_framework.authentication.TokenAuthentication',
+  #  ),
+   # 'DEFAULT_PERMISSION_CLASSES':(
+    #            'rest_framework.permissions.IsAuthenticated',
+    #),
+
+#}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -209,7 +218,7 @@ AUTH_USER_MODEL = 'myauth.CustomUser'
 
 # By Vijay
 #STATIC_URL = '/static/'
-#MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #MEDIA_URL = '/media/'
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'

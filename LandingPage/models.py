@@ -90,6 +90,7 @@ class VideoRecorded(models.Model):
     class Meta:
         verbose_name='Recorded Sessions'
         verbose_name_plural='Recorded Sessions'
+
 #contain all the liveSessions to the particuler course
 class LiveSession(models.Model):
     Vid=models.AutoField(primary_key=True)
