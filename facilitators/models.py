@@ -11,7 +11,7 @@ class Applicants(models.Model):
     phone=models.CharField(max_length=13,null=True, blank=True)
     portfolio = models.FileField(upload_to ='uploads/',null=True, blank=True)
     intrest=models.CharField(max_length=250)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(CustomUser, related_name='applicant',on_delete=models.CASCADE,null=True)
     status = models.CharField(max_length=50, null=True, blank=True)
     def __str__(self):  # __unicode__ for Python 2
         return self.user.email

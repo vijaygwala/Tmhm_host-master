@@ -47,4 +47,3 @@ class FacilitatorAdmin(admin.ModelAdmin):
 
 admin.site.register(Facilitator,FacilitatorAdmin)
 admin.site.register(Applicants,ApplicantsAdmin)
-#admin.site.register(Experience,ExperienceAdmin)

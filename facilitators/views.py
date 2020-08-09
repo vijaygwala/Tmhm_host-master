@@ -95,14 +95,26 @@ def facilitator_Dashboard_Landing_page(request):
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
 def facilitator_Dashboard_explore_courses_page(request):
-    return render(request, 'facilitators/Dashboard/explore_courses.html')
+    category=Category.objects.all()
+    subcategory=SubCategory.objects.all()
+    context={'category':category, 'subcategory':subcategory}
+
+    return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 def facilitator_Dashboard_support_page(request):
     return render(request, 'facilitators/Dashboard/support.html')
 
 
 
 def facilitator_Dashboard_create_course_page(request):
-    return render(request, 'facilitators/Dashboard/create_course.html')
+    if request.method=='POST':
+        pass
+    else:
+        audience_list=Audience.objects.values('audience')
+
+        context={
+            'audience_list':audience_list
+        }
+        return render(request, 'facilitators/Dashboard/create_course.html',context)
 
 def facilitator_Profile_page(request):
     return render(request, 'facilitators/Dashboard/profile.html')

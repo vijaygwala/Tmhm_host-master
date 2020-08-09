@@ -40,18 +40,73 @@ class SubCategory(models.Model):
         verbose_name='Subcategories of Categories'
         verbose_name_plural='Subcategories of Categories'
 
+class Audience(models.Model):
+    audience=models.CharField(max_length=100,null=True,blank=True)
+    def __str__(self):
+        return self.audience
+
 #this relation contains all the courses releted to particuler subcategory
 class Course(models.Model):
+    Audience=(
+        ('Students','Students'),
+        ('Jobseekers','Jobseekers'),
+        ('Freshers','Freshers'),
+        ('Working Proffessionals','Working Proffessionals'),
+        
+        ('Freelencers','Freelencers'),
+        ('Enterpreners','Enterpreners'),
+        ('Others','Others')
+
+    )
     Cid=models.AutoField(primary_key=True)
-    name=models.CharField(max_length=100,null=False,blank=False)
+    code=models.CharField(max_length=100,null=False,blank=False)
     title=models.CharField(max_length=100,null=False,blank=False)
     description=models.TextField(blank=False,null=True)
+    days=models.CharField(max_length=100,null=True,blank=True)
+    months=models.CharField(max_length=100,null=True,blank=True)
+    audience=models.CharField(choices=Audience,max_length=100,null=True,blank=True)
+    takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        return self.title
     class Meta:
         verbose_name='Courses'
         verbose_name_plural='Courses'
+def content_file_name(instance, filename):
+    return '/'.join(['LiveSessions', instance.course.title, filename])
+def content_Rfile_name(instance, filename):
+    return '/'.join(['RecordedSession', instance.course.title, filename])
+
+#contain all the recorded videos to the particuler course
+class VideoRecorded(models.Model):
+    Vid=models.AutoField(primary_key=True)
+    title=models.CharField(max_length=100,null=True,blank=True)
+    description=models.TextField(blank=True,null=True)
+    session_duration=models.CharField(max_length=100,null=True,blank=True)
+    video=models.FileField(upload_to =content_Rfile_name,null=True,blank=True)
+    course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name='Recorded Sessions'
+        verbose_name_plural='Recorded Sessions'
+#contain all the liveSessions to the particuler course
+class LiveSession(models.Model):
+    Vid=models.AutoField(primary_key=True)
+    title=models.CharField(max_length=100,null=True,blank=True)
+    description=models.TextField(blank=True,null=True)
+    session_duration=models.CharField(max_length=100,null=True,blank=True)
+    session_date=models.DateField(null=True,blank=True)
+    session_start=models.TimeField(auto_now_add=True)
+    session_end=models.TimeField(auto_now_add=True)
+    days=models.CharField(max_length=100,null=True,blank=True)
+    video=models.FileField(upload_to =content_file_name,null=True,blank=True)
+    course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name='Live Sessions'
+        verbose_name_plural='Live Sessions'
 
 
 #this relation associate a particuler facilitator with particuler course
@@ -59,7 +114,7 @@ class offer(models.Model):
     Fid = models.ForeignKey(Facilitator, on_delete=models.CASCADE)
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        return self.Fid.name
     class Meta:
         verbose_name='Details about Courses and Facilitator'
         verbose_name_plural='Details about Courses and Facilitators'

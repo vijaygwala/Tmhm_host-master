@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 {% load static %}
 <html lang="en">
 
@@ -9,11 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>CREATE COURSES</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link href="https://cdn.usebootstrap.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://cdn.usebootstrap.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>  
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -28,16 +33,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <!-- Icons font CSS-->
-    <link href='{% static 'facilitators/vendor/mdi-font/css/material-design-iconic-font.min.css' %}' rel="stylesheet" media="all">
+    {% comment %} <link href='{% static 'facilitators/vendor/mdi-font/css/material-design-iconic-font.min.css' %}' rel="stylesheet" media="all">
     <link href='{% static 'facilitators/vendor/font-awesome-4.7/css/font-awesome.min.css' %}' rel="stylesheet" media="all">
     <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
     <!-- Vendor CSS-->
     <link href='{% static 'facilitators/vendor/select2/select2.min.css' %}' rel="stylesheet" media="all">
@@ -46,13 +49,20 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href='{% static 'facilitators/css/opensans-font.css' %}'>
     <link rel="stylesheet" type="text/css" href='{% static 'facilitators/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}'>
-    <!-- Main Style Css -->
+    <!-- Main Style Css --> {% endcomment %}
     <link rel="stylesheet" href='{% static 'facilitators/css/create_course.css'%}' />
 
 
     <!-- Custom styles for this template-->
     <link href='{% static 'facilitators/css/main.css'%}' rel="stylesheet">
     <style>
+
+
+
+
+
+
+    
         #accordionSidebar {
             height: 100%;
             width: 160px;
@@ -258,7 +268,7 @@
                 <div class="page-content" style="">
                     <div id="contentdone" class="form-v1-content">
                         <div class="wizard-form">
-                            <form class="form-register" action="#" method="post">
+                            <form class="form-register"id="msform" action="" method="post">
                                 <div id="form-total">
                                     <!-- SECTION 1 -->
                                     <h2>
@@ -274,8 +284,18 @@
                                             <div class="form-row">
                                                 <div class="form-holder">
                                                     <fieldset>
+                                                        <legend>Code</legend>
+                                                        <input type="text" class="form-control" id="id_code" name="code" placeholder="Course Code" required>
+                                                    </fieldset>
+                                                </div>
+
+                                            </div>
+
+                                             <div class="form-row">
+                                                <div class="form-holder">
+                                                    <fieldset>
                                                         <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="first-name" name="first-name" placeholder="Title of course" required>
+                                                        <input type="text" class="form-control" id="id_title" name="title" placeholder="Title of course" required>
                                                     </fieldset>
                                                 </div>
 
@@ -284,27 +304,18 @@
                                                 <div class="form-holder form-holder-2">
                                                     <fieldset>
                                                         <legend>Description</legend>
-                                                        <textarea id="subject" name="subject" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                                        <textarea id="id_description" name="description" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-holder">
                                                     <fieldset>
                                                         <legend>Target Audience</legend>
-                                                        <select id="country" name="country">
-                                                            <option value="">Students</option>
-                                                            <option value="">Freshers</option>
-                                                            <option value="">Jobseekers</option>
-
-                                                            <option value="">Working Professionals</option>
-
-                                                            <option value="">Freelancers</option>                         
-                                                    <option value="">Entrepreneurs</option>
-                                                    <option value="">Others</option>                         
-
-
-
-                                                          </select>
+                                                        <select id="id_audience" name="audience">
+                                                            {% for obj in audience_list %}
+                                                            <option value="{{obj.audience}}">{{obj.audience}}</option>
+                                                              {% endfor %}                       
+                                                            </select>
                                                     </fieldset>
                                                 </div>
                                             </div>
@@ -313,7 +324,7 @@
                                                 <div class="form-holder form-holder-2">
                                                     <fieldset>
                                                         <legend>Takeaway/Learning</legend>
-                                                        <textarea id="subject" name="subject" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
+                                                        <textarea id="id_takeway" name="takeway" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
                                                 </div>
                                             </div>
                                             <!-- <div class="form-row form-row-date">
@@ -363,104 +374,37 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-holder form-holder-1">
-                                                    <input type="text" name="find_category" placeholder="Select the category" class="form-control" required>
+                                                    <input type="text" name="find_category" placeholder="Select the category" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>BUSINESS</option>
-                <option>Entrepreneurship</option>  
-                <option>Management</option>
-                <option>Communication</option>
-                <option>Operations</option>
-                <option>Human Resources</option>
+                                                <div class="col-lg-12">
+                                          <div class="form-group mt-auto">
+                    
+                    <span>
+                        <select class="selectpicker" multiple title="Choose Your Course" name="course" id="choose-category" data-live-search="true">
 
-            </select>
-        </span>
+                            {% for cat in category %}
+                            <optgroup label="{{cat.name}}">
+                                {% for sub in subcategory %}
+                                {% if sub.cat_id.cat_id == cat.cat_id %}
+                                <option value="{{sub.subCat_id}}">{{sub.name}}</option>
+                                {% endif %}
+                               {% endfor %}
+                            </optgroup>
+                            {% endfor %}
+                           
+                        </select>
+                        </span>
+                        <br>
+                         <i id="fwcourse-error" aria-hidden="true"></i><span id="course-error" class="text-danger"></span>
+                    </div>
+                                                 </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>IT & SOFTWARE</option>
-              <option>Web Applications</option>
-              <option>Mobile Applications</option>
-              <option>Data Sciences</option>
-              <option>Machine Learning</option>
-            </select>
-        </span>
-                                                </div>
+                                           
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-1">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>PERSONAL</option>
-                <option>Emotional IQ</option>
-                <option>Happiness</option>
-               <option>Productivity</option>
-               <option>Memory Power</option>
-               <option>Work Life Balance</option>
-
-
-            </select>
-        </span>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>HEALTH/FITNESS</option>
-                <option>Yoga and Meditation</option>
-                <option>Fitness</option>
-                <option>Dieting</option>
-                <option>Sports</option>
-            </select>
-        </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-1">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>CREATIVE</option>
-                <option>Content Writing</option>
-                <option>Music</option>
-     <option>Calligraphy  </option>
-     <option>Multimedia      </option>
-     <option>Do it Yourself</option>
-     <option>Web Designs/UI-UX</option>
-
-
-            </select>
-        </span>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>TEACHING</option>
-                <option>Test and Exam Prep.</option>
-                 <option>Maths</option>
-                 <option>Physics</option>
-                 <option>Languages</option>
-
-            </select>
-        </span>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
                                     </section>
+                                   
                                     <!-- SECTION 3 -->
                                     <h2>
                                         <p class="step-icon"><span>03</span></p>
@@ -480,10 +424,10 @@
 
                                                         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="">
                                                             <li class="nav-item">
-                                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sessions</a>
+                                                                <a class="nav-link active" id="session" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sessions</a>
                                                             </li>
                                                             <li class="nav-item">
-                                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Course</a>
+                                                                <a class="nav-link" id="course" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Course</a>
                                                             </li>
                                                         </ul>
 
@@ -493,12 +437,28 @@
                                                                 <h3 class="register-heading" style="color:rgb(20, 153, 214);">Here to address learners and share your experience? Share an interactive Session Video!</h3>
                                                                 <div class="row register-form">
                                                                     <div class="col">
+                                                                         <div class="form-row">
+                                                <div class="form-holder">
+                                                    <fieldset>
+                                                        <legend>Title</legend>
+                                                        <input type="text" class="form-control" id="stitle" name="htitle" placeholder="Title of Video" >
+                                                    </fieldset>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row">
+                                                <fieldset>
+                                            <label class="special-label">Description</label>
+                                            <textarea id="id_description" name="sdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                                
+                                            </div>
+             
                                                                         <label class="special-label">Session Duration:</label>
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>Hour/min</legend>
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
+                                                                                    <input type="time" id="ltime" name="ltime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
                                                                             </div>
 
                                                                         </div>
@@ -508,7 +468,7 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>Date</legend>
-                                                                                    <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
+                                                                                    <input type="date" id="ldate" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
 
                                                                         </div>
                                                                         <!-- 
@@ -527,12 +487,12 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>From</legend>
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
+                                                                                    <input type="time" id="lstime"  name="lstime"min="00:00" max="24:00" > </fieldset>
                                                                             </div>
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>To</legend>
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
+                                                                                    <input type="time" id="letime" name="letime" min="00:00" max="24:00" > </fieldset>
                                                                             </div>
 
                                                                         </div>
@@ -542,7 +502,7 @@
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
-                                                                                    <input type="text" name="days" maxlength="3" id="" pattern="\d{3}" required/> </div>
+                                                                                    <input type="text" name="days"  id="ldays" /> </div>
 
                                                                         </div>
 
@@ -550,9 +510,9 @@
                                                                         <div class="form-holder form-holder-2">
                                                                             <label class="special-label">Upload:</label>
 
-                                                                            <form>
+                                                                            
                                                                                 <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
+                                                                                    <input type="file" class="custom-file-input" id="livevideo">
                                                                                     <label class="custom-file-label" for="customFile">Session Video</label>
                                                                                 </div>
 
@@ -566,13 +526,28 @@
                                                                 <h3 class="register-heading" style="color:rgb(20, 153, 214);">Want to impact people through your teachings? Start here by uploading Course videos!</h3>
                                                                 <div class="row register-form">
                                                                     <div class="col">
+                                                                               <div class="form-row">
+                                                <div class="form-holder">
+                                                    <fieldset>
+                                                        <legend>Title</legend>
+                                                        <input type="text" class="form-control" id="ctitle" name="title" placeholder="Title of Video">
+                                                    </fieldset>
+                                                </div>
 
+                                            </div>
+                                            <div class="form-row">
+                                                <fieldset>
+                                            <label class="special-label">Description</label>
+                                            <textarea id="id_description" name="cdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                                
+                                            </div>
+             
                                                                         <label class="special-label">Course Video Duration:</label>
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>Hour/min</legend>
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
+                                                                                    <input type="time" id="ctime" name="ctime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
                                                                             </div>
 
                                                                         </div>
@@ -586,7 +561,7 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
 
-                                                                                    <input type="number" id="" name="" min="1" max="999">
+                                                                                    <input type="number" id="cdays" name="cdays" min="1" max="999">
                                                                             </div>
 
                                                                         </div>
@@ -595,7 +570,7 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
 
-                                                                                    <input type="number" id="" name="" min="1" max="12">
+                                                                                    <input type="number" id="cmonths" name="cmonths" min="1" max="12">
                                                                             </div>
 
                                                                         </div>
@@ -605,9 +580,9 @@
                                                                         <div class="form-holder form-holder-2">
                                                                             <label class="special-label">Upload:</label>
 
-                                                                            <form>
+                                                                            
                                                                                 <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
+                                                                                    <input type="file" class="custom-file-input" id="coursevideo">
                                                                                     <label class="custom-file-label" for="customFile">Course Video</label>
                                                                                 </div>
 
@@ -744,6 +719,9 @@
                                                     </div>
                                                 </div>
                                             </div> -->
+                                    <div class="container text-center">
+                            <button class="btn btn-secondary" type="submit" >submit</button>
+                                    </div>
                                         </div>
                                     </section>
                                 </div>
@@ -812,16 +790,116 @@
         </div>
     </div>
 
-
-
+    
     <script>
+
+   
+
+
+    $(document).ready(function(){
+  
+    var $myForm = $('#msform')
+    $myForm.submit(function(event){
+        event.preventDefault()  
+        {% comment %} var cat_list = $('#choose-category option:selected').toArray().map(item => item.text);       {% endcomment %}
+    var session= document.getElementById('session').getAttribute('aria-selected');
+   var course= document.getElementById('course').getAttribute('aria-selected');
+   var coursevideo;
+   var sessionvideo;
+   var $video;
+   var data = {};
+   var course_details={
+       "code":$('#id_code').val(),
+       "title":$('#id_title').val(),
+       "description":$('#id_description').val(),
+       "audience":$('#id_audience').val(),
+       "takeway":$('#id_takeway').val(),
+ 
+   };
+   if(course=='true')
+   {
+        coursevideo={
+                "title":$('#ctitle').val(),
+                "description":$('#cdescription').val(),
+                "session_duration":$('#ctime').val(),
+                "days":$('#cdays').val(),
+                "months":$('#cmonths').val()
+       
+       }
+        $video=$('#coursevideo').get(0).files[0];
+data={
+    "rvideo":"true",
+    "svideo":"false",
+    "video":coursevideo,
+    "course":course_details
+}
+   }
+   else {
+sessionvideo={
+               "title":$('#stime').val(),
+                "description":$('#sdescription').val(),
+                "session_duration":$('#ltime').val(),
+                "session_start":$('#lstime').val(),
+                "session_end":$('#letime').val(),
+                "date":$('#ldate').val(),
+                "days":$('#ldays').val()
+       
+       }
+
+ $video=$('#livevideo').get(0).files[0]
+
+ data={
+    "rvideo":"false",
+    "svideo":"true",
+    "video":sessionvideo,
+    "course":course_details
+}
+   }
+
+
+console.log(data);
+
+var formData = new FormData();
+  formData.append('file',$video)
+  formData.append('data',JSON.stringify(data))
+
+ $.ajaxSetup({async: false});
+$.ajax({
+    url: '{% url 'createcourseapi' %}',
+    async: false,
+    data: formData,
+    contentType: false,
+    processData: false,
+    headers: {
+                        "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+    type: 'POST',
+    cache: false,
+    
+    error: function(xhr, status, error) {
+        alert(error);
+    },
+    success: function(response) {
+     
+                window.location.href ='{% url "facilitator-register" %}';
+            
+    }
+});
+
+$.ajaxSetup({async: true}); 
+
+});
+});
+
+    // Material Select Initialization
+
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
 
-        var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
+        {% comment %} var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
 
         colors.each(function(color) {
             $$('.color-picker')[0].insert(
@@ -836,7 +914,7 @@
                     'background': background
                 });
             });
-        });
+        });  {% endcomment %}
     </script>
 
     <!-- JQuery -->
@@ -853,7 +931,7 @@
     <script src='{% static 'facilitators/js/sb-admin-2.min.js'%}'></script>
 
     <!-- Page level plugins -->
-    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script>
+    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script> 
 
     <!-- Page level custom scripts -->
     <script src='{% static 'facilitators/js/demo/chart-area-demo.js'%}'></script>
