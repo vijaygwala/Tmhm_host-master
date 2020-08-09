@@ -13,7 +13,7 @@ from LandingPage.models import *
 from myauth.models import *
 from django.http import JsonResponse
 from django.views.generic import View
-
+from passlib.hash import django_pbkdf2_sha256 as handler
 
 
 #facilitator page
@@ -140,18 +140,17 @@ class ChangePassword(View):
         current = request.GET.get('currentPassword', None)
         newp = request.GET.get('newPassword', None)
         confirmp = request.GET.get('confirmNewPassword', None)
-        print('ALALALLALAL')
 
         try:
-            obj = get_object_or_404(CustomUser, email=request.user.email)
-            print(obj)
+            obj = get_object_or_404(CustomUser, email="saurabhpanwar127@gmail.com")
+            print(obj.password)
         except:
             print('NO USER FOUND')
-        
-        if obj.password == current:
+        # print(handler.verify(current, obj.password))
+        if handler.verify(current, obj.password):
             obj.set_password(confirmp)
+            obj.save()
             response = 'Password changed successfully!'
-        
         else:
             response = "Invalid current Password!"
 

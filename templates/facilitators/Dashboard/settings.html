@@ -148,7 +148,7 @@
                                     <label for="accountPasswordLabel" class="col-sm-3 col-form-label input-label">Account password</label>
 
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" name="currentPassword" id="accountPasswordLabel" placeholder="Enter current password" aria-label="Enter current password">
+                                        <input type="password" class="form-control" name="currentAccountPassword" id="accountPasswordLabel" placeholder="Enter current password" aria-label="Enter current password">
                                         <small class="form-text">This is the password you use to log in to your Front account.</small>
                                     </div>
                                 </div>
@@ -174,16 +174,23 @@
                             <!-- Form -->
                             <form id="changePassword" action="" >
                                
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <label for="currentPasswordLabel" class="col-sm-3 col-form-label input-label">Current password</label>
 
                                     <div class="col-sm-9">
                                         <input type="password" class="form-control" name="currentPassword" id="currentPasswordLabel" placeholder="Enter current password" aria-label="Enter current password">
                                     </div>
-                                </div>
-                                <!-- End Form Group -->
+                                </div> -->
 
-                                <!-- Form Group -->
+                                <div class="row form-group">
+                                    <label for="currentPassword" class="col-sm-3 col-form-label input-label">Current password</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" name="currentPassword" id="currentPassword" placeholder="Enter current password" aria-label="Enter current password">
+                                    </div>
+                                </div>
+
+
                                 <div class="row form-group">
                                     <label for="newPassword" class="col-sm-3 col-form-label input-label">New password</label>
 
@@ -191,9 +198,6 @@
                                         <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter new password" aria-label="Enter new password">
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
-
-                                <!-- Form Group -->
                                 <div class="row form-group">
                                     <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label input-label">Confirm new password</label>
 
@@ -214,14 +218,13 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- End Form Group -->
-
                                 <div class="d-flex justify-content-end">
                                     <a class="btn btn-white" href="javascript:;">Cancel</a>
                                     <span class="mx-2"></span>
                                     <button type="submit" class="btn btn-primary">Update Password</button>
                                 </div>
                             </form>
+             
                             <!-- End Form -->
                         </div>
                         <!-- End Body -->
@@ -523,44 +526,44 @@
 
 
     <div class="hs-unfold-overlay"></div>
-
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    
     <script>
         $("form#changePassword").submit(function() {
             var currentPassword = $('input[name="currentPassword"]').val().trim();
-            var newPassword = $('input[name="newPassword"]').val().trim();
-            var confirmNewPassword = $('input[name="confirmNewPassword"]').val().trim();
-            if (nameInput && newPassword && confirmNewPassword) {
-                if (newPassword===confirmNewPassword) {
-                    $.ajax({
-                        url: '{% url "changePassword" %}',
-                        data: {
-                            'currentPassword': currentPassword,
-                            'newPasswordss': newPassword,
-                            'confirmNewPassword': confirmNewPassword
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.msg) {
-                             alert(response);
-                            }
-                        }
-                    });
-                }
-                else {
-                    alert("Passwords must be same!")
-                }
+              var newPassword = $('input[name="newPassword"]').val().trim();
+              var confirmNewPassword = $('input[name="confirmNewPassword"]').val().trim();
+                  if (currentPassword && newPassword && confirmNewPassword) {
+                      if (newPassword===confirmNewPassword) {
+                              $.ajax({
+                                  url: '{% url "changePassword" %}',
+                                  data: {
+                                      'currentPassword': currentPassword,
+                                      'newPassword': newPassword,
+                                      'confirmNewPassword': confirmNewPassword
+                                  },
+                                  dataType: 'json',
+                                  success: function (data) {
+                                      if (data.msg) {
+                                       alert(data.msg.response);
+                                      }
+                                  }
+                              });
+                          }
+                          else {
+                              alert("Passwords must be same!")
+                          }
+          
+                        } else {
+                          alert("All fields must have a valid value.");
+                      }
+                      $('form#changePassword').trigger("reset");
+                      return false;
+                  });
+                </script>
+    
 
-              } else {
-                alert("All fields must have a valid value.");
-            }
-            $('form#changePassword').trigger("reset");
-            return false;
-        });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
 </body>
 
