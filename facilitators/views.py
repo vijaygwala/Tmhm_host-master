@@ -95,7 +95,7 @@ class RegisterLoginView(AjaxFormMixin,View):
 
 def facilitator_Dashboard_Landing_page(request):
     print(request.user)
-    instance = CustomUser.objects.get(email="saurabhpanwar127@gmail.com")
+    instance = CustomUser.objects.get(email=request.user.email)
     obj = instance.user.facilitator
     print(obj)
     pro = instance.userprofile
