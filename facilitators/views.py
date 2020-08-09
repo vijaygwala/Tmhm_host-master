@@ -125,9 +125,6 @@ def facilitator_Profile_page(request):
     return render(request, 'facilitators/Dashboard/profile.html')
 
 def facilitator_Dashboard_settings_page(request):
-    obj = get_object_or_404(CustomUser, email='saurabhpanwar127@gmail.com')
-    # obj.set_password(newpasswrd)
-    # print('Password is:', obj.password)
     return render(request, 'facilitators/Dashboard/settings.html')
 
 
@@ -136,14 +133,13 @@ def facilitator_Dashboard_settings_page(request):
 class ChangePassword(View):
     def get(self, request):
         response = ''
-        print('AAAAAAAAAAAAAAAAAAAAAAAAAAA')
         current = request.GET.get('currentPassword', None)
         newp = request.GET.get('newPassword', None)
         confirmp = request.GET.get('confirmNewPassword', None)
 
         try:
-            obj = get_object_or_404(CustomUser, email="saurabhpanwar127@gmail.com")
-            print(obj.password)
+            obj = get_object_or_404(CustomUser, email=request.user.email)
+            # print(obj.password)
         except:
             print('NO USER FOUND')
         # print(handler.verify(current, obj.password))
