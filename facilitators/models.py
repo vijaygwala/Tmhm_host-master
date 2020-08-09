@@ -11,8 +11,10 @@ class Applicants(models.Model):
     phone=models.CharField(max_length=13,null=True, blank=True)
     portfolio = models.FileField(upload_to ='uploads/',null=True, blank=True)
     intrest=models.CharField(max_length=250)
-    user = models.ForeignKey(CustomUser, related_name='applicant',on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="user")
     status = models.CharField(max_length=50, null=True, blank=True)
+    def __str__(self):  # __unicode__ for Python 2
+        return self.user.email
     class Meta:
         
         verbose_name='Registered Applicant'
@@ -41,7 +43,7 @@ class Facilitator(models.Model):
     country=models.CharField(max_length=100,blank=True,null=True)
     state=models.CharField(max_length=100,blank=True,null=True)
     zipcode=models.CharField(max_length=7,blank=True,null=True)
-    user = models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True,related_name='facilitator')
     
     class Meta:
         

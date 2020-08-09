@@ -40,6 +40,7 @@ class SubCategory(models.Model):
         verbose_name='Subcategories of Categories'
         verbose_name_plural='Subcategories of Categories'
 
+# Audience for courses
 class Audience(models.Model):
     audience=models.CharField(max_length=100,null=True,blank=True)
     def __str__(self):

@@ -203,6 +203,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a class="dropdown-item" href="{% url 'profile' approved.Fid %}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
@@ -210,6 +211,8 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
                                 </a>
 =======
+=======
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                 <a class="dropdown-item" href='{% url 'profile'%}'>
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
@@ -217,9 +220,14 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
                                 </a>
 
+<<<<<<< HEAD
 >>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+=======
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href='#' data-toggle="modal" data-target="#logoutModal">
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
                                 </a>
                             </div>
@@ -237,11 +245,21 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-lg-8 col-md-6" style="color: black">
+<<<<<<< HEAD
                                         <h3 class="mb-0 text-truncated">Facilitator Name</h3>
                                         <p class="lead">Web / UI Designer</p>
                                         <p>
                                             I love to read, hang out with friends, watch football, listen to music, and learn new things.
                                         </p>
+=======
+                                        <h3 class="mb-0 text-truncated">{{ facilitator_name }}</h3>
+                                        <p class="lead">{{ intrest }}</p>
+                                        {% if Bio %}
+                                        <p>
+                                            {{ Bio }}
+                                        </p>
+                                        {% endif %}
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                         <p> <span class="badge badge-info tags">HTML5</span>
                                             <span class="badge badge-info tags">CSS3</span>
                                             <span class="badge badge-info tags">nodejs</span>
@@ -279,12 +297,21 @@
 
                     </div>
                     <div class="row">
+<<<<<<< HEAD
+=======
+                        {% if courses %}
+                        {% for course in courses %}
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
+<<<<<<< HEAD
                                             <div class="text-xs font-weight-bold  text-uppercase mb-1"> Course Name</div>
+=======
+                                            <div class="text-xs font-weight-bold  text-uppercase mb-1">{{ course.Cid.name }}</div>
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
                                         </div>
                                         <a href="#"><img src='{% static 'facilitators/img/office.jpeg' %}' style="width:100%;"></a>
@@ -305,6 +332,7 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
 
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary h-100 py-2">
@@ -386,12 +414,26 @@
                         </div>
                     </div>
 
+=======
+                        {% endfor %}
+                        {% else %}
+                        <div class="col-xl-3 col-md-6 mb-4">
+                        <h4>No courses!</h4>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if courses %}
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                     <!---See More-->
                     <div class="see-more">
                         <div class="font-weight-bold text-center">
                             <a href="#">See more...</a>
                         </div>
                     </div>
+<<<<<<< HEAD
+=======
+                    {% endif %}
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h6 class="h2 d-inline-block mb-0" style="color:black">Course Overview</h6>
@@ -407,7 +449,15 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Courses</div>
+<<<<<<< HEAD
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+=======
+                                            {% if total_course %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_course }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            {% endif %}
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -480,7 +530,7 @@
 
 
 
-                    <! <div class="header-body">
+                     <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
                             <h6 class="h2 d-inline-block mb-0" style="color:black">Upcoming Courses</h6>
@@ -620,7 +670,11 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+<<<<<<< HEAD
                     <a class="btn btn-primary" href=''>Logout</a>
+=======
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+>>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                 </div>
             </div>
         </div>

@@ -1,14 +1,10 @@
 from django.db import models
 
-# Create your models here.
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from rest_framework.authtoken.models import Token
-
-
 
 
 
@@ -65,7 +61,7 @@ class Profile(models.Model):
         (ADMIN, 'Admin'),
 
     )
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="userprofile")
     #Address = models.CharField(max_length=30, blank=True)
     #DOB = models.DateField(null=True, blank=True)
     role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)

@@ -16,11 +16,22 @@ from django.contrib.auth.decorators import login_required
 import requests
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.http import JsonResponse
+from django.views.generic import View
+from passlib.hash import django_pbkdf2_sha256 as handler
+from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from django.contrib.auth import logout
+
+#facilitator page
+def facilitator_page(request):
+    return render(request, 'facilitators/index.html')
 
 
-# def signup(request):
-#     context = {'form': UserForm(),'expform':ExperienceForm(),'fquery':FacilitatorQueriesForm()}
-#     return render(request, 'facilitators/register/mysignup.html',context)
+
+    
+from django.views.generic import CreateView
+from .mixins import AjaxFormMixin
 
 # Facilitator registration code personal details , experience details and facilitator queries without Rest Api
 class RegisterLoginView(AjaxFormMixin,View):
@@ -87,6 +98,27 @@ class RegisterLoginView(AjaxFormMixin,View):
         return redirect('facilitator-register')
 
 def facilitator_Dashboard_Landing_page(request):
+   #by saurabh
+    print(request.user)
+    instance = CustomUser.objects.get(email=request.user.email)
+    context = {}
+    try:
+        obj = instance.user.facilitator
+        print(obj)
+        pro = instance.userprofile
+        offr = offer.objects.filter(Fid=obj.Fid)
+        total_course = offr.count()
+        context = {
+        "facilitator_name" : obj.name, 
+        "Bio" : obj.Bio,
+        "courses": offr,
+        "total_course": total_course,
+        "intrest": pro.intrest
+    } 
+    except:
+        print('myauth.models.CustomUser.user.RelatedObjectDoesNotExist: CustomUser has no user')
+
+    # by aamir
     appli = Applicants.objects.get(user=request.user)   #appli.Aid
     approved = Facilitator.objects.get(user=appli)
     context = {'approved':approved}
@@ -219,5 +251,38 @@ def facilitator_Profile_page(request, pk):
         
 
 
+# for handling ajax request for change password form of setting section of profile
 
-   
+class ChangePassword(View):
+    def get(self, request):
+        response = ''
+        current = request.GET.get('currentPassword', None)
+        newp = request.GET.get('newPassword', None)
+        confirmp = request.GET.get('confirmNewPassword', None)
+
+        try:
+            obj = get_object_or_404(CustomUser, email=request.user.email)
+            # print(obj.password)
+        except:
+            print('NO USER FOUND')
+        # print(handler.verify(current, obj.password))
+        if handler.verify(current, obj.password):
+            obj.set_password(confirmp)
+            obj.save()
+            response = 'Password changed successfully!'
+        else:
+            response = "Invalid current Password!"
+
+
+        msg = { 'response':response }
+
+        data = {
+                'msg': msg
+            }
+        return JsonResponse(data)
+
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('facilitator'))
+
