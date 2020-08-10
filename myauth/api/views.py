@@ -41,6 +41,7 @@ class FacilitatorRegisterAPI(APIView):
         expform = ExperienceSerializer(data=exp_form)
         form = RegisterSerializer(data=personal_detail)
         
+        
         phone=personal_detail.get('phone')
         fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
         course=personal_detail.get('course')
@@ -57,6 +58,8 @@ class FacilitatorRegisterAPI(APIView):
         
         if form.is_valid(raise_exception=True):
             user=form.save()
+            user.role=2
+            user.save()
             applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
             applicant.save()
             exp_form["facilitator"]=applicant.Aid

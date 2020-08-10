@@ -209,7 +209,7 @@ class facilitator_login(View):
                 else:
                     return HttpResponse("you are not authorized")
             else:
-                return render(request, 'facilitators/index.html')
+                return render(request, 'facilitators/Dashboard/index.html')
 
 @api_view(['GET', 'POST'])
 def facilitator_Profile_page(request, pk):
