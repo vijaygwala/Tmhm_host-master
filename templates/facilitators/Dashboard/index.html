@@ -202,14 +202,15 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{% url 'profile' approved.Fid %}">
+                                <a class="dropdown-item" href='{% url 'profile' 1 %}'>
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
                                 </a>
-                                <a class="dropdown-item" href="{% url 'settings'%}">
+                                <a class="dropdown-item" href='{% url 'settings'%}'>
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
                                 </a>
+
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href='#' data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
                                 </a>
                             </div>
@@ -227,11 +228,13 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 col-lg-8 col-md-6" style="color: black">
-                                        <h3 class="mb-0 text-truncated">Facilitator Name</h3>
-                                        <p class="lead">Web / UI Designer</p>
+                                        <h3 class="mb-0 text-truncated">{{ facilitator_name }}</h3>
+                                        <p class="lead">{{ intrest }}</p>
+                                        {% if Bio %}
                                         <p>
-                                            I love to read, hang out with friends, watch football, listen to music, and learn new things.
+                                            {{ Bio }}
                                         </p>
+                                        {% endif %}
                                         <p> <span class="badge badge-info tags">HTML5</span>
                                             <span class="badge badge-info tags">CSS3</span>
                                             <span class="badge badge-info tags">nodejs</span>
@@ -269,12 +272,14 @@
 
                     </div>
                     <div class="row">
+                        {% if courses %}
+                        {% for course in courses %}
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold  text-uppercase mb-1"> Course Name</div>
+                                            <div class="text-xs font-weight-bold  text-uppercase mb-1">{{ course.Cid.name }}</div>
 
                                         </div>
                                         <a href="#"><img src='{% static 'facilitators/img/office.jpeg' %}' style="width:100%;"></a>
@@ -295,93 +300,21 @@
                                 </div>
                             </div>
                         </div>
-
+                        {% endfor %}
+                        {% else %}
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold  text-uppercase mb-1"> Course Name</div>
-
-                                        </div>
-                                        <a href="#"><img src='{% static 'facilitators/img/office.jpeg' %}' style="width:100%;"></a>
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Learners</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Active Learners</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
-
-                                        </div>
-                                        <div class="col-auto" style="top: 10px;">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <h4>No courses!</h4>
                         </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold  text-uppercase mb-1"> Course Name</div>
-
-                                        </div>
-                                        <a href="#"><img src='{% static 'facilitators/img/office.jpeg' %}' style="width:100%;"></a>
-
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Learners</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Active Learners</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
-
-                                        </div>
-                                        <div class="col-auto" style="top: 10px;">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary  h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1"> Course Name</div>
-
-                                        </div>
-                                        <a href="#"><img src='{% static 'facilitators/img/office.jpeg'%}' style="width:100%;"></a>
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Learners</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Active Learners</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
-
-                                        </div>
-                                        <div class="col-auto" style="top: 10px;">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endif %}
                     </div>
-
+                    {% if courses %}
                     <!---See More-->
                     <div class="see-more">
                         <div class="font-weight-bold text-center">
                             <a href="#">See more...</a>
                         </div>
                     </div>
+                    {% endif %}
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h6 class="h2 d-inline-block mb-0" style="color:black">Course Overview</h6>
@@ -397,7 +330,11 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Courses</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                            {% if total_course %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_course }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            {% endif %}
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -610,7 +547,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href=''>Logout</a>
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
                 </div>
             </div>
         </div>
