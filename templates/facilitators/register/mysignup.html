@@ -441,29 +441,13 @@ var formData = new FormData();
 let csrftoken = getCookie('csrftoken');
  $.ajaxSetup({async: false});
 $.ajax({
-<<<<<<< HEAD
     url: '{% url 'register' %}',
-=======
-    url: "{% url 'register' %}",
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
     async: false,
     data: formData,
     contentType: false,
     processData: false,
     headers: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        "X-CSRFTOKEN": "{{ csrf_token }}"
-=======
-                        "X-CSRFTOKEN": "{{ csrf_token }}",
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                        "X-CSRFTOKEN": "{{ csrf_token }}"
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                        "X-CSRFTOKEN": "{{ csrf_token }}"
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
+"X-CSRFTOKEN": "{{ csrf_token }}",
                 },
     type: 'POST',
     cache: false,
@@ -500,13 +484,10 @@ function getCookie(name) {
 
 
 
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
     
     $("#nexta").click(function(){
         

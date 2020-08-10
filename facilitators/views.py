@@ -100,7 +100,7 @@ class RegisterLoginView(AjaxFormMixin,View):
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
-    instance = CustomUser.objects.get(email=request.user.email)
+    instance = CustomUser.objects.get(email='vijaygwala97@gmail.com')
     context = {}
     try:
         obj = instance.user.facilitator
@@ -119,7 +119,7 @@ def facilitator_Dashboard_Landing_page(request):
         print('myauth.models.CustomUser.user.RelatedObjectDoesNotExist: CustomUser has no user')
 
     # by aamir
-    appli = Applicants.objects.get(user=request.user)   #appli.Aid
+    appli = Applicants.objects.get(user=instance)   #appli.Aid
     approved = Facilitator.objects.get(user=appli)
     context = {'approved':approved}
 
