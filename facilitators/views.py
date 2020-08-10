@@ -22,6 +22,8 @@ from passlib.hash import django_pbkdf2_sha256 as handler
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import logout
+import json
+from math import ceil
 
 #facilitator page
 def facilitator_page(request):

@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<<<<<<< HEAD
 {% load static %}
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-{% load static %}
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 <!-- saved from url=(0052)https://htmlstream.com/front/html/account/index.html -->
 <html lang="en">
 
@@ -22,7 +15,6 @@
     <!-- Favicon -->
 
     <!-- Font -->
-
     <link href='{% static 'facilitators/profile/css' %}' rel="stylesheet">
 
     <!-- CSS Implementing Plugins -->
@@ -33,7 +25,6 @@
 
     <!-- CSS Front Template -->
     <link rel="stylesheet" href='{% static 'facilitators/profile/theme.css'%}'>
-
 </head>
 
 <body>
@@ -98,28 +89,12 @@
                                     <!-- Avatar -->
                                     <div class="d-none d-lg-block text-center mb-5">
                                         <div class="avatar avatar-xxl avatar-circle mb-3">
-
                                             <img class="avatar-img" src="{{ourdata.profile.url}}" alt="Image Description">
                                             <img class="avatar-status avatar-lg-status" src='{% static 'facilitators/profile/top-vendor.svg'%}' alt="Image Description" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified user">
                                         </div>
 
                                         <h4 class="card-title">{{ourdata.name}}</h4>
                                         <p class="card-text font-size-1">{{request.user}}</p>
-
-                                            <img class="avatar-img" src="./Profile Info _ Front - Responsive Website Template_files/img1(1).jpg" alt="Image Description">
-                                            <img class="avatar-status avatar-lg-status" src="./Profile Info _ Front - Responsive Website Template_files/top-vendor.svg" alt="Image Description" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified user">
-                                        </div>
-
-                                        <h4 class="card-title">Natalie Curtis</h4>
-                                        <p class="card-text font-size-1">natalie@example.com</p>
-
-                                            <img class="avatar-img" src='{% static 'facilitators/profile/img1(1).jpg'%}' alt="Image Description">
-                                            <img class="avatar-status avatar-lg-status" src='{% static 'facilitators/profile/top-vendor.svg'%}' alt="Image Description" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified user">
-                                        </div>
-
-                                        <h4 class="card-title">Natalie Curtis</h4>
-                                        <p class="card-text font-size-1">natalie@example.com</p>
-
                                     </div>
                                     <!-- End Avatar -->
 
@@ -128,22 +103,18 @@
                                     <!-- List -->
                                     <ul class="nav nav-sub nav-sm nav-tabs nav-list-y-2 mb-4">
                                         <li class="nav-item">
-
                                             <a class="nav-link" href="{% url 'dashboard' %}">
-                       <i class="fas fa-id-card nav-icon"></i> Dashboard
+                                                <i class="fas fa-id-card nav-icon"></i> Dashboard
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="">
-
-                                            <a class="nav-link active" href='{% url 'profile' %}'>
-                                            <i class="fas fa-id-card nav-icon"></i> Personal info
+                                                <i class="fas fa-id-card nav-icon"></i> Personal info
                                             </a>
                                         </li>
                                         <li class="nav-item">
-
                                             <a class="nav-link" href="{% url 'settings' %}">
-                        <i class="fas fa-shield-alt nav-icon"></i> Login &amp; security
+                                                <i class="fas fa-shield-alt nav-icon"></i> Login &amp; security
                                             </a>
                                         </li>
 
@@ -168,7 +139,6 @@
 
                         <!-- Body -->
                         <div class="card-body">
-
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <!-- Form Group -->
@@ -178,22 +148,12 @@
                                     <div class="col-sm-9">
                                         <div class="media align-items-center">
                                             <label class="avatar avatar-xl avatar-circle mr-4" for="avatarUploader">
-
                                             <img id="avatarImg" class="avatar-img" src="{{ourdata.profile.url}}" alt="Image Description">
                                         </label>
 
                                             <div class="media-body">
                                                 <div class="btn btn-sm btn-primary file-attachment-btn mb-2 mb-sm-0 mr-2">Upload Photo
                                                     <input type="file" class="js-file-attach file-attachment-btn-label" name="profile" id="avatarUploader" data-hs-file-attach-options="{
-
-                        <img id="avatarImg" class="avatar-img" src='{% static 'facilitators/profile/img1(1).jpg'%}' alt="Image Description">
-
-                      </label>
-
-                                            <div class="media-body">
-                                                <div class="btn btn-sm btn-primary file-attachment-btn mb-2 mb-sm-0 mr-2">Upload Photo
-                                                    <input type="file" class="js-file-attach file-attachment-btn-label" id="avatarUploader" data-hs-file-attach-options="{
-
                                     &quot;textTarget&quot;: &quot;#avatarImg&quot;,
                                     &quot;mode&quot;: &quot;image&quot;,
                                     &quot;targetAttr&quot;: &quot;src&quot;
@@ -213,10 +173,8 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group">
-
                                             <input type="text" class="form-control" name="firstName" id="firstNameLabel" placeholder="Clarice" aria-label="Clarice" value="{{firstname}}">
                                             <input type="text" class="form-control" name="lastName" id="lastNameLabel" placeholder="Boone" aria-label="Boone" value="{{lastname}}">
-
                                         </div>
                                     </div>
                                 </div>
@@ -227,9 +185,7 @@
                                     <label for="emailLabel" class="col-sm-3 col-form-label input-label">Email</label>
 
                                     <div class="col-sm-9">
-
                                         <input type="email" class="form-control" name="email" id="emailLabel" placeholder="clarice@example.com" aria-label="clarice@example.com" value="{{request.user}}" readonly>
-
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -244,7 +200,6 @@
 
                                     <div class="col-sm-9">
                                         <div class="input-group align-items-center">
-
                                             <input type="text" class="js-masked-input form-control" name="phone" id="phoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx" value="{{ourdata.phone}}" data-hs-mask-options="{
                                &quot;template&quot;: &quot;+0(000)000-00-00&quot;
                              }" maxlength="16">
@@ -319,27 +274,19 @@
                                         <!-- Quill -->
                                         <div class="quill-custom">
                                             <div class="js-quill ql-container ql-snow" style="min-height: 15rem;" data-hs-quill-options="{
-
-
                            &quot;placeholder&quot;: &quot;{{ourdata.Bio}}&quot;,
-
                             &quot;modules&quot;: {
                               &quot;toolbar&quot;: [
                                 [&quot;bold&quot;, &quot;italic&quot;, &quot;underline&quot;, &quot;strike&quot;, &quot;link&quot;, &quot;image&quot;, &quot;blockquote&quot;, &quot;code&quot;, {&quot;list&quot;: &quot;bullet&quot;}]
                               ]
                             }
                            }">
-
                                                 <div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="Add your bio....">
                                                     <input type="text" class="col-sm-3 col-form-label input-label" name="Bio" value="{{ourdata.Bio}}">
                                                 </div>
                                                 <div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>
                                                 <div class="ql-tooltip ql-hidden">
                                                     <a class="ql-preview" rel="noopener noreferrer" target="_blank" href="about:blank"></a>
-<<<<<<< HEAD
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                     <a class="ql-action"></a>
                                                     <a class="ql-remove"></a>
                                                 </div>
@@ -364,15 +311,7 @@
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
-<<<<<<< HEAD
-<<<<<<< HEAD
             
-=======
-                            </form>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                            </form>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                         </div>
                         <!-- End Body -->
 
@@ -390,15 +329,7 @@
 
                         <!-- Body -->
                         <div class="card-body">
-<<<<<<< HEAD
-<<<<<<< HEAD
                             
-=======
-                            <form>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                            <form>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                 <!-- Form Group -->
                                 <div class="row form-group">
                                     <label for="locationLabel" class="col-sm-3 col-form-label input-label">Location</label>
@@ -408,8 +339,6 @@
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                                         <!-- End Select -->          
                                         <div class="mb-3">
                                             <label for="countryLabel" class="col-sm-3 col-form-label input-label">Country</label>
@@ -417,19 +346,6 @@
                                         </div>
                                         <label for="stateLabel" class="col-sm-3 col-form-label input-label">State</label>
                                         <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State" value="{{ourdata.state}}">
-=======
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                        <!-- End Select -->
-
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" name="city" id="cityLabel" placeholder="City" aria-label="City" value="India">
-                                        </div>
-                                        <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State">
-<<<<<<< HEAD
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -439,15 +355,7 @@
                                     <label for="addressLine1Label" class="col-sm-3 col-form-label input-label">Address line 1</label>
 
                                     <div class="col-sm-9">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                         <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address" value="{{ourdata.PAddress}}">
-=======
-                                        <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address" value="45 Roker Terrace, Latheronwheel">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                        <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address" value="45 Roker Terrace, Latheronwheel">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -461,15 +369,7 @@
                                     <label for="addressLine2Label" class="col-sm-3 col-form-label input-label">Address line 2 <span class="input-label-secondary">(Optional)</span></label>
 
                                     <div class="col-sm-9">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                         <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address" value="{{ourdata.TAddress}}">
-=======
-                                        <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                        <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
                                         <!-- Container For Input Field -->
                                         <div id="addAddressFieldContainer"></div>
@@ -498,23 +398,13 @@
                                     <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code <i class="far fa-question-circle text-body ml-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="You can find your code in a postal address."></i></label>
 
                                     <div class="col-sm-9">
-
                                         <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code" aria-label="Your zip code" value="{{ourdata.zipcode}}" data-hs-mask-options="{
-3
                              &quot;template&quot;: &quot;AA0 0AA&quot;
                            }" maxlength="7">
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
-<<<<<<< HEAD
-<<<<<<< HEAD
                            
-=======
-                            </form>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                            </form>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                         </div>
                         <!-- End Body -->
 
@@ -522,19 +412,9 @@
                         <div class="card-footer d-flex justify-content-end">
                             <a class="btn btn-white" href="javascript:;">Cancel</a>
                             <span class="mx-2"></span>
-<<<<<<< HEAD
-<<<<<<< HEAD
                             <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="SAVE">
                         </div>
                     </form>
-=======
-                            <a class="btn btn-primary" href="javascript:;">Save Changes</a>
-                        </div>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                            <a class="btn btn-primary" href="javascript:;">Save Changes</a>
-                        </div>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                         <!-- End Footer -->
                     </div>
                     <!-- End Card -->
@@ -695,15 +575,7 @@
 
                                     <a class="btn btn-sm btn-ghost-secondary btn-block mb-2" href="https://htmlstream.com/front/html/account/index.html#">
                                         <span class="d-flex justify-content-center align-items-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                      <img class="mr-2" src='{% static 'facilitators/profile/img17.png" alt="Image Description" width="14" height="14">
-=======
-                      <img class="mr-2" src="./Profile Info _ Front - Responsive Website Template_files/img17.png" alt="Image Description" width="14" height="14">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                      <img class="mr-2" src='{% static 'facilitators/profile/img17.png" alt="Image Description" width="14" height="14">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
+                      <img class="mr-2" src='{% static 'facilitators/profile/img17.png'%' alt="Image Description" width="14" height="14">
                       Sign In with Google
                     </span>
                                     </a>
@@ -767,15 +639,7 @@
 
                                     <a class="btn btn-sm btn-ghost-secondary btn-block mb-2" href="https://htmlstream.com/front/html/account/index.html#">
                                         <span class="d-flex justify-content-center align-items-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
                       <img class="mr-2" src='{% static 'facilitators/profile/img17.png'%}' alt="Image Description" width="14" height="14">
-=======
-                      <img class="mr-2" src="./Profile Info _ Front - Responsive Website Template_files/img17.png" alt="Image Description" width="14" height="14">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                      <img class="mr-2" src='{% static 'facilitators/profile/img17.png'%}' alt="Image Description" width="14" height="14">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                       Sign Up with Google
                     </span>
                                     </a>
@@ -864,10 +728,6 @@
     <!-- End Go to Top -->
 
     <!-- JS Global Compulsory -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
     <script src='{% static 'facilitators/profile/jquery.min.js.download'%}'></script>
     <script src='{% static 'facilitators/profile/jquery-migrate.min.js.download'%}'></script>
     <script src='{% static 'facilitators/profile/bootstrap.bundle.min.js.download'%}'></script>
@@ -891,34 +751,6 @@
     <script src='{% static 'facilitators/profile/hs.mask.js.download'%}'></script>
     <script src='{% static 'facilitators/profile/hs.select2.js.download'%}'></script>
     <script src='{% static 'facilitators/profile/hs.quill.js.download'%}'></script>
-<<<<<<< HEAD
-=======
-    <script src="./Profile Info _ Front - Responsive Website Template_files/jquery.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/jquery-migrate.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/bootstrap.bundle.min.js.download"></script>
-
-    <!-- JS Implementing Plugins -->
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-header.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-go-to.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-unfold.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-mega-menu.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-show-animation.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-file-attach.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs-add-field.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/jquery.validate.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/jquery.mask.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/select2.full.min.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/quill.min.js.download"></script>
-
-    <!-- JS Front -->
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs.core.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs.validation.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs.mask.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs.select2.js.download"></script>
-    <script src="./Profile Info _ Front - Responsive Website Template_files/hs.quill.js.download"></script>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
     <!-- JS Plugins Init. -->
     <script>

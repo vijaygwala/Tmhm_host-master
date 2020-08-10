@@ -29,6 +29,8 @@ class LiveSessionsAdmin(admin.ModelAdmin):
     list_display=('Vid','title','description','session_duration','session_start','session_end','video','course')
 class AudienceAdmin(admin.ModelAdmin):
     list_display=('audience',)
+class QueryAdmin(admin.ModelAdmin):
+    list_display=('Fid','query','reply')
 
 admin.site.register(VideoRecorded,VideoRecordedAdmin)
 admin.site.register(LiveSession,LiveSessionsAdmin)
@@ -38,3 +40,4 @@ admin.site.register(SubCategory,SubCategoryAdmin)
 admin.site.register(Course,CourseAdmin)
 admin.site.register(offer,offerAdmin)
 admin.site.register(Audience,AudienceAdmin)
+admin.site.register(Queries,QueryAdmin)

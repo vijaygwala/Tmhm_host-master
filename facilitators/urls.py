@@ -12,5 +12,6 @@ urlpatterns = [
     path('facilitator/dashboard/profile/<str:pk>/', views.facilitator_Profile_page,name='profile'),
     path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support'),
     path('facilitator/dashboard/changepassword/', views.ChangePassword.as_view(), name="changePassword"),
-    path('facilitator/logout/', views.user_logout, name="logout")
+    path('facilitator/logout/', views.user_logout, name="logout"),
+    path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support1'),
  ]

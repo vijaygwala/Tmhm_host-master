@@ -74,7 +74,7 @@ class CreateCourseApi(APIView):
 @csrf_exempt
 def courses(request):
     if request.method=='GET':
-        courses=offer.objects.filter(Fid=2)
+        courses=offer.objects.filter(Fid=1)
         newlist=[]
         for i in range(0,len(courses)):
             course_details=Course.objects.get(title=courses[i].Cid)
