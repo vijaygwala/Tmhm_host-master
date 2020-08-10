@@ -414,22 +414,6 @@
                             <!--/card-block-->
                         </div>
                     </div>
-<<<<<<< HEAD
-                    {% for product, range, nSlides in category %}
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
-                            class="h6 d-inline-block mb-2">{{ product.0.subCat_id.name }}</h6>
-                    </div>
-                    <div class="slider-area">
-                        <div class="container">
-                            <div id="carouselExampleIndicators{{forloop.counter}}" class="carousel slide" data-ride="carousel">
-                                
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators{{forloop.counter}}" data-slide-to="0" class="active"></li>
-                                    {% for i in range %}
-                                    <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to={{ i }}></li>
-                                    {% endfor %}
-=======
 
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -443,7 +427,6 @@
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                 </ol>
                                 <div class='carousel-inner'>
                                     <div class='carousel-item active'>
