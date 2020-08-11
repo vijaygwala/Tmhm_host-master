@@ -286,6 +286,7 @@ class ChangePassword(View):
         current = request.GET.get('currentPassword', None)
         newp = request.GET.get('newPassword', None)
         confirmp = request.GET.get('confirmNewPassword', None)
+        obj=None
 
         try:
             obj = get_object_or_404(CustomUser, email=request.user.email)
