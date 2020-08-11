@@ -1,56 +1,24 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-<!DOCTYPE html>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-<!DOCTYPE html>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-<!DOCTYPE html>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
+{% extends '../base.html' %}
 {% load static %}
-<html lang="en">
-
-<head>
+<!-- ---------------------------------------------- -->
+    {% block title %}
+Create Courses
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <title>CREATE COURSES</title>
-   
 <!-- Latest compiled and minified JavaScript -->
-
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
     <link href="https://cdn.usebootstrap.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="https://cdn.usebootstrap.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>  
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-=======
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-
-    <title>CREATE COURSES</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -61,86 +29,36 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template-->
-    <link href='{% static 'facilitators/vendor/fontawesome-free/css/all.min.css' %}' rel="stylesheet" type="text/css">
+    <link href="{% static 'facilitators/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 
 
     
     <!-- Icons font CSS-->
-    {% comment %} <link href='{% static 'facilitators/vendor/mdi-font/css/material-design-iconic-font.min.css' %}' rel="stylesheet" media="all">
-    <link href='{% static 'facilitators/vendor/font-awesome-4.7/css/font-awesome.min.css' %}' rel="stylesheet" media="all">
+    {% comment %} <link href="{% static 'facilitators/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'facilitators/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
     <!-- Font special for pages-->
-=======
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Icons font CSS-->
-    <link href='{% static 'facilitators/vendor/mdi-font/css/material-design-iconic-font.min.css' %}' rel="stylesheet" media="all">
-    <link href='{% static 'facilitators/vendor/font-awesome-4.7/css/font-awesome.min.css' %}' rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
     <!-- Vendor CSS-->
-    <link href='{% static 'facilitators/vendor/select2/select2.min.css' %}' rel="stylesheet" media="all">
-    <link href='{% static 'facilitators/vendor/datepicker/daterangepicker.css' %}' rel="stylesheet" media="all">
+    <link href="{% static 'facilitators/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'facilitators/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href='{% static 'facilitators/css/opensans-font.css' %}'>
-    <link rel="stylesheet" type="text/css" href='{% static 'facilitators/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+    <link rel="stylesheet" type="text/css" href="{% static 'facilitators/css/opensans-font.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'facilitators/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
     <!-- Main Style Css --> {% endcomment %}
-=======
-    <!-- Main Style Css -->
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-    <!-- Main Style Css -->
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-    <!-- Main Style Css -->
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-    <link rel="stylesheet" href='{% static 'facilitators/css/create_course.css'%}' />
+    <link rel="stylesheet" href="{% static 'facilitators/css/create_course.css'%}" />
 
 
     <!-- Custom styles for this template-->
-    <link href='{% static 'facilitators/css/main.css'%}' rel="stylesheet">
+    <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet">
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
     <style>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-
-
-
-    
-=======
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
         #accordionSidebar {
             height: 100%;
             width: 160px;
@@ -192,173 +110,15 @@
         }
     </style>
 
-</head>
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
 
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-
-        <ul class="navbar-nav bg-light sidebar sidebar-light accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href='{% url 'dashboard' %}'>
-                <img src='{% static 'facilitators/img/logotiny.png' %}' class="navbar-brand-img" alt="...">
-                <div class="sidebar-brand-text ">Learnopad </div>
-
-            </a>
-            <!-- Brand -->
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider  my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active ">
-                <a class="nav-link " href='{% url 'dashboard' %}'>
-                    <i class="fas fa-fw fa-tachometer-alt text-dark"></i>
-                    <span class="text-dark">Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <!-- Nav Item - Dashboard -->
-
-            <li class="nav-item active  ">
-                <a class="nav-link" href='{% url 'createcourse' %}'>
-                    <i class="fa fa-globe text-dark"></i>
-                    <span class="text-dark">Create courses</span></a>
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item  ">
-                <a class="nav-link" href='{% url 'earnings' %}'>
-                    <i class="fa fa-bar-chart text-dark"></i>
-                    <span class="text-dark">My Earnings</span></a>
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item  ">
-                <a class="nav-link" href='{% url 'explorecourses' %}'>
-                    <i class="fa fa-globe text-dark"></i>
-                    <span class="text-dark">Explore Courses</span></a>
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href='{% url 'support' %}'>
-                    <i class="fa fa-heart text-dark"></i>
-                    <span class="text-dark">Support</span></a>
-            </li>
-
-
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-
-
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top" id="topbar">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-              </button>
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button">
-                  <i class="fa fa-search fa-sm"></i>
-                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                            <i class="fas fa-search fa-sm"></i>
-                          </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-dark font-weight-bold">Facilitator</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href='{% url 'profile'%}'>
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-                                </a>
-                                <a class="dropdown-item" href='{% url 'settings'%}'>
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
                 <!-- page content begin  -->
                 <div class="page-content" style="">
                     <div id="contentdone" class="form-v1-content">
                         <div class="wizard-form">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                             <form class="form-register"id="msform" action="" method="post">
-=======
-                            <form class="form-register" action="#" method="post">
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                            <form class="form-register" action="#" method="post">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                            <form class="form-register" action="#" method="post">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                 <div id="form-total">
                                     <!-- SECTION 1 -->
                                     <h2>
@@ -374,9 +134,6 @@
                                             <div class="form-row">
                                                 <div class="form-holder">
                                                     <fieldset>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <legend>Code</legend>
                                                         <input type="text" class="form-control" id="id_code" name="code" placeholder="Course Code" required>
                                                     </fieldset>
@@ -389,18 +146,6 @@
                                                     <fieldset>
                                                         <legend>Title</legend>
                                                         <input type="text" class="form-control" id="id_title" name="title" placeholder="Title of course" required>
-=======
-                                                        <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="first-name" name="first-name" placeholder="Title of course" required>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                        <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="first-name" name="first-name" placeholder="Title of course" required>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                        <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="first-name" name="first-name" placeholder="Title of course" required>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                     </fieldset>
                                                 </div>
 
@@ -409,59 +154,18 @@
                                                 <div class="form-holder form-holder-2">
                                                     <fieldset>
                                                         <legend>Description</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <textarea id="id_description" name="description" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
-=======
-                                                        <textarea id="subject" name="subject" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                        <textarea id="subject" name="subject" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                        <textarea id="subject" name="subject" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-holder">
                                                     <fieldset>
                                                         <legend>Target Audience</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <select id="id_audience" name="audience">
                                                             {% for obj in audience_list %}
                                                             <option value="{{obj.audience}}">{{obj.audience}}</option>
                                                               {% endfor %}                       
                                                             </select>
-=======
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                                        <select id="country" name="country">
-                                                            <option value="">Students</option>
-                                                            <option value="">Freshers</option>
-                                                            <option value="">Jobseekers</option>
-
-                                                            <option value="">Working Professionals</option>
-
-                                                            <option value="">Freelancers</option>                         
-                                                    <option value="">Entrepreneurs</option>
-                                                    <option value="">Others</option>                         
-
-
-
-                                                          </select>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                     </fieldset>
                                                 </div>
                                             </div>
@@ -470,19 +174,7 @@
                                                 <div class="form-holder form-holder-2">
                                                     <fieldset>
                                                         <legend>Takeaway/Learning</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <textarea id="id_takeway" name="takeway" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
-=======
-                                                        <textarea id="subject" name="subject" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                        <textarea id="subject" name="subject" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                        <textarea id="subject" name="subject" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                 </div>
                                             </div>
                                             <!-- <div class="form-row form-row-date">
@@ -532,9 +224,6 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-holder form-holder-1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                     <input type="text" name="find_category" placeholder="Select the category" class="form-control" >
                                                 </div>
                                             </div>
@@ -566,116 +255,6 @@
                                             </div>
                                     </section>
                                    
-=======
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                                    <input type="text" name="find_category" placeholder="Select the category" class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>BUSINESS</option>
-                <option>Entrepreneurship</option>  
-                <option>Management</option>
-                <option>Communication</option>
-                <option>Operations</option>
-                <option>Human Resources</option>
-
-            </select>
-        </span>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>IT & SOFTWARE</option>
-              <option>Web Applications</option>
-              <option>Mobile Applications</option>
-              <option>Data Sciences</option>
-              <option>Machine Learning</option>
-            </select>
-        </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-1">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>PERSONAL</option>
-                <option>Emotional IQ</option>
-                <option>Happiness</option>
-               <option>Productivity</option>
-               <option>Memory Power</option>
-               <option>Work Life Balance</option>
-
-
-            </select>
-        </span>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>HEALTH/FITNESS</option>
-                <option>Yoga and Meditation</option>
-                <option>Fitness</option>
-                <option>Dieting</option>
-                <option>Sports</option>
-            </select>
-        </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-1">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>CREATIVE</option>
-                <option>Content Writing</option>
-                <option>Music</option>
-     <option>Calligraphy  </option>
-     <option>Multimedia      </option>
-     <option>Do it Yourself</option>
-     <option>Web Designs/UI-UX</option>
-
-
-            </select>
-        </span>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <span class="custom-dropdown big">
-            <select>    
-                <option>TEACHING</option>
-                <option>Test and Exam Prep.</option>
-                 <option>Maths</option>
-                 <option>Physics</option>
-                 <option>Languages</option>
-
-            </select>
-        </span>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </section>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                     <!-- SECTION 3 -->
                                     <h2>
                                         <p class="step-icon"><span>03</span></p>
@@ -695,29 +274,10 @@
 
                                                         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="">
                                                             <li class="nav-item">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                 <a class="nav-link active" id="session" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sessions</a>
                                                             </li>
                                                             <li class="nav-item">
                                                                 <a class="nav-link" id="course" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Course</a>
-=======
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sessions</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Course</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                             </li>
                                                         </ul>
 
@@ -727,9 +287,6 @@
                                                                 <h3 class="register-heading" style="color:rgb(20, 153, 214);">Here to address learners and share your experience? Share an interactive Session Video!</h3>
                                                                 <div class="row register-form">
                                                                     <div class="col">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                          <div class="form-row">
                                                 <div class="form-holder">
                                                     <fieldset>
@@ -746,30 +303,12 @@
                                                 
                                             </div>
              
-=======
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                         <label class="special-label">Session Duration:</label>
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>Hour/min</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="time" id="ltime" name="ltime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
-=======
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                             </div>
 
                                                                         </div>
@@ -779,19 +318,7 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>Date</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="date" id="ldate" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
-=======
-                                                                                    <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
                                                                         </div>
                                                                         <!-- 
@@ -810,36 +337,12 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>From</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="time" id="lstime"  name="lstime"min="00:00" max="24:00" > </fieldset>
-=======
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                             </div>
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>To</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="time" id="letime" name="letime" min="00:00" max="24:00" > </fieldset>
-=======
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="time" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                             </div>
 
                                                                         </div>
@@ -849,19 +352,7 @@
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="text" name="days"  id="ldays" /> </div>
-=======
-                                                                                    <input type="text" name="days" maxlength="3" id="" pattern="\d{3}" required/> </div>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="text" name="days" maxlength="3" id="" pattern="\d{3}" required/> </div>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="text" name="days" maxlength="3" id="" pattern="\d{3}" required/> </div>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
                                                                         </div>
 
@@ -869,27 +360,9 @@
                                                                         <div class="form-holder form-holder-2">
                                                                             <label class="special-label">Upload:</label>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                             
                                                                                 <div class="custom-file">
                                                                                     <input type="file" class="custom-file-input" id="livevideo">
-=======
-                                                                            <form>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                            <form>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                            <form>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                                     <label class="custom-file-label" for="customFile">Session Video</label>
                                                                                 </div>
 
@@ -903,9 +376,6 @@
                                                                 <h3 class="register-heading" style="color:rgb(20, 153, 214);">Want to impact people through your teachings? Start here by uploading Course videos!</h3>
                                                                 <div class="row register-form">
                                                                     <div class="col">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                <div class="form-row">
                                                 <div class="form-holder">
                                                     <fieldset>
@@ -922,33 +392,12 @@
                                                 
                                             </div>
              
-=======
-
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                         <label class="special-label">Course Video Duration:</label>
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
                                                                                     <legend>Hour/min</legend>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="time" id="ctime" name="ctime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
-=======
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="time" class="without_ampm" min="00:00" max="24:00" required> </fieldset>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                             </div>
 
                                                                         </div>
@@ -962,19 +411,7 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="number" id="cdays" name="cdays" min="1" max="999">
-=======
-                                                                                    <input type="number" id="" name="" min="1" max="999">
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="number" id="" name="" min="1" max="999">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="number" id="" name="" min="1" max="999">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                             </div>
 
                                                                         </div>
@@ -983,19 +420,7 @@
                                                                             <div class="form-holder">
                                                                                 <fieldset>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                                     <input type="number" id="cmonths" name="cmonths" min="1" max="12">
-=======
-                                                                                    <input type="number" id="" name="" min="1" max="12">
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                                    <input type="number" id="" name="" min="1" max="12">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                                    <input type="number" id="" name="" min="1" max="12">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                             </div>
 
                                                                         </div>
@@ -1005,27 +430,9 @@
                                                                         <div class="form-holder form-holder-2">
                                                                             <label class="special-label">Upload:</label>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                             
                                                                                 <div class="custom-file">
                                                                                     <input type="file" class="custom-file-input" id="coursevideo">
-=======
-                                                                            <form>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                                                            <form>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-                                                                            <form>
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="customFile">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                                                                     <label class="custom-file-label" for="customFile">Course Video</label>
                                                                                 </div>
 
@@ -1162,18 +569,9 @@
                                                     </div>
                                                 </div>
                                             </div> -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                                     <div class="container text-center">
                             <button class="btn btn-secondary" type="submit" >submit</button>
                                     </div>
-=======
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                         </div>
                                     </section>
                                 </div>
@@ -1184,30 +582,9 @@
 
                 <!-- page content end  -->
 
-                <!-- Footer -->
-                <footer class="footer pt-0" style="z-index:1;">
-                    <div class="row align-items-center justify-content-lg-between">
-                        <div class="col-lg-6">
-                            <div class="copyright text-center  text-lg-left  text-black">
-                                &copy; 2020 <a href="http://tmhm.in/" class="font-weight-bold ml-1" target="_blank">TMHM Consulting Pvt Ltd.</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 ">
-                            <ul class="nav nav-footer text-black justify-content-center justify-content-lg-end">
-                                <li class="nav-item">
-                                    <a href="http://tmhm.in/" class="nav-link" target="_blank">
-                                        <span class="text-dark">About Us</span></a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a href="https://tmhm.in/blog/" class="nav-link" target="_blank"> <span class="text-dark">Blog</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="" class="nav-link" target="_blank"> <span class="text-dark">Privacy Policy</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </footer>
+
+
+              
             </div>
         </div>
         <!-- End of Footer -->
@@ -1218,39 +595,37 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="index.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     
-    <script>
-
    
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script> 
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
+    <script src="{% static 'facilitators/js/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'facilitators/js/jquery.steps.js'%}"></script>
+    <script src="{% static 'facilitators/js/main.js'%}"></script>
+
+{% endblock content %}
+
+{% block javascript %}
+ <script>
     $(document).ready(function(){
   
     var $myForm = $('#msform')
@@ -1348,40 +723,13 @@ $.ajaxSetup({async: true});
 
     // Material Select Initialization
 
-=======
-
-
-    <script>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-
-
-    <script>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-
-
-    <script>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         {% comment %} var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
-=======
-        var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-        var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-        var colors = ['1abc9c', '2c3e50', '2980b9', '7f8c8d', 'f1c40f', 'd35400', '27ae60'];
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
 
         colors.each(function(color) {
             $$('.color-picker')[0].insert(
@@ -1396,56 +744,7 @@ $.ajaxSetup({async: true});
                     'background': background
                 });
             });
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         });  {% endcomment %}
-=======
-        });
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-        });
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-        });
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
     </script>
 
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src='{% static 'facilitators/vendor/jquery/jquery.min.js'%}'></script>
-    <script src='{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}'></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src='{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}'></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src='{% static 'facilitators/js/sb-admin-2.min.js'%}'></script>
-
-    <!-- Page level plugins -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script> 
-=======
-    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script>
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-
-    <!-- Page level custom scripts -->
-    <script src='{% static 'facilitators/js/demo/chart-area-demo.js'%}'></script>
-    <script src='{% static 'facilitators/js/demo/chart-pie-demo.js'%}'></script>
-    <script src='{% static 'facilitators/js/jquery-3.3.1.min.js'%}'></script>
-    <script src='{% static 'facilitators/js/jquery.steps.js'%}'></script>
-    <script src='{% static 'facilitators/js/main.js'%}'></script>
-
-</body>
-
-</html>
+{% endblock javascript%}

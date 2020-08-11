@@ -1,25 +1,27 @@
-<!DOCTYPE html>
+{% extends '../base.html' %}
 {% load static %}
-<html lang="en">
-
-<head>
-
+<!-- ---------------------------------------------- -->
+    {% block title %}
+Explore Courses
+    {% endblock title %}
+<!-- --------------------------------------------- -->
+    {% block header %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>Explore Courses</title>
-
     <!-- Custom fonts for this template-->
-    <link href='{% static 'facilitators/vendor/fontawesome-free/css/all.min.css'%}' rel="stylesheet" type="text/css">
+    <link href="{% static 'facilitators/vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href='{% static 'facilitators/css/main.css'%}' rel="stylesheet">
-    <style>
+    <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet">
+    {% endblock header %}
+<!-- ------------------------------------------- -->
+    {% block stylesheet %}
+ <style>
         #accordionSidebar {
             height: 100%;
             width: 160px;
@@ -69,164 +71,10 @@
             }
         }
     </style>
-
-</head>
-
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        <!-- Sidebar -->
-
-        <ul class="navbar-nav bg-light sidebar sidebar-light accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <img src='{% static 'facilitators/img/logotiny.png' %}' class="navbar-brand-img" alt="...">
-                <div class="sidebar-brand-text ">Learnopad </div>
-            </a>
-            <!-- Brand -->
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider  my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link " href="/">
-                    <i class="fas fa-fw fa-tachometer-alt text-dark"></i>
-                    <span class="text-dark">Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <!-- Nav Item - Dashboard -->
-
-            <li class="nav-item  ">
-                <a class="nav-link" href='{% url 'createcourse'%}'>
-                    <i class="fa fa-globe text-dark"></i>
-                    <span class="text-dark">Create courses</span></a>
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item  ">
-                <a class="nav-link" href='{% url 'earnings'%}'>
-                    <i class="fa fa-bar-chart text-dark"></i>
-                    <span class="text-dark">My Earnings</span></a>
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active ">
-                <a class="nav-link " href='{% url 'explorecourses'%}'>
-                    <i class="fa fa-globe text-dark"></i>
-                    <span class="text-dark">Explore Courses</span></a>
-            </li>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link" href='{% url 'support'%}'>
-                    <i class="fa fa-heart text-dark"></i>
-                    <span class="text-dark">Support</span></a>
-            </li>
-
-
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-
-
-        </ul>
-        <!-- End of Sidebar -->
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top" id="topbar">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-dark font-weight-bold">Facilitator</span>
-                                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href='{% url 'profile'%}'>
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-                                </a>
-                                <a class="dropdown-item" href='{% url 'settings'%}'>
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn " data-toggle="modal" data-target="#staticBackdrop" style="border: 0;padding: 0;">
-                  Settings
-                  </button>
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
-
-
-
-                <!-- Modal -->
+    {% endblock stylesheet %}
+<!-- ----------------------------------------------------- -->
+    {% block content %}
+         <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -402,7 +250,7 @@
                     <div class="col-12">
                         <div class="card">
 
-                            <img src='{% static 'facilitators/img/explore_courses.jpg'%}' class="img-fluid img-thumbnail" alt="Responsive image" style="filter: blur(2px);
+                            <img src="{% static 'facilitators/img/explore_courses.jpg'%}" class="img-fluid img-thumbnail" alt="Responsive image" style="filter: blur(2px);
                           -webkit-filter: blur(2px);height:250px; background-position: center;
                           background-repeat: no-repeat;background-size: cover;">
 
@@ -414,7 +262,6 @@
                             <!--/card-block-->
                         </div>
                     </div>
-<<<<<<< HEAD
                     {% for product, range, nSlides in category %}
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
@@ -429,431 +276,10 @@
                                     {% for i in range %}
                                     <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to={{ i }}></li>
                                     {% endfor %}
-=======
-
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
-                            class="h6 d-inline-block mb-2">Html5</h6>
-                    </div>
-                    <div class="slider-area">
-                        <div class="container">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                 </ol>
                                 <div class='carousel-inner'>
                                     <div class='carousel-item active'>
                                         <div class='container'>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg' %}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg' %}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Warlord</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Full Stack Web Developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                    {% comment %} <div class='carousel-item'>
-=======
-                                    <div class='carousel-item'>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                    <div class='carousel-item'>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg' %}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='carousel-item'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                </div> {% endcomment %}
-=======
-                                </div>
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                                </div>
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                                <a class="carousel-control-prev primary" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-                   {% comment %} <div class="d-sm-flex align-items-center justify-content-between mb-4">
-
-                         <h6 style="position:relative;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
-=======
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-
-                        <h6 style="position:relative;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-
-                        <h6 style="position:relative;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                            class="h6 d-inline-block mb-2">CSS3</h6>
-                    </div>
-                    <div class="slider-area">
-                        <div class="container">
-                            <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                </ol>
-                                <div class='carousel-inner'>
-                                    <div class='carousel-item active'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Warlord</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Full Stack Web Developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='carousel-item'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='carousel-item'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px" style="background-color:gainsboro">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <a class="carousel-control-prev primary" href="#carouselExampleIndicators1" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
-                            class="h6 d-inline-block mb-2">Nodejs</h6>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                        </div>
-                        <div class="slider-area">
-=======
-                    </div>
-                    <div class="slider-area">
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
-                    </div>
-                    <div class="slider-area">
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-                        <div class="container">
-                            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                </ol>
-                                <div class='carousel-inner'>
-                                    <div class='carousel-item active'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Warlord</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Full Stack Web Developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='carousel-item'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='carousel-item'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Arunima M</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Lead Consultant,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                                    <div class="card border">
-                                                        <img class="card-img-top" src='{% static 'facilitators/img/liza3.jpg'%}' alt="Card image cap" height="250px">
-                                                        <div class="card-body" style="background-color:gainsboro">
-                                                            <h5 class="card-title" style="color:red;">Dhruv Goswami</h5>
-                                                            <h6 style="color:#262626;font-size: 0.75em;">Professional product developer,IT</h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <a class="carousel-control-prev primary" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
-<<<<<<< HEAD
-=======
                                             <div class='row text-center'>
                                                 <div class='col-md-4 col-sm-12 mb-2'>
                                                     <div class="card border">
@@ -892,58 +318,40 @@
                                     <span class="sr-only">Previous</span>
                                 </a>
                                 <a class="carousel-control-next" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="next">
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </div>
                         </div>
                     </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    {% endcomment %}
-                </div>
-            </div>
-        </div>
-    </div> 
-=======
-
-=======
                     {% endfor %}
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
-
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
                 </div>
-            </div>
-        </div>
-    </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 6a8617ef26f879ba22da98dc6091dd975700186f
-=======
->>>>>>> e6bf21051fa79727a86ff3a21eed57e45c73e1a3
-=======
->>>>>>> 1a65a008d1b46dd6e355658c8f159f9ca51c62e3
-    <script src='{% static 'facilitators/vendor/jquery/jquery.min.js'%}'></script>
-    <script src='{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}'></script>
+                    <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src='{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js' %}'></script>
+    <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src='{% static 'facilitators/js/sb-admin-2.min.js'%}'></script>
+    <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
 
     <!-- Page level plugins -->
-    <script src='{% static 'facilitators/vendor/chart.js/Chart.min.js'%}'></script>
+    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script>
 
     <!-- Page level custom scripts -->
-    <script src='{% static 'facilitators/js/demo/chart-area-demo.js'%}'></script>
-    <script src='{% static 'facilitators/js/demo/chart-pie-demo.js'%}'></script>
+    <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
+    {% endblock content %}
+<!-- ------------------------------------------------- -->
+    {% block javascript %}
 
-</body>
+    {% endblock javascript%}
 
-</html>
+
+
+
+       
+       
+    
+
+
