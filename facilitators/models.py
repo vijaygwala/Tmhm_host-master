@@ -2,7 +2,7 @@ from myauth.models import *
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from django.utils import timezone
 
 #this relation contains all the applicants who is registerd from facilitator registration form
 class Applicants(models.Model):
@@ -13,6 +13,8 @@ class Applicants(models.Model):
     intrest=models.CharField(max_length=250)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True, related_name="user")
     status = models.CharField(max_length=50, null=True, blank=True)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):  # __unicode__ for Python 2
         return self.user.email
     class Meta:
@@ -44,6 +46,8 @@ class Facilitator(models.Model):
     state=models.CharField(max_length=100,blank=True,null=True)
     zipcode=models.CharField(max_length=7,blank=True,null=True)
     user = models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True,related_name='facilitator')
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     
     class Meta:
         

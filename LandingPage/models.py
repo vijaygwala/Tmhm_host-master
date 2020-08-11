@@ -5,7 +5,7 @@ from django.db.models.signals import post_delete
 #from django.dispatch import receive
 from django.core.validators import RegexValidator
 from facilitators.models import Facilitator
-
+from django.utils import timezone
 #this table contain all the councelling releted details
 class OnlineCounsellingDetails(models.Model):
     councelling_id = models.AutoField(primary_key=True)
@@ -13,6 +13,8 @@ class OnlineCounsellingDetails(models.Model):
     email = models.CharField(max_length=30,null=False,blank=False)
     phone_regex = RegexValidator(regex=r'^[6-9]\d{9}$', message="enter valid phone number")
     phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=True) 
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.name
     class Meta:
@@ -23,6 +25,8 @@ class OnlineCounsellingDetails(models.Model):
 class Category(models.Model):
     cat_id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=False,blank=False)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.name
     class Meta:
@@ -34,6 +38,8 @@ class SubCategory(models.Model):
     subCat_id=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=False,blank=False)
     cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.name
     class Meta:
@@ -69,6 +75,8 @@ class Course(models.Model):
     audience=models.CharField(choices=Audience,max_length=100,null=True,blank=True)
     takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.title
     class Meta:
@@ -87,6 +95,8 @@ class VideoRecorded(models.Model):
     session_duration=models.CharField(max_length=100,null=True,blank=True)
     video=models.FileField(upload_to =content_Rfile_name,null=True,blank=True)
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.title
     class Meta:
@@ -105,6 +115,8 @@ class LiveSession(models.Model):
     days=models.CharField(max_length=100,null=True,blank=True)
     video=models.FileField(upload_to =content_file_name,null=True,blank=True)
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.title
     class Meta:
@@ -126,6 +138,8 @@ class Queries(models.Model):
     Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE)
     query=models.TextField(max_length=500)
     reply=models.TextField(max_length=500,blank=True, null=True)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.Fid.name
 

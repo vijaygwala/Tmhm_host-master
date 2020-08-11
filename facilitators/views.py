@@ -24,7 +24,7 @@ from django.urls import reverse
 from django.contrib.auth import logout
 import json
 from math import ceil
-
+from rest_framework.authtoken.models import Token
 #facilitator page
 def facilitator_page(request):
     return render(request, 'facilitators/index.html')
@@ -164,7 +164,11 @@ def facilitator_Dashboard_support_page(request):
 
 
 def facilitator_Dashboard_create_course_page(request):
-    return render(request, 'facilitators/Dashboard/create_course.html')
+    audience_list=Audience.objects.values('audience')
+    context={
+        'audience_list':audience_list
+    }
+    return render(request, 'facilitators/Dashboard/create_course.html',context)
 
 def facilitator_Dashboard_settings_page(request):
     return render(request, 'facilitators/Dashboard/settings.html')
@@ -183,21 +187,27 @@ class facilitator_login(View):
             password = request.POST['password']
             user = authenticate(request, email=email1, password=password)
             message=None
+            print(user)
 
             try:
                 obj = Token.objects.get_or_create(user=user)
-                appli = Applicants.objects.get(user=user)   #appli.Aid
+                appli = Applicants.objects.get(user=user)  #appli.Aid
                 approved = Facilitator.objects.get(user=appli) #aprroved.Fid
+                print(approved)
                 print(obj)
             except:
                 obj = None
                 approved=None
+            print(approved)
 
             if approved:
                 if obj:
                     if user:
                         if user.is_active:
                             login(request, user)
+                            print(" after login")
+                            print(user)
+                            request.user=user
                             context = {'approved':approved}
                             return render(request, 'facilitators/Dashboard/index.html', context)
                             return response(obj, status=200)
@@ -209,7 +219,9 @@ class facilitator_login(View):
                 else:
                     return HttpResponse("you are not authorized")
             else:
-                return render(request, 'facilitators/Dashboard/index.html')
+                print("login failed")
+            
+                return render(request, 'facilitators/index.html')
 
 @api_view(['GET', 'POST'])
 def facilitator_Profile_page(request, pk):

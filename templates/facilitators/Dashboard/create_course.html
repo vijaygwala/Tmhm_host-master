@@ -449,7 +449,7 @@
                                             <div class="form-row">
                                                 <fieldset>
                                             <label class="special-label">Description</label>
-                                            <textarea id="id_description" name="sdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                            <textarea id="sdescription" name="sdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
                                                 
                                             </div>
              
@@ -538,7 +538,7 @@
                                             <div class="form-row">
                                                 <fieldset>
                                             <label class="special-label">Description</label>
-                                            <textarea id="id_description" name="cdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                            <textarea id="cdescription" name="cdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
                                                 
                                             </div>
              
@@ -814,6 +814,8 @@
        "description":$('#id_description').val(),
        "audience":$('#id_audience').val(),
        "takeway":$('#id_takeway').val(),
+        "days":$('#cdays').val(),
+        "months":$('#cmonths').val()
  
    };
    if(course=='true')
@@ -821,9 +823,8 @@
         coursevideo={
                 "title":$('#ctitle').val(),
                 "description":$('#cdescription').val(),
-                "session_duration":$('#ctime').val(),
-                "days":$('#cdays').val(),
-                "months":$('#cmonths').val()
+                "session_duration":$('#ctime').val()
+               
        
        }
         $video=$('#coursevideo').get(0).files[0];
