@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from facilitators.models import *
 from facilitators.forms import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import auth
 from django.views import View
 import random
 import string
@@ -102,7 +103,7 @@ class RegisterLoginView(AjaxFormMixin,View):
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
-    instance = CustomUser.objects.get(email='vijaygwala97@gmail.com')
+    instance = CustomUser.objects.get(email=request.user)
     context = {}
     try:
         obj = instance.user.facilitator
@@ -111,7 +112,7 @@ def facilitator_Dashboard_Landing_page(request):
         offr = offer.objects.filter(Fid=obj.Fid)
         total_course = offr.count()
         context = {
-        "facilitator_name" : obj.name, 
+        "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
         "courses": offr,
         "total_course": total_course,
@@ -121,19 +122,30 @@ def facilitator_Dashboard_Landing_page(request):
         print('myauth.models.CustomUser.user.RelatedObjectDoesNotExist: CustomUser has no user')
 
     # by aamir
-    appli = Applicants.objects.get(user=instance)   #appli.Aid
+    appli = Applicants.objects.get(user=request.user)   #appli.Aid
     approved = Facilitator.objects.get(user=appli)
     context = {'approved':approved}
 
     return render(request, 'facilitators/Dashboard/index.html',context)
+
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
+
 def facilitator_Dashboard_explore_courses_page(request):   
-    r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
-    data=json.loads(r.text)
+    # r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
+    # data=json.loads(r.text)
+    # print(request.user.id)
+    # data=Facilitator.objects.get(email=request.user)
+    appli=Applicants.objects.get(user=request.user)
+    faci=Facilitator.objects.get(user=appli)
+    course=offer.objects.filter(Fid=faci.Fid)
+    newlist=[]
+    for i in range(0,len(course)):
+        course_details=Course.objects.get(title=course[i].Cid)
+        newlist.append(course_details)
     context={}
-    for i in range(0,len(data)):
-        subcategory=SubCategory.objects.get(subCat_id=data[i]['subCat_id'])
+    for i in range(0,len(newlist)):
+        subcategory=SubCategory.objects.get(name=newlist[i].subCat_id)
         context.setdefault('subcategory',set()).add(subcategory)
     category=[]
     for cat in context['subcategory']:
@@ -147,15 +159,14 @@ def facilitator_Dashboard_explore_courses_page(request):
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
 def facilitator_Dashboard_support_page(request):
+    appli=Applicants.objects.get(user=request.user)
+    faci=Facilitator.objects.get(user=appli)
     if request.method=='POST':
         query=request.POST['Queries']
-        data={
-            'query':query
-        }
-        r=requests.post(url='http://127.0.0.1:8000/facilitator/api/support',data=data)
+        Queries.objects.create(Fid=faci,query=query)
         return redirect('support1')
     context={
-        'data':Queries.objects.all()
+        'data':Queries.objects.filter(Fid=faci)
     }
     
     return render(request, 'facilitators/Dashboard/support.html',context)
@@ -182,10 +193,12 @@ class facilitator_login(View):
     #authentication_classes = (TokenAuthentication,) 
     #permission_classes = (IsAuthenticated,) 
     def post(self, request):
-        if request.method == 'POST':
+        if request.method == "POST":
             email1 =  request.POST['email']
             password = request.POST['password']
-            user = authenticate(request, email=email1, password=password)
+            print(email1, password)
+            user = authenticate(request,email=email1, password=password)
+            print(user)
             message=None
             print(user)
 
