@@ -19,7 +19,8 @@ from django.views import View
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FileUploadParser
 from django.core import serializers
-
+from rest_framework.decorators import permission_classes,api_view
+from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
@@ -72,16 +73,19 @@ class CreateCourseApi(APIView):
 # Considering request.user has Fid=2.
 
 @csrf_exempt
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def courses(request):
     if request.method=='GET':
-        courses=offer.objects.filter(Fid=1)
+        print(request.user)
+        courses=offer.objects.filter(Fid=2)
         newlist=[]
         for i in range(0,len(courses)):
             course_details=Course.objects.get(title=courses[i].Cid)
             newlist.append(course_details)
         course_data=CourseSerializers(newlist,many=True)
         # print(course_data.data)
-        return JsonResponse(course_data.data,safe=False)
+        return Response(course_data)
 
 @csrf_exempt
 def support(request):
