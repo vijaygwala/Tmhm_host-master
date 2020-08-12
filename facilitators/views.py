@@ -144,18 +144,17 @@ def facilitator_Dashboard_explore_courses_page(request):
         course_details=Course.objects.get(title=course[i].Cid)
         newlist.append(course_details)
     context={}
-    for i in range(0,len(newlist)):
-        subcategory=SubCategory.objects.get(name=newlist[i].subCat_id)
-        context.setdefault('subcategory',set()).add(subcategory)
+    if len(newlist)==0:
+        context.update({'count':0})
+        return render(request,'facilitators/Dashboard/explore_courses.html',context)
     category=[]
-    for cat in context['subcategory']:
-        val=Course.objects.filter(subCat_id=cat.subCat_id)
-        n=len(val)
-        nSlides=(n//3)+ceil(n/3-n//3)
-        l=[val,range(1,nSlides),n]
-        category.append(l)
+    val=newlist
+    n=len(val)
+    nSlides=(n//3)+ceil(n/3-n//3)
+    l=[val,range(1,nSlides),n]
+    category.append(l)
     context.update({'category':category})
-    # print(context)
+    print(context)
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
 def facilitator_Dashboard_support_page(request):
