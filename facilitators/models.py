@@ -27,9 +27,6 @@ class Applicants(models.Model):
 
 
 
-
-
-
 #this relation contains all the facilitators
 class Facilitator(models.Model):
     Fid=models.AutoField(primary_key=True)

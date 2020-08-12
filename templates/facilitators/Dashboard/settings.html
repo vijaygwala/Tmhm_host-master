@@ -480,6 +480,9 @@
     <script src="{% static 'facilitators/settings/hs.validation.js.download'%}"></script>
 
     <!-- JS Plugins Init. -->
+
+    <!-- Sweatalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).on('ready', function() {
             // initialization of header
@@ -527,6 +530,7 @@
     <div class="hs-unfold-overlay"></div>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
     
     <script>
         $("form#changePassword").submit(function() {
@@ -544,18 +548,21 @@
                                   },
                                   dataType: 'json',
                                   success: function (data) {
-                                      if (data.msg) {
-                                       alert(data.msg.response);
+                                      if (data.msg.suc_res) {
+                                       swal("Hurray!", data.msg.suc_res, "success");
+                                      }
+                                      else {
+                                        swal("Sorry!", data.msg.err_res, "error");
                                       }
                                   }
                               });
                           }
                           else {
-                              alert("Passwords must be same!")
+                              swal("Oops!", "Passwords must be same!", "error");
                           }
           
                         } else {
-                          alert("All fields must have a valid value.");
+                          swal("Invalid Entries!", "All fields must have a valid value.", "info");
                       }
                       $('form#changePassword').trigger("reset");
                       return false;
