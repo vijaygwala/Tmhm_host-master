@@ -104,7 +104,7 @@ def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
     instance = CustomUser.objects.get(email=request.user)
-    context = {}
+    
     
     obj = instance.user.facilitator
     print(obj.Fid)

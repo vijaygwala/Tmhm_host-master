@@ -283,7 +283,12 @@ Explore Courses
                                             <div class='row text-center'>
                                                 <div class='col-md-4 col-sm-12 mb-2'>
                                                     <div class="card border">
+                                                        
+                                                        {% if product.0.thumbnail %}
                                                         <img class="card-img-top" src={{ product.0.thumbnail.url }} alt="Card image cap" height="250px">
+                                                        {% endif %}
+                                                            
+                                                        
                                                         <div class="card-body" style="background-color:gainsboro">
                                                             <h5 class="card-title" style="color:red;">{{ product.0.title }}</h5>
                                                             <h6 style="color:#262626;font-size: 0.75em;">{{ product.0.name }}</h6>
@@ -294,7 +299,12 @@ Explore Courses
                                                 {% for i in product|slice:"1:" %}
                                                 <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
                                                     <div class="card border">
+                                                        
+                                                        {% if i.thumbnail %}
                                                         <img class="card-img-top" src={{ i.thumbnail.url }} alt="Card image cap" height="250px">
+                                                        {% endif %}
+                                                            
+                                                        
                                                         <div class="card-body" style="background-color:gainsboro">
                                                             <h5 class="card-title" style="color:red;">{{ i.title }}</h5>
                                                             <h6 style="color:#262626;font-size: 0.75em;">{{ i.name }}</h6>
