@@ -262,6 +262,9 @@ Explore Courses
                             <!--/card-block-->
                         </div>
                     </div>
+                    {% if count == 0 %}
+                    <h5>No Courses</h5>
+                    {% else %}
                     {% for product, range, nSlides in category %}
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
@@ -335,6 +338,7 @@ Explore Courses
                         </div>
                     </div>
                     {% endfor %}
+                    {% endif %}
                 </div>
                     <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
