@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from facilitators.models import *
 from facilitators.forms import *
 from django.contrib.auth import authenticate, login, logout
@@ -29,8 +29,6 @@ from rest_framework.authtoken.models import Token
 #facilitator page
 def facilitator_page(request):
     return render(request, 'facilitators/index.html')
-
-
 
     
 from django.views.generic import CreateView
@@ -100,37 +98,45 @@ class RegisterLoginView(AjaxFormMixin,View):
         messages.success(request, ('Your profile was successfully Created!'))
         return redirect('facilitator-register')
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
     instance = CustomUser.objects.get(email=request.user)
     context = {}
-    try:
-        obj = instance.user.facilitator
-        print(obj)
-        pro = instance.userprofile
-        offr = offer.objects.filter(Fid=obj.Fid)
-        total_course = offr.count()
-        context = {
+    
+    obj = instance.user.facilitator
+    print(obj.Fid)
+    pro = instance.user
+    offr = offer.objects.filter(Fid=obj.Fid)
+    total_course = offr.count()
+    print(offr)
+    print(total_course)
+    context = {
         "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
         "courses": offr,
         "total_course": total_course,
-        "intrest": pro.intrest
-    } 
-    except:
-        print('myauth.models.CustomUser.user.RelatedObjectDoesNotExist: CustomUser has no user')
+        "profile_id": obj.Fid,
+        "intrest": pro.intrest   
+    }
+
 
     # by aamir
     appli = Applicants.objects.get(user=request.user)   #appli.Aid
     approved = Facilitator.objects.get(user=appli)
-    context = {'approved':approved}
+    context['approved'] = approved
 
     return render(request, 'facilitators/Dashboard/index.html',context)
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_explore_courses_page(request):   
     # r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
     # data=json.loads(r.text)
@@ -158,6 +164,8 @@ def facilitator_Dashboard_explore_courses_page(request):
     # print(context)
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_support_page(request):
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
@@ -173,7 +181,7 @@ def facilitator_Dashboard_support_page(request):
 
 
 
-
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_create_course_page(request):
     audience_list=Audience.objects.values('audience')
     context={
@@ -181,8 +189,11 @@ def facilitator_Dashboard_create_course_page(request):
     }
     return render(request, 'facilitators/Dashboard/create_course.html',context)
 
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_settings_page(request):
     return render(request, 'facilitators/Dashboard/settings.html')
+
+
 
 class facilitator_login(View):
     
@@ -196,46 +207,54 @@ class facilitator_login(View):
         if request.method == "POST":
             email1 =  request.POST['email']
             password = request.POST['password']
-            print(email1, password)
+            # print(email1, password)
             user = authenticate(request,email=email1, password=password)
-            print(user)
             message=None
-            print(user)
-
             try:
                 obj = Token.objects.get_or_create(user=user)
                 appli = Applicants.objects.get(user=user)  #appli.Aid
                 approved = Facilitator.objects.get(user=appli) #aprroved.Fid
-                print(approved)
-                print(obj)
             except:
                 obj = None
                 approved=None
-            print(approved)
-
+            # print(approved)
             if approved:
-                if obj:
-                    if user:
-                        if user.is_active:
-                            login(request, user)
-                            print(" after login")
-                            print(user)
-                            request.user=user
-                            context = {'approved':approved}
-                            return render(request, 'facilitators/Dashboard/index.html', context)
-                            return response(obj, status=200)
-                        else:
-                            return HttpResponse("Account not active")
+                # if obj:
+                if user:
+                    if user.is_active:
+                        login(request, user)
+                        # print(" after login")
+                        # print(user)
+                        # request.user=user
+                        # context = {'approved':approved}
+                        if request.GET.get('next', None):
+                            return HttpResponseRedirect(request.GET['next'])
+                        return HttpResponseRedirect(reverse('dashboard'))
+                        # return response(obj, status=200)
                     else:
-                        print("someone tried to login and failed")
-                        return HttpResponse("You are not a facilitator")
+                        notification = "Account not active"
+                        context = { 'notification': notification,
+                            'clss': 'alert-danger'
+                            }
+                        return render(request, 'facilitators/index.html', context)
+                        # return HttpResponse("Account not active")
                 else:
-                    return HttpResponse("you are not authorized")
+                    print("Not registered! login failed")
+                    notification = 'Not registered! login failed'
+                    return HttpResponse("Not registered! login failed")
+            # else:
+            #     return HttpResponse("you are not authorized")
             else:
-                print("login failed")
-            
-                return render(request, 'facilitators/index.html')
+                print("You are not a facilitator")
+                notification = "You are not a facilitator"
+                context = {
+                    'notification': notification,
+                    'clss': 'alert-danger'
+                }
+                return render(request, 'facilitators/index.html', context)
 
+
+@login_required(login_url='/facilitator/login/')
 @api_view(['GET', 'POST'])
 def facilitator_Profile_page(request, pk):
 
@@ -279,35 +298,37 @@ def facilitator_Profile_page(request, pk):
 
 
 # for handling ajax request for change password form of setting section of profile
+@login_required(login_url='/facilitator/login/')
+def ChangePassword(request):
+    suc_res = ''
+    err_res = ''
+    current = request.GET.get('currentPassword', None)
+    newp = request.GET.get('newPassword', None)
+    confirmp = request.GET.get('confirmNewPassword', None)
 
-class ChangePassword(View):
-    def get(self, request):
-        response = ''
-        current = request.GET.get('currentPassword', None)
-        newp = request.GET.get('newPassword', None)
-        confirmp = request.GET.get('confirmNewPassword', None)
-        obj=None
 
-        try:
-            obj = get_object_or_404(CustomUser, email=request.user.email)
-            # print(obj.password)
-        except:
-            print('NO USER FOUND')
+    try:
+        obj = get_object_or_404(CustomUser, email=request.user)
+        # print(obj.password)
+    except:
+        print('NO USER FOUND')
         # print(handler.verify(current, obj.password))
-        if handler.verify(current, obj.password):
-            obj.set_password(confirmp)
-            obj.save()
-            response = 'Password changed successfully!'
-        else:
-            response = "Invalid current Password!"
+    if handler.verify(current, obj.password):
+        obj.set_password(confirmp)
+        obj.save()
+        suc_res = 'Password changed successfully!'
+    else:
+        err_res = "Invalid current Password!"
 
 
-        msg = { 'response':response }
+    msg = { 'err_res':err_res,
+            'suc_res': suc_res
+        }
 
-        data = {
-                'msg': msg
-            }
-        return JsonResponse(data)
+    data = {
+            'msg': msg
+        }
+    return JsonResponse(data)
 
 
 def user_logout(request):
