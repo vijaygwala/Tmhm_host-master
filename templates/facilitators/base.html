@@ -4,8 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="{% static 'facilitators/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+
     {% block header %}
     {% endblock header %}
 
@@ -31,7 +30,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active ">
                 <a class="nav-link " href="{% url 'dashboard'%}">
-                    <i class="fas fa-fw fa-tachometer-alt text-dark"></i>
+                    <i style='font-size:13px' class='fas'>&#xf3fd;</i>
                     <span class="text-dark">Dashboard</span></a>
             </li>
             <!-- Divider -->
@@ -192,5 +191,6 @@
 
     {% block javascript %}
     {% endblock javascript%}
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   </body>
 </html>
