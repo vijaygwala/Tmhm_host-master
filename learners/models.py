@@ -2,7 +2,7 @@ from django.db import models
 from myauth.models import *
 from facilitators.models import *
 from LandingPage.models import *
-
+from django.utils import timezone
 
 # Create your models here.
 class Learners(models.Model):
@@ -22,6 +22,8 @@ class Learners(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,related_name='learner')
     enrolled=models.ManyToManyField(Course, related_name = 'enroll')
     status=models.CharField(max_length=100,null=True,blank=True,default='Active')
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     
     class Meta:
         

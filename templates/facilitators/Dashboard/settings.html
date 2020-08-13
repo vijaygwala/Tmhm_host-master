@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'facilitators/settings/all.min.css'%}">
     <link rel="stylesheet" href="{% static 'facilitators/settings/hs-mega-menu.min.css'%}">
 
-
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>   
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="{% static 'facilitators/settings/theme.css'%}">
 </head>
@@ -102,7 +102,7 @@
                                     <ul class="nav nav-sub nav-sm nav-tabs nav-list-y-2 mb-4">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'dashboard'%}">
-                                                <i class="fas fa-id-card nav-icon"></i>Dashboard
+                                                <i class="fas fa-fw fa-tachometer-alt"></i>&nbsp &nbsp Dashboard
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -480,6 +480,9 @@
     <script src="{% static 'facilitators/settings/hs.validation.js.download'%}"></script>
 
     <!-- JS Plugins Init. -->
+
+    <!-- Sweatalert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).on('ready', function() {
             // initialization of header
@@ -527,6 +530,7 @@
     <div class="hs-unfold-overlay"></div>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
     
     <script>
         $("form#changePassword").submit(function() {
@@ -544,18 +548,21 @@
                                   },
                                   dataType: 'json',
                                   success: function (data) {
-                                      if (data.msg) {
-                                       alert(data.msg.response);
+                                      if (data.msg.suc_res) {
+                                       swal("Hurray!", data.msg.suc_res, "success");
+                                      }
+                                      else {
+                                        swal("Sorry!", data.msg.err_res, "error");
                                       }
                                   }
                               });
                           }
                           else {
-                              alert("Passwords must be same!")
+                              swal("Oops!", "Passwords must be same!", "error");
                           }
           
                         } else {
-                          alert("All fields must have a valid value.");
+                          swal("Invalid Entries!", "All fields must have a valid value.", "info");
                       }
                       $('form#changePassword').trigger("reset");
                       return false;
