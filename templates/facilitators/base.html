@@ -21,7 +21,7 @@
         <ul class="navbar-nav bg-light sidebar sidebar-light accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'dashboard'%}">
-                <img src="{% static 'facilitators/img/logotiny.png'%}" class="navbar-brand-img" alt="...">
+                <img src="{% static 'facilitators/img/logotiny.png' %}" class="navbar-brand-img" alt="...">
                 <div class="sidebar-brand-text">Learnopad </div>
             </a>
             <!-- Brand -->
@@ -29,26 +29,26 @@
             <hr class="sidebar-divider  my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active ">
-                <a class="nav-link " href="{% url 'dashboard'%}">
+                <a class="nav-link " href="{% url 'dashboard' %}">
                     <i style='font-size:13px' class='fas'>&#xf3fd;</i>
                     <span class="text-dark">Dashboard</span></a>
             </li>
             <!-- Divider -->
             <!-- Nav Item - Dashboard -->
             <li class="nav-item  ">
-                <a class="nav-link" href="{% url 'createcourse'%}">
+                <a class="nav-link" href="{% url 'createcourse' %}">
                     <i class="fa fa-globe text-dark"></i>
                     <span class="text-dark">Create courses</span></a>
             </li>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item  ">
-                <a class="nav-link" href="{% url 'earnings'%}">
+                <a class="nav-link" href="{% url 'earnings' %}">
                     <i class="fa fa-bar-chart text-dark"></i>
                     <span class="text-dark">My Earnings</span></a>
             </li>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item  ">
-                <a class="nav-link" href="{% url 'explorecourses'%}">
+                <a class="nav-link" href="{% url 'explorecourses' %}">
                     <i class="fa fa-globe text-dark"></i>
                     <span class="text-dark">Explore Courses</span></a>
             </li>
@@ -131,10 +131,10 @@
                 {% block content %}
                 {% endblock content %}
                     <!-- Footer -->
-                    <footer class="footer pt-0">
+                    <footer class="footer pt-0" style="z-index:1;margin-top:20vh;">
                         <div class="row align-items-center justify-content-lg-between">
                             <div class="col-lg-6">
-                                <div class="copyright text-center  text-lg-left  text-black">
+                                <div class="copyright text-center text-lg-left text-black">
                                     &copy; 2020 <a href="http://tmhm.in/" class="font-weight-bold ml-1" target="_blank">TMHM Consulting Pvt Ltd.</a>
                                 </div>
                             </div>

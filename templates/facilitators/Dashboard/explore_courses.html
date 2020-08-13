@@ -263,7 +263,11 @@ Explore Courses
                         </div>
                     </div>
                     {% if count == 0 %}
-                    <h5>No Courses</h5>
+                    <div class="card" style="width: 18rem;margin-left: 30%;margin-top: 5%">
+                        <div class="card-body">
+                          No Courses
+                        </div>
+                      </div>
                     {% else %}
                     {% for product, range, nSlides in category %}
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
