@@ -147,6 +147,9 @@ def facilitator_Dashboard_explore_courses_page(request):
     course=offer.objects.filter(Fid=faci.Fid)
     course1=[]
     context={}
+    if len(course)==0:
+        context.update({'count':0})
+        return render(request,'facilitators/Dashboard/explore_courses.html',context)
     for i in range(0,len(course)):
         subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
         context.setdefault('subcategory',set()).add(subcategory)
