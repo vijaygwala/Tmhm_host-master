@@ -97,7 +97,7 @@
                                         </p>
                                     </div>
                                     <div class="col-12 col-lg-4 col-md-6 text-center">
-                                        <img src="{% static 'facilitators/img/icon.jpg'%}" alt="" class=" rounded-circle img-fluid" style="width: 100px; height: 100px;">
+                                        <img src="{{request.user.user.facilitator.profile.url}}" alt="" class=" rounded-circle img-fluid" style="width: 100px; height: 100px;">
                                         <br>
                                         <ul class="list-inline ratings text-center" title="Ratings">
                                             <li class="list-inline-item"><a href="#"><span class="fa fa-star"></span></a>
