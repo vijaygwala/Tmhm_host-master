@@ -12,7 +12,7 @@
   <!-- Favicons -->
   <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="icon">
   <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="apple-touch-icon">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -242,10 +242,15 @@ footer #social i:hover{
             </div>
         </div>
     </nav>
-    <div class="alert {{clss}}">
-      <p style="text-align: center">{{ notification }}</p> 
-    </div>
+    {% comment %} <div class="alert {{clss}}">
+       <p style="text-align: center">{{ notification }}</p>  
 
+    </div> {% endcomment %}
+    {% if notification %}
+    <script>
+    swal("Oops!", "Incorrect Email or Password", "error");
+    </script>
+  {% endif %}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
   <div class="modal-dialog">
     <div class="modal-content">

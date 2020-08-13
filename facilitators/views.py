@@ -189,8 +189,12 @@ def facilitator_Dashboard_support_page(request):
 @login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_create_course_page(request):
     audience_list=Audience.objects.values('audience')
+    category=Category.objects.all()
+    subcategory=SubCategory.objects.all()
     context={
-        'audience_list':audience_list
+        'audience_list':audience_list,
+        'category':category,
+        'subcategory':subcategory
     }
     return render(request, 'facilitators/Dashboard/create_course.html',context)
 
