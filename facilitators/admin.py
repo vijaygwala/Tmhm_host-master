@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from LandingPage.admin import *
 
 class ExperienceInline(admin.StackedInline):
     model = Experience
@@ -44,6 +45,6 @@ class ApplicantsAdmin(admin.ModelAdmin):
 #     ist_display=('Qid','query','status','user')
 class FacilitatorAdmin(admin.ModelAdmin):
     list_display=('Fid','name','DOB','phone','PAddress','TAddress','profile','Bio','country','state','zipcode','user')
-
+    inlines = (offer_inline,)
 admin.site.register(Facilitator,FacilitatorAdmin)
 admin.site.register(Applicants,ApplicantsAdmin)

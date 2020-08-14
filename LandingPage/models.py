@@ -130,9 +130,9 @@ class offer(models.Model):
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
     def __str__(self):
         return self.Fid.name
-    class Meta:
-        verbose_name='Details about Courses and Facilitator'
-        verbose_name_plural='Details about Courses and Facilitators'
+    # class Meta:
+    #     verbose_name='Details about Courses and Facilitator'
+    #     verbose_name_plural='Details about Courses and Facilitators'
 
 class Queries(models.Model):
     Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE)
