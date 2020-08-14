@@ -26,6 +26,12 @@ from django.contrib.auth import logout
 import json
 from math import ceil
 from rest_framework.authtoken.models import Token
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+import threading
+import datetime
+from django.template import RequestContext
 #facilitator page
 def facilitator_page(request):
     return render(request, 'facilitators/index.html')
@@ -104,22 +110,33 @@ def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
     instance = CustomUser.objects.get(email=request.user)
+    # o = instance.learner.all()
+    # print('leaner', o)
     
     
     obj = instance.user.facilitator
-    print(obj.Fid)
+    total_queries = Queries.objects.filter(Fid=obj.Fid).count()
+    # print(total_queries)
     pro = instance.user
     offr = offer.objects.filter(Fid=obj.Fid)
+    # print(offr)
     total_course = offr.count()
-    print(offr)
-    print(total_course)
+    total_learners = 0
+    active_learners = 0
+    for course in offr: 
+        active_learners += course.Cid.enroll.filter(status="Active").count()
+        total_learners += course.Cid.enroll.all().count()
+  
     context = {
         "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
         "courses": offr,
         "total_course": total_course,
         "profile_id": obj.Fid,
-        "intrest": pro.intrest   
+        "intrest": pro.intrest,
+        'total_learners': total_learners,  
+        'active_learners': (active_learners/total_learners)*100,
+        'total_queries': total_queries
     }
 
 
@@ -344,3 +361,59 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('facilitator'))
 
+
+# pending forgot password view -------------------------------
+# def forgot_password(request, email):
+#     suc = ''
+#     ms = ''
+#     if request.method == 'GET':
+#         u = get_object_or_404(CustomUser, email=email)
+#         otp = random.randrange(1234, 99999, 3)
+#         receiver = u.email
+#         subject = 'OTP from TechBook' + ' : ' + str(otp)
+#         text = 'Hi '+ str(usrname)+' Your one time password for Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
+#         send_mail(str(subject), text, 'vijaygwala97@gmail.com', [str(receiver)])
+#         print('mail sent')
+#         def expire():
+#             try:
+#                 o = get_object_or_404(OTP, sender=email)
+#                 print(o.value)
+#                 print('Deleting OTP...')
+#                 o.delete()
+#             except:
+#                 print('Already deleted')
+#         try:
+#             o = get_object_or_404(OTP, sender=email)
+#             o.value = otp
+#             o.save()
+#             threading.Timer(420.0, expire).start()
+#         except:
+#             o = OTP.objects.create(sender=email, value=otp)
+#             threading.Timer(420.0, expire).start()
+
+
+#     if request.method == 'POST':
+#         u = get_object_or_404(CustomUser, email=email)
+#         o = get_object_or_404(OTP, sender=email)
+#         otpform = OTPForm(request.POST)
+#         if otpform.is_valid():
+#             otp = otpform.cleaned_data['body']
+#             newp = otpform.cleaned_data['password']
+#             if str(o.value) == str(otp):
+#                 print("haiiiiiiiiiiiiiiiiiiii")
+#                 u.set_password(newp)
+#                 u.save()
+#                 suc = 'alert-success'
+#                 ms = 'Your Password Changed Successfully!'
+#                 context = {
+#                     'suc' : suc,
+#                     'ms' : ms
+#                 }
+#                 return render(request, 'changed.html', context)
+#             else:
+#                 return render(request, 'recover.html', {'otpform':otpform})
+#         else:
+#             return render(request, 'recover.html', {'otpform':otpform})
+#     else:
+#         otpform = OTPForm()
+#         return render(request, 'recover.html', {'otpform':otpform})
