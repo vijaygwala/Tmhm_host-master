@@ -26,6 +26,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
         for user in queryset:
             facilitator=Facilitator.objects.create(name=user.name,phone=user.phone,user=user)
             facilitator.save()
+        queryset.update(status="Approved")
     def shortlisted_facilitator(self,request , queryset):
         queryset.update(status="Shortlisted")
     def OnHold_facilitator(self,request , queryset):
