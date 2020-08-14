@@ -112,14 +112,17 @@ class Experience(models.Model):
 #         return self.name
 
 # #this realtion contains all the quries to the particuler facilitator
+
 class FacilitatorQueries(models.Model):
     STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
     Qid=models.AutoField(primary_key=True)
     query=models.TextField(blank=True,null=True)
     status=models.CharField(max_length=10,choices=STATUS,default="Doubt")
-    user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
+    user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True, related_name="queries")
     def __str__(self):
         return self.status
+
+
     
 # @receiver(post_save, sender=Applicants)
 # def create_or_update_user_user(sender, instance, created, **kwargs):
@@ -137,8 +140,12 @@ class FacilitatorQueries(models.Model):
 #     def __str__(self):
 #         return self.Answer
 
+class OTP(models.Model):
+    sender = models.CharField(max_length=500)   
+    value = models.CharField(max_length=500)
 
-
+    def __str__(self):
+        return self.sender
 
 
 
