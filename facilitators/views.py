@@ -126,7 +126,11 @@ def facilitator_Dashboard_Landing_page(request):
     for course in offr: 
         active_learners += course.Cid.enroll.filter(status="Active").count()
         total_learners += course.Cid.enroll.all().count()
-  
+    
+    if total_learners != 0:
+        active_learners = (active_learners/total_learners)*100
+
+
     context = {
         "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
@@ -135,7 +139,7 @@ def facilitator_Dashboard_Landing_page(request):
         "profile_id": obj.Fid,
         "intrest": pro.intrest,
         'total_learners': total_learners,  
-        'active_learners': (active_learners/total_learners)*100,
+        'active_learners': active_learners,
         'total_queries': total_queries
     }
 
