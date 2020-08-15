@@ -139,11 +139,7 @@ def facilitator_Dashboard_Landing_page(request):
         "profile_id": obj.Fid,
         "intrest": pro.intrest,
         'total_learners': total_learners,  
-<<<<<<< HEAD
-        'active_learners': 0,
-=======
         'active_learners': active_learners,
->>>>>>> 651ce72b0bf6175ed2b6a803f10da3d334f1d3dd
         'total_queries': total_queries
     }
 
