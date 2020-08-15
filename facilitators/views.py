@@ -126,7 +126,11 @@ def facilitator_Dashboard_Landing_page(request):
     for course in offr: 
         active_learners += course.Cid.enroll.filter(status="Active").count()
         total_learners += course.Cid.enroll.all().count()
-  
+    
+    if total_learners != 0:
+        active_learners = (active_learners/total_learners)*100
+
+
     context = {
         "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
@@ -135,7 +139,11 @@ def facilitator_Dashboard_Landing_page(request):
         "profile_id": obj.Fid,
         "intrest": pro.intrest,
         'total_learners': total_learners,  
+<<<<<<< HEAD
         'active_learners': 0,
+=======
+        'active_learners': active_learners,
+>>>>>>> 651ce72b0bf6175ed2b6a803f10da3d334f1d3dd
         'total_queries': total_queries
     }
 
@@ -234,6 +242,9 @@ class facilitator_login(View):
             email1 =  request.POST['email']
             password = request.POST['password']
             # print(email1, password)
+            u = get_object_or_404(CustomUser, email=email1)
+            print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            print(u.pk)
             user = authenticate(request,email=email1, password=password)
             message=None
             try:
@@ -247,6 +258,7 @@ class facilitator_login(View):
             if approved:
                 # if obj:
                 if user:
+                    
                     if user.is_active:
                         login(request, user)
                         # print(" after login")
@@ -266,8 +278,11 @@ class facilitator_login(View):
                         # return HttpResponse("Account not active")
                 else:
                     print("Not registered! login failed")
-                    notification = 'Not registered! login failed'
-                    return HttpResponse("Not registered! login failed")
+                    context = {
+                        'notification': 'Not registered! login failed',
+                        'uemail': u.pk
+                    }
+                    return render(request, 'facilitators/index.html', context)
             # else:
             #     return HttpResponse("you are not authorized")
             else:
@@ -275,8 +290,10 @@ class facilitator_login(View):
                 notification = "You are not a facilitator"
                 context = {
                     'notification': notification,
-                    'clss': 'alert-danger'
+                    'clss': 'alert-danger',
+                    'uemail': u.pk
                 }
+                print(context['uemail'])
                 return render(request, 'facilitators/index.html', context)
 
 
@@ -363,57 +380,59 @@ def user_logout(request):
 
 
 # pending forgot password view -------------------------------
-# def forgot_password(request, email):
-#     suc = ''
-#     ms = ''
-#     if request.method == 'GET':
-#         u = get_object_or_404(CustomUser, email=email)
-#         otp = random.randrange(1234, 99999, 3)
-#         receiver = u.email
-#         subject = 'OTP from TechBook' + ' : ' + str(otp)
-#         text = 'Hi '+ str(usrname)+' Your one time password for Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
-#         send_mail(str(subject), text, 'vijaygwala97@gmail.com', [str(receiver)])
-#         print('mail sent')
-#         def expire():
-#             try:
-#                 o = get_object_or_404(OTP, sender=email)
-#                 print(o.value)
-#                 print('Deleting OTP...')
-#                 o.delete()
-#             except:
-#                 print('Already deleted')
-#         try:
-#             o = get_object_or_404(OTP, sender=email)
-#             o.value = otp
-#             o.save()
-#             threading.Timer(420.0, expire).start()
-#         except:
-#             o = OTP.objects.create(sender=email, value=otp)
-#             threading.Timer(420.0, expire).start()
+def forgot_password(request, pk=None):
+    suc = ''
+    ms = ''
+    print('GETTTTTTTTTTT')
+    if request.method == 'GET':
+        u = get_object_or_404(CustomUser, pk=pk)
+        otp = random.randrange(1234, 99999, 3)
+        print(otp)
+        print(u)
+        receiver = u.email
+        subject = 'OTP from Learnopad' + ' : ' + str(otp)
+        text = 'Hi '+ str(u.email)+' Your one time password for Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
+        send_mail(str(subject), text, 'vijaygwala97@gmail.com', [str(receiver)])
+        print('mail sent')
+        def expire():
+            try:
+                o = get_object_or_404(OTP, sender=u.email)
+                print(o.value)
+                print('Deleting OTP...')
+                o.delete()
+            except:
+                print('Already deleted')
+        try:
+            o = get_object_or_404(OTP, sender=u.email)
+            o.value = otp
+            o.save()
+            threading.Timer(420.0, expire).start()
+        except:
+            o = OTP.objects.create(sender=u.email, value=otp)
+            threading.Timer(420.0, expire).start()
 
 
-#     if request.method == 'POST':
-#         u = get_object_or_404(CustomUser, email=email)
-#         o = get_object_or_404(OTP, sender=email)
-#         otpform = OTPForm(request.POST)
-#         if otpform.is_valid():
-#             otp = otpform.cleaned_data['body']
-#             newp = otpform.cleaned_data['password']
-#             if str(o.value) == str(otp):
-#                 print("haiiiiiiiiiiiiiiiiiiii")
-#                 u.set_password(newp)
-#                 u.save()
-#                 suc = 'alert-success'
-#                 ms = 'Your Password Changed Successfully!'
-#                 context = {
-#                     'suc' : suc,
-#                     'ms' : ms
-#                 }
-#                 return render(request, 'changed.html', context)
-#             else:
-#                 return render(request, 'recover.html', {'otpform':otpform})
-#         else:
-#             return render(request, 'recover.html', {'otpform':otpform})
-#     else:
-#         otpform = OTPForm()
-#         return render(request, 'recover.html', {'otpform':otpform})
+    if request.method == 'POST':
+        print('POSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+        u = get_object_or_404(CustomUser, pk=pk)
+        o = get_object_or_404(OTP, sender=u.email)
+        otp =  request.POST['otp']
+        newpassword =  request.POST['newpassword']
+        confirmpassword =  request.POST['confirmpassword']
+        
+        if str(newpassword) == str(confirmpassword):
+
+            if str(o.value) == str(otp):
+                print("haiiiiiiiiiiiiiiiiiiii")
+                u.set_password(confirmpassword)
+                u.save()
+                suc = 'alert-success'
+                ms = 'Your Password Changed Successfully!'
+                return render(request, 'facilitators/index.html', {'repsonse': 'Account recovered Successfully!', 'arg': 'success', 'heading': 'Hurray!'})
+            else:
+                return render(request, 'facilitators/index.html', {'repsonse':"Invalid or Expired OTP", 'arg': 'error', 'heading': 'Oops!'})
+        else:
+            return render(request, 'facilitators/index.html', {'repsonse':"Passwords must be same!", 'arg': 'error', 'heading': 'Sorry!'})
+    else:
+        
+        return render(request, 'facilitators/index.html', {'repsonse':"Something went worng! Try again!", 'arg': 'warning', 'heading': 'Sorry'})
