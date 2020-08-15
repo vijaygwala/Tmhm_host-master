@@ -118,7 +118,7 @@ class FacilitatorQueries(models.Model):
     Qid=models.AutoField(primary_key=True)
     query=models.TextField(blank=True,null=True)
     status=models.CharField(max_length=10,choices=STATUS,default="Doubt")
-    user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True, related_name="queries")
+    user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.status
 
