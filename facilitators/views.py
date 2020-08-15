@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from facilitators.models import *
 from facilitators.forms import *
 from django.contrib.auth import authenticate, login, logout
@@ -26,11 +26,15 @@ from django.contrib.auth import logout
 import json
 from math import ceil
 from rest_framework.authtoken.models import Token
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+import threading
+import datetime
+from django.template import RequestContext
 #facilitator page
 def facilitator_page(request):
     return render(request, 'facilitators/index.html')
-
-
 
     
 from django.views.generic import CreateView
@@ -100,37 +104,60 @@ class RegisterLoginView(AjaxFormMixin,View):
         messages.success(request, ('Your profile was successfully Created!'))
         return redirect('facilitator-register')
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
     instance = CustomUser.objects.get(email=request.user)
-    context = {}
-    try:
-        obj = instance.user.facilitator
-        print(obj)
-        pro = instance.userprofile
-        offr = offer.objects.filter(Fid=obj.Fid)
-        total_course = offr.count()
-        context = {
+    # o = instance.learner.all()
+    # print('leaner', o)
+    
+    
+    obj = instance.user.facilitator
+    total_queries = Queries.objects.filter(Fid=obj.Fid).count()
+    # print(total_queries)
+    pro = instance.user
+    offr = offer.objects.filter(Fid=obj.Fid)
+    # print(offr)
+    total_course = offr.count()
+    total_learners = 0
+    active_learners = 0
+    for course in offr: 
+        active_learners += course.Cid.enroll.filter(status="Active").count()
+        total_learners += course.Cid.enroll.all().count()
+    
+    if total_learners != 0:
+        active_learners = (active_learners/total_learners)*100
+
+
+    context = {
         "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
         "courses": offr,
         "total_course": total_course,
-        "intrest": pro.intrest
-    } 
-    except:
-        print('myauth.models.CustomUser.user.RelatedObjectDoesNotExist: CustomUser has no user')
+        "profile_id": obj.Fid,
+        "intrest": pro.intrest,
+        'total_learners': total_learners,  
+        'active_learners': active_learners,
+        'total_queries': total_queries
+    }
+
 
     # by aamir
     appli = Applicants.objects.get(user=request.user)   #appli.Aid
     approved = Facilitator.objects.get(user=appli)
-    context = {'approved':approved}
+    context['approved'] = approved
 
     return render(request, 'facilitators/Dashboard/index.html',context)
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_explore_courses_page(request):   
     # r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
     # data=json.loads(r.text)
@@ -139,24 +166,32 @@ def facilitator_Dashboard_explore_courses_page(request):
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
     course=offer.objects.filter(Fid=faci.Fid)
-    newlist=[]
-    for i in range(0,len(course)):
-        course_details=Course.objects.get(title=course[i].Cid)
-        newlist.append(course_details)
+    course1=[]
     context={}
-    if len(newlist)==0:
+    if len(course)==0:
         context.update({'count':0})
         return render(request,'facilitators/Dashboard/explore_courses.html',context)
+    for i in range(0,len(course)):
+        subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
+        context.setdefault('subcategory',set()).add(subcategory)
+        course1.append(course[i].Cid)
     category=[]
-    val=newlist
-    n=len(val)
-    nSlides=(n//3)+ceil(n/3-n//3)
-    l=[val,range(1,nSlides),n]
-    category.append(l)
+    for cat in context['subcategory']:
+        val=Course.objects.filter(subCat_id=cat.subCat_id)
+        val1=[]
+        for c in val:
+            if c in course1:
+                val1.append(c)
+        n=len(val1)
+        nSlides=(n//3)+ceil(n/3-n//3)
+        l=[val1,range(1,nSlides),n]
+        category.append(l)
     context.update({'category':category})
     print(context)
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
+
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_support_page(request):
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
@@ -172,16 +207,23 @@ def facilitator_Dashboard_support_page(request):
 
 
 
-
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_create_course_page(request):
     audience_list=Audience.objects.values('audience')
+    category=Category.objects.all()
+    subcategory=SubCategory.objects.all()
     context={
-        'audience_list':audience_list
+        'audience_list':audience_list,
+        'category':category,
+        'subcategory':subcategory
     }
     return render(request, 'facilitators/Dashboard/create_course.html',context)
 
+@login_required(login_url='/facilitator/login/')
 def facilitator_Dashboard_settings_page(request):
     return render(request, 'facilitators/Dashboard/settings.html')
+
+
 
 class facilitator_login(View):
     
@@ -195,46 +237,63 @@ class facilitator_login(View):
         if request.method == "POST":
             email1 =  request.POST['email']
             password = request.POST['password']
-            print(email1, password)
+            # print(email1, password)
+            u = get_object_or_404(CustomUser, email=email1)
+            print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            print(u.pk)
             user = authenticate(request,email=email1, password=password)
-            print(user)
             message=None
-            print(user)
-
             try:
                 obj = Token.objects.get_or_create(user=user)
                 appli = Applicants.objects.get(user=user)  #appli.Aid
                 approved = Facilitator.objects.get(user=appli) #aprroved.Fid
-                print(approved)
-                print(obj)
             except:
                 obj = None
                 approved=None
-            print(approved)
-
+            # print(approved)
             if approved:
-                if obj:
-                    if user:
-                        if user.is_active:
-                            login(request, user)
-                            print(" after login")
-                            print(user)
-                            request.user=user
-                            context = {'approved':approved}
-                            return render(request, 'facilitators/Dashboard/index.html', context)
-                            return response(obj, status=200)
-                        else:
-                            return HttpResponse("Account not active")
+                # if obj:
+                if user:
+                    
+                    if user.is_active:
+                        login(request, user)
+                        # print(" after login")
+                        # print(user)
+                        # request.user=user
+                        # context = {'approved':approved}
+                        if request.GET.get('next', None):
+                            return HttpResponseRedirect(request.GET['next'])
+                        return HttpResponseRedirect(reverse('dashboard'))
+                        # return response(obj, status=200)
                     else:
-                        print("someone tried to login and failed")
-                        return HttpResponse("You are not a facilitator")
+                        notification = "Account not active"
+                        context = { 'notification': notification,
+                            'clss': 'alert-danger'
+                            }
+                        return render(request, 'facilitators/index.html', context)
+                        # return HttpResponse("Account not active")
                 else:
-                    return HttpResponse("you are not authorized")
+                    print("Not registered! login failed")
+                    context = {
+                        'notification': 'Not registered! login failed',
+                        'uemail': u.pk
+                    }
+                    return render(request, 'facilitators/index.html', context)
+            # else:
+            #     return HttpResponse("you are not authorized")
             else:
-                print("login failed")
-            
-                return render(request, 'facilitators/index.html')
+                print("You are not a facilitator")
+                notification = "You are not a facilitator"
+                context = {
+                    'notification': notification,
+                    'clss': 'alert-danger',
+                    'uemail': u.pk
+                }
+                print(context['uemail'])
+                return render(request, 'facilitators/index.html', context)
 
+
+@login_required(login_url='/facilitator/login/')
 @api_view(['GET', 'POST'])
 def facilitator_Profile_page(request, pk):
 
@@ -278,38 +337,98 @@ def facilitator_Profile_page(request, pk):
 
 
 # for handling ajax request for change password form of setting section of profile
+@login_required(login_url='/facilitator/login/')
+def ChangePassword(request):
+    suc_res = ''
+    err_res = ''
+    current = request.GET.get('currentPassword', None)
+    newp = request.GET.get('newPassword', None)
+    confirmp = request.GET.get('confirmNewPassword', None)
 
-class ChangePassword(View):
-    def get(self, request):
-        response = ''
-        current = request.GET.get('currentPassword', None)
-        newp = request.GET.get('newPassword', None)
-        confirmp = request.GET.get('confirmNewPassword', None)
-        obj=None
 
-        try:
-            obj = get_object_or_404(CustomUser, email=request.user.email)
-            # print(obj.password)
-        except:
-            print('NO USER FOUND')
+    try:
+        obj = get_object_or_404(CustomUser, email=request.user)
+        # print(obj.password)
+    except:
+        print('NO USER FOUND')
         # print(handler.verify(current, obj.password))
-        if handler.verify(current, obj.password):
-            obj.set_password(confirmp)
-            obj.save()
-            response = 'Password changed successfully!'
-        else:
-            response = "Invalid current Password!"
+    if handler.verify(current, obj.password):
+        obj.set_password(confirmp)
+        obj.save()
+        suc_res = 'Password changed successfully!'
+    else:
+        err_res = "Invalid current Password!"
 
 
-        msg = { 'response':response }
+    msg = { 'err_res':err_res,
+            'suc_res': suc_res
+        }
 
-        data = {
-                'msg': msg
-            }
-        return JsonResponse(data)
+    data = {
+            'msg': msg
+        }
+    return JsonResponse(data)
 
 
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('facilitator'))
 
+
+# pending forgot password view -------------------------------
+def forgot_password(request, pk=None):
+    suc = ''
+    ms = ''
+    print('GETTTTTTTTTTT')
+    if request.method == 'GET':
+        u = get_object_or_404(CustomUser, pk=pk)
+        otp = random.randrange(1234, 99999, 3)
+        print(otp)
+        print(u)
+        receiver = u.email
+        subject = 'OTP from Learnopad' + ' : ' + str(otp)
+        text = 'Hi '+ str(u.email)+' Your one time password for Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
+        send_mail(str(subject), text, 'vijaygwala97@gmail.com', [str(receiver)])
+        print('mail sent')
+        def expire():
+            try:
+                o = get_object_or_404(OTP, sender=u.email)
+                print(o.value)
+                print('Deleting OTP...')
+                o.delete()
+            except:
+                print('Already deleted')
+        try:
+            o = get_object_or_404(OTP, sender=u.email)
+            o.value = otp
+            o.save()
+            threading.Timer(420.0, expire).start()
+        except:
+            o = OTP.objects.create(sender=u.email, value=otp)
+            threading.Timer(420.0, expire).start()
+
+
+    if request.method == 'POST':
+        print('POSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+        u = get_object_or_404(CustomUser, pk=pk)
+        o = get_object_or_404(OTP, sender=u.email)
+        otp =  request.POST['otp']
+        newpassword =  request.POST['newpassword']
+        confirmpassword =  request.POST['confirmpassword']
+        
+        if str(newpassword) == str(confirmpassword):
+
+            if str(o.value) == str(otp):
+                print("haiiiiiiiiiiiiiiiiiiii")
+                u.set_password(confirmpassword)
+                u.save()
+                suc = 'alert-success'
+                ms = 'Your Password Changed Successfully!'
+                return render(request, 'facilitators/index.html', {'repsonse': 'Account recovered Successfully!', 'arg': 'success', 'heading': 'Hurray!'})
+            else:
+                return render(request, 'facilitators/index.html', {'repsonse':"Invalid or Expired OTP", 'arg': 'error', 'heading': 'Oops!'})
+        else:
+            return render(request, 'facilitators/index.html', {'repsonse':"Passwords must be same!", 'arg': 'error', 'heading': 'Sorry!'})
+    else:
+        
+        return render(request, 'facilitators/index.html', {'repsonse':"Something went worng! Try again!", 'arg': 'warning', 'heading': 'Sorry'})

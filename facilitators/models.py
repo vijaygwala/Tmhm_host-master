@@ -27,9 +27,6 @@ class Applicants(models.Model):
 
 
 
-
-
-
 #this relation contains all the facilitators
 class Facilitator(models.Model):
     Fid=models.AutoField(primary_key=True)
@@ -40,7 +37,7 @@ class Facilitator(models.Model):
     state=models.TextField(blank=True, null=True)
     PAddress=models.TextField(blank=True,null=True)
     TAddress=models.TextField(blank=True,null=True)
-    profile=models.ImageField(upload_to ='Mentor_profiles/',default='default.png',null=True, blank=True)
+    profile=models.ImageField(upload_to ='Mentor_profiles/',default='default/profile.png',null=True, blank=True)
     Bio=models.TextField(blank=True,null=True)
     country=models.CharField(max_length=100,blank=True,null=True)
     state=models.CharField(max_length=100,blank=True,null=True)
@@ -74,7 +71,7 @@ class Experience(models.Model):
     Youtube_Url= models.URLField(max_length=250,blank=True,null=True)
     RExperience=models.CharField(max_length=1,choices=REXP)
     TExperience=models.CharField(max_length=1,choices=TEXP)
-    facilitator= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
+    facilitator= models.OneToOneField(Applicants,related_name='experience', on_delete=models.CASCADE,null=True)
     
 # @receiver(post_save, sender=Applicants)
 # def create_or_update_user_facilitator(sender, instance, created, **kwargs):
@@ -115,6 +112,7 @@ class Experience(models.Model):
 #         return self.name
 
 # #this realtion contains all the quries to the particuler facilitator
+
 class FacilitatorQueries(models.Model):
     STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
     Qid=models.AutoField(primary_key=True)
@@ -123,6 +121,8 @@ class FacilitatorQueries(models.Model):
     user= models.OneToOneField(Applicants, on_delete=models.CASCADE,null=True)
     def __str__(self):
         return self.status
+
+
     
 # @receiver(post_save, sender=Applicants)
 # def create_or_update_user_user(sender, instance, created, **kwargs):
@@ -140,8 +140,12 @@ class FacilitatorQueries(models.Model):
 #     def __str__(self):
 #         return self.Answer
 
+class OTP(models.Model):
+    sender = models.CharField(max_length=500)   
+    value = models.CharField(max_length=500)
 
-
+    def __str__(self):
+        return self.sender
 
 
 

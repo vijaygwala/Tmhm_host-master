@@ -22,7 +22,7 @@
     <link rel="stylesheet" href='{% static 'facilitators/profile/hs-mega-menu.min.css' %}'>
     <link rel="stylesheet" href='{% static 'facilitators/profile/select2.min.css' %}'>
     <link rel="stylesheet" href='{% static 'facilitators/profile/quill.snow.css'%}'>
-
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>   
     <!-- CSS Front Template -->
     <link rel="stylesheet" href='{% static 'facilitators/profile/theme.css'%}'>
 </head>
@@ -53,7 +53,7 @@
 
                     <div class="col-auto">
                         <div class="d-none d-lg-block">
-                            <a class="btn btn-sm btn-primary" href="#">Log out</a>
+                            <a class="btn btn-sm btn-primary" href="{% url 'logout' %}">Log out</a>
                         </div>
 
                         <!-- Responsive Toggle Button -->
@@ -104,7 +104,7 @@
                                     <ul class="nav nav-sub nav-sm nav-tabs nav-list-y-2 mb-4">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{% url 'dashboard' %}">
-                                                <i class="fas fa-id-card nav-icon"></i> Dashboard
+                                                <i class="fas fa-fw fa-tachometer-alt"></i>&nbsp &nbsp Dashboard
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -298,7 +298,7 @@
                                 <!-- End Form Group -->
 
                                 <!-- Form Group -->
-                                <div class="row align-items-center">
+                                {% comment %} <div class="row align-items-center">
                                     <label for="disableAdCheckbox" class="col-sm-3 col-form-label input-label">Disable ads <span class="badge badge-primary text-uppercase ml-1">PRO</span></label>
 
                                     <div class="col-sm-9">
@@ -309,7 +309,7 @@
                                         </div>
                                         <!-- End Custom Checkbox -->
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
                                 <!-- End Form Group -->
             
                         </div>
@@ -342,10 +342,10 @@
                                         <!-- End Select -->          
                                         <div class="mb-3">
                                             <label for="countryLabel" class="col-sm-3 col-form-label input-label">Country</label>
-                                            <input type="text" class="form-control" name="country" id="countryLabel" placeholder="country" aria-label="country" value="{{ourdata.country}}">
+                                            <input type="text" class="form-control" name="country" id="countryLabel"  aria-label="country"{% if ourdata.country is None %} placeholder="country"{% else %}value="{{ourdata.country}}"{% endif %}>
                                         </div>
                                         <label for="stateLabel" class="col-sm-3 col-form-label input-label">State</label>
-                                        <input type="text" class="form-control" name="state" id="stateLabel" placeholder="State" aria-label="State" value="{{ourdata.state}}">
+                                        <input type="text" class="form-control" name="state" id="stateLabel"  aria-label="State" {% if ourdata.state is None %} placeholder="State"{% else %}value="{{ourdata.state}}"{% endif %}>
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -355,7 +355,7 @@
                                     <label for="addressLine1Label" class="col-sm-3 col-form-label input-label">Address line 1</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="addressLine1" id="addressLine1Label" placeholder="Your address" aria-label="Your address" value="{{ourdata.PAddress}}">
+                                        <input type="text" class="form-control" name="addressLine1" id="addressLine1Label"  aria-label="Permanent Address" {% if ourdata.PAddress is None %} placeholder="Your Address"{% else %}value="{{ourdata.PAddress}}"{% endif %}>
                                     </div>
                                 </div>
                                 <!-- End Form Group -->
@@ -369,7 +369,7 @@
                                     <label for="addressLine2Label" class="col-sm-3 col-form-label input-label">Address line 2 <span class="input-label-secondary">(Optional)</span></label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="addressLine2" id="addressLine2Label" placeholder="Your address" aria-label="Your address" value="{{ourdata.TAddress}}">
+                                        <input type="text" class="form-control" name="addressLine2" id="addressLine2Label"  aria-label="Your address" {% if ourdata.TAddress is None %} placeholder="Your Address"{% else %}value="{{ourdata.TAddress}}"{% endif %}>
 
                                         <!-- Container For Input Field -->
                                         <div id="addAddressFieldContainer"></div>
@@ -398,7 +398,7 @@
                                     <label for="zipCodeLabel" class="col-sm-3 col-form-label input-label">Zip code <i class="far fa-question-circle text-body ml-1" data-toggle="tooltip" data-placement="top" title="" data-original-title="You can find your code in a postal address."></i></label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel" placeholder="Your zip code" aria-label="Your zip code" value="{{ourdata.zipcode}}" data-hs-mask-options="{
+                                        <input type="text" class="js-masked-input form-control" name="zipCode" id="zipCodeLabel"  aria-label="Your zip code" {% if ourdata.zipcode is None %} placeholder="Your zip code"{% else %}value="{{ourdata.zipcode}}"{% endif %} data-hs-mask-options="{
                              &quot;template&quot;: &quot;AA0 0AA&quot;
                            }" maxlength="7">
                                     </div>
@@ -420,12 +420,12 @@
                     <!-- End Card -->
 
                     <!-- Card -->
-                    <div class="card mb-3 mb-lg-5">
+                    {% comment %}<div class="card mb-3 mb-lg-5">
                         <div class="card-header">
                             <h5 class="card-title">Privacy</h5>
                         </div>
 
-                        <!-- Body -->
+                         <!-- Body -->
                         <div class="card-body">
                             <form>
                                 <!-- Form Group -->
@@ -458,7 +458,7 @@
                         </div>
                         <!-- End Body -->
                     </div>
-                    <!-- End Card -->
+                    <!-- End Card --> {% endcomment %}
 
                     <!-- Card -->
                     <div class="card">

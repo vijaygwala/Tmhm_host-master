@@ -25,7 +25,7 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from LandingPage.models import Course,Facilitator,offer,Queries
+from LandingPage.models import *
 from facilitators.api.serializers import *
 
 
@@ -39,14 +39,15 @@ class CreateCourseApi(APIView):
         details=json.loads(request.data.pop('data')[0])
         print(details)
         print(request.user)
-        #subcategory_detail=details.pop('subcategory')
+        subcategory_detail=details.pop('subcategory')
         course_detail=details.pop('course')
         video_detail=details.pop('video')
         video_detail['video']=file
-        #course=subcategory_detail.get('subcategory')
+        course=subcategory_detail.get('subcategory')
         subcat=SubCategory.objects.get(name='Web Development')
         print(subcat)
         ofr={}
+        offering=None
         course_detail['subCat_id'] =subcat.subCat_id
         c_code=course_detail.get('code')
         try:
@@ -60,9 +61,9 @@ class CreateCourseApi(APIView):
                     ins=cs.save()
                     video_detail['course']=ins.Cid
                     ofr['Cid']=ins.Cid
-                    ofr['Fid']=request.user.user.facilitator.Fid
-                    offer=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
-                    offer.save()
+                    ofr['Fid']=request.user.user.facilitator
+                    offering=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
+                    offering.save()
                 
                 vs= LiveSessionsSerializer(data=video_detail)
                 if vs.is_valid(raise_exception=True):
@@ -80,10 +81,10 @@ class CreateCourseApi(APIView):
                 if cs.is_valid(raise_exception=True):
                     ins=cs.save()
                     video_detail['course']=ins.Cid
-                    ofr['Cid']=ins.Cid
-                    ofr['Fid']=request.user.user.facilitator.Fid
-                    offer=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
-                    offer.save()
+                    ofr['Cid']=ins
+                    ofr['Fid']=request.user.user.facilitator
+                    offering=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
+                    offering.save()
                     
                 
                 vs= VideoRecordedSerializer(data=video_detail)

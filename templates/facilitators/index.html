@@ -12,7 +12,7 @@
   <!-- Favicons -->
   <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="icon">
   <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="apple-touch-icon">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -242,7 +242,20 @@ footer #social i:hover{
             </div>
         </div>
     </nav>
+    {% comment %} <div class="alert {{clss}}">
+       <p style="text-align: center">{{ notification }}</p>  
 
+    </div> {% endcomment %}
+    {% if notification %}
+    <script>
+    swal("Oops!", "Incorrect Email or Password", "error");
+    </script>
+  {% endif %}
+  {% if repsonse %}
+  <script>
+  swal({{heading}}, {{repsonse}}, {{arg}});
+  </script>
+{% endif %}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -268,15 +281,91 @@ footer #social i:hover{
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
-                <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/hpme">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
+                {% if uemail %}
+                <p>{% url 'forgotPassword' uemail %}</p>
+                <button class="btn btn-primary rounded" id="otp" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 12px" >Forgot Password?</button>
+              {% endif %}
+                <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/home">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
             </div>
-            <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="sign in">
+            <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="Sign in">
         </form>
       </div>
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
+{% if uemail %}
+
+    <script>
+        $("#otp").click(function() {
+                              $.ajax({
+                                  url: "{% url forgotPassword uemail %}",
+                                  success: function (data) {
+                                       swal("Hurray!", 'GET done', "success");
+                                      }    
+                              });
+                </script>
+        {% endif %}
+
+
+
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel"><strong>Password Recovery</strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              {% if uemail %}
+            <form style="padding-right: 80px; padding-left: 80px;" method='POST' action="{% url 'forgotPassword' uemail %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <p>OTP has been sent to your registered email address!</p>
+                  </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="otp"id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your OTP">
+                </div>
+                
+                <div class="form-group">  
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="newpassword"data-toggle="password" placeholder="New Password" id="password-field">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="confirmpassword"data-toggle="password" placeholder="Confirm Password" id="password-field">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="Change Password">
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- end of forgot password modal============== -->
+
+
+
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">

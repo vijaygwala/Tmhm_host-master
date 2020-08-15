@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from LandingPage.admin import *
 
 class ExperienceInline(admin.StackedInline):
     model = Experience
@@ -25,6 +26,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
         for user in queryset:
             facilitator=Facilitator.objects.create(name=user.name,phone=user.phone,user=user)
             facilitator.save()
+        queryset.update(status="Approved")
     def shortlisted_facilitator(self,request , queryset):
         queryset.update(status="Shortlisted")
     def OnHold_facilitator(self,request , queryset):
@@ -44,6 +46,8 @@ class ApplicantsAdmin(admin.ModelAdmin):
 #     ist_display=('Qid','query','status','user')
 class FacilitatorAdmin(admin.ModelAdmin):
     list_display=('Fid','name','DOB','phone','PAddress','TAddress','profile','Bio','country','state','zipcode','user')
-
+    inlines = (offer_inline,)
 admin.site.register(Facilitator,FacilitatorAdmin)
 admin.site.register(Applicants,ApplicantsAdmin)
+admin.site.register(OTP)
+
