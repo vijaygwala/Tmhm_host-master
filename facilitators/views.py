@@ -239,8 +239,6 @@ class facilitator_login(View):
             password = request.POST['password']
             # print(email1, password)
             u = get_object_or_404(CustomUser, email=email1)
-            print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-            print(u.pk)
             user = authenticate(request,email=email1, password=password)
             message=None
             try:
@@ -381,14 +379,17 @@ def forgot_password(request, pk=None):
     ms = ''
     print('GETTTTTTTTTTT')
     if request.method == 'GET':
-        u = get_object_or_404(CustomUser, pk=pk)
+        print(pk)
+        u = CustomUser.objects.get(id=pk)
+        print(u)
+        #get_object_or_404(CustomUser, pk=pk)
         otp = random.randrange(1234, 99999, 3)
         print(otp)
         print(u)
-        receiver = u.email
+        receiver = 'vijaygwala73@gmail.com'
         subject = 'OTP from Learnopad' + ' : ' + str(otp)
-        text = 'Hi '+ str(u.email)+' Your one time password for Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
-        send_mail(str(subject), text, 'vijaygwala97@gmail.com', [str(receiver)])
+        text = 'Hi '+ receiver+' Your one time password for Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
+        send_mail(str(subject), text, 'vijaygwala97@gmail.com', [receiver,],fail_silently=False)
         print('mail sent')
         def expire():
             try:

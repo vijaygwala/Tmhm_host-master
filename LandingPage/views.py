@@ -4,6 +4,8 @@ from django.shortcuts import render
 def home(request):
     return render(request,'LandingPage/index.html')
 
+def freecontent(request):
+    return render(request,'LandingPage/freeContent/index.html')
 
 # Landing page signup form
 def signup(request):

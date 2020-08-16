@@ -283,14 +283,21 @@ footer #social i:hover{
             </div>
 
             <div class="form-group">
-                {% if uemail %}
-                <p>{% url 'forgotPassword' uemail %}</p>
-                <button class="btn btn-primary rounded" id="otp" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 12px" >Forgot Password?</button>
-              {% endif %}
-                <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/home">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
+           
+          <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/home">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
             </div>
+            <div class="row">
+              <div class='col-md-3'>
             <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="Sign in">
+             </div>
+             <div class='col-md-6'>
+             {% if uemail %}
+                <a class="btn btn-primary rounded text-white " id="otp" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 12px" >Forgot Password?</a>
+              {% endif %}
+              </div>
+            </div>
         </form>
+         
       </div>
     </div>
   </div>
@@ -303,12 +310,15 @@ footer #social i:hover{
     <script>
         $("#otp").click(function() {
                               $.ajax({
-                                  url: "{% url forgotPassword uemail %}",
+                                  url: '{% url 'forgotPassword' uemail %}',
+                                  type:"GET",
                                   success: function (data) {
                                        swal("Hurray!", 'GET done', "success");
-                                      }    
-                              });
-                </script>
+                                      } 
+                                      
+                              })   
+                              })
+    </script>
         {% endif %}
 
 
@@ -972,6 +982,7 @@ footer #social i:hover{
 
   <!--<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
   <div id="preloader"></div>-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>

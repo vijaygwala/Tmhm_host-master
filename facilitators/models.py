@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 
+
 #this relation contains all the applicants who is registerd from facilitator registration form
 class Applicants(models.Model):
     Aid=models.AutoField(primary_key=True)

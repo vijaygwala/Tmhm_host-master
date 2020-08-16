@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('facilitators.api.urls')),
     path('', include('myauth.api.urls')),
     path('', include('payment_gateway.urls')),
-    # path('accounts/', include('allauth.urls')),
+    path('', include('corporates.urls')),
     path('', include('LandingPage.urls')),
     path('', include('facilitators.urls')),
     path('', include('learners.urls')),

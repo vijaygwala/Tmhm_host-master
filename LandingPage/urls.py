@@ -9,4 +9,5 @@ urlpatterns = [
     path('contact/', views.contact),
     path('categories/', views.category),
     path('terms-and-services/', views.termsandservices),
+    path('Free/', views.freecontent,name="freecontent"),
 ]

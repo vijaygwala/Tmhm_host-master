@@ -77,6 +77,8 @@ class Course(models.Model):
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    offering=models.ManyToManyField(Facilitator,through='offer')
+    
     def __str__(self):
         return self.title
     class Meta:
