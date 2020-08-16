@@ -130,7 +130,6 @@ def facilitator_Dashboard_Landing_page(request):
     if total_learners != 0:
         active_learners = (active_learners/total_learners)*100
 
-
     context = {
         "facilitator_name" : obj.name,
         "Bio" : obj.Bio,
@@ -142,7 +141,25 @@ def facilitator_Dashboard_Landing_page(request):
         'active_learners': active_learners,
         'total_queries': total_queries
     }
-
+    # My courses
+    appli=Applicants.objects.get(user=request.user)
+    faci=Facilitator.objects.get(user=appli)
+    course=offer.objects.filter(Fid=faci.Fid)
+    if len(course)==0:
+        context.update({'count':0})
+        return render(request,'facilitators/Dashboard/index.html',context)
+    category=[]
+    val1=[]
+    for cat in course:
+        val=Course.objects.get(code=cat.Cid.code)
+        print(val)
+        val1.append(val)
+    n=len(val1)
+    nSlides=(n//3)+ceil(n/3-n//3)
+    l=[val1,range(1,nSlides),n]
+    category.append(l)
+    context.update({'category':category})
+    
 
     # by aamir
     appli = Applicants.objects.get(user=request.user)   #appli.Aid
@@ -186,8 +203,8 @@ def facilitator_Dashboard_explore_courses_page(request):
         nSlides=(n//3)+ceil(n/3-n//3)
         l=[val1,range(1,nSlides),n]
         category.append(l)
-    context.update({'category':category})
     print(context)
+    context.update({'category':category})
     return render(request, 'facilitators/Dashboard/explore_courses.html',context)
 
 
