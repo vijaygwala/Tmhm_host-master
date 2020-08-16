@@ -10,4 +10,5 @@ urlpatterns = [
     path('categories/', views.category),
     path('terms-and-services/', views.termsandservices),
     path('Free/', views.freecontent,name="freecontent"),
+    path('explore/courses/', views.exploreCourses,name='Lexplorecourses'),
 ]

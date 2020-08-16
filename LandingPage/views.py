@@ -6,6 +6,8 @@ def home(request):
 
 def freecontent(request):
     return render(request,'LandingPage/freeContent/index.html')
+def exploreCourses(request):
+    return render(request,'LandingPage/exploreCourses/exploreCourses.html')
 
 # Landing page signup form
 def signup(request):
