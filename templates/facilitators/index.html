@@ -52,7 +52,7 @@ body,html {
 #trainers a.active{
   border-left: inset;
   font-weight: 600;
-  color: #black;
+  color: black;
   text-decoration: none; 
   background: transparent; 
 }
@@ -247,15 +247,31 @@ footer #social i:hover{
 
     </div> {% endcomment %}
     {% if notification %}
-    <script>
-    swal("Oops!", "Incorrect Email or Password", "error");
-    </script>
+
+    <script>swal({
+        title: "Oops!",
+        text: "Incorrect Email or Password!",
+        icon: "error",
+        buttons: ["Try again", "Forgot Password?"],
+        dangerMode: false,
+      })
+      .then((forgot_password) => {
+        if (forgot_password) {
+            $.ajax({
+                    url: "{% url 'forgotPassword' uemail %}",
+                    type:"GET",
+                    success: function (data) {
+                    swal("OTP sent!", 'OTP is sent to your email', "success");
+                    $("#forgotPasswordModal").modal();
+                     }     
+                  })
+        }
+        else {
+          $("#exampleModal").modal();
+        }  
+      });</script>
   {% endif %}
-  {% if repsonse %}
-  <script>
-  swal({{heading}}, {{repsonse}}, {{arg}});
-  </script>
-{% endif %}
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -310,12 +326,11 @@ footer #social i:hover{
     <script>
         $("#otp").click(function() {
                               $.ajax({
-                                  url: '{% url 'forgotPassword' uemail %}',
+                                  url: "{% url 'forgotPassword' uemail %}",
                                   type:"GET",
                                   success: function (data) {
-                                       swal("Hurray!", 'GET done', "success");
-                                      } 
-                                      
+                                       swal("OTP sent!", 'OTP is sent to your email', "success");
+                                      }     
                               })
         })  
                              
@@ -371,6 +386,25 @@ footer #social i:hover{
         </div>
       </div>
     </div>
+    
+    {% if password_recovered %}
+    <h1>{{password_recovered}}</h1>
+    <script>
+      swal('Hurray!', 'Account recovered Successfully! Try to login.', 'success');
+    </script>
+    {% elif invalid_otp %}
+    <script>
+        swal('Oops!', 'Invalid or Expired OTP', 'error');
+      </script>
+      {% elif password_not_same %}
+      <script>
+          swal('Sorry!', 'Passwords must be same!', 'warning');
+        </script>
+        {% elif went_wrong %}
+        <script>
+            swal('Sorry!', 'Something went wrong! Please Try again!', 'warning');
+          </script>
+  {% endif %}
 
   <!-- end of forgot password modal============== -->
 
