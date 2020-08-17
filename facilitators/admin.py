@@ -49,8 +49,5 @@ class FacilitatorAdmin(admin.ModelAdmin):
     inlines = (offer_inline,)
 admin.site.register(Facilitator,FacilitatorAdmin)
 admin.site.register(Applicants,ApplicantsAdmin)
-<<<<<<< Updated upstream
 admin.site.register(OTP)
-=======
->>>>>>> Stashed changes
 
