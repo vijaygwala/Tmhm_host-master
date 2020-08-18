@@ -157,15 +157,13 @@ def facilitator_Dashboard_Landing_page(request):
     val1=[]
     for cat in course:
         val=Course.objects.get(code=cat.Cid.code)
-        print(val)
         val1.append(val)
     n=len(val1)
     nSlides=(n//3)+ceil(n/3-n//3)
-    l=[val1,range(1,nSlides),n]
-    category.append(l)
-    context.update({'category':category})
-    
-
+    context.update({'courses':val1})
+    context.update({'nSlides':nSlides})
+    context.update({'range':range(1,nSlides)})
+    print(context)
     # by aamir
     appli = Applicants.objects.get(user=request.user)   #appli.Aid
     approved = Facilitator.objects.get(user=appli)
@@ -185,32 +183,33 @@ def facilitator_Dashboard_explore_courses_page(request):
     # data=json.loads(r.text)
     # print(request.user.id)
     # data=Facilitator.objects.get(email=request.user)
-    appli=Applicants.objects.get(user=request.user)
-    faci=Facilitator.objects.get(user=appli)
-    course=offer.objects.filter(Fid=faci.Fid)
-    course1=[]
-    context={}
-    if len(course)==0:
-        context.update({'count':0})
-        return render(request,'facilitators/Dashboard/explore_courses.html',context)
-    for i in range(0,len(course)):
-        subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
-        context.setdefault('subcategory',set()).add(subcategory)
-        course1.append(course[i].Cid)
-    category=[]
-    for cat in context['subcategory']:
-        val=Course.objects.filter(subCat_id=cat.subCat_id)
-        val1=[]
-        for c in val:
-            if c in course1:
-                val1.append(c)
-        n=len(val1)
-        nSlides=(n//3)+ceil(n/3-n//3)
-        l=[val1,range(1,nSlides),n]
-        category.append(l)
-    print(context)
-    context.update({'category':category})
-    return render(request, 'facilitators/Dashboard/explore_courses.html',context)
+    # appli=Applicants.objects.get(user=request.user)
+    # faci=Facilitator.objects.get(user=appli)
+    # course=offer.objects.all()
+    # course1=[]
+    # context={}
+    # if len(course)==0:
+    #     context.update({'count':0})
+    #     return render(request,'facilitators/Dashboard/explore_courses.html',context)
+    # for i in range(0,len(course)):
+    #     subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
+    #     context.setdefault('subcategory',set()).add(subcategory)
+    #     course1.append(course[i].Cid)
+    # category=[]
+    # for cat in context['subcategory']:
+    #     val=Course.objects.filter(subCat_id=cat.subCat_id)
+    #     val1=[]
+    #     for c in val:
+    #         if c in course1:
+    #             val1.append(c)
+    #     n=len(val1)
+    #     nSlides=(n//3)+ceil(n/3-n//3)
+    #     l=[val1,range(1,nSlides),n]
+    #     category.append(l)
+    # print(context)
+    # context.update({'category':category})
+    # return render(request, 'facilitators/Dashboard/explore_courses.html',context)
+    return redirect('Lexplorecourses')
 
 
 @login_required(login_url='/facilitator/login/')
@@ -222,7 +221,7 @@ def facilitator_Dashboard_support_page(request):
         Queries.objects.create(Fid=faci,query=query)
         return redirect('support1')
     context={
-        'data':Queries.objects.filter(Fid=faci)
+        'data':Queries.objects.filter(Fid=faci).order_by('query')
     }
     
     return render(request, 'facilitators/Dashboard/support.html',context)
