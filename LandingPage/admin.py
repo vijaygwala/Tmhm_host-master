@@ -16,21 +16,33 @@ class offer_inline(admin.TabularInline):
     model = offer
     verbose_name_plural = 'Offerd By'
     extra = 1
-
+class CourseVideoInline(admin.StackedInline):
+    model = CourseVideo
+    can_delete = False
+    extra = 1
+    verbose_name_plural = 'Preview'
+    fk_name = 'course'
+    list_select_related = ('course',)
+    list_display=('Vid','title','description','session_duration','video','course')
+    list_display_links=['title','description','session_duration','video','course']
 class CategoryAdmin(admin.ModelAdmin):
     list_display=('cat_id','name')
+    list_display_links=['name']
 class SubCategoryAdmin(admin.ModelAdmin):
     list_display=('subCat_id','name','cat_id')
+    list_display_links=['name','cat_id']
 class CourseAdmin(admin.ModelAdmin):
     list_display=('Cid','code','title','days','months','description','subCat_id')
-    inlines = (offer_inline,)
+    inlines = (offer_inline,CourseVideoInline)
+    list_display_links=['code','title']
 # class offerAdmin(admin.ModelAdmin):
 #     list_display=('Fid','Cid')
 
 class CouncellingAdmin(admin.ModelAdmin):
     list_display=('councelling_id','name','email','phone_number')
-class VideoRecordedAdmin(admin.ModelAdmin):
-    list_display=('Vid','title','description','session_duration','video','course')
+    list_display_links=['name','email','phone_number']
+
+
 class LiveSessionsAdmin(admin.ModelAdmin):
     list_display=('Vid','title','description','session_duration','session_start','session_end','video','course')
 class AudienceAdmin(admin.ModelAdmin):
@@ -38,7 +50,7 @@ class AudienceAdmin(admin.ModelAdmin):
 class QueryAdmin(admin.ModelAdmin):
     list_display=('Fid','query','reply')
 
-admin.site.register(VideoRecorded,VideoRecordedAdmin)
+
 admin.site.register(LiveSession,LiveSessionsAdmin)
 admin.site.register(OnlineCounsellingDetails,CouncellingAdmin)
 admin.site.register(Category,CategoryAdmin)

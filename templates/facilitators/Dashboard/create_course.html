@@ -281,15 +281,17 @@ Create Courses
 
                                                     <div class="col register-right">
 
-                                                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="">
+                                                        {% comment %} <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="">
                                                             <li class="nav-item">
-                                                                <a class="nav-link active" id="session" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sessions</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" id="course" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Course</a>
-                                                            </li>
-                                                        </ul>
+                                                                <a class="nav-link active" id="course" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Course</a>
 
+                                                            </li>
+                                                            <li class="nav-item">
+                                                        <a class="nav-link " id="session" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Sessions</a>
+
+                                                            </li> 
+                                                        </ul> {% endcomment %}
+{% comment %} 
 
                                                         <div class="tab-content" id="myTabContent">
                                                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -380,7 +382,7 @@ Create Courses
 
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> {% endcomment %}
                                                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                                 <h3 class="register-heading" style="color:rgb(20, 153, 214);">Want to impact people through your teachings? Start here by uploading Course videos!</h3>
                                                                 <div class="row register-form">
@@ -396,12 +398,12 @@ Create Courses
                                             </div>
                                             <div class="form-row">
                                                 <fieldset>
-                                            <label class="special-label">Description</label>
+                                            <legend class="special-label">Description</legend>
                                             <textarea id="cdescription" name="cdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
                                                 
                                             </div>
              
-                                                                        <label class="special-label">Course Video Duration:</label>
+                                                                        {% comment %} <label class="special-label">Course Video Duration:</label>
                                                                         <div class="form-row">
                                                                             <div class="form-holder">
                                                                                 <fieldset>
@@ -409,7 +411,7 @@ Create Courses
                                                                                     <input type="time" id="ctime" name="ctime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
                                                                             </div>
 
-                                                                        </div>
+                                                                        </div> {% endcomment %}
 
 
 
@@ -448,7 +450,9 @@ Create Courses
 
                                                                         </div>
 
-
+                                                                       <div class="container text-center mt-2">
+                            <button class="btn btn-secondary" type="submit" >submit</button>
+                                    </div>
                                                                     </div>
 
                                                                 </div>
@@ -578,9 +582,7 @@ Create Courses
                                                     </div>
                                                 </div>
                                             </div> -->
-                                    <div class="container text-center">
-                            <button class="btn btn-secondary" type="submit" >submit</button>
-                                    </div>
+                                 
                                         </div>
                                     </section>
                                 </div>
@@ -644,8 +646,8 @@ Create Courses
     $myForm.submit(function(event){
         event.preventDefault()  
          var cat_list = $('#category option:selected').toArray().map(item => item.text);      
-    var session= document.getElementById('session').getAttribute('aria-selected');
-   var course= document.getElementById('course').getAttribute('aria-selected');
+    var session= 'false'//document.getElementById('session').getAttribute('aria-selected');
+   var course= 'true'//document.getElementById('course').getAttribute('aria-selected');
    var coursevideo;
    var sessionvideo;
    var $video;
@@ -674,7 +676,8 @@ data={
     "rvideo":"true",
     "svideo":"false",
     "video":coursevideo,
-    "course":course_details
+    "course":course_details,
+    "subcategory":cat_list
 }
    }
    else {
@@ -686,6 +689,7 @@ sessionvideo={
                 "session_end":$('#letime').val(),
                 "date":$('#ldate').val(),
                 "days":$('#ldays').val()
+
        
        }
 
@@ -695,7 +699,8 @@ sessionvideo={
     "rvideo":"false",
     "svideo":"true",
     "video":sessionvideo,
-    "course":course_details
+    "course":course_details,
+    "subcategory":cat_list
 }
    }
 
@@ -724,7 +729,11 @@ $.ajax({
     },
     success: function(response) {
         
-                window.location.href ='{% url "createcourse" %}';
+    swal("Done!", "Course is Created Successfully ", "success");
+      setTimeout(function(){
+            window.location.href = '{% url "createcourse" %}';
+         }, 5000); 
+                
             
     }
 });

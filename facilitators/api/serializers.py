@@ -35,7 +35,7 @@ class SubCategorySerializers(serializers.ModelSerializer):
 #serializer for recordedvideo model
 class VideoRecordedSerializer(serializers.ModelSerializer):
     class Meta:
-        model=VideoRecorded
+        model=CourseVideo
         fields=('title','description','session_duration','video','course')
 
 # serializer for ofe

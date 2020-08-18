@@ -20,6 +20,7 @@ from django.views import View
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FileUploadParser
 from django.core import serializers
+from mailing.views import *
 
 # Facilitator Register API
 class FacilitatorRegisterAPI(APIView):
@@ -64,15 +65,6 @@ class FacilitatorRegisterAPI(APIView):
             applicant.save()
             exp_form["facilitator"]=applicant.Aid
             facilitator_query['user']=applicant.Aid
-           
-            # profile=Profile.objects.get(user=user.id)
-            # profile.portfolio=file
-            # profile.phone=phone
-            # #profile.portfolio=portfolio
-            # profile.role=2
-            # profile.intrest=catlist
-            # profile.save()
-           
         
         
         if expform.is_valid(raise_exception=True):
@@ -86,7 +78,8 @@ class FacilitatorRegisterAPI(APIView):
             else:
                 messages.error(request, ('Invalid Query Deatails !'))
                 return redirect('register')
-       
+        successOnRegistration(user.email,'Registration.png')
+        RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
         messages.success(request, ('Your profile was successfully Created!'))
         return Response({'redirect':'{% url "facilitator-register" %}'},status=201)
 

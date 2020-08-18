@@ -90,7 +90,7 @@ def content_Rfile_name(instance, filename):
     return '/'.join(['RecordedSession', instance.course.title, filename])
 
 #contain all the recorded videos to the particuler course
-class VideoRecorded(models.Model):
+class CourseVideo(models.Model):
     Vid=models.AutoField(primary_key=True)
     title=models.CharField(max_length=100,null=True,blank=True)
     description=models.TextField(blank=True,null=True)
@@ -101,10 +101,7 @@ class VideoRecorded(models.Model):
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.title
-    class Meta:
-        verbose_name='Recorded Sessions'
-        verbose_name_plural='Recorded Sessions'
-
+    
 #contain all the liveSessions to the particuler course
 class LiveSession(models.Model):
     Vid=models.AutoField(primary_key=True)

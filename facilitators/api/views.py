@@ -43,8 +43,8 @@ class CreateCourseApi(APIView):
         course_detail=details.pop('course')
         video_detail=details.pop('video')
         video_detail['video']=file
-        course=subcategory_detail.get('subcategory')
-        subcat=SubCategory.objects.get(name='Web Development')
+        subc=subcategory_detail[0]
+        subcat=SubCategory.objects.get(name=subc)
         print(subcat)
         ofr={}
         offering=None

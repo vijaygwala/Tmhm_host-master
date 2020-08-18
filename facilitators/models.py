@@ -148,5 +148,8 @@ class OTP(models.Model):
     def __str__(self):
         return self.sender
 
-
+    class Meta:
+        
+        verbose_name='Reset OTP'
+        verbose_name_plural='Reset OTPS'
 
