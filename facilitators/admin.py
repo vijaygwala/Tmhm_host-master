@@ -38,7 +38,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 facilitator.save()
                 user.status='Approved'
                 user.save()
-                successOnRegistration(user.email,'finalstep.png')
+                successOnRegistration(user.user.email,'finalstep.png')
                 messages.success(request, (user.name+' is approved !'))
             else:
                 messages.info(request, (check.name+' is already approved !'))

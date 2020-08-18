@@ -98,7 +98,7 @@ def payment_status(request):
         'razorpay_signature' : response['razorpay_signature']
     }
 
-
+    print("payment ho gai ")
     # VERIFYING SIGNATURE
     try:
         status = client.utility.verify_payment_signature(params_dict)
