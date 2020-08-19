@@ -49,6 +49,10 @@ class AudienceAdmin(admin.ModelAdmin):
     list_display=('audience',)
 class QueryAdmin(admin.ModelAdmin):
     list_display=('Fid','query','reply')
+class ContactAdmin(admin.ModelAdmin):
+    list_display=('name','email','categories','mobile','message')
+class CorporateTalksAdmin(admin.ModelAdmin):
+    list_display=('name','email','mobile','company_name','training_need','message','city','state','check')
 
 
 admin.site.register(LiveSession,LiveSessionsAdmin)
@@ -58,4 +62,5 @@ admin.site.register(SubCategory,SubCategoryAdmin)
 admin.site.register(Course,CourseAdmin)
 # admin.site.register(offer,offerAdmin)
 admin.site.register(Audience,AudienceAdmin)
-admin.site.register(Queries,QueryAdmin)
+admin.site.register(ContactUs,ContactAdmin)
+admin.site.register(CorporatesTalks,CorporateTalksAdmin)

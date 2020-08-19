@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from LandingPage.models import *    
 from facilitators.models import *
 from math import ceil
+from django.contrib import messages
+from .forms import *
 # Landing  page
 def home(request):
     return render(request,'LandingPage/index.html')
@@ -45,7 +47,15 @@ def aboutus(request):
 
 #Landing page Contact us page
 def contact(request):
-    return render(request, 'LandingPage/contactus/contact.html')
+    if request.method=='POST':
+        form=ContactUsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,f"Details Submitted Succesfully")
+            return redirect('contactus')
+    form=ContactUsForm()
+    context={'form':form}
+    return render(request, 'LandingPage/contactus/contact.html',context)
 
 #Landing page categories page
 def category(request):

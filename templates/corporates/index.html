@@ -18,6 +18,15 @@
      </head>
 
      <body>
+        {% if messages %}
+        <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><script>
+                        alert('{{ message }}');
+                    </script></li>
+                {% endfor %}
+        </ul>
+        {% endif %} 
         <section class=""id="header">
             <div class="col-lg-12 col-md-12 col-xs-12 menu-bar">
                 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white top-0 ">
@@ -178,62 +187,50 @@
             <div class="col-lg-8 col-md-8 col-sm-8 my-form-col">
                 <h4>Talk With Our Trainers</h4>
                 <div class="horizontal"><hr></div>
-                <form>
+                <form method="POST">
+                  {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-lg-12">
-                            <label for="inputAddress">Name*</label>
-                            <input type="text" class="form-control" id="inputName" placeholder="Name" required>
+                            <label for="inputAddress" required >Name*</label>
+                            {{ form.name }}
                           </div>
                       <div class="form-group col-md-6">
-                        <label for="inputEmail4">Email*</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+                        <label for="inputEmail4" required >Email*</label>
+                        {{ form.email }}
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputPassword4">Phone Number*</label>
-                        <input type="password" class="form-control" id="inputPhone" placeholder="Phone Number" required>
+                        {{ form.mobile }}
                       </div>
                        
     
                     <div class="form-group col-md-6">
                       <label for="inputAddress">Company Name</label>
-                      <input type="text" class="form-control" id="inputCompany" placeholder="Enter Company Name" required>
+                      {{ form.company_name }}
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputAddress2">Training Need*</label>
-                      <select id="inputTraining" class="form-control">
-                        <option selected>Select An Option</option>
-                        <option>Digital Training</option>
-                        <option>Marketing Training</option>
-                        <option>IT Training</option>
-                        <option>BusinessTraining</option>
-                      </select>
-                       
+                      {{ form.training_need }}
                     </div>
                     <div class="form-group col-lg-12">
                         <label for="inputAddress">Query</label>
-                        <textarea type="text" class="form-control" id="inputQuery" placeholder="Write Your Query"></textarea>
+                        {{ form.message }}
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputCity">City</label>
-                        <input type="text" class="form-control" id="inputCity" placeholder="Enter Your City">
+                        {{ form.city }}
                       </div>
                       <div class="form-group col-md-6">
                         <label for="inputState">State</label>
-                        <select id="inputState" class="form-control">
-                          <option selected>Select Your State</option>
-                          <option>Uttar Pradesh</option>
-                          <option>Madhya Pradesh</option>
-                          <option>Maharashtra</option>
-                          <option>Tamil Nadu</option>
-                        </select>
+                        {{ form.state }}
                       </div>
                        
                     </div>
                     <div class="form-group">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                        {{ form.check }}
                         <label class="form-check-label" for="gridCheck">
                           Check me out
                         </label>

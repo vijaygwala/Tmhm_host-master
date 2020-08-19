@@ -172,6 +172,15 @@ Contact Us
 <!---------------------------------- -->
 
 {% block content %}
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><script>
+                    alert('{{ message }}');
+                </script></li>
+            {% endfor %}
+    </ul>
+    {% endif %}             
 	<div class="container">
 		<div class="row">
 
@@ -192,28 +201,21 @@ Contact Us
                 <!-- Contact Form -->
                 <div align="center" style="margin: 20px">
                     <div class="contact_form_container">
-                        <form action="#" id="contact_form" class="contact_form">
+                        <form action="#" id="contact_form" class="contact_form" method='POST'>
                             {% csrf_token %}
-                            <div style="margin-bottom: 20px"><input type="text" class="contact_input contact_input_name inpt" placeholder="Your Name" required="required"><div class="input_border"></div></div>
-                            <div><input type="text" class="contact_input contact_input_email inpt" placeholder="Your E-mail" required="required"><div class="input_border"></div></div>
+                            <div style="margin-bottom: 20px">{{ form.name }}<div class="input_border"></div></div>
+                            <div>{{ form.email}} <div class="input_border"></div></div>
                             <div class="row mt-4">
                                 <div class="col-lg-6" style="margin-bottom: 20px">
                                     <div class="contact_input_name inpt">
-                                        <select class="custom-select" id="inputGroupSelect02" style="height: 52px;font-family: 'Oswald', sans-serif;font-size: 14px !important;font-weight: 400 !important;color: #88889d !important;">
-                                            <option selected > Categories...</option>
-                                            <option value="Learner">Learner</option>
-                                            <option value="Facilitator">Facilitator</option>
-                                            <option value="Campus">Campus</option>
-                                            <option value="Corporate">Corporate</option>
-                                            <option value="Others">Others</option>
-                                        </select>
+                                        {{ form.categories }}
                                     </div>
                                 </div>
                                 <div class="col-lg-6" style="margin-bottom: 20px">
-                                    <div><input type="tel" class="contact_input contact_input_subject inpt" placeholder="Mobile Number" required="required"><div class="input_border"></div></div>
+                                    <div>{{ form.mobile }}<div class="input_border"></div></div>
                                 </div>
                             </div>
-                            <div><textarea class="contact_textarea contact_input inpt" placeholder="Message" required="required" style="height: 150px;"></textarea><div class="input_border" style="bottom:5px"></div></div>
+                            <div>{{ form.message }}<div class="input_border" style="bottom:5px"></div></div>
                             <button class="contact_button">send</button>
                         </form>
                     </div>
