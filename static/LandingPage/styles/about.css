@@ -402,7 +402,7 @@ section
 .why_image
 {
 	width: 100%;
-    
+    padding: 30px;
 }
 .why_image img
 {
@@ -414,18 +414,22 @@ section
 	padding-bottom: 55px;
 	padding-left: px;
 	padding-right: px;
+    background: rgb(23,129,176);
+background: radial-gradient(circle, rgba(23,129,176,1) 16%, rgba(26,28,28,1) 100%);
 }
 .why_title
 {
 	font-family: 'Raleway', sans-serif;
 	font-size: 25px;
 	font-weight: 400;
-	color: #181818;
+	color: white;
 	line-height: 1.1;
+    
 }
 .why_text
 {
 	margin-top: 20px;
+    color: white;
 }
 .why_icon
 {
@@ -447,9 +451,7 @@ section
 	max-width: 60%;
 }
 
-/*********************************
-10. Team
-*********************************/
+
 
 
 /*

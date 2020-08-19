@@ -5,6 +5,33 @@ from pathlib import Path
 from email.mime.image import MIMEImage
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
+from django.template import Context
+import threading
+from django.http import HttpResponse
+
+def some_view():
+    template = get_template('html/shortlisted.html')
+    image_url ="static/email/Registration.png"
+    context = Context({'image_name':image_url})
+    content=render_to_string('html/shortlisted.html')
+    #content = template.render()
+    subject='nothing'
+    # if not user.email:
+    #     raise BadHeaderError('No email address given for {0}'.format(user))
+    msg = EmailMessage(subject, content, 'vijaygwala97@gmail.com', to=['vijaygwala73@gmail.com',])
+    res=msg.send()
+    return HttpResponse('%s'%res)
+
+#speed up mails
+class EmailThread(threading.Thread):
+    def __init__(self,email):
+        self.email=email
+        threading.Thread.__init__(self)
+    def run(self):
+        self.email.send()
+
 
 # inform about facilitator registration
 def RegistrationSuccessAdminEmail(name,catlist):
@@ -22,7 +49,7 @@ def RegistrationSuccessAdminEmail(name,catlist):
 # the function for sending an email
 def send_email(subject, text_content, html_content=None, sender=None, recipient=None, image_path=None, image_name=None):
     email = EmailMultiAlternatives(subject=subject, body=text_content, from_email=sender, to=recipient if isinstance(recipient, list) else [recipient])
-
+    
     if all([html_content,image_path,image_name]):
         email.attach_alternative(html_content, "text/html")
         email.content_subtype = 'html'  # set the primary content to be text/html
@@ -33,8 +60,8 @@ def send_email(subject, text_content, html_content=None, sender=None, recipient=
             
             image.add_header('Content-ID', f"<{image_name}>")
             email.attach(image)
-
-    email.send()
+    EmailThread(email).start()
+   
 def registration(request):
     return render(request,'html/shortlisted.html')
 

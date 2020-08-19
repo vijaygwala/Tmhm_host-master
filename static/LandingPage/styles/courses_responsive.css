@@ -306,6 +306,22 @@
     }
     
 }
+/************
+14. 420px
+************/
+@media only screen and (max-width: 420px)
+{
+    .courses_search_container{
+    }
+    .courses_search_button{
+        font-size: 12px;
+    }
+    .courses_search_input{
+        font-size: 12px;
+        width: 120px;
+    }
+}
+
 
 /************
 14. 400px
