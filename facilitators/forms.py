@@ -43,5 +43,3 @@ class FacilitatorQueriesForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(FacilitatorQueriesForm, self).__init__(*args, **kwargs)
         self.fields['query'].widget.attrs.update({'placeholder': 'Ask Your Question','id':'autoresizing'})
-
-

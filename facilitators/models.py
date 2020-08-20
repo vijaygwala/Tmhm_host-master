@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
-
+from ckeditor.fields import RichTextField
 
 #this relation contains all the applicants who is registerd from facilitator registration form
 class Applicants(models.Model):
@@ -33,7 +33,7 @@ class Facilitator(models.Model):
     Fid=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=True,blank=True)
     DOB=models.DateField(blank=True,null=True)
-    phone=models.CharField(max_length=13,blank=False)
+    phone=models.CharField(max_length=13,null=True,blank=True)
     country=models.TextField(blank=True, null=True)
     state=models.TextField(blank=True, null=True)
     PAddress=models.TextField(blank=True,null=True)

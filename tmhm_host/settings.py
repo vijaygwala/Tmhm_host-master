@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'payment_gateway',
     'mailing',
     # endVijay
+    #amir
     'rest_framework.authtoken',
 ]
 # for go
@@ -83,7 +84,6 @@ INSTALLED_APPS = [
 #     ),
 
 # }
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
