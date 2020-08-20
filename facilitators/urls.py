@@ -15,4 +15,5 @@ urlpatterns = [
     path('facilitator/logout/', views.user_logout, name="logout"),
     path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support1'),
     path('facilitator/login/', views.facilitator_login.as_view(), name="login"),
+    path('aboutfacilitator/',views.aboutfacilitator, name="aboutfacilitator"),
  ]

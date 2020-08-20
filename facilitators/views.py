@@ -298,9 +298,6 @@ def facilitator_Profile_page(request, pk):
     #context = {'ourdata':ourdata}
     return render(request, 'facilitators/Dashboard/profile.html', context)
 
-        
-        
-
 
 # for handling ajax request for change password form of setting section of profile
 @login_required(login_url='/facilitator/login/')
@@ -335,6 +332,10 @@ def ChangePassword(request):
         }
     return JsonResponse(data)
 
+
+def aboutfacilitator(request):
+    ourdata = Facilitator.objects.get()
+    return render(request, 'aboutfacilitator.html')
 
 def user_logout(request):
     logout(request)
