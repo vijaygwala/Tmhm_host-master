@@ -147,3 +147,55 @@ class Queries(models.Model):
         verbose_name_plural='Support For Facilitators'
 
 
+class ContactUs(models.Model):
+    Categories=(
+        ('Categories','Categories..'),
+        ('Learners','Learners'),
+        ('Facilitators','Facilitators'),
+        ('Corporates','Corporates'),
+        ('Campus','Campus'),
+        ('Others','Others'),
+        
+
+    )
+    name=models.CharField(max_length=50)
+    email=models.EmailField(max_length=100)
+    categories=models.CharField(max_length=100,choices=Categories)
+    mobile=models.CharField(max_length=10)
+    message=models.TextField(max_length=200)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name='Contact Us'
+        verbose_name_plural='Contact Us'
+
+class CorporatesTalks(models.Model):
+    Categories=(
+        ('Select','Select..'),
+        ('Digital Training','Digital Training'),
+        ('Business Training','Business Training'),
+        ('IT Training','IT Training'),
+        ('Marketing Training','Marketing Training'),
+        ('Others','Others'),
+        
+
+    )
+    name=models.CharField(max_length=50)
+    email=models.EmailField(max_length=100)
+    mobile=models.CharField(max_length=10)
+    company_name=models.CharField(max_length=200)
+    training_need=models.CharField(max_length=100,choices=Categories)
+    message=models.TextField(max_length=200)
+    city=models.CharField(max_length=20)
+    state=models.CharField(max_length=20)
+    check=models.BooleanField()
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name='Corporate Talks'
+        verbose_name_plural='Corporate Talks'
+
+
+
