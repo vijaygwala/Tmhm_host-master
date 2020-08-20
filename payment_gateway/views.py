@@ -9,7 +9,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 # razor pay account setup
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
-
+from mailing.views import *
 
 
     
@@ -98,10 +98,11 @@ def payment_status(request):
         'razorpay_signature' : response['razorpay_signature']
     }
 
-
+    print("payment ho gai ")
     # VERIFYING SIGNATURE
     try:
         status = client.utility.verify_payment_signature(params_dict)
+        successOnRegistration(request.user.email,'Afterpayment.png')
         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
     except:
         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})

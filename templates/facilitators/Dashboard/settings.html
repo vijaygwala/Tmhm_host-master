@@ -87,12 +87,12 @@
                                     <!-- Avatar -->
                                     <div class="d-none d-lg-block text-center mb-5">
                                         <div class="avatar avatar-xxl avatar-circle mb-3">
-                                            <img class="avatar-img" src="{% static 'facilitators/settings/img1(1).jpg' %}" alt="Image Description">
+                                            <img class="avatar-img" src="{{request.user.user.facilitator.profile.url}}" alt="Image Description">
                                             <img class="avatar-status avatar-lg-status" src="{% static 'facilitators/settings/top-vendor.svg' %}" alt="Image Description" data-toggle="tooltip" data-placement="top" title="" data-original-title="Verified user">
                                         </div>
 
-                                        <h4 class="card-title">Natalie Curtis</h4>
-                                        <p class="card-text font-size-1">natalie@example.com</p>
+                                        <h4 class="card-title">{{request.user.user.facilitator.name}}</h4>
+                                        <p class="card-text font-size-1">{{ request.user.email}}</p>
                                     </div>
                                     <!-- End Avatar -->
 
@@ -166,7 +166,7 @@
                     <!-- Card -->
                     <div class="card mb-3 mb-lg-5">
                         <div class="card-header">
-                            <h5 class="card-title">Password</h5>
+                            <h5 class="card-title">Change Password</h5>
                         </div>
 
                         <!-- Body -->
@@ -357,7 +357,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-sm mb-1 mb-sm-0">
                                                         <h6 class="mb-0">Youtube</h6>
-                                                        <a class="small" href="">www.youtube.com/htmlstream</a>
+                                                        <a class="small" href="{{request.user.user.experience.Youtube_Url}}">{{request.user.user.experience.Youtube_Url}}</a>
                                                     </div>
 
                                                     <div class="col-sm-auto">
@@ -381,7 +381,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-sm mb-1 mb-sm-0">
                                                         <h6 class="mb-0">Linkedin</h6>
-                                                        <a class="small" href="">www.linkedin.com/htmlstream</a>
+                                                        <a class="small" href="{{request.user.user.experience.Linkedin_Url}}">{{request.user.user.experience.Linkedin_Url}}</a>
                                                     </div>
 
                                                     <div class="col-sm-auto">
@@ -401,6 +401,8 @@
                                                 <div class="row align-items-center">
                                                     <div class="col-sm mb-1 mb-sm-0">
                                                         <h6 class="mb-0">Website</h6>
+                                <a class="small" href="{{request.user.user.experience.Website_Url}}">{{request.user.user.experience.Website_Url}}</a>
+
                                                         <small>Not connected</small>
                                                     </div>
 

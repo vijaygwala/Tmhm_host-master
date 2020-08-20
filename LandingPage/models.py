@@ -77,6 +77,8 @@ class Course(models.Model):
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    offering=models.ManyToManyField(Facilitator,through='offer')
+    
     def __str__(self):
         return self.title
     class Meta:
@@ -88,7 +90,7 @@ def content_Rfile_name(instance, filename):
     return '/'.join(['RecordedSession', instance.course.title, filename])
 
 #contain all the recorded videos to the particuler course
-class VideoRecorded(models.Model):
+class CourseVideo(models.Model):
     Vid=models.AutoField(primary_key=True)
     title=models.CharField(max_length=100,null=True,blank=True)
     description=models.TextField(blank=True,null=True)
@@ -99,10 +101,7 @@ class VideoRecorded(models.Model):
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.title
-    class Meta:
-        verbose_name='Recorded Sessions'
-        verbose_name_plural='Recorded Sessions'
-
+    
 #contain all the liveSessions to the particuler course
 class LiveSession(models.Model):
     Vid=models.AutoField(primary_key=True)
@@ -130,9 +129,9 @@ class offer(models.Model):
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
     def __str__(self):
         return self.Fid.name
-    class Meta:
-        verbose_name='Details about Courses and Facilitator'
-        verbose_name_plural='Details about Courses and Facilitators'
+    # class Meta:
+    #     verbose_name='Details about Courses and Facilitator'
+    #     verbose_name_plural='Details about Courses and Facilitators'
 
 class Queries(models.Model):
     Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE)
@@ -146,5 +145,57 @@ class Queries(models.Model):
     class Meta:
         verbose_name='Support For Facilitators'
         verbose_name_plural='Support For Facilitators'
+
+
+class ContactUs(models.Model):
+    Categories=(
+        ('Categories','Categories..'),
+        ('Learners','Learners'),
+        ('Facilitators','Facilitators'),
+        ('Corporates','Corporates'),
+        ('Campus','Campus'),
+        ('Others','Others'),
+        
+
+    )
+    name=models.CharField(max_length=50)
+    email=models.EmailField(max_length=100)
+    categories=models.CharField(max_length=100,choices=Categories)
+    mobile=models.CharField(max_length=10)
+    message=models.TextField(max_length=200)
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name='Contact Us'
+        verbose_name_plural='Contact Us'
+
+class CorporatesTalks(models.Model):
+    Categories=(
+        ('Select','Select..'),
+        ('Digital Training','Digital Training'),
+        ('Business Training','Business Training'),
+        ('IT Training','IT Training'),
+        ('Marketing Training','Marketing Training'),
+        ('Others','Others'),
+        
+
+    )
+    name=models.CharField(max_length=50)
+    email=models.EmailField(max_length=100)
+    mobile=models.CharField(max_length=10)
+    company_name=models.CharField(max_length=200)
+    training_need=models.CharField(max_length=100,choices=Categories)
+    message=models.TextField(max_length=200)
+    city=models.CharField(max_length=20)
+    state=models.CharField(max_length=20)
+    check=models.BooleanField()
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name='Corporate Talks'
+        verbose_name_plural='Corporate Talks'
+
 
 

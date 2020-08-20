@@ -12,7 +12,7 @@
   <!-- Favicons -->
   <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="icon">
   <link href="{% static 'LandingPage/img/logotiny.png' %}" rel="apple-touch-icon">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -52,7 +52,7 @@ body,html {
 #trainers a.active{
   border-left: inset;
   font-weight: 600;
-  color: #black;
+  color: black;
   text-decoration: none; 
   background: transparent; 
 }
@@ -242,9 +242,35 @@ footer #social i:hover{
             </div>
         </div>
     </nav>
-    <div class="alert {{clss}}">
-      <p style="text-align: center">{{ notification }}</p> 
-    </div>
+    {% comment %} <div class="alert {{clss}}">
+       <p style="text-align: center">{{ notification }}</p>  
+
+    </div> {% endcomment %}
+    {% if notification %}
+
+    <script>swal({
+        title: "Oops!",
+        text: "Incorrect Email or Password!",
+        icon: "error",
+        buttons: ["Try again", "Forgot Password?"],
+        dangerMode: false,
+      })
+      .then((forgot_password) => {
+        if (forgot_password) {
+            $.ajax({
+                    url: "{% url 'forgotPassword' uemail %}",
+                    type:"GET",
+                    success: function (data) {
+                    swal("OTP sent!", 'OTP is sent to your email', "success");
+                    $("#forgotPasswordModal").modal();
+                     }     
+                  })
+        }
+        else {
+          $("#exampleModal").modal();
+        }  
+      });</script>
+  {% endif %}
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
   <div class="modal-dialog">
@@ -271,15 +297,120 @@ footer #social i:hover{
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
-                <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/hpme">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
+           
+          <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/home">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
             </div>
-            <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="sign in">
+            <div class="row">
+              <div class='col-md-3'>
+            <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="Sign in">
+             </div>
+             <div class='col-md-6'>
+             {% if uemail %}
+                <a class="btn btn-primary rounded text-white " id="otp" data-toggle="modal" data-target="#forgotPasswordModal" style="font-size: 12px" >Forgot Password?</a>
+              {% endif %}
+              </div>
+            </div>
         </form>
+         
       </div>
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
+{% if uemail %}
+
+    <script>
+        $("#otp").click(function() {
+                              $.ajax({
+                                  url: "{% url 'forgotPassword' uemail %}",
+                                  type:"GET",
+                                  success: function (data) {
+                                       swal("OTP sent!", 'OTP is sent to your email', "success");
+                                      }     
+                              })
+        })  
+                             
+    </script>
+        {% endif %}
+
+
+
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-size: 13px;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel"><strong>Password Recovery</strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              {% if uemail %}
+            <form style="padding-right: 80px; padding-left: 80px;" method='POST' action="{% url 'forgotPassword' uemail %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <p>OTP has been sent to your registered email address!</p>
+                  </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="otp"id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your OTP">
+                </div>
+                
+                <div class="form-group">  
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="newpassword"data-toggle="password" placeholder="New Password" id="password-field">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="confirmpassword"data-toggle="password" placeholder="Confirm Password" id="password-field">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary rounded" style="font-size: 12px" value="Change Password">
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {% if password_recovered %}
+    <h1>{{password_recovered}}</h1>
+    <script>
+      swal('Hurray!', 'Account recovered Successfully! Try to login.', 'success');
+    </script>
+    {% elif invalid_otp %}
+    <script>
+        swal('Oops!', 'Invalid or Expired OTP', 'error');
+      </script>
+      {% elif password_not_same %}
+      <script>
+          swal('Sorry!', 'Passwords must be same!', 'warning');
+        </script>
+        {% elif went_wrong %}
+        <script>
+            swal('Sorry!', 'Something went wrong! Please Try again!', 'warning');
+          </script>
+  {% endif %}
+
+  <!-- end of forgot password modal============== -->
+
+
+
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
@@ -886,6 +1017,7 @@ footer #social i:hover{
 
   <!--<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
   <div id="preloader"></div>-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>
