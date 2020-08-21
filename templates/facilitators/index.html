@@ -246,6 +246,11 @@ footer #social i:hover{
        <p style="text-align: center">{{ notification }}</p>  
 
     </div> {% endcomment %}
+    {% if user is none %}
+    <script>
+    swal('Sorry!','This credential are Not Valid Try to Register Please !','error')
+    </script>
+    {% endif %}
     {% if notification %}
 
     <script>swal({
