@@ -36,6 +36,7 @@ from django.contrib import messages
 from django.contrib.messages import get_messages
 from django.views.generic import CreateView
 from .mixins import AjaxFormMixin
+from django.utils.datastructures import MultiValueDictKeyError
 
 
 #facilitator page
@@ -344,33 +345,35 @@ def facilitator_Profile_page(request, pk):
         return render(request, 'facilitators/Dashboard/profile.html',context)
 
     if request.method == 'POST':
+          
         ourdata=Facilitator.objects.get(Fid=pk)
         #profileimg = request.FILES
         #for i in request.FILES:
         if request.FILES:
             ourdata.profile=request.FILES['profile']
 
-        firstname = request.POST['firstName']
-        lastname = request.POST['lastName']
-        ourdata.name=firstname+" "+lastname
-        ourdata.phone = request.POST['phone']
-        #ourdata.Bio = request.POST['Bio']
-        ourdata.country = request.POST['country']
-        ourdata.state = request.POST['state']
-        ourdata.PAddress = request.POST['addressLine1']
-        ourdata.TAddress = request.POST['addressLine2']
-        ourdata.zipcode = request.POST['zipCode']
+        firstname = request.POST.get('firstName')
+        lastname = request.POST.get('lastName')
+        ourdata.name=str(firstname)+" "+str(lastname)
+        ourdata.phone = request.POST.get('phone')
+        ourdata.country = request.POST.get('country')
+        ourdata.state = request.POST.get('state')
+        ourdata.PAddress = request.POST.get('addressLine1')
+        ourdata.TAddress = request.POST.get('addressLine2')
+        ourdata.zipcode = request.POST.get('zipCode')
+        try:
+            ourdata.Bio = request.POST['bio']
+        except MultiValueDictKeyError:
+            pass
+        
         
         ourdata.save()
         
-        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname,}
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname,'pk':pk}
         return render(request, 'facilitators/Dashboard/profile.html', context)
 
     #context = {'ourdata':ourdata}
     return render(request, 'facilitators/Dashboard/profile.html', context)
-
-        
-        
 
 
 # for handling ajax request for change password form of setting section of profile
@@ -406,6 +409,10 @@ def ChangePassword(request):
         }
     return JsonResponse(data)
 
+
+def aboutfacilitator(request):
+    ourdata = Facilitator.objects.get()
+    return render(request, 'aboutfacilitator.html')
 
 def user_logout(request):
     logout(request)

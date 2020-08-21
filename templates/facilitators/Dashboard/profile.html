@@ -268,21 +268,21 @@
 
                                 <!-- Form Group -->
                                 <div class="row form-group">
-                                    <label class="col-sm-3 col-form-label input-label">BIO</label>
-
+                                    <label class="col-sm-3 col-form-label input-label" for="bio">BIO</label>
                                     <div class="col-sm-9">
                                         <!-- Quill -->
                                         <div class="quill-custom">
+            
                                             <div class="js-quill ql-container ql-snow" style="min-height: 15rem;" data-hs-quill-options="{
-                           &quot;placeholder&quot;: &quot;{{ourdata.Bio}}&quot;,
+                           &quot;placeholder&quot;: &quot;Add your bio......&quot;,
                             &quot;modules&quot;: {
                               &quot;toolbar&quot;: [
-                                [&quot;bold&quot;, &quot;italic&quot;, &quot;underline&quot;, &quot;strike&quot;, &quot;link&quot;, &quot;image&quot;, &quot;blockquote&quot;, &quot;code&quot;, {&quot;list&quot;: &quot;bullet&quot;}]
+                                [&quot;bold&quot;, &quot;italic&quot;, &quot;underline&quot;, &quot;strike&quot;, &quot;link&quot;, &quot;blockquote&quot;, &quot;code&quot;, {&quot;list&quot;: &quot;bullet&quot;}]
                               ]
                             }
                            }">
                                                 <div class="ql-editor" data-gramm="false" contenteditable="true" data-placeholder="Add your bio....">
-                                                    <input type="text" class="col-sm-3 col-form-label input-label" name="Bio" value="{{ourdata.Bio}}">
+                                                    <p id="bio" name="bio">{{ourdata.Bio}}</p>
                                                 </div>
                                                 <div class="ql-clipboard" contenteditable="true" tabindex="-1"></div>
                                                 <div class="ql-tooltip ql-hidden">
@@ -810,8 +810,29 @@
                 var select2 = $.HSCore.components.HSSelect2.init($(this));
             });
 
+            //by Amir
             // initialization of quilljs editor
             var quill = $.HSCore.components.HSQuill.init('.js-quill');
+            /* var text = quill.getText(0, 100);
+            console.log(text) */
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            quill.on('text-change', function(delta, oldDelta, source) {
+                /* console.log(quill.container.firstChild.innerHTML) */
+                var text = quill.getText(0, 500)
+                
+                /* $('#bio').val(quill.container.firstChild.innerHTML); */
+                $.ajax({
+                    type:"POST",
+                    url:"{% url 'profile' pk %}",
+                    headers:{'X-CSRFToken': csrftoken},
+                    data:{'bio': text},
+                    dataType: 'json',
+                    
+                })
+                
+            }); 
+            //endamir
+            
 
             // initialization of go to
             $('.js-go-to').each(function() {
