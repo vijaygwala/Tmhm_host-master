@@ -96,7 +96,7 @@ class CourseVideo(models.Model):
     description=models.TextField(blank=True,null=True)
     session_duration=models.CharField(max_length=100,null=True,blank=True)
     video=models.FileField(upload_to =content_Rfile_name,null=True,blank=True)
-    course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    course=models.ForeignKey(Course, on_delete=models.CASCADE,related_name='course_video')
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):

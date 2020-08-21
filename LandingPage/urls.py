@@ -11,4 +11,5 @@ urlpatterns = [
     path('terms-and-services/', views.termsandservices),
     path('Free/', views.freecontent,name="freecontent"),
     path('explore/courses/', views.exploreCourses,name='Lexplorecourses'),
+    path('course/<int:pk>/', views.CoursePage,name="course"),
 ]
