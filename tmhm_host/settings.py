@@ -70,7 +70,8 @@ INSTALLED_APPS = [
 # By vijay
 # SITE_ID = 1
 # LOGIN_REDIRECT_URL = '/'
-# X_FRAME_OPTIONS='SAMEORIGIN'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 # endvijay
 
 # REST_FRAMEWORK = {
@@ -92,6 +93,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'tmhm_host.urls'
@@ -107,6 +109,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -218,7 +221,7 @@ AUTH_USER_MODEL = 'myauth.CustomUser'
 
 # By Vijay
 #STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 #MEDIA_URL = '/media/'
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
