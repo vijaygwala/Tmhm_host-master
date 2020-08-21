@@ -281,7 +281,7 @@ class facilitator_login(View):
             try:
                 u = get_object_or_404(CustomUser, email=email1)
             except:
-                u=none
+                u=None
                 context={'user':u}
                 return render(request, 'facilitators/index.html', context)
 
