@@ -418,7 +418,7 @@ def ChangePassword(request):
 
 def aboutfacilitator(request):
     ourdata = Facilitator.objects.get()
-    return render(request, 'aboutfacilitator.html')
+    return render(request,'aboutfacilitator.html',{'ourdata':ourdata})
 
 def user_logout(request):
     logout(request)
