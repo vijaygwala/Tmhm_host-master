@@ -74,45 +74,6 @@ class Experience(models.Model):
     TExperience=models.CharField(max_length=1,choices=TEXP)
     facilitator= models.OneToOneField(Applicants,related_name='experience', on_delete=models.CASCADE,null=True)
     
-# @receiver(post_save, sender=Applicants)
-# def create_or_update_user_facilitator(sender, instance, created, **kwargs):
-#     if created:
-#         Experience.objects.create(facilitator=instance)
-#     instance.user.save()
-
-# #this table contain all the categories
-# class Category(models.Model):
-#     cat_id=models.AutoField(primary_key=True)
-#     name=models.CharField(max_length=100,null=False,blank=False)
-#     def __str__(self):
-#         return self.name
-
-# #this relation contains all the subcategories releted to particuler categories
-# class SubCategory(models.Model):
-#     subCat_id=models.AutoField(primary_key=True)
-#     name=models.CharField(max_length=100,null=False,blank=False)
-#     cat_id = models.ForeignKey(Category, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return self.name
-
-# #this relation contains all the courses releted to particuler subcategory
-# class Course(models.Model):
-#     Cid=models.AutoField(primary_key=True)
-#     name=models.CharField(max_length=100,null=False,blank=False)
-#     title=models.CharField(max_length=100,null=False,blank=False)
-#     description=models.TextField(blank=False,null=True)
-#     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return self.name
-
-# #this relation associate a particuler facilitator with particuler course
-# class offer(models.Model):
-#     Fid = models.ForeignKey(Facilitator, on_delete=models.CASCADE)
-#     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return self.name
-
-# #this realtion contains all the quries to the particuler facilitator
 
 class FacilitatorQueries(models.Model):
     STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
@@ -125,25 +86,11 @@ class FacilitatorQueries(models.Model):
 
 
     
-# @receiver(post_save, sender=Applicants)
-# def create_or_update_user_user(sender, instance, created, **kwargs):
-#     if created:
-#         FacilitatorQueries.objects.create(user=instance)
-#     instance.user.save()
-
-# #this relation contains all the answer releted to particuler question
-# class FacilitatorQueriesAnswer(models.Model):
-#     STATUS=(('R','Resolved'),('D','Doubt'))
-#     Aid=models.AutoField(primary_key=True)
-#     Answer=models.TextField(blank=True,null=True)
-#     status=models.CharField(max_length=1,choices=STATUS,null=False,default=None)
-#     Qid = models.ForeignKey(FacilitatorQueries, on_delete=models.CASCADE)
-#     def __str__(self):
-#         return self.Answer
 
 class OTP(models.Model):
     sender = models.CharField(max_length=500)   
     value = models.CharField(max_length=500)
+    
 
     def __str__(self):
         return self.sender

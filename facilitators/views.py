@@ -278,7 +278,13 @@ class facilitator_login(View):
             email1 =  request.POST['email']
             password = request.POST['password']
             # print(email1, password)
-            u = get_object_or_404(CustomUser, email=email1)
+            try:
+                u = get_object_or_404(CustomUser, email=email1)
+            except:
+                u=None
+                context={'user':u}
+                return render(request, 'facilitators/index.html', context)
+
             user = authenticate(request,email=email1, password=password)
             message=None
             try:

@@ -4,6 +4,7 @@ from facilitators.models import *
 from math import ceil
 from django.contrib import messages
 from .forms import *
+from django.views.decorators.clickjacking import xframe_options_exempt
 # Landing  page
 def home(request):
     return render(request,'LandingPage/index.html')
@@ -44,6 +45,16 @@ def signup(request):
 #Landing page about us page
 def aboutus(request):
     return render(request, 'LandingPage/aboutus/aboutus.html')
+#this is course page
+@xframe_options_exempt
+def CoursePage(request,pk):
+    course=Course.objects.get(Cid=pk)
+    course_video=course.course_video.all()[0]
+    facilitator=course.offering.all()[0]
+    month =course.updated.strftime('%b')
+    year=course.updated.strftime('%Y')
+    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year}
+    return render(request, 'LandingPage/course/course.html',context)
 
 #Landing page Contact us page
 def contact(request):

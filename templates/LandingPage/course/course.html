@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 <title>Course Details</title>
@@ -6,19 +7,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Unicat project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="styles/course.css">
-<link rel="stylesheet" type="text/css" href="styles/course_responsive.css">
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.css'%}'>
+<link href='{% static 'LandingPage/plugins/font-awesome-4.7.0/css/font-awesome.min.css'%}' rel="stylesheet" type="text/css">
+<link href='{% static 'LandingPage/plugins/colorbox/colorbox.css'%}' rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.theme.default.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/animate.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/course.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/course_responsive.css'%}'>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
-        <link rel="stylesheet" href="LandingPage/css/owl.carousel.css">
-        <link rel="stylesheet" href="LandingPage/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.carousel.css'%}'>
+        <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.theme.default.min.css'%}'>
         <style>
     body,html {
         margin: 0;
@@ -200,7 +201,7 @@
 <body>
  
     <figure class="figure" style="margin: 11px;">
-        <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
+        <img src='{% static 'LandingPage/LandingPage/img/logotiny.png'%}' class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
         <figcaption class="figure-caption text-center">LearnOpad</figcaption>
     </figure>
 
@@ -216,10 +217,10 @@
                     <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
+                    <a class="nav-link" href=''>Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampl">
+                    <a class="nav-link" href='' data-toggle="modal" data-target="#exampl">
                     Free Content
                     </a>
                 </li>
@@ -256,13 +257,13 @@
 				<div class="col-lg-8">
 					
 					<div class="" style="color: white">
-                        <div class="course_title" style="margin-top: 30px">Software Training</div>
-                        <h5 style="color: white">Build 20 mini frontend projects from scratch with HTML5, CSS & JavaScript</h5>
+                        <div class="course_title" style="margin-top: 30px">{{course.title}}</div>
+                        <h5 style="color: white">{{course.description}}</h5>
                         <h5 style="color: white">(No frameworks or libraries)</h5>
                         <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button>4.5
                         <span class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></span>(2,951 ratings) 17,616 students
-                        <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">Priya Dikshit</a></h6>
-                        <h6 style="color: white;margin-top: 10px"><i class="fa fa-cog" aria-hidden="true"></i> Last updated 1/2020 </h6>
+                        <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">{{facilitator.name}}</a></h6>
+                        <h6 style="color: white;margin-top: 10px"><i class="fa fa-cog" aria-hidden="true"></i> Last updated {{course.updated.day}} {{month}} {{year}}  </h6>
                         <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> English </h6>
                         <div style="margin-top: 10px">
                         <button type="button" class="btn btn-outline-info" style="margin-right: 30px">Wishlist <i class="fa fa-heart" aria-hidden="true"></i></button>
@@ -291,7 +292,7 @@
 							<!-- Course Info Item -->
 							<div class="course_info_item">
 								<div class="course_info_title">Teacher:</div>
-								<div class="course_info_text"><a href="#">Jacke Masito</a></div>
+								<div class="course_info_text"><a href="#">{{facilitator.name}}</a></div>
 							</div>
 
 							<!-- Course Info Item -->
@@ -303,13 +304,13 @@
 							<!-- Course Info Item -->
 							<div class="course_info_item">
 								<div class="course_info_title">Categories:</div>
-								<div class="course_info_text"><a href="#">Languages</a></div>
+								<div class="course_info_text"><a href="#">{{course.subCat_id.cat_id.name}}</a></div>
 							</div>
 
 						</div>
 
 						<!-- Course Image -->
-						<div class="course_image"><img src="images/course_image.jpg" alt=""></div>
+						<div class="course_image"><img src='{% static 'LandingPage/images/course_image.jpg'%}' alt=""></div>
 
 						<!-- Course Tabs -->
 						<div class="course_tabs_container">
@@ -322,7 +323,7 @@
 
 								<!-- Description -->
 								<div class="tab_panel active">
-									<div class="tab_panel_title">Software Training</div>
+									<div class="tab_panel_title">{{course.name}}</div>
 									<div class="tab_panel_content">
 										<div class="tab_panel_text">
 											<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo. Nullam ac urna eu felis dapibus condimentum sit amet a augue. Sed non neque elit. Sed ut imperdiet nisi. Proin condimentum fermentum nunc. Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent per conubia nostra, per inceptos himenaeos.</p>
@@ -395,7 +396,7 @@
 								<!-- Curriculum -->
 								<div class="tab_panel tab_panel_2">
 									<div class="tab_panel_content">
-										<div class="tab_panel_title">Software Training</div>
+										<div class="tab_panel_title">{{course.name}}</div>
 										<div class="tab_panel_content">
 											<div class="tab_panel_text">
 												<p>Lorem Ipsn gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auci elit consequat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</p>
@@ -513,10 +514,10 @@
 										<ul class="comments_list">
 											<li>
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-													<div class="comment_image"><div><img src="images/comment_1.jpg" alt=""></div></div>
+													<div class="comment_image"><div><img src='{% static 'LandingPage/images/comment_1.jpg'%}' alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
-															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
+															<div class="comment_author"><a href="#">{{facilitator.name}}</a></div>
 															<div class="comment_rating"><div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div></div>
 															<div class="comment_time ml-auto">1 day ago</div>
 														</div>
@@ -532,7 +533,7 @@
 												<ul>
 													<li>
 														<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-															<div class="comment_image"><div><img src="images/comment_2.jpg" alt=""></div></div>
+															<div class="comment_image"><div><img src='{% static 'LandingPage/images/comment_2.jpg'%}' alt=""></div></div>
 															<div class="comment_content">
 																<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
 																	<div class="comment_author"><a href="#">John Tyler</a></div>
@@ -553,7 +554,7 @@
 											</li>
 											<li>
 												<div class="comment_item d-flex flex-row align-items-start jutify-content-start">
-													<div class="comment_image"><div><img src="images/comment_3.jpg" alt=""></div></div>
+													<div class="comment_image"><div><img src='{% static 'LandingPage/images/comment_3.jpg'%}' alt=""></div></div>
 													<div class="comment_content">
 														<div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
 															<div class="comment_author"><a href="#">Milley Cyrus</a></div>
@@ -590,11 +591,14 @@
                         <div align="center">
                         <div class="card" style="width: 18rem;">
                             <div style="">
-                          <img src="images/office.jpeg" class="card-img-top" alt="...">
-                                <div class="centered" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;background-color: rgba(0,0,0,0.4);width: 100%;height: 100%"></div>
+                          {% comment %} <img src='{% static 'LandingPage/images/office.jpeg'%}' class="card-img-top" alt="..."> {% endcomment %}
+                          <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" allowtransparency="true" src="https://www.youtube.com/watch?v=SGNxnvqv16Y" allowfullscreen></iframe>
+                            </div>
+                                {% comment %} <div class="centered" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;background-color: rgba(0,0,0,0.4);width: 100%;height: 100%"></div>
                                 <div class="centered" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: white;"><center><a href="#"><i class="fa fa-play-circle" aria-hidden="true" style="font-size: 60px;color: #14bdee;"></i></a></center></div>
                                 
-                                <div style="position: absolute;top: 75%;left: 50%;transform: translate(-50%, -50%);color: white;"><h5 style="color: white;width: 200px"><center>Course Preview</center></h5></div></div>
+                                <div style="position: absolute;top: 75%;left: 50%;transform: translate(-50%, -50%);color: white;"><h5 style="color: white;width: 200px"><center>Course Preview</center></h5></div></div> {% endcomment %}
                             
                           <div class="card-body" style="margin-bottom:-30px">
                             <h5 class="card-title">$180 <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">$500 </span><span style="font-size: 15px;" > 30% Off </span> </h5>
@@ -644,7 +648,7 @@
 							<div class="sidebar_section_title">Teacher</div>
 							<div class="sidebar_teacher">
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
-									<div class="teacher_image"><img src="images/teacher.jpg" alt=""></div>
+									<div class="teacher_image"><img src='{% static 'LandingPage/images/teacher.jpg'%}' alt=""></div>
 									<div class="teacher_title">
 										<div class="teacher_name"><a href="#">Jacke Masito</a></div>
 										<div class="teacher_position">Marketing & Management</div>
@@ -680,7 +684,7 @@
 
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img src="images/latest_1.jpg" alt=""></div></div>
+									<div class="latest_image"><div><img src='{% static 'LandingPage/images/latest_1.jpg'%}' alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">How to Design a Logo a Beginners Course</a></div>
 										<div class="latest_price">Free</div>
@@ -689,7 +693,7 @@
 
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img src="images/latest_2.jpg" alt=""></div></div>
+									<div class="latest_image"><div><img src='{% static 'LandingPage/images/latest_2.jpg'%}' alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">Photography for Beginners Masterclass</a></div>
 										<div class="latest_price">$170</div>
@@ -698,7 +702,7 @@
 
 								<!-- Latest Course -->
 								<div class="latest d-flex flex-row align-items-start justify-content-start">
-									<div class="latest_image"><div><img src="images/latest_3.jpg" alt=""></div></div>
+									<div class="latest_image"><div><img src='{% static 'LandingPage/images/latest_3.jpg'%}' alt=""></div></div>
 									<div class="latest_content">
 										<div class="latest_title"><a href="course.html">The Secrets of Body Language</a></div>
 										<div class="latest_price">$220</div>
@@ -722,7 +726,7 @@
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
                 <figure class="figure" style="margin: 11px;">
-                    <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 60px; height: 40px;">
+                    <img src='{% static 'LandingPage/LandingPage/img/logotiny.png'%}' class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 60px; height: 40px;">
                     <figcaption class="figure-caption text-center">LearnOpad</figcaption>
                 </figure>
             </div>
@@ -872,17 +876,17 @@
                     } 
             }
         }
-    </script><script src="LandingPage/js/owl.carousel.js"></script>
+    </script><script src='{% static 'LandingPage/LandingPage/js/owl.carousel.js'%}'></script>
 
 
 	
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
-<script src="js/course.js"></script>
+<script src='{% static 'LandingPage/js/jquery-3.2.1.min.js'%}'></script>
+<script src='{% static 'LandingPage/styles/bootstrap4/popper.js'%}'></script>
+<script src='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.js'%}'></script>
+<script src='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.js'%}'></script>
+<script src='{% static 'LandingPage/plugins/easing/easing.js'%}'></script>
+<script src='{% static 'LandingPage/plugins/parallax-js-master/parallax.min.js'%}'></script>
+<script src='{% static 'LandingPage/plugins/colorbox/jquery.colorbox-min.js'%}'></script>
+<script src='{% static 'LandingPage/js/course.js'%}'></script>
 </body>
 </html>
