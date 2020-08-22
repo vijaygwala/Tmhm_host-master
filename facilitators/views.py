@@ -411,8 +411,14 @@ def ChangePassword(request):
 
 
 def aboutfacilitator(request):
-    ourdata = Facilitator.objects.get()
-    return render(request, 'aboutfacilitator.html')
+    appli=Applicants.objects.get(name='rahul yadav')
+    faci=Facilitator.objects.get(user=appli)
+    web = Experience.objects.get(facilitator=appli)
+    context={
+        'faci':faci,
+        'web':web,
+    }
+    return render(request, 'aboutfacilitator.html',context)
 
 def user_logout(request):
     logout(request)
