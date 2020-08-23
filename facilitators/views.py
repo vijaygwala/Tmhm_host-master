@@ -416,7 +416,7 @@ def ChangePassword(request):
     return JsonResponse(data)
 
 
-def aboutfacilitator(request):
+def aboutfacilitator(request,pk):
     course=Course.objects.get(Cid=2)
     faci=course.offering.all()[0]
     web = faci.user.experience

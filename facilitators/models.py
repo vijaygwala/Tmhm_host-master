@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from ckeditor.fields import RichTextField
-from LandingPage import models as landing
+
 
 #this relation contains all the applicants who is registerd from facilitator registration form
 class Applicants(models.Model):
@@ -91,6 +91,7 @@ class FacilitatorQueries(models.Model):
 class OTP(models.Model):
     sender = models.CharField(max_length=500)   
     value = models.CharField(max_length=500)
+    #txt=models.OneToOneField('landing.Course',on_delete=models.CASCADE)
     
     
 
