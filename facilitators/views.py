@@ -420,10 +420,22 @@ def aboutfacilitator(request):
     appli=Applicants.objects.get(name='rahul yadav')
     faci=Facilitator.objects.get(user=appli)
     web = Experience.objects.get(facilitator=appli)
+    qwerty = {
+        'A': '3-6 yrs',
+        'B': '6-10 yrs',
+        'C': '10+ yrs',
+    }
+    texp = qwerty[web.TExperience]
+    rexp = qwerty[web.RExperience]
+
     context={
         'faci':faci,
         'web':web,
+        'appli':appli,
+        'texp':texp,
+        'rexp':rexp
     }
+    
     return render(request, 'aboutfacilitator.html',context)
 
 def user_logout(request):

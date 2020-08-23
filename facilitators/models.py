@@ -73,7 +73,7 @@ class Experience(models.Model):
     RExperience=models.CharField(max_length=1,choices=REXP)
     TExperience=models.CharField(max_length=1,choices=TEXP)
     facilitator= models.OneToOneField(Applicants,related_name='experience', on_delete=models.CASCADE,null=True)
-    
+     
 
 class FacilitatorQueries(models.Model):
     STATUS=(('Resolved','Resolved'),('Doubt','Doubt'))
