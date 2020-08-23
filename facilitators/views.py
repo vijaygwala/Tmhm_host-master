@@ -420,6 +420,7 @@ def aboutfacilitator(request):
     appli=Applicants.objects.get(name='rahul yadav')
     faci=Facilitator.objects.get(user=appli)
     web = Experience.objects.get(facilitator=appli)
+    #asd = offer.objects.get(Fid=faci.Fid)
     qwerty = {
         'A': '3-6 yrs',
         'B': '6-10 yrs',
