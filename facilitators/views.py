@@ -417,14 +417,14 @@ def ChangePassword(request):
 
 
 def aboutfacilitator(request):
-    appli=Applicants.objects.get(name='rahul yadav')
-    faci=Facilitator.objects.get(user=appli)
-    web = Experience.objects.get(facilitator=appli)
+    course=Course.objects.get(Cid=2)
+    faci=course.offering.all()[0]
+    web = faci.user.experience
     context={
         'faci':faci,
         'web':web,
     }
-    return render(request, 'aboutfacilitator.html',context)
+    return render(request, 'LandingPage/course/aboutus/facilitator_aboutus.html',context)
 
 def user_logout(request):
     logout(request)
