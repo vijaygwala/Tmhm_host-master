@@ -86,7 +86,11 @@
 
             <div class="section-title">
                 <strong><h1>About Me</h1></strong>
-                <h5 style="color: rgb(61, 60, 60);">{{faci.Bio}}</h5>
+                {%if faci.Bio %}
+                    <h5 style="color: rgb(61, 60, 60);">{{faci.Bio}}</h5>
+                {% else %}
+                    <h5 style="color: rgb(61, 60, 60);">Hi, some of my personal dossier is present below, feel free to contact me anytime.</h5>
+                {% endif %}
                 <br>
             </div>
 

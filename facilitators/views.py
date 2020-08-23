@@ -417,7 +417,7 @@ def ChangePassword(request):
 
 
 def aboutfacilitator(request):
-    appli=Applicants.objects.get(name='rahul yadav')
+    appli=Applicants.objects.get(name='vijay gwala')
     faci=Facilitator.objects.get(user=appli)
     web = Experience.objects.get(facilitator=appli)
     #asd = offer.objects.get(Fid=faci.Fid)
