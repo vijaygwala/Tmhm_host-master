@@ -419,7 +419,7 @@ def ChangePassword(request):
 
 def aboutfacilitator(request, pk):
     faci=Facilitator.objects.get(Fid=pk)
-    appli=Applicants.objects.get(name=faci.name)
+    appli=Applicants.objects.get(user=faci.user.user)
     web = Experience.objects.get(facilitator=appli)
     qwerty = {
         'A': '3-6 yrs',
