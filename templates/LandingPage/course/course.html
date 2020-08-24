@@ -649,7 +649,7 @@
 								<div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
 									<div class="teacher_image"><img src='{% static 'LandingPage/images/teacher.jpg'%}' alt=""></div>
 									<div class="teacher_title">
-										<div class="teacher_name"><a href="#">{{facilitator.name}}</a></div>
+										<div class="teacher_name"><a href="{% url 'aboutfacilitator' facilitator.Fid %}">{{facilitator.name}}</a></div>
 										<div class="teacher_position">{{facilitator.user.intrest}}</div>
 									</div>
 								</div>
