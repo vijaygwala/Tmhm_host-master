@@ -1,5 +1,5 @@
-from django.shortcuts import render
-
+from django.shortcuts import render,redirect
+from .models import *
 # Create your views here.
 
 #landing page's learners page
@@ -28,7 +28,15 @@ def settings(request):
     return render(request,'learners/dashboard/settings.html')
 
 def support(request):
-    return render(request,'learners/dashboard/Support.html')
+    learner=Learners.objects.get(Lid=1)
+    if request.method=='POST':
+        query=request.POST['Queries']
+        LQueries.objects.create(Lid=learner,query=query)
+        return redirect('learner_support')
+    context={
+        'data':LQueries.objects.filter(Lid=learner).order_by('query')
+    }
+    return render(request,'learners/dashboard/Support.html',context)
 
 def tte(request):
     return render(request,'learners/dashboard/tte.html')
