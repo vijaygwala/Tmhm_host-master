@@ -104,7 +104,9 @@
                                 <li><i class="icofont-rounded-right"></i> <strong>Name:</strong> {{appli.name}}</li>
                                 <li><i class="icofont-rounded-right"></i> <strong>Relative Experience:</strong> {{rexp}}</li>
                                 <li><i class="icofont-rounded-right"></i> <strong>Contact:</strong> {{appli.user.email}}</li>
-                                <li><i class="icofont-rounded-right"></i> <strong>Location:</strong> {{faci.state}},{{faci.country}}</li>
+                                {% if faci.state or faci.country %}
+                                    <li><i class="icofont-rounded-right"></i> <strong>Location:</strong> {{faci.state}},{{faci.country}}</li>
+                                {% endif %}
                             </ul>
                         </div>
                         <div class="col-lg-6">
