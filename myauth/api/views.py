@@ -56,16 +56,20 @@ class FacilitatorRegisterAPI(APIView):
         print(course)
         user=None
         profile=None
+        try:
+            if form.is_valid(raise_exception=True):
+                user=form.save()
+                user.role=2
+                user.save()
+                applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
+                applicant.save()
+                exp_form["facilitator"]=applicant.Aid
+                facilitator_query['user']=applicant.Aid
         
-        if form.is_valid(raise_exception=True):
-            user=form.save()
-            user.role=2
-            user.save()
-            applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
-            applicant.save()
-            exp_form["facilitator"]=applicant.Aid
-            facilitator_query['user']=applicant.Aid
-        
+        except:
+            messages.error(request, ('Email is already exist !'))
+            return redirect('facilitator-register')
+           
         
         if expform.is_valid(raise_exception=True):
             expform.save()

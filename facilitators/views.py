@@ -416,19 +416,11 @@ def ChangePassword(request):
     return JsonResponse(data)
 
 
-def aboutfacilitator(request):
-    appli=Applicants.objects.get(name='rahul yadav')
-    faci=Facilitator.objects.get(user=appli)
-    web = Experience.objects.get(facilitator=appli)
-    #asd = offer.objects.get(Fid=faci.Fid)
-    qwerty = {
-        'A': '3-6 yrs',
-        'B': '6-10 yrs',
-        'C': '10+ yrs',
-    }
-    texp = qwerty[web.TExperience]
-    rexp = qwerty[web.RExperience]
 
+def aboutfacilitator(request,pk):
+    course=Course.objects.get(Cid=2)
+    faci=course.offering.all()[0]
+    web = faci.user.experience
     context={
         'faci':faci,
         'web':web,
@@ -436,8 +428,7 @@ def aboutfacilitator(request):
         'texp':texp,
         'rexp':rexp
     }
-    
-    return render(request, 'aboutfacilitator.html',context)
+    return render(request, 'LandingPage/course/aboutus/facilitator_aboutus.html',context)
 
 def user_logout(request):
     logout(request)
