@@ -9,7 +9,7 @@ class Learners(models.Model):
     Lid=models.AutoField(primary_key=True)
     name=models.CharField(max_length=100,null=True,blank=True)
     DOB=models.DateField(blank=True,null=True)
-    phone=models.CharField(max_length=13,blank=False)
+    phone=models.CharField(max_length=13,null=True,blank=True)
     country=models.TextField(blank=True, null=True)
     state=models.TextField(blank=True, null=True)
     PAddress=models.TextField(blank=True,null=True)
