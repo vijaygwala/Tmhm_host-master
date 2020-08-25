@@ -37,6 +37,7 @@ from django.contrib.messages import get_messages
 from django.views.generic import CreateView
 from .mixins import AjaxFormMixin
 from django.utils.datastructures import MultiValueDictKeyError
+from myauth.decoraters import *
 
 
 #facilitator page
@@ -112,6 +113,7 @@ class RegisterLoginView(AjaxFormMixin,View):
 
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def facilitator_Dashboard_Landing_page(request):
    #by saurabh
     print(request.user)
@@ -174,11 +176,13 @@ def facilitator_Dashboard_Landing_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def facilitator_Dashboard_myearnings_page(request):
     return render(request, 'facilitators/Dashboard/my_earnings.html')
 
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def facilitator_Dashboard_explore_courses_page(request):   
     # r=requests.get('http://127.0.0.1:8000/facilitator/api/dashboard/explore')
     # data=json.loads(r.text)
@@ -214,6 +218,7 @@ def facilitator_Dashboard_explore_courses_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def facilitator_Dashboard_support_page(request):
     appli=Applicants.objects.get(user=request.user)
     faci=Facilitator.objects.get(user=appli)
@@ -230,6 +235,7 @@ def facilitator_Dashboard_support_page(request):
 
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def facilitator_Dashboard_create_course_page(request):
     audience_list=Audience.objects.values('audience')
     category=Category.objects.all()
@@ -242,6 +248,7 @@ def facilitator_Dashboard_create_course_page(request):
     return render(request, 'facilitators/Dashboard/create_course.html',context)
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def facilitator_Dashboard_settings_page(request):
     return render(request, 'facilitators/Dashboard/settings.html')
 
@@ -338,6 +345,7 @@ class facilitator_login(View):
 
 
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 @api_view(['GET', 'POST'])
 def facilitator_Profile_page(request, pk):
 
@@ -384,6 +392,7 @@ def facilitator_Profile_page(request, pk):
 
 # for handling ajax request for change password form of setting section of profile
 @login_required(login_url='/facilitator/login/')
+@allowed_users(['Facilitators'])
 def ChangePassword(request):
     suc_res = ''
     err_res = ''
@@ -446,6 +455,7 @@ def user_logout(request):
 
 
 #forgot password view ------------------------------- By Saurabh Gujjar
+@allowed_users(['Facilitators','Visiters','Learners'])
 def forgot_password(request, pk=None):
     if request.method == 'GET':
         print(pk)
