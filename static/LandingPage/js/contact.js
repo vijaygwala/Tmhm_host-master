@@ -7,7 +7,7 @@
 1. Vars and Inits
 2. Set Header
 3. Init Menu
-4. Init Input
+4. Init Header Search
 5. Init Google Map
 
 
@@ -24,9 +24,8 @@ $(document).ready(function()
 	*/
 
 	var header = $('.header');
-	var headerSocial = $('.header_social');
-	var menu = $('.menu');
 	var menuActive = false;
+	var menu = $('.menu');
 	var burger = $('.hamburger');
 	var map;
 
@@ -35,11 +34,6 @@ $(document).ready(function()
 	$(window).on('resize', function()
 	{
 		setHeader();
-
-		setTimeout(function()
-		{
-			$(window).trigger('resize.px.parallax');
-		}, 375);
 	});
 
 	$(document).on('scroll', function()
@@ -48,7 +42,7 @@ $(document).ready(function()
 	});
 
 	initMenu();
-	initInput();
+	initHeaderSearch();
 	initGoogleMap();
 
 	/* 
@@ -59,21 +53,19 @@ $(document).ready(function()
 
 	function setHeader()
 	{
-		if($(window).scrollTop() > 127)
+		if($(window).scrollTop() > 100)
 		{
 			header.addClass('scrolled');
-			headerSocial.addClass('scrolled');
 		}
 		else
 		{
 			header.removeClass('scrolled');
-			headerSocial.removeClass('scrolled');
 		}
 	}
 
 	/* 
 
-	3. Set Menu
+	3. Init Menu
 
 	*/
 
@@ -93,20 +85,21 @@ $(document).ready(function()
 					else
 					{
 						openMenu();
+
+						$(document).one('click', function cls(e)
+						{
+							if($(e.target).hasClass('menu_mm'))
+							{
+								$(document).one('click', cls);
+							}
+							else
+							{
+								closeMenu();
+							}
+						});
 					}
 				});
 			}
-		}
-		if($('.menu_close').length)
-		{
-			var close = $('.menu_close');
-			close.on('click', function()
-			{
-				if(menuActive)
-				{
-					closeMenu();
-				}
-			});
 		}
 	}
 
@@ -124,47 +117,25 @@ $(document).ready(function()
 
 	/* 
 
-	4. Init Input
+	4. Init Header Search
 
 	*/
 
-	function initInput()
+	function initHeaderSearch()
 	{
-		if($('.inpt').length)
+		if($('.search_button').length)
 		{
-			var inpt = $('.inpt');
-			inpt.each(function()
+			$('.search_button').on('click', function()
 			{
-				var ele = $(this);
-				var border = ele.next();
-
-				ele.focus(function()
+				if($('.header_search_container').length)
 				{
-					border.css({'visibility': "visible", 'opacity': "1"});
-				});
-				ele.blur(function()
-				{
-					border.css({'visibility': "hidden", 'opacity': "0"});
-				});
-
-				ele.on("mouseenter", function()
-				{
-					border.css({'visibility': "visible", 'opacity': "1"});
-				});
-
-				ele.on("mouseleave", function()
-				{
-					if(!ele.is(":focus"))
-					{
-						border.css({'visibility': "hidden", 'opacity': "0"});
-					}
-				});
-				
+					$('.header_search_container').toggleClass('active');
+				}
 			});
 		}
 	}
 
-	 /* 
+	/* 
 
 	5. Init Google Map
 
@@ -172,11 +143,11 @@ $(document).ready(function()
 
 	function initGoogleMap()
 	{
-		var myLatlng = new google.maps.LatLng(34.063685,-118.272936);
+		var myLatlng = new google.maps.LatLng(38.877434, -77.094214);
     	var mapOptions = 
     	{
     		center: myLatlng,
-	       	zoom: 14,
+	       	zoom: 17,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			draggable: true,
 			scrollwheel: false,
@@ -193,11 +164,170 @@ $(document).ready(function()
 			styles:
 			[
 			  {
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#f5f5f5"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.icon",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#717171"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "administrative.land_parcel",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#bdbdbd"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#eeeeee"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#e5e5e5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "poi.park",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#ffffff"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.arterial",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#757575"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.highway",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#dadada"
+			      }
+			    ]
+			  },
+			  {
 			    "featureType": "road.highway",
 			    "elementType": "geometry.fill",
 			    "stylers": [
 			      {
-			        "color": "#ffeba1"
+			        "color": "#ffffff"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.highway",
+			    "elementType": "geometry.stroke",
+			    "stylers": [
+			      {
+			        "visibility": "off"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.highway",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#616161"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "road.local",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "transit.line",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#e5e5e5"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "transit.station",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#eeeeee"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "geometry",
+			    "stylers": [
+			      {
+			        "color": "#c9c9c9"
+			      }
+			    ]
+			  },
+			  {
+			    "featureType": "water",
+			    "elementType": "labels.text.fill",
+			    "stylers": [
+			      {
+			        "color": "#9e9e9e"
 			      }
 			    ]
 			  }
@@ -207,6 +337,31 @@ $(document).ready(function()
     	// Initialize a map with options
     	map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+    	var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<div id="bodyContent">'+
+            '481-7473 Cum Rd. Yorba Linda South Carolina'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+    	// Use an image for a marker
+		var image = 'images/marker.png';
+		var marker = new google.maps.Marker(
+		{
+			position: new google.maps.LatLng(38.877434, -77.094214),
+			map: map,
+			icon: image
+		});
+
+		marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+   
 		// Re-center map after window resize
 		google.maps.event.addDomListener(window, 'resize', function()
 		{
@@ -217,5 +372,5 @@ $(document).ready(function()
 			}, 1400);
 		});
 	}
-	
+
 });

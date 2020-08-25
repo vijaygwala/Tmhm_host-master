@@ -7,8 +7,11 @@
 1. Vars and Inits
 2. Set Header
 3. Init Menu
-4. Init Input
-5. Init Milestones
+4. Init Header Search
+5. Init Accordions
+6. Init Video
+7. Initialize Milestones
+8. Init Partners Slider
 
 
 ******************************/
@@ -24,9 +27,8 @@ $(document).ready(function()
 	*/
 
 	var header = $('.header');
-	var headerSocial = $('.header_social');
-	var menu = $('.menu');
 	var menuActive = false;
+	var menu = $('.menu');
 	var burger = $('.hamburger');
 	var ctrl = new ScrollMagic.Controller();
 
@@ -35,11 +37,6 @@ $(document).ready(function()
 	$(window).on('resize', function()
 	{
 		setHeader();
-
-		setTimeout(function()
-		{
-			$(window).trigger('resize.px.parallax');
-		}, 375);
 	});
 
 	$(document).on('scroll', function()
@@ -48,8 +45,11 @@ $(document).ready(function()
 	});
 
 	initMenu();
-	initInput();
+	initHeaderSearch();
+	initAccordions();
+	initVideo();
 	initMilestones();
+	initPartnersSlider();
 
 	/* 
 
@@ -59,21 +59,19 @@ $(document).ready(function()
 
 	function setHeader()
 	{
-		if($(window).scrollTop() > 127)
+		if($(window).scrollTop() > 100)
 		{
 			header.addClass('scrolled');
-			headerSocial.addClass('scrolled');
 		}
 		else
 		{
 			header.removeClass('scrolled');
-			headerSocial.removeClass('scrolled');
 		}
 	}
 
 	/* 
 
-	3. Set Menu
+	3. Init Menu
 
 	*/
 
@@ -93,20 +91,21 @@ $(document).ready(function()
 					else
 					{
 						openMenu();
+
+						$(document).one('click', function cls(e)
+						{
+							if($(e.target).hasClass('menu_mm'))
+							{
+								$(document).one('click', cls);
+							}
+							else
+							{
+								closeMenu();
+							}
+						});
 					}
 				});
 			}
-		}
-		if($('.menu_close').length)
-		{
-			var close = $('.menu_close');
-			close.on('click', function()
-			{
-				if(menuActive)
-				{
-					closeMenu();
-				}
-			});
 		}
 	}
 
@@ -124,49 +123,115 @@ $(document).ready(function()
 
 	/* 
 
-	4. Init Input
+	4. Init Header Search
 
 	*/
 
-	function initInput()
+	function initHeaderSearch()
 	{
-		if($('.newsletter_input').length)
+		if($('.search_button').length)
 		{
-			var inpt = $('.newsletter_input');
-			inpt.each(function()
+			$('.search_button').on('click', function()
 			{
-				var ele = $(this);
-				var border = ele.next();
-
-				ele.focus(function()
+				if($('.header_search_container').length)
 				{
-					border.css({'visibility': "visible", 'opacity': "1"});
-				});
-				ele.blur(function()
-				{
-					border.css({'visibility': "hidden", 'opacity': "0"});
-				});
-
-				ele.on("mouseenter", function()
-				{
-					border.css({'visibility': "visible", 'opacity': "1"});
-				});
-
-				ele.on("mouseleave", function()
-				{
-					if(!ele.is(":focus"))
-					{
-						border.css({'visibility': "hidden", 'opacity': "0"});
-					}
-				});
-				
+					$('.header_search_container').toggleClass('active');
+				}
 			});
 		}
 	}
 
 	/* 
 
-	5. Initialize Milestones
+	6. Init Accordions
+
+	*/
+
+	function initAccordions()
+	{
+		if($('.accordion').length)
+		{
+			var accs = $('.accordion');
+
+			accs.each(function()
+			{
+				var acc = $(this);
+
+				if(acc.hasClass('active'))
+				{
+					var panel = $(acc.next());
+					var panelH = panel.prop('scrollHeight') + "px";
+					
+					if(panel.css('max-height') == "0px")
+					{
+						panel.css('max-height', panel.prop('scrollHeight') + "px");
+					}
+					else
+					{
+						panel.css('max-height', "0px");
+					}
+					$(window).trigger('resize.px.parallax');
+				}
+
+				acc.on('click', function()
+				{
+					if(acc.hasClass('active'))
+					{
+						acc.removeClass('active');
+						var panel = $(acc.next());
+						var panelH = panel.prop('scrollHeight') + "px";
+						
+						if(panel.css('max-height') == "0px")
+						{
+							panel.css('max-height', panel.prop('scrollHeight') + "px");
+						}
+						else
+						{
+							panel.css('max-height', "0px");
+						}
+						$(window).trigger('resize.px.parallax');
+					}
+					else
+					{
+						acc.addClass('active');
+						var panel = $(acc.next());
+						var panelH = panel.prop('scrollHeight') + "px";
+						
+						if(panel.css('max-height') == "0px")
+						{
+							panel.css('max-height', panel.prop('scrollHeight') + "px");
+						}
+						else
+						{
+							panel.css('max-height', "0px");
+						}
+						$(window).trigger('resize.px.parallax');
+					}
+				});
+			});
+		}
+	}
+
+	/* 
+
+	6. Init Video
+
+	*/
+
+	function initVideo()
+	{
+		$(".vimeo").colorbox(
+		{
+			iframe:true,
+			innerWidth:640,
+			innerHeight:409,
+			maxWidth: '90%'
+		});
+	}
+
+	/* 
+
+	7. Initialize Milestones
 
 	*/
 
@@ -183,7 +248,7 @@ $(document).ready(function()
 	    		var eleValue = ele.text();
 
 	    		/* Use data-sign-before and data-sign-after to add signs
-	    		infront or behind the counter number (+, k, etc) */
+	    		infront or behind the counter number */
 	    		var signBefore = "";
 	    		var signAfter = "";
 
@@ -220,4 +285,50 @@ $(document).ready(function()
 	    	});
 		}
 	}
+
+	/* 
+
+	8. Init Partners Slider
+
+	*/
+
+	function initPartnersSlider()
+	{
+		if($('.partners_slider').length)
+		{
+			var partnersSlider = $('.partners_slider');
+			partnersSlider.owlCarousel(
+			{
+				loop:true,
+				autoplay:true,
+				smartSpeed:1200,
+				nav:false,
+				dots:false,
+				responsive:
+				{
+					0:
+					{
+						items:1
+					},
+					480:
+					{
+						items:2
+					},
+					720:
+					{
+						items:3
+					},
+					991:
+					{
+						items:4
+					},
+					1199:
+					{
+						items:6
+					}
+				}
+			});
+		}
+	}
+
 });
