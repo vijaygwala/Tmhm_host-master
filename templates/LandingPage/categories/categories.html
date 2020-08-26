@@ -499,6 +499,7 @@ Categories
 {% endblock content %}
 <!----------------------------- -->
 
+{% block javascript %}
     <script>
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
@@ -537,19 +538,5 @@ Categories
             }
         }
     </script>
-     </script><script src='{% static 'LandingPage/LandingPage/js/owl.carousel.js'%}'></script>
-
-
-	
-<script src='{% static 'LandingPage/js/jquery-3.2.1.min.js'%}'></script>
-<script src='{% static 'LandingPage/styles/bootstrap4/popper.js'%}'></script>
-<script src='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.js'%}'></script>
-<script src='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.js'%}'></script>
-<script src='{% static 'LandingPage/plugins/easing/easing.js'%}'></script>
-<script src='{% static 'LandingPage/plugins/parallax-js-master/parallax.min.js'%}'></script>
-<script src='{% static 'LandingPage/plugins/colorbox/jquery.colorbox-min.js'%}'></script>
-<script src='{% static 'LandingPage/js/course.js'%}'></script>
-
-</body>
-
-</html>
+ 
+{% endblock javascript %}
