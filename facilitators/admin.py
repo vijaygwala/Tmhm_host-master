@@ -37,6 +37,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 facilitator=Facilitator.objects.create(name=user.name,phone=user.phone,user=user)
                 facilitator.save()
                 user.status='Approved'
+                
                 user.save()
                 successOnRegistration(user.user.email,'finalstep.png')
                 messages.success(request, (user.name+' is approved !'))

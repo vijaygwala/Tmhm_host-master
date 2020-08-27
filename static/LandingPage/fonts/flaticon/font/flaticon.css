@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 19/06/2020 04:39
+  	Creation date: 26/01/2019 10:34
   	*/
 
 @font-face {
@@ -25,20 +25,16 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
-        font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
 }
 
-.flaticon-test-tube:before { content: "\f100"; }
-.flaticon-compass:before { content: "\f101"; }
-.flaticon-microscope:before { content: "\f102"; }
-.flaticon-globe:before { content: "\f103"; }
-.flaticon-book:before { content: "\f104"; }
-.flaticon-atom:before { content: "\f105"; }
-.flaticon-pencil-cup:before { content: "\f106"; }
+.flaticon-teacher:before { content: "\f100"; }
+.flaticon-books:before { content: "\f101"; }
+.flaticon-diploma:before { content: "\f102"; }
+.flaticon-reading:before { content: "\f103"; }
+.flaticon-security:before { content: "\f104"; }
+.flaticon-education:before { content: "\f105"; }
+.flaticon-jigsaw:before { content: "\f106"; }
+.flaticon-kids:before { content: "\f107"; }

@@ -32,3 +32,18 @@ class Learners(models.Model):
     def __str__(self):
         return self.name
 
+class LQueries(models.Model):
+    Lid=models.ForeignKey(Learners,on_delete=models.CASCADE)
+    query=models.TextField(max_length=500)
+    reply=models.TextField(max_length=500,blank=True, null=True)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+
+    class Meta:
+        verbose_name='Support For Learners'
+        verbose_name_plural='Support For Learners'
+    def __str__(self):
+        return self.Lid.name
+
+    
+

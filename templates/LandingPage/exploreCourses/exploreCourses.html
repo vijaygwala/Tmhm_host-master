@@ -1,402 +1,684 @@
 {% extends 'LandingPage/base.html' %}
-{% load static %}
-<!--------------------------------- -->
+{% load static%}
+<!---------------------------------- -->
 
 {% block title %}
 Explore Courses
 {% endblock title %}
-<!---------------------------------- -->
+<!--------------------------- -->
 
 {% block header %}
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.css'%}'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.css'%}'>
 <link href='{% static 'LandingPage/plugins/font-awesome-4.7.0/css/font-awesome.min.css'%}' rel="stylesheet" type="text/css">
+<link href='{% static 'LandingPage/plugins/colorbox/colorbox.css'%}' rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.css'%}'>
 <link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.theme.default.css'%}'>
 <link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/animate.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/courses.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/courses_responsive.css'%}'>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="stylesheet" href="LandingPage/css/owl.carousel.css">
-        <link rel="stylesheet" href="LandingPage/css/owl.theme.default.min.css">
-    
-<link rel="stylesheet" href='{% static 'LandingPage/css/open-iconic-bootstrap.min.css'%}'>
-    <link rel="stylesheet" href='{% static 'LandingPage/css/animate.css'%}'>
-
-    <link rel="stylesheet" href='{% static 'LandingPage/css/owl.carousel.min.css'%}'>
-    <link rel="stylesheet" href='{% static 'LandingPage/css/owl.theme.default.min.css'%}'>
-    <link rel="stylesheet" href='{% static 'LandingPage/css/magnific-popup.css'%}'>
-
-    <link rel="stylesheet" href='{% static 'LandingPage/css/aos.css'%}'>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href='{% static 'LandingPage/css/ionicons.min.css'%}'>
-
-    <link rel="stylesheet" href='{% static 'LandingPage/css/flaticon.css'%}'>
-    <link rel="stylesheet" href='{% static 'LandingPage/css/icomoon.css'%}'>
-    <link rel="stylesheet" href='{% static 'LandingPage/css/style.css'%}'>    
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
+        <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.carousel.css'%}'>
+        <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.theme.default.min.css'%}'>
 {% endblock header %}
-<!------------------------------------------ -->
 
 {% block stylesheet %}
-        <style>
-    body,html {
-        margin: 0;
-        padding: 0;
-        max-width: 100%;
-        overflow-x: hidden;
-        font-family: Raleway;
-    }
-    .item{
-        background-color: white;
-        min-height: 250px;
-
-        border-radius: 10px;
-        border:2px solid black;
-    }
-    .label{
-        color: white;
-    }
-    .head{
-        color: black;
-    }
-    .signup-form form{
-
-        width:100%;
-        background-color: #f1f2f6;
-        border-radius: 3px;
-        margin-bottom: 15px;
-
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }
-    .signup-form .hint {
-        color: black;
-        margin-bottom: 30px;
-        text-align: center;
-    }
-    
-    .slider-area{
-        margin:0;
-    }
-    .carousel-control.left, .carousel-control.right{
-        background: transparent;
-    } 
-    .img-area{
-        margin: auto;
-        overflow: hidden;
-        align-items: center;
-    }
-    .img-area img{
-        height: 400px;
-        width: 500px;
-    }
-    .carousel-caption{
-        position: static;
-        padding-bottom: 15px;
-        padding-top: 0;
-    }
-    .carousel-caption h4{
-        font-size: 20px;
-    }
-    #navbar-left a{
-        text-decoration: none;
-        color: #ababab;
-    }
-    #navbar-left a:hover{
-        color: black;
-    }
-    #navbar-left button{
-        color: white;
-    }
-    footer{
-        background: #eeeeee; 
-        color:#757575;
-        font-size: 13px;
-        line-height: 1.2
-    }
-    footer h6{
-        color: #9e9e9e;
-    }
-    footer a{
-        color: black;
-    }
-    footer a:link{
-        text-decoration: none;
-    }
-    footer a:hover{
-        color: #757575;
-    }
-    footer #social i{
-        color: black;
-        font-size: 1.2rem;
-    }
-    footer #social i:hover{
-        color: #3db166;
-    }
-    @media (max-width: 768px) {
-        #navbar-left{
-            display: block;
-        }
-        #first {
-            padding-top: 2px;
-            padding-bottom: 2px;
-            line-height: 12px;
-        }
-        .container-fluid{
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-        }
-        .section-a img{
+    <style>
+        body,
+        html {
+            margin: 0;
             padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: Raleway;
         }
-        footer{
-            font-size: 7.2px;    
+        
+        .maincontainer {
+            margin-left: 4rem;
+            margin-right: 4rem;
         }
-    }
-    @media (max-width: 990px){
-        #navbar-left{
-            display: block;
+        
+        .item {
+            background-color: white;
+            min-height: 250px;
+            border-radius: 10px;
+            border: 2px solid black;
         }
-        #navbar-left form{
-            display: none;
+        
+        .label {
+            color: white;
         }
-        .section-a{
-            margin-bottom: 32px;
+        
+        .head {
+            color: black;
         }
-        .section-a img{
-            margin: 32px;
+        
+        .signup-form form {
+            width: 100%;
+            background-color: #f1f2f6;
+            border-radius: 3px;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
         }
-        .section-a #section-a-learn h2,h3{
-            font-size: 31px;
+        
+        .signup-form .hint {
+            color: black;
+            margin-bottom: 30px;
+            text-align: center;
         }
-        .section-a #section-a-learn h4{
-            font-size: 15px;
+        
+        .slider-area {
+            margin: 0;
         }
-        #query{
-            margin-left: 11em;
+        
+        .carousel-control.left,
+        .carousel-control.right {
+            background: transparent;
         }
-        #query_request{
-            text-align: center !important;
-        } 
-        footer{
-            font-size: 7.2px;    
-        }
-    }
-    @media (max-width: 375px){
-        #query{
-            margin-left: 0 !important; 
-        }
-    }
-    @media all and (max-width: 765px){
-        footer{
-            font-size: 1rem;
-        }
-        #query{
-            margin-left: 1.5em;
-        }
-        #footer-left{
-            padding-left: 3em;
-            text-align: left;
-        }
-    }
-    @media only screen and (max-width: 1000px){
-        #logo{
-            margin-left:10px!important;
-        }
-    }
-
-    @media only screen and (max-width: 1080px){
-        #request{
+        
+        .img-area {
+            margin: auto;
+            overflow: hidden;
             align-items: center;
-            justify-content: center;
-            text-align:center;
         }
-    }
-
+        
+        .img-area img {
+            height: 400px;
+            width: 500px;
+        }
+        
+        .carousel-caption {
+            position: static;
+            padding-bottom: 15px;
+            padding-top: 0;
+        }
+        
+        .carousel-caption h4 {
+            font-size: 20px;
+        }
+        
+        #navbar-left a {
+            text-decoration: none;
+            color: #ababab;
+        }
+        
+        #navbar-left a:hover {
+            color: black;
+        }
+        
+        #navbar-left button {
+            color: white;
+        }
+        
+        footer {
+            background: #eeeeee;
+            color: #757575;
+            font-size: 13px;
+            line-height: 1.2
+        }
+        
+        footer h6 {
+            color: #9e9e9e;
+        }
+        
+        footer a {
+            color: black;
+        }
+        
+        footer a:link {
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #757575;
+        }
+        
+        footer #social i {
+            color: black;
+            font-size: 1.2rem;
+        }
+        
+        footer #social i:hover {
+            color: #3db166;
+        }
+        
+        @media (max-width: 768px) {
+            #navbar-left {
+                display: block;
+            }
+            #first {
+                padding-top: 2px;
+                padding-bottom: 2px;
+                line-height: 12px;
+            }
+            .container-fluid {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            .section-a img {
+                padding: 0;
+            }
+            footer {
+                font-size: 7.2px;
+            }
+        }
+        
+        @media (max-width: 990px) {
+            #navbar-left {
+                display: block;
+            }
+            #navbar-left form {
+                display: none;
+            }
+            .section-a {
+                margin-bottom: 32px;
+            }
+            .section-a img {
+                margin: 32px;
+            }
+            .section-a #section-a-learn h2,
+            h3 {
+                font-size: 31px;
+            }
+            .section-a #section-a-learn h4 {
+                font-size: 15px;
+            }
+            #query {
+                margin-left: 11em;
+            }
+            #query_request {
+                text-align: center !important;
+            }
+            footer {
+                font-size: 7.2px;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            #query {
+                margin-left: 0 !important;
+            }
+        }
+        
+        @media all and (max-width: 765px) {
+            footer {
+                font-size: 1rem;
+            }
+            #query {
+                margin-left: 1.5em;
+            }
+            #footer-left {
+                padding-left: 3em;
+                text-align: left;
+            }
+        }
+        
+        @media only screen and (max-width: 1000px) {
+            #logo {
+                margin-left: 10px!important;
+            }
+        }
+        
+        @media only screen and (max-width: 1080px) {
+            #request {
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+        }
     </style>
- {% endblock stylesheet %}
-<!---------------------------------------- -->
+{% endblock stylesheet %}
+<!-------------------------------------- -->
 
 {% block content %}
-<div class="super_container">
-	
-	<!-- Begin Page Content -->
-        <div class="outer-container-that-is-relative bg-white" style="margin-top: 20px;position: relative;font-family: 'Raleway';" id="content">
-            <div class="col-12">
-            <div class="card">
-                
-                       <img src='{% static 'LandingPage/img/explore_courses.jpg'%}' class="img-fluid img-thumbnail" alt="Responsive image" style="filter: blur(2px);
-                          -webkit-filter: blur(2px);height:250px; background-position: center;
-                          background-repeat: no-repeat;background-size: cover;">         
-                            
-                          <h2 style="position: absolute;color: white;font-weight: 600;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center">Popular Courses</h2>
-                        <!--/col-->
-                    
-                    <!--/row-->
-                
-                <!--/card-block-->
-            </div>
-        </div>
-          
-          
-        {% if count == 0 %}
-        <div class="card" style="width: 18rem;margin-left: 30%;margin-top: 5%">
-            <div class="card-body">
-              No Courses
-            </div>
-          </div>
-        {% else %}
-        {% for product, range, nSlides in category %}
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h6 style="position: absolute;color: white;font-weight: 600;position: relative;bottom: -50px; top: 50%;left: 50%;transform: translate(-50%, -50%);background-color: rgba(0,0,0, 0.4);border: 3px solid #f1f1f1;width: 50%; padding: 10px;text-align: center"
-                class="h6 d-inline-block mb-2">{{ product.0.subCat_id.name }}</h6>
-        </div>
-        <div class="slider-area">
-            <div class="container">
-                <div id="carouselExampleIndicators{{forloop.counter}}" class="carousel slide" data-ride="carousel">
-                    
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators{{forloop.counter}}" data-slide-to="0" class="active"></li>
-                        {% for i in range %}
-                        <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to={{ i }}></li>
-                        {% endfor %}
-                    </ol>
-                    <div class='carousel-inner'>
-                        <div class='carousel-item active'>
-                            <div class='container'>
-                                <div class='row text-center'>
-                                    <div class='col-md-4 col-sm-12 mb-2'>
-                                        <div class="card border">
-                                            
-                                            {% if product.0.thumbnail %}
-                                            <img class="card-img-top" src={{ product.0.thumbnail.url }} alt="Card image cap" height="250px">
-                                            {% endif %}
-                                                
-                                            
-                                            <div class="card-body" style="background-color:gainsboro">
-                                                <h5 class="card-title" style="color:red;"><a href="{}" class="stretched-link">{{ product.0.title }}</a></h5>
-                                                {% comment %} <h6 style="color:#262626;font-size: 0.75em;">{{ product.0.name }}</h6> {% endcomment %}
-                                            </div>
-                                        </div>
-                                    </div>
+    <div class="super_container">
 
-                                    {% for i in product|slice:"1:" %}
-                                    <div class='col-md-4 col-sm-12 col-sm-offset-1 mb-2'>
-                                        <div class="card border">
-                                            
-                                            {% if i.thumbnail %}
-                                            <img class="card-img-top" src={{ i.thumbnail.url }} alt="Card image cap" height="250px">
-                                            {% endif %}
-                                                
-                                            
-                                            <div class="card-body" style="background-color:gainsboro">
-                                                <h5 class="card-title" style="color:red;"><a href="#" class="stretched-link">{{ i.title }}</a></h5>
-                                                
+
+        <!-- Courses -->
+
+        <div class="courses">
+            <div class="maincontainer">
+                <div class="row">
+
+
+
+
+                    <!-- Courses Sidebar -->
+                    <div class="col-lg-4">
+                        <div class="sidebar" style="margin-top: 0;">
+
+                            <!-- Categories -->
+                            <div class="sidebar_section">
+                                <div class="sidebar_section_title">Filter</div>
+                                <div class="sidebar_categories">
+                                    <ul>
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card">
+                                                <div class="card-header" id="headingOne">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="border:none">
+                                         Topic
+                                        </button>
+                                                    </h2>
+                                                </div>
+
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <label class="container">
+                                                            <input type="checkbox" checked="checked">
+                                                            <span class="checkmark"></span>C++
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Machine Learning
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Python
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Java
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingtwo">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo" style="border:none">
+                                        Level
+                                        </button>
+                                                    </h2>
+                                                </div>
+
+                                                <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-parent="#accordionExample">
+                                                    <div class="card-body">
+
+                                                        <label class="container">
+                                                            <input type="checkbox" checked="checked">
+                                                            <span class="checkmark"></span>Beginner
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Advanced
+                                                          </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingthree">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree" style="border:none">
+                                        Sub-Categories
+                                        </button>
+                                                    </h2>
+                                                </div>
+
+                                                <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label> <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label> <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label> <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingTwo">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="border:none">
+                                        Language
+                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <h2 class="mb-0">
+                                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="border:none">
+                                         Price
+                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+                                                        <label class="container">
+                                                            <input type="checkbox">
+                                                            <span class="checkmark"></span>Web Development
+                                                          </label>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    {% if forloop.counter|divisibleby:2 and forloop.counter > 0 and not forloop.last %}
-                                    </div></div></div>
-                                    <div class='carousel-item'>
-                                        <div class='container'>
-                                            <div class='row text-center'>
-                                    {% endif %}
-                                    {% endfor %}
+                                    </ul>
                                 </div>
                             </div>
+
+
+
+                            <!-- Tags -->
+                            <div class="sidebar_section">
+                                <div class="sidebar_section_title">Tags</div>
+                                <div class="sidebar_tags">
+                                    <ul class="tags_list">
+                                        <li><a href="#">creative</a></li>
+                                        <li><a href="#">unique</a></li>
+                                        <li><a href="#">photography</a></li>
+                                        <li><a href="#">ideas</a></li>
+                                        <li><a href="#">wordpress</a></li>
+                                        <li><a href="#">startup</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
                         </div>
-                    
                     </div>
-                    <a class="carousel-control-prev primary" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <!-- Courses Main Content -->
+
+
+
+
+                    <div class="col-lg-8">
+                        <div class="courses_search_container">
+                            <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
+                                <input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+                                <select id="courses_search_select" class="courses_search_select courses_search_input">
+								<option>All Categories</option>
+								<option>Category</option>
+								<option>Category</option>
+								<option>Category</option>
+							</select>
+                                <button action="submit" class="courses_search_button ml-auto">search now</button>
+                            </form>
+                        </div>
+                        <div class="courses_container">
+                            <div class="row courses_row">
+
+                                <!-- Course -->
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_4.jpg' %}" alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' 1 %}">Software Training</a></h3>
+                                            <div class="course_teacher">Mr. John Taylor</div>
+                                            <div class="course_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Course -->
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_5.jpg' %}" alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' 1 %}">Developing Mobile Apps</a></h3>
+                                            <div class="course_teacher">Ms. Lucius</div>
+                                            <div class="course_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">Free</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Course -->
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_6.jpg' %}" alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' 1 %}">Starting a Startup</a></h3>
+                                            <div class="course_teacher">Mr. Charles</div>
+                                            <div class="course_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto"><span>$320</span>$220</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Course -->
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_7.jpg' %}" alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' 1 %}">Learn Basic German Fast</a></h3>
+                                            <div class="course_teacher">Mr. John Taylor</div>
+                                            <div class="course_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Course -->
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_8.jpg' %}" a alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' 1 %}">Business Groud Up</a></h3>
+                                            <div class="course_teacher">Ms. Lucius</div>
+                                            <div class="course_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">Free</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Course -->
+                                <div class="col-lg-6 course_col">
+                                    <div class="course">
+                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_9.jpg' %}"  alt=""></div>
+                                        <div class="course_body">
+                                            <h3 class="course_title"><a href="{% url 'course' 1 %}">Java Technology</a></h3>
+                                            <div class="course_teacher">Mr. Charles</div>
+                                            <div class="course_text">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+                                            </div>
+                                        </div>
+                                        <div class="course_footer">
+                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>20 Student</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto"><span>$320</span>$220</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-        {% endfor %}
-        {% endif %}
-    </div>
-	      
-  </div>
 
-    
-<div style="margin-bottom: 3em;"></div>               
-<!-- Footer -->
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/da956b6924.js" crossorigin="anonymous"></script>
+    <script src='{% static 'LandingPage/LandingPage/js/owl.carousel.js'%}'></script>
+    <script src='{% static 'LandingPage/js/jquery-3.2.1.min.js'%}'></script>
+    <script src='{% static 'LandingPage/styles/bootstrap4/popper.js'%}'></script>
+    <script src='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/easing/easing.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/parallax-js-master/parallax.min.js'%}'></script>
+    <script src='{% static 'LandingPage/plugins/colorbox/jquery.colorbox-min.js'%}'></script>
+    <script src='{% static 'LandingPage/js/course.js'%}'></script>
 {% endblock content %}
-<!----------------------------------- -->
 
 {% block javascript %}
-    <script>
 
+    <script>
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
+        });
 
-            $(".toggle-password").click(function() {
+        $(".toggle-password").click(function() {
 
             $(this).toggleClass("fa-eye fa-eye-slash");
             var input = $($(this).attr("toggle"));
             if (input.attr("type") == "password") {
-            input.attr("type", "text");
+                input.attr("type", "text");
             } else {
-            input.attr("type", "password");
+                input.attr("type", "password");
             }
         });
 
-        function check_ephone(phno, email){
+        function check_ephone(phno, email) {
             var regex = /^[0-9]{10}$/;
             var regexe_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)){
+            if (regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) {
                 return true;
-                } else {
-                    if (!(regex.test(phno.yourphone.value)) ) {
-                        alert("This is not a valid phone number");
-                        return false;
-                    }
-                    if (!(regex.test(email.youreamil.value)) ) {
-                        alert("This is not a valid email id");
-                        return false;
-                    }
-                    if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value)) ) {
-                        alert("This is not a valid phone number and email id");
-                        return false;
-                    } 
+            } else {
+                if (!(regex.test(phno.yourphone.value))) {
+                    alert("This is not a valid phone number");
+                    return false;
+                }
+                if (!(regex.test(email.youreamil.value))) {
+                    alert("This is not a valid email id");
+                    return false;
+                }
+                if (!(regex.test(phno.yourphone.value) && regex_email.test(email.youremail.value))) {
+                    alert("This is not a valid phone number and email id");
+                    return false;
+                }
             }
         }
-
- <script>
-function myFunction() {
-  var dots = document.getElementById("dots");
-  var moreText = document.getElementById("more");
-  var btnText = document.getElementById("myBtn");
-
-  if (dots.style.display === "none") {
-    dots.style.display = "inline";
-    btnText.innerHTML = "Read more"; 
-    moreText.style.display = "none";
-  } else {
-    dots.style.display = "none";
-    btnText.innerHTML = "Read less"; 
-    moreText.style.display = "inline";
-  }
-}
-</script>
-       
-
-
-   
+    </script>
 {% endblock javascript %}
