@@ -91,7 +91,7 @@ class FacilitatorQueries(models.Model):
 class OTP(models.Model):
     sender = models.CharField(max_length=500)   
     value = models.CharField(max_length=500)
-    txt=models.OneToOneField(to='LandingPage.Course',on_delete=models.CASCADE)
+    
     
     
 
