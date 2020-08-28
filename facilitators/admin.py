@@ -3,6 +3,7 @@ from .models import *
 from LandingPage.admin import *
 from mailing.views import *
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 class ExperienceInline(admin.StackedInline):
     model = Experience
@@ -37,7 +38,8 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 facilitator=Facilitator.objects.create(name=user.name,phone=user.phone,user=user)
                 facilitator.save()
                 user.status='Approved'
-                
+                group = Group.objects.get(name='Facilitators')
+                user.groups.add(group)
                 user.save()
                 successOnRegistration(user.user.email,'finalstep.png')
                 messages.success(request, (user.name+' is approved !'))

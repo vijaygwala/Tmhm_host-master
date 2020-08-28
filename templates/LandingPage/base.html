@@ -51,14 +51,19 @@
                             <button class="btn my-sm-0" type="submit" style="color: black;s"><i class="fa fa-search"></i></button>
                         </form>
                     </li>
-                   
+                   {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href='{% url 'logout' %}' class="btn btn-primary rounded" style="color: white">Log out</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
                     </li>
                     <li class="nav-item">
                         <a href="/signup" class="btn btn-primary rounded" style="color: white">Sign Up</a>
                     </li>
-            
+                    {% endif %}
+
                 </ul>
             </div>
         </div>
@@ -75,7 +80,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form style="padding-right: 80px; padding-left: 80px;" method="POST" action="">
+        <form style="padding-right: 80px; padding-left: 80px;" method="POST" action='{% url 'login' %}'>
             {% csrf_token %}
             <div class="form-group">
                 <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address / Phone Number">

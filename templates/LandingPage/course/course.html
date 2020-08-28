@@ -254,7 +254,6 @@ Course Details
                                 <button type="button" class="btn btn-outline-info">Share <i class="fa fa-share" aria-hidden="true"></i></button>
                             </div>
 
-<<<<<<< HEAD
                         </div>
                     </div>
                 </div>
@@ -628,7 +627,7 @@ Course Details
                                     <div class="teacher_title_container d-flex flex-row align-items-center justify-content-start">
                                         <div class="teacher_image"><img src='{% static 'LandingPage/images/teacher.jpg'%}' alt=""></div>
                                         <div class="teacher_title">
-                                            <div class="teacher_name"><a href="#">{{facilitator.name}}</a></div>
+                                            <div class="teacher_name"><a href="{% url 'aboutfacilitator' facilitator.Fid %}">{{facilitator.name}}</a></div>
                                             <div class="teacher_position">{{facilitator.user.intrest}}</div>
                                         </div>
                                     </div>
@@ -679,8 +678,6 @@ Course Details
                                 </div>
                             </div>
 
-=======
->>>>>>> 4566bf877f2c6b7b113e43a1bc7f341a7baf72d8
                         </div>
                     </div>
                 </div>

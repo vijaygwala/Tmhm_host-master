@@ -21,6 +21,7 @@ from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FileUploadParser
 from django.core import serializers
 from mailing.views import *
+from django.contrib.auth.models import Group
 
 # Facilitator Register API
 class FacilitatorRegisterAPI(APIView):
@@ -32,44 +33,42 @@ class FacilitatorRegisterAPI(APIView):
 
     def post(self, request, *args, **kwargs):
         file=request.FILES['file']
-        print(file)
-        print(type(file))
-        print(request.data)
         personal_detail=json.loads(request.data.pop('data')[0])
-        print(personal_detail)
         exp_form=personal_detail.pop('facilitator')
         facilitator_query=personal_detail.pop('fquery')
         expform = ExperienceSerializer(data=exp_form)
         form = RegisterSerializer(data=personal_detail)
-        
-        
         phone=personal_detail.get('phone')
         fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
         course=personal_detail.get('course')
-        print(course)
+        
         catlist=""
         for cat in course: 
             if cat!=course[len(course)-1]: 
                 catlist+=cat+","
             else:
                 catlist+=cat
-        print(course)
         user=None
-        profile=None
         try:
-            if form.is_valid(raise_exception=True):
-                user=form.save()
-                user.role=2
-                user.save()
-                applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
-                applicant.save()
-                exp_form["facilitator"]=applicant.Aid
-                facilitator_query['user']=applicant.Aid
-        
+            user=CustomUser.objects.get(email=personal_detail['email'])
         except:
-            messages.error(request, ('Email is already exist !'))
-            return redirect('facilitator-register')
-           
+            user=None
+        if user is None:
+            try:
+                if form.is_valid(raise_exception=True):
+                    user=form.save()
+                    group = Group.objects.get(name='Visiters')
+                    user.groups.add(group)
+                    user.save()
+                                
+            except:
+                messages.error(request, ('Email is already exist !'))
+                return redirect('facilitator-register')
+        applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
+        applicant.save()
+        exp_form["facilitator"]=applicant.Aid
+        facilitator_query['user']=applicant.Aid
+  
         
         if expform.is_valid(raise_exception=True):
             expform.save()
@@ -82,6 +81,7 @@ class FacilitatorRegisterAPI(APIView):
             else:
                 messages.error(request, ('Invalid Query Deatails !'))
                 return redirect('register')
+        
         successOnRegistration(user.email,'Registration.png')
         RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
         messages.success(request, ('Your profile was successfully Created!'))

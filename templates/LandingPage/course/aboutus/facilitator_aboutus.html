@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
     <title>LearnOpad </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-    <link rel="stylesheet" type="text/css" href="styles/courses.css">
-    <link rel="stylesheet" type="text/css" href="styles/courses_responsive.css">
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/bootstrap4/bootstrap.min.css'%}'>
+<link href='{% static 'LandingPage/plugins/font-awesome-4.7.0/css/font-awesome.min.css'%}' rel="stylesheet" type="text/css">
+<link href='{% static 'LandingPage/plugins/colorbox/colorbox.css'%}' rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.carousel.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/owl.theme.default.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/plugins/OwlCarousel2-2.2.1/animate.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/courses.css'%}'>
+<link rel="stylesheet" type="text/css" href='{% static 'LandingPage/styles/courses_responsive.css'%}'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
+        
 
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    
+    <link rel="stylesheet" href='{% static 'LandingPage/css/open-iconic-bootstrap.min.css'%}'>
+    <link rel="stylesheet" href='{% static 'LandingPage/css/animate.css'%}'>
 
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href='{% static 'LandingPage/css/owl.carousel.min.css'%}'>
+    <link rel="stylesheet" href='{% static 'LandingPage/css/owl.theme.default.min.css'%}'>
+    <link rel="stylesheet" href='{% static 'LandingPage/css/magnific-popup.css'%}'>
+
+    <link rel="stylesheet" href='{% static 'LandingPage/css/aos.css'%}'>
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href='{% static 'LandingPage/css/ionicons.min.css'%}'>
 
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href='{% static 'LandingPage/css/flaticon.css'%}'>
+    <link rel="stylesheet" href='{% static 'LandingPage/css/icomoon.css'%}'>
+    <link rel="stylesheet" href='{% static 'LandingPage/css/style.css'%}'>
+    <link rel="stylesheet" href='{% static 'LandingPage/profile.css'%}'>
     <style>
 #more {display: none;}
 </style>
@@ -37,7 +47,7 @@
     <figure class="figure" style="margin-right: 11px;margin-top: 18px;margin-bottom: 11px;margin-left: 15px;">
 
         <!-- changes made   -->
-        <img src="images/ss.jpg" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 45px;margin-left:20px;">
+        <img src='{% static 'LandingPage/images/ss.jpg'%}' class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 45px;margin-left:20px;">
         <!-- change end   -->
 
         <figcaption class="figure-caption text-center">LearnOpad</figcaption>
@@ -90,21 +100,21 @@
       <div class="row">
         <div class="col-sm-4 order-1 order-lg-2">
             <div align="center">
-             <img src="images/teacher-5.jpg" style="width: 200px;border-radius: 200px">
+             <img src='{% static 'LandingPage/images/teacher-5.jpg'%}' style="width: 200px;border-radius: 200px">
             </div>
         </div>
         <div class="col-sm-8 order-2 order-lg-1">
             <div style="font-family: 'Raleway',sans-serif">
                         <div style="margin-top:20px" class="text-muted">FACILITATOR</div>
-                        <h1 style="font-weight: 700">Daniel Walter Scott</h1>
-                        <h5 style="margin-top: -10px;font-weight: 500">Adobe certified instructor and Adobe certified expert</h5>
+                        <h1 style="font-weight: 700">{{faci.name}}</h1>
+                        <h5 style="margin-top: -10px;font-weight: 500">{{faci.user.intrest}}</h5>
                         <div style="margin-top: 20px">
                             <div class="container" style="margin-left: -18px;">
                               <div class="row">
                                   <div class="col-6" class="text-muted"><h6 style="font-weight: 700">Total Students</h6></div>
                                   <div class="col-6" class="text-muted"><h6 style="font-weight: 700"> Reviews</h6></div>
                                 <div class="w-100"></div>
-                                  <div class="col-6"><h3 style="font-weight: 700">10,000</h3></div>
+                                  <div class="col-6"><h3 style="font-weight: 700">{{total_learners}}</h3></div>
                                 <div class="col-6"><h3 style="font-weight: 700">10,000</h3></div>
                               </div>
                             </div>
@@ -140,24 +150,29 @@
             
             <div class="courses_container">
                 <h3 style="font-weight: 700;margin-top: 20px">My Courses</h3>
-						<div class="row courses_row">
+						
 							
 							<!-- Course -->
-							<div class="col-lg-6 course_col">
+                            {% for course in courses %}
+  				            {% cycle "<div class='row courses_row'>" "" %}
+    			                
+  					           
+
+		                    <div class="col-lg-6 course_col">
 								<div class="course">
-									<div class="course_image"><img src="images/course_4.jpg" alt=""></div>
+									<div class="course_image"><img src='{{course.thumbnail.url}}' alt=""></div>
 									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">Software Training</a></h3>
+										<h3 class="course_title"><a href="course.html">{{course.title}}</a></h3>
 										<div
 										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
+											<p>{{course.description}}</p>
 										</div>
 									</div>
 									<div class="course_footer">
 										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
 											<div class="course_info">
 												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>20 Student</span>
+												<span>{{course.ernolling.all|length}}</span>
 											</div>
 											<div class="course_info">
 												<i class="fa fa-star" aria-hidden="true"></i>
@@ -169,148 +184,15 @@
 								</div>
 							</div>
 
-							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div class="course">
-									<div class="course_image"><img src="images/course_5.jpg" alt=""></div>
-									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">Developing Mobile Apps</a></h3>
-									
-										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-										</div>
-									</div>
-									<div class="course_footer">
-										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-											<div class="course_info">
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>20 Student</span>
-											</div>
-											<div class="course_info">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
-											</div>
-											<div class="course_price ml-auto">Free</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div class="course">
-									<div class="course_image"><img src="images/course_6.jpg" alt=""></div>
-									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">Starting a Startup</a></h3>
-										
-										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-										</div>
-									</div>
-									<div class="course_footer">
-										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-											<div class="course_info">
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>20 Student</span>
-											</div>
-											<div class="course_info">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
-											</div>
-											<div class="course_price ml-auto"><span>$320</span>$220</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div class="course">
-									<div class="course_image"><img src="images/course_7.jpg" alt=""></div>
-									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">Learn Basic German Fast</a></h3>
-										<div
-										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-										</div>
-									</div>
-									<div class="course_footer">
-										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-											<div class="course_info">
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>20 Student</span>
-											</div>
-											<div class="course_info">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
-											</div>
-											<div class="course_price ml-auto">$130</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div class="course">
-									<div class="course_image"><img src="images/course_8.jpg" alt=""></div>
-									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">Business Groud Up</a></h3>
-									
-										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-										</div>
-									</div>
-									<div class="course_footer">
-										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-											<div class="course_info">
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>20 Student</span>
-											</div>
-											<div class="course_info">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
-											</div>
-											<div class="course_price ml-auto">Free</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Course -->
-							<div class="col-lg-6 course_col">
-								<div class="course">
-									<div class="course_image"><img src="images/course_9.jpg" alt=""></div>
-									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">Java Technology</a></h3>
-										
-										<div class="course_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-										</div>
-									</div>
-									<div class="course_footer">
-										<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-											<div class="course_info">
-												<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-												<span>20 Student</span>
-											</div>
-											<div class="course_info">
-												<i class="fa fa-star" aria-hidden="true"></i>
-												<span>5 Ratings</span>
-											</div>
-											<div class="course_price ml-auto"><span>$320</span>$220</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-                        <div class="container" style="margin-top: -30px">
+							
+						 {% cycle "" "</div>" %}
+				            {% endfor %}
+                            <div class="container" style="margin-top: -30px">
                           <div class="row">
                             <div class="col-sm" align="center" style="margin-left: -20px">
                               
 									<ul class="pagination_list">
-										<li class="active"><a href="#">1</a></li>
+										<li class="active"><i class="fa fa-angle-left" aria-hidden="true"></i><a href="#"></a></li>
 										<li><a href="#">2</a></li>
 										<li><a href="#">3</a></li>
 										<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
@@ -335,11 +217,12 @@
                         </div>
 						
 					</div>
+                    </div>
 
-            
-          </div>    
-        <div class="col-sm-4">
-            <div style="font-family: 'Raleway',sans-serif" align="center">
+                    
+                </div>    
+                <div class="col-sm-4">
+                <div style="font-family: 'Raleway',sans-serif" align="center">
                        <div>  
                 <button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-link" aria-hidden="true"></i> Website</button></div>  
             <div><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</button></div> 
@@ -363,7 +246,7 @@
 
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
                     <figure class="figure" style="margin: 11px;">
-                        <img src="images/ss.jpg" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 45px;margin-left: 14px;">
+                        <img src='{% static 'LandingPage/images/ss.jpg'%}' class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 45px;margin-left: 14px;">
                         <figcaption class="figure-caption text-center">LearnOpad</figcaption>
                     </figure>
                 </div>
@@ -474,32 +357,32 @@
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
+    <script src='{% static 'LandingPage/js/jquery.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery-migrate-3.0.1.min.js' %}'></script>
     
     
     
-    <script src="js/jquery.stellar.min.js"></script>
+    <script src='{% static 'LandingPage/js/jquery.stellar.min.js' %}'></script>
     
-    <script src="js/aos.js"></script>
+    <script src='{% static 'LandingPage/js/aos.js' %}'></script>
     
     
-    <script src="js/courses.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/jquery.waypoints.min.js"></script>
-    <script src="js/jquery.stellar.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src= '{% static 'LandingPage/js/courses.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery-migrate-3.0.1.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/popper.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/bootstrap.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery.easing.1.3.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery.waypoints.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery.stellar.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/owl.carousel.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/jquery.magnific-popup.min.js' %}'></script>
     
-    <script src="js/jquery.animateNumber.min.js"></script>
-    <script src="js/scrollax.min.js"></script>
+    <script src='{% static 'LandingPage/js/jquery.animateNumber.min.js' %}'></script>
+    <script src='{% static 'LandingPage/js/scrollax.min.js' %}'></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="js/google-map.js"></script>
-    <script src="js/main.js"></script>
+    <script src='{% static 'LandingPage/js/google-map.js' %}'></script>
+    <script src='{% static 'LandingPage/js/main.js' %}'></script>
 
 
     <script>

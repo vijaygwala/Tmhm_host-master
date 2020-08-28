@@ -284,7 +284,11 @@ a:active {
 				<tr>
 					<td>
 						<br><br>
-						
+						{% for image in images %}
+  				{% cycle "<div class='row'>" "" %}
+    			<div class="span6">*image goes here*</div>
+  					{% cycle "" "</div>" %}
+				{% endfor %}
 						<!-- A Real Hero (and a real human being) -->
 						<p><img src='http://127.0.0.1:8000{% static 'email/Registration.png' %}' alt='image'/></p><!-- /hero -->
 					<div class ="container">

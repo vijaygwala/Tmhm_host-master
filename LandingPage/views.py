@@ -5,13 +5,19 @@ from math import ceil
 from django.contrib import messages
 from .forms import *
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.contrib.auth.decorators import login_required
+from myauth.decoraters import *
 # Landing  page
 def home(request):
     return render(request,'LandingPage/index.html')
 
+#free content avialable for users here 
+@login_required(login_url='/home')
+@allowed_users(['Visiters','Learners','Facilitators'])
 def freecontent(request):
     return render(request,'LandingPage/freeContent/index.html')
 
+# users can expolore the courses from explore courses
 def exploreCourses(request):
     course=offer.objects.all()
     course1=[]
@@ -38,15 +44,12 @@ def exploreCourses(request):
     context.update({'category':category})
     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
 
-# Landing page signup form
-def signup(request):
-    return render(request, 'LandingPage/signup/signup.html')
 
 #Landing page about us page
 def aboutus(request):
     return render(request, 'LandingPage/aboutus/aboutus.html')
-#this is course page
 
+#this is course page
 def CoursePage(request,pk):
     course=Course.objects.get(Cid=pk)
     course_video=course.course_video.all()[0]

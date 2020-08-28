@@ -61,9 +61,11 @@ def send_email(subject, text_content, html_content=None, sender=None, recipient=
             image.add_header('Content-ID', f"<{image_name}>")
             email.attach(image)
     EmailThread(email).start()
-   
+from LandingPage.models import Course  
 def registration(request):
-    return render(request,'html/shortlisted.html')
+    course=Course.objects.all()
+    context={'images':course}
+    return render(request,'html/shortlisted.html',context)
 
 def successOnRegistration(to,template):
     recipient = [to]

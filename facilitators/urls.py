@@ -8,13 +8,13 @@ urlpatterns = [
     path('facilitator/dashboard/create_course', views.facilitator_Dashboard_create_course_page, name="createcourse"),
     path('facilitator/dashboard/', views.facilitator_Dashboard_Landing_page,name="dashboard"),
     path('facilitator/', views.facilitator_page,name='facilitator'),
-    path('facilitator-register/', views.RegisterLoginView.as_view(),name='facilitator-register'),
+    #path('facilitator-register/', views.RegisterLoginView.as_view(),name='facilitator-register'),
     path('facilitator/dashboard/settings/', views.facilitator_Dashboard_settings_page,name='settings'),
     path('facilitator/dashboard/profile/<str:pk>/', views.facilitator_Profile_page,name='profile'),
     path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support'),
     path('facilitator/dashboard/changepassword/', views.ChangePassword, name="changePassword"),
-    path('facilitator/logout/', views.user_logout, name="logout"),
+    
     path('facilitator/dashboard/support/', views.facilitator_Dashboard_support_page,name='support1'),
-    path('facilitator/login/', views.facilitator_login.as_view(), name="login"),
-    path('About/facilitator/',views.aboutfacilitator, name="aboutfacilitator"),
+    
+    path('About/facilitator/<int:pk>/',views.aboutfacilitator, name="aboutfacilitator"),
  ]

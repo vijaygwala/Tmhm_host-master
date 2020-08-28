@@ -18,7 +18,7 @@ import requests
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
-from django.views.generic import View
+
 from passlib.hash import django_pbkdf2_sha256 as handler
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -33,11 +33,14 @@ import threading
 import datetime
 from django.template import RequestContext
 from django.contrib import messages
+from django.views.generic import View
 from django.contrib.messages import get_messages
 from django.views.generic import CreateView
 from .mixins import AjaxFormMixin
 from django.utils.datastructures import MultiValueDictKeyError
 from myauth.decoraters import *
+from django.core.paginator import Paginator
+
 
 
 #facilitator page
@@ -45,73 +48,6 @@ def facilitator_page(request):
     return render(request, 'facilitators/index.html')
 
     
-
-
-# Facilitator registration code personal details , experience details and facilitator queries without Rest Api
-class RegisterLoginView(AjaxFormMixin,View):
-    def get(self, request, *args, **kwargs):
-        category=Category.objects.all()
-        subcategory=SubCategory.objects.all()
-        context = {'form': UserForm(),'expform':ExperienceForm(),'fquery':FacilitatorQueriesForm(),'category':category,'subcategory':subcategory}
-        return render(request, 'facilitators/register/mysignup.html', context)
-
-    def post(self, request, *args, **kwargs):
-        context = {'form': UserForm(),'expform':ExperienceForm(),'fquery':FacilitatorQueriesForm()}
-        form = UserForm(request.POST)
-        expform = ExperienceForm(request.POST)
-        phone=request.POST.get('phone','')
-        portfolio = request.FILES['pro']
-        fquery=FacilitatorQueriesForm(request.POST)
-        course=request.POST.getlist('course','')
-        catlist=""
-        for cat in course:
-            catlist+=cat+","
-        print(course)
-        user=None
-        try:
-            if form.is_valid():
-                user=form.save()
-                profile=Profile.objects.get(user=user.id)
-                profile.phone=phone
-                profile.portfolio=portfolio
-                profile.role=2
-                profile.intrest=catlist
-                profile.save()
-            else:
-                raise form.ValidationError("Invalid Email or Password !")
-        except:
-            messages.error(request, ('Incorrect Email or Password !'))
-            return redirect('facilitator-register')
-            
-       
-        try:
-            if expform.is_valid():
-                ex=expform.save(commit=False)
-                ex.facilitator=user
-                ex.save()
-            else:
-                raise expform.ValidationError("Invalid Experience Deatails !")
-        except:
-            messages.error(request, ('Invalid Experience Deatails !'))
-            return redirect('facilitator-register')
-
-        if fquery!=None:
-            try:
-                if fquery.is_valid():
-                    qo=fquery.save(commit=False)
-                    qo.user=user
-                    qo.save()
-                else:
-                    raise fquery.ValidationError("Invalid Query Deatails !")
-            except:
-                messages.error(request, ('Invalid Query Deatails !'))
-                return redirect('facilitator-register')
-       
-
-        messages.success(request, ('Your profile was successfully Created!'))
-        return redirect('facilitator-register')
-
-
 @login_required(login_url='/facilitator/login/')
 @allowed_users(['Facilitators'])
 def facilitator_Dashboard_Landing_page(request):
@@ -254,94 +190,6 @@ def facilitator_Dashboard_settings_page(request):
 
 
 
-class facilitator_login(View):
-    
-    def get(self, request):
-        context = {}
-        storage = get_messages(request)
-        for message in storage:
-            print('MESSAGE', message)
-            if str(message) == 'password_recovered':
-                context['password_recovered']='password_recovered'
-            elif str(message) == 'invalid_otp':
-                context['invalid_otp']='invalid_otp'
-            elif str(message) == 'password_not_same':
-                context['password_not_same']= 'password_not_same'
-            elif str(message) == 'went_wrong':
-                context['went_wrong']= 'went_wrong'
-            else:
-                return HttpResponseRedirect(reverse('login'))
-
-        print(context)
-
-            
-        return render(request,'facilitators/index.html', context)
-
-
-    #authentication_classes = (TokenAuthentication,) 
-    #permission_classes = (IsAuthenticated,) 
-    def post(self, request):
-        if request.method == "POST":
-            email1 =  request.POST['email']
-            password = request.POST['password']
-            # print(email1, password)
-            try:
-                u = get_object_or_404(CustomUser, email=email1)
-            except:
-                u=None
-                context={'user':u}
-                return render(request, 'facilitators/index.html', context)
-
-            user = authenticate(request,email=email1, password=password)
-            message=None
-            try:
-                obj = Token.objects.get_or_create(user=user)
-                appli = Applicants.objects.get(user=user)  #appli.Aid
-                approved = Facilitator.objects.get(user=appli) #aprroved.Fid
-            except:
-                obj = None
-                approved=None
-            # print(approved)
-            if approved:
-                # if obj:
-                if user:
-                    
-                    if user.is_active:
-                        login(request, user)
-                        # print(" after login")
-                        # print(user)
-                        # request.user=user
-                        # context = {'approved':approved}
-                        if request.GET.get('next', None):
-                            return HttpResponseRedirect(request.GET['next'])
-                        return HttpResponseRedirect(reverse('dashboard'))
-                        # return response(obj, status=200)
-                    else:
-                        notification = "Account not active"
-                        context = { 'notification': notification,
-                            'clss': 'alert-danger'
-                            }
-                        return render(request, 'facilitators/index.html', context)
-                        # return HttpResponse("Account not active")
-                else:
-                    print("Not registered! login failed")
-                    context = {
-                        'notification': 'Not registered! login failed',
-                        'uemail': u.pk
-                    }
-                    return render(request, 'facilitators/index.html', context)
-            # else:
-            #     return HttpResponse("you are not authorized")
-            else:
-                print("You are not a facilitator")
-                notification = "You are not a facilitator"
-                context = {
-                    'notification': notification,
-                    'clss': 'alert-danger',
-                    'uemail': u.pk
-                }
-                print(context['uemail'])
-                return render(request, 'facilitators/index.html', context)
 
 
 @login_required(login_url='/facilitator/login/')
@@ -426,18 +274,25 @@ def ChangePassword(request):
 
 
 def aboutfacilitator(request,pk):
-    course=Course.objects.get(Cid=2)
-    faci=course.offering.all()[0]
-    web = faci.user.experience
+    
+    faci=Facilitator.objects.get(Fid=pk)
+    exp = faci.user.experience
+    courses=faci.offering.all().order_by('Cid')
+    total_learners=0
+    for course in courses:
+        total_learners+=course.enroll.all().count()
+    paginator=Paginator(courses,6,orphans=1)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+
     context={
         'faci':faci,
-        'web':web,
+        'exp':exp,
+        'total_learners':total_learners,
+        'courses':page_obj
     }
     return render(request, 'LandingPage/course/aboutus/facilitator_aboutus.html',context)
 
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('facilitator'))
 
 
 
