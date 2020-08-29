@@ -135,18 +135,14 @@
                 I've spent a long time watching others learn, and teach, to refine how I work with you to be efficient, useful and, most importantly, memorable. I want you to carry what I've shown you into a bright future.
                 
                 I have a wife (a lovely Irish girl) and kids. I have lived and worked in many places (as Kiwis tend to do) – but most of my 14+ years of creating and teaching has had one overriding theme: bringing others along for the ride as we all try to change the world with our stories, our labours of love and our art.
-                <span id="dots">...</span><span id="more">
+                
                 I'm a certified Adobe instructor (ACI) in Ireland. I'm also an Adobe Certified Expert (ACE) and have completed the Adobe Certified Associate training (ACA). And I don't just do Adobe. Remember, media is a very broad term – digital blew out the borders, so we are all constantly learning.
 
                 I've been teaching for 14+ years. I come from being a media designer and content creator – so I understand exactly where you're at now. I've been there. I love this stuff. Print, digital publishing, web and video. I can see how it all connects. And I can see how we can share those connections.
 
-                I built Bring Your Own Laptop in Ireland, New Zealand, Australia & online. I have a great team working with me to keep BYOL at the top of Adobe and digital media training. I understand business, I have one – so I know how important it is to get it right and make it work for you.
-
-                Now my focus is on Udemy. It's my mission to bring you the best training for digital media on Udemy.
-
-                Daniel Walter Scott
-                </span></b></p>
-            <button onclick="myFunction()" id="myBtn" class="btn btn-info">Read more</button>
+                
+                </b></p>
+            {% comment %} <button onclick="myFunction()" id="myBtn" class="btn btn-info">Read more</button> {% endcomment %}
             
             <div class="courses_container">
                 <h3 style="font-weight: 700;margin-top: 20px">My Courses</h3>
@@ -160,7 +156,7 @@
 
 		                    <div class="col-lg-6 course_col">
 								<div class="course">
-									<div class="course_image"><img src='{{course.thumbnail.url}}' alt=""></div>
+									<div class="course_image"><img src='{% static 'LandingPage/images/course_8.jpg'%}' alt=""></div>
 									<div class="course_body">
 										<h3 class="course_title"><a href="course.html">{{course.title}}</a></h3>
 										<div
@@ -192,11 +188,15 @@
                             <div class="col-sm" align="center" style="margin-left: -20px">
                               
 									<ul class="pagination_list">
-										<li class="active"><i class="fa fa-angle-left" aria-hidden="true"></i><a href="#"></a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-									</ul>
+                                    {% if courses.has_previous %}
+										<li class="active"><a href="?page={{ courses.privious_page_number }}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+									{% endif %}	
+                                        <li><a href="#">{{ courses.number }}</a></li>
+										
+                                    {% if courses.has_next %}
+										<li><a href='?page={{ courses.next_page_number }}'><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+									{% endif %}
+                                    </ul>
                                 
                             </div>
                             <div class="col-sm" align="center" style="margin-right: -15px">
@@ -222,14 +222,23 @@
                     
                 </div>    
                 <div class="col-sm-4">
-                <div style="font-family: 'Raleway',sans-serif" align="center">
-                       <div>  
-                <button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-link" aria-hidden="true"></i> Website</button></div>  
-            <div><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</button></div> 
-            <div><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</button></div>  
-            <div><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn</button></div>  
-            <div><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-youtube" aria-hidden="true"></i> Youtube</button></div>
+                
+            <div style="font-family: 'Raleway',sans-serif" align="center"> 
+                  {% if faci.user.experience.Website_Url %}  <div>     
+                <a href='{{faci.user.experience.Website_Url}}'><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-link" aria-hidden="true"></i> Website</button></a>
+                
+                </div>
+                {% endif %}  
+               
+             
+              
             
+            {% if faci.user.experience.Linkedin_Url %}
+            <div><a href='{{faci.user.experience.Linkedin_Url}}'><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-linkedin-square" aria-hidden="true"></i> LinkedIn</button></a></div>  
+            {% endif %}
+            {% if faci.user.experience.Youtube_Url %}
+            <div><a href='{{faci.user.experience.Youtube_Url}}'><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-youtube" aria-hidden="true"></i> Youtube</button></a></div>
+             {% endif %}
         </div>
                         
         </div>
