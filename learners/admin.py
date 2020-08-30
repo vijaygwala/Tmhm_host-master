@@ -9,9 +9,5 @@ class LearnersAdmin(admin.ModelAdmin):
 class LQueryAdmin(admin.ModelAdmin):
     list_display=('Lid','query','reply','added','updated')
 
-class ReviewsAdmin(admin.ModelAdmin):
-    list_display=('Cid','Lid','reviews','created_at')
-
 admin.site.register(Learners,LearnersAdmin)
 admin.site.register(LQueries,LQueryAdmin)
-admin.site.register(Reviews,ReviewsAdmin)

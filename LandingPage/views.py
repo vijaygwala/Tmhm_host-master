@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from LandingPage.models import *    
 from facilitators.models import *
-from learners.models import *
 from math import ceil
 from django.contrib import messages
 from .forms import *
@@ -59,23 +58,6 @@ def CoursePage(request,pk):
     year=course.updated.strftime('%Y')
     similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
-    user=0
-    userenrolled=Learners.objects.filter(enrolled=Course.objects.get(Cid=pk))
-    print(userenrolled)
-    try:
-        login_user=Learners.objects.get(user=request.user)
-        if Learners.objects.get(user=request.user) in userenrolled:
-            user=1
-        if request.method=='POST':
-            review=request.POST['review']
-            data=Reviews.objects.create(Cid=Course.objects.get(Cid=pk),Lid=Learners.objects.get(user=request.user),reviews=review)
-            data.save()
-            return redirect('course',pk)
-    except:
-        pass
-    reviews=Reviews.objects.filter(Cid=Course.objects.get(Cid=pk))
-    context.update({'reviews':reviews,'user':user})
-    print(context)
     return render(request, 'LandingPage/course/course.html',context)
 
 #Landing page Contact us page
