@@ -56,7 +56,8 @@ def CoursePage(request,pk):
     facilitator=course.offering.all()[0]
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
-    similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
+    similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id).exclude(Cid=course.Cid)[:3]
+    print(similer)
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
     return render(request, 'LandingPage/course/course.html',context)
 

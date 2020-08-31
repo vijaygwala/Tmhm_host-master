@@ -174,7 +174,7 @@ Create Courses
                                                             {% for obj in audience_list %}
                                                             <option value="{{obj.audience}}">{{obj.audience}}</option>
                                                               {% endfor %}                       
-                                                            </select>
+                                                        </select>
                                                     </fieldset>
                                                 </div>
                                             </div>
@@ -640,6 +640,7 @@ Create Courses
 
 {% block javascript %}
  <script>
+ 
     $(document).ready(function(){
   
     var $myForm = $('#msform')
@@ -668,9 +669,7 @@ Create Courses
                 "title":$('#ctitle').val(),
                 "description":$('#cdescription').val(),
                 "session_duration":$('#ctime').val()
-               
-       
-       }
+               }
         $video=$('#coursevideo').get(0).files[0];
 data={
     "rvideo":"true",

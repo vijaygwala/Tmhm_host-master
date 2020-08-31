@@ -300,8 +300,8 @@ Categories
                                     <div class="course">
                                         <div class="course_image"><img src="{% static 'LandingPage/images/course_4.jpg' %}" alt=""></div>
                                         <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">{{course.title}}</a></h3>
-                                            <div class="course_teacher">{{course.offering.}}</div>
+                                            <h3 class="course_title"><a href='{% url 'course' course.Cid %}' class="stretched-link">{{course.title}}</a></h3>
+                                            <div class="course_teacher">{{course.offering.all.0.name}}</div>
                                             <div class="course_text">
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
                                             </div>
@@ -310,7 +310,7 @@ Categories
                                             <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
                                                 <div class="course_info">
                                                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
+                                                    <span>{{ course.enroll.all | length }}</span>
                                                 </div>
                                                 <div class="course_info">
                                                     <i class="fa fa-star" aria-hidden="true"></i>

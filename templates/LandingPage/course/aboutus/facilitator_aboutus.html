@@ -155,10 +155,10 @@
   					           
 
 		                    <div class="col-lg-6 course_col">
-								<div class="course">
+								<div class="card course">
 									<div class="course_image"><img src='{% static 'LandingPage/images/course_8.jpg'%}' alt=""></div>
 									<div class="course_body">
-										<h3 class="course_title"><a href="course.html">{{course.title}}</a></h3>
+										<h3 class="course_title"> <a href='{% url 'course' course.Cid %}' class="stretched-link">{{course.title}}</a></h3>
 										<div
 										<div class="course_text">
 											<p>{{course.description}}</p>
@@ -177,6 +177,7 @@
 											<div class="course_price ml-auto">$130</div>
 										</div>
 									</div>
+                                   
 								</div>
 							</div>
 
@@ -199,7 +200,7 @@
                                     </ul>
                                 
                             </div>
-                            <div class="col-sm" align="center" style="margin-right: -15px">
+                            {% comment %} <div class="col-sm" align="center" style="margin-right: -15px">
                               <div class="courses_show_container ml-auto clearfix">
 										<div class="courses_show_text">Showing <span class="courses_showing">1-6</span> of <span class="courses_total">26</span> results:</div>
 										<div class="courses_show_content">
@@ -212,8 +213,8 @@
 											</select>
 										</div>
 									</div>
-                            </div>
-                          </div>
+                                </div>
+                          </div> {% endcomment %}
                         </div>
 						
 					</div>

@@ -295,7 +295,7 @@ Course Details
 
                             <!-- Course Image -->
                             <div class="course_image"><img src='{% static 'LandingPage/images/course_image.jpg'%}' alt=""></div>
-                            
+                        
                             <!-- Course Tabs -->
                             <div class="course_tabs_container">
                                 <div class="tabs d-flex flex-row align-items-center justify-content-start">
@@ -313,20 +313,15 @@ Course Details
                                                 <p>{{course.description}}</p>
                                             </div>
                                             <div class="tab_panel_section">
-                                                <div class="tab_panel_subtitle">Requirements</div>
+                                                <div class="tab_panel_subtitle">prerequesite</div>
                                                 <ul class="tab_panel_bullets">
-                                                    <li>Lorem Ipsn gravida nibh vel velit auctor aliquet. Class aptent taciti sociosquad litora torquent.</li>
-                                                    <li>Cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a.</li>
-                                                    <li>Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat.</li>
-                                                    <li>Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.</li>
-                                                </ul>
+                                                    <li>No prerequesite required </li>
+                                                   </ul>
                                             </div>
                                             <div class="tab_panel_section">
-                                                <div class="tab_panel_subtitle">What is the target audience?</div>
+                                                <div class="tab_panel_subtitle"></div>
                                                 <div class="tab_panel_text">
-                                                    <p>This course is intended for anyone interested in learning to master his or her own body.This course is aimed at beginners, so no previous experience with hand balancing skillts is necessary Aenean viverra
-                                                        tincidunt nibh, in imperdiet nunc. Suspendisse eu ante pretium, consectetur leo at, congue quam. Nullam hendrerit porta ante vitae tristique. Vestibulum ante ipsum primis in faucibus orci luctus
-                                                        et ultrices posuere cubilia Curae.</p>
+                                                    <p>{{course.takeway}}</p>
                                                 </div>
                                             </div>
                                             <div class="tab_panel_faq">
@@ -609,7 +604,7 @@ Course Details
                                         <!-- Teacher Quizzes -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
                                             <div class="teacher_meta_title">Enrolled students:</div>
-                                            <div class="teacher_meta_text ml-auto"><span>600</span><i class="fa fa-user" aria-hidden="true"></i></div>
+                                            <div class="teacher_meta_text ml-auto"><span>{{course.enroll.all | length }}</span><i class="fa fa-user" aria-hidden="true"></i></div>
                                         </div>
                                     </div>
                                     <div class="teacher_info">
@@ -626,13 +621,13 @@ Course Details
                                 <div class="sidebar_latest">
 
                                     <!-- Latest Course -->
-                                    {% for courses in similar %}
+                                    {% for courses in similer %}
                                     <div class="latest d-flex flex-row align-items-start justify-content-start">
                                         <div class="latest_image">
-                                            <div><img src='{{ courses.thumbnail.url}}' alt=""></div>
+                                            <div><img src='{% static 'LandingPage/images/course_4.jpg' %}' alt=""></div>
                                         </div>
                                         <div class="latest_content">
-                                            <div class="latest_title"><a href="course.html">{{courses.name}}</a></div>
+                                            <div class="latest_title"><a href='{% url 'course' course.Cid %}' class="stretched-link">{{course.title}}</a></div>
                                             <div class="latest_price">Free</div>
                                         </div>
                                     </div>
