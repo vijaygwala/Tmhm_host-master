@@ -30,6 +30,14 @@ Course Details
 
 {% block stylesheet %}
         <style>
+                .rate {
+                    font-size: 30px;
+                     }
+              .rate .fu{
+                    font-size: 30px;
+                    color:#FF9800;      
+                    cursor: pointer;
+                   }
         body,
         html {
             margin: 0;
@@ -245,8 +253,8 @@ Course Details
                             <div class="course_title" style="margin-top: 30px">{{course.title}}</div>
                             <h5 style="color: white">{{course.description}}</h5>
                             
-                            <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button>4.5
-                            <span class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></span>(2,951 ratings) 17,616 students
+                            <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button>{{avg_rating}}
+                            <span class="rating_r rating_r_{{int_avg_rating}}"><i></i><i></i><i></i><i></i><i></i></span>({{total_rating}} ratings) {{total_leaners_for_this_course}} students
                             <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">{{facilitator.name}}</a></h6>
                             <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> English </h6>
                             <div style="margin-top: 10px">
@@ -282,7 +290,7 @@ Course Details
                                 <!-- Course Info Item -->
                                 <div class="course_info_item">
                                     <div class="course_info_title">Reviews:</div>
-                                    <div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+                                    <div class="rating_r rating_r_{{facilitator_rating}}"><i></i><i></i><i></i><i></i><i></i></div>
                                 </div>
 
                                 <!-- Course Info Item -->
@@ -440,43 +448,57 @@ Course Details
 
                                         <!-- Rating -->
                                         <div class="review_rating_container">
-                                            <div class="review_rating">
-                                                <div class="review_rating_num">4.5</div>
-                                                <div class="review_rating_stars">
-                                                    <div class="rating_r rating_r_4"><i></i><i></i><i></i><i></i><i></i></div>
+                                                <div class="review_rating">
+                                                    <div class="review_rating_num">{{avg_rating}}</div>
+                                                    <div class="review_rating_stars">
+                                                        <div class="rating_r rating_r_{{int_avg_rating}}"><i></i><i></i><i></i><i></i><i></i></div>
+                                                    </div>
+                                                    <div class="review_rating_text">({{total_rating}} Ratings)</div>
                                                 </div>
-                                                <div class="review_rating_text">(28 Ratings)</div>
+                                                <div class="review_rating_bars">
+                                                    <ul>
+                                                        <li><span>5 Star</span>
+                                                            <div class="review_rating_bar">
+                                                                <div style="width:{{str5}}%;"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li><span>4 Star</span>
+                                                            <div class="review_rating_bar">
+                                                                <div style="width:{{str4}}%;"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li><span>3 Star</span>
+                                                            <div class="review_rating_bar">
+                                                                <div style="width:{{str3}}%;"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li><span>2 Star</span>
+                                                            <div class="review_rating_bar">
+                                                                <div style="width:{{str2}}%;"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li><span>1 Star</span>
+                                                            <div class="review_rating_bar">
+                                                                <div style="width:{{str1}}%;"></div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <br>
+                                              
+                                                <div style="text-align: center;">
+                                                <p>Rate this Course!</p>
+                                                <div class="rate">
+                                                        <span>&#9733</span>
+                                                        <span>&#9733</span>
+                                                        <span>&#9733</span>
+                                                        <span>&#9733</span>
+                                                        <span>&#9733</span>
+                                                     </div>
+                                                    </div>
                                             </div>
-                                            <div class="review_rating_bars">
-                                                <ul>
-                                                    <li><span>5 Star</span>
-                                                        <div class="review_rating_bar">
-                                                            <div style="width:90%;"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li><span>4 Star</span>
-                                                        <div class="review_rating_bar">
-                                                            <div style="width:75%;"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li><span>3 Star</span>
-                                                        <div class="review_rating_bar">
-                                                            <div style="width:32%;"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li><span>2 Star</span>
-                                                        <div class="review_rating_bar">
-                                                            <div style="width:10%;"></div>
-                                                        </div>
-                                                    </li>
-                                                    <li><span>1 Star</span>
-                                                        <div class="review_rating_bar">
-                                                            <div style="width:3%;"></div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
                                         <!-- Comments -->
                                         <div class="comments_container">
                                             {% for rev in reviews %}
@@ -599,7 +621,7 @@ Course Details
                                         <!-- Teacher Rating -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
                                             <div class="teacher_meta_title">Average Review:</div>
-                                            <div class="teacher_meta_text ml-auto"><span>4.7</span><i class="fa fa-star" aria-hidden="true"></i></div>
+                                            <div class="teacher_meta_text ml-auto"><span>{{float_facilitator_rating}}</span><i class="fa fa-star" aria-hidden="true"></i></div>
                                         </div>
                                         <!-- Teacher Review -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
@@ -706,4 +728,69 @@ Course Details
             }
         }
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script>
+            const stars=document.querySelector(".rate").children;
+            let ratingValue = 0;
+             let index;
+             let rated = {{rated_by_me | safe }};
+      
+              for(let i=0; i<stars.length; i++){
+            
+               if (i<rated) {
+                  
+                  for(let j=0; j<=i; j++){
+                     //stars[j].classList.remove("fa-star-o");		 	
+                  stars[j].classList.add("fu");		 	
+                  }
+               }
+                 stars[i].addEventListener("mouseover",function(){
+                     for(let j=0; j<stars.length; j++){
+                        stars[j].classList.remove("fu");		 	
+                        //stars[j].classList.add("fa-star-o");		 	
+                     }
+                     for(let j=0; j<=i; j++){
+                        //stars[j].classList.remove("fa-star-o");		 	
+                       stars[j].classList.add("fu");		 	
+                     }
+                 })
+                 stars[i].addEventListener("click",function(){
+                 ratingValue=i+1;
+                 index=i;
+                 $.ajax({
+                    url: "{% url 'rate_course' pk %}",
+                    data: {
+                        'star': ratingValue,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                         //alert("Course Rated!");
+                         setTimeout(function() {
+                             window.location.reload();
+                         }, 50);
+                        }
+                        else {
+                          alert("Something went wrong, Try again");
+                        }
+                    }
+                });
+                 console.log(ratingValue);
+                 })
+                 stars[i].addEventListener("mouseout",function(){
+                     
+                     for(let j=0; j<stars.length; j++){
+                        stars[j].classList.remove("fu");		 	
+                        //stars[j].classList.add("fa-star-o");		 	
+                     }
+                     for(let j=0; j<=index; j++){
+                        //stars[j].classList.remove("fa-star-o");		 	
+                       stars[j].classList.add("fu");		 	
+                     }
+                 })
+              }
+            
+      </script>
     {% endblock javascript %}

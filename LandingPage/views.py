@@ -7,6 +7,7 @@ from .forms import *
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
+from django.http import JsonResponse
 # Landing  page
 def home(request):
     return render(request,'LandingPage/index.html')
@@ -52,14 +53,60 @@ def aboutus(request):
 #this is course page
 def CoursePage(request,pk):
     course=Course.objects.get(Cid=pk)
+    
+    # learner = Learners.objects.get()
+    # print(request.user.learner)
+    if course.no_of_ratings() != 0:
+        total_rating = course.no_of_ratings()
+    star_list = course.star_count()
     course_video=course.course_video.all()[0]
     facilitator=course.offering.all()[0]
+    all_course_of_facilitator = facilitator.offering.all()
+    sum_of_avg_ratings = 0
+    for i in all_course_of_facilitator:
+        sum_of_avg_ratings += i.avg_rating()
+    if all_course_of_facilitator.count() != 0:
+        facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
+    print(facilitator_rating)
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
     similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
-    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
+    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
+    'avg_rating': course.avg_rating(),
+    'int_avg_rating': int(course.avg_rating()),
+    'total_rating': total_rating,
+    'str5': star_list[4],
+    'str4': star_list[3],
+    'str3': star_list[2],
+    'str2': star_list[1],
+    'str1': star_list[0],
+    'rated_by_me': course.rating_by_me(request.user.learner),
+    'pk': pk,
+    'total_leaners_for_this_course': course.enroll.all().count(),
+    'facilitator_rating': int(facilitator_rating),
+    'float_facilitator_rating': round(facilitator_rating, 1),
+    }
     return render(request, 'LandingPage/course/course.html',context)
 
+def rate_course(request, pk=None):
+    print('AAAAAAAAYYYYYYYYYYYYYYYAAAAAAAAAA')
+    succ = False
+    strs = request.GET.get('star', None)
+    print(strs)
+    try:
+        obj = Rating.objects.get(course=pk, lerner=request.user.learner)
+        obj.stars = int(strs)
+        obj.save()
+        print("OLD")
+    except:
+        new_obj = Rating(course=pk, lerner=request.user.learner, stars=int(strs))
+        new_obj.save()
+        print('NEW')
+    succ = True
+    data = {
+        'success': succ
+    }
+    return JsonResponse(data)
 #Landing page Contact us page
 def contact(request):
     if request.method=='POST':

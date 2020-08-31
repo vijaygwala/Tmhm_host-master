@@ -59,6 +59,13 @@ def facilitator_Dashboard_Landing_page(request):
     
     
     obj = instance.user.facilitator
+    all_course_of_facilitator = obj.offering.all()
+    sum_of_avg_ratings = 0
+    for i in all_course_of_facilitator:
+        sum_of_avg_ratings += i.avg_rating()
+    if all_course_of_facilitator.count() != 0:
+        facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
+    print(facilitator_rating)
     total_queries = Queries.objects.filter(Fid=obj.Fid).count()
     # print(total_queries)
     pro = instance.user
@@ -83,7 +90,8 @@ def facilitator_Dashboard_Landing_page(request):
         "intrest": pro.intrest,
         'total_learners': total_learners,  
         'active_learners': active_learners,
-        'total_queries': total_queries
+        'total_queries': total_queries,
+        'facilitator_rating': int(facilitator_rating),
     }
     # My courses
     appli=Applicants.objects.get(user=request.user)
@@ -276,6 +284,16 @@ def ChangePassword(request):
 def aboutfacilitator(request,pk):
     
     faci=Facilitator.objects.get(Fid=pk)
+    facilitator_rating = 0
+    try:
+        all_course_of_facilitator = faci.offering.all()
+        sum_of_avg_ratings = 0
+        for i in all_course_of_facilitator:
+            sum_of_avg_ratings += i.avg_rating()
+        if all_course_of_facilitator.count() != 0:
+            facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
+    except:
+        facilitator_rating = 0
     exp = faci.user.experience
     courses=faci.offering.all().order_by('Cid')
     total_learners=0
@@ -289,7 +307,8 @@ def aboutfacilitator(request,pk):
         'faci':faci,
         'exp':exp,
         'total_learners':total_learners,
-        'courses':page_obj
+        'courses':page_obj,
+        'facilitator_rating': round(facilitator_rating, 1),
     }
     return render(request, 'LandingPage/course/aboutus/facilitator_aboutus.html',context)
 

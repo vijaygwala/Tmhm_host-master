@@ -25,6 +25,14 @@
     {% block stylesheet %}
 
     <style>
+            .rate {
+                font-size: 37px;
+             }
+             .rate .fu{
+               font-size: 37px;
+               color:#FF9800;      
+               
+             }
         #accordionSidebar {
             height: 100%;
             width: 160px;
@@ -100,15 +108,14 @@
                                         <img src="{{ request.user.user.facilitator.profile.url }}" alt="" class=" rounded-circle img-fluid" style="width: 100px; height: 100px;">
                                         <br>
                                         <ul class="list-inline ratings text-center" title="Ratings">
-                                            <li class="list-inline-item"><a href="#"><span class="fa fa-star"></span></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><span class="fa fa-star"></span></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><span class="fa fa-star"></span></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><span class="fa fa-star"></span></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#"><span class="fa fa-star"></span></a>
+                                            <div class="rate">
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                                <span>&#9733</span>
+                                             </div>
+                                    ({{facilitator_rating}})
                                             </li>
                                         </ul>
                                         
@@ -369,6 +376,16 @@
     {% endblock content %}
 <!-- ------------------------------------------------- -->
     {% block javascript %}
-
+    <script>
+        const stars=document.querySelector(".rate").children;
+         let rated = {{facilitator_rating | safe }};
+          for(let i=0; i<stars.length; i++){          
+           if (i<rated) { 
+              for(let j=0; j<=i; j++){	 	
+              stars[j].classList.add("fu");		 	
+              }
+           }
+          }
+  </script>
     {% endblock javascript%}
 
