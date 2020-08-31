@@ -62,8 +62,7 @@ def CoursePage(request,pk):
         total_rating = course.no_of_ratings()
 
     star_list = course.star_count()
-   
-    print(star_list)
+    print('LALALA',int(course.avg_rating()))
     course_video=course.course_video.all()[0]
     facilitator=course.offering.all()[0]
     all_course_of_facilitator = facilitator.offering.all()
@@ -72,7 +71,7 @@ def CoursePage(request,pk):
         sum_of_avg_ratings += i.avg_rating()
     if all_course_of_facilitator.count() != 0:
         facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
-    print(star_list[4])
+
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
     similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
@@ -98,13 +97,16 @@ def rate_course(request, pk=None):
     succ = False
     strs = request.GET.get('star', None)
     print(strs)
+    crse = Course.objects.get(pk=pk)
+    print(crse)
     try:
-        obj = Rating.objects.get(course=pk, lerner=request.user.learner)
+        obj = Rating.objects.get(course=crse, lerner=request.user.learner)
         obj.stars = int(strs)
         obj.save()
         print("OLD")
+        print(obj)
     except:
-        new_obj = Rating(course=pk, lerner=request.user.learner, stars=int(strs))
+        new_obj = Rating(course=crse, lerner=request.user.learner, stars=int(strs))
         new_obj.save()
         print('NEW')
     succ = True
