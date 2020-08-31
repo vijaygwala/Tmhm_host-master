@@ -120,7 +120,7 @@ class Course(models.Model):
             percent.append((star5/len(ratings))*100)
             return percent
         else:
-            return 0
+            return [0,0,0,0,0]
     def rating_by_me(self, ler):
         try:
             ratings = Rating.objects.get(course=self, lerner=ler)

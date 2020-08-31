@@ -56,18 +56,23 @@ def CoursePage(request,pk):
     
     # learner = Learners.objects.get()
     # print(request.user.learner)
+    total_rating = 0
+    
     if course.no_of_ratings() != 0:
         total_rating = course.no_of_ratings()
+
     star_list = course.star_count()
+   
+    print(star_list)
     course_video=course.course_video.all()[0]
     facilitator=course.offering.all()[0]
     all_course_of_facilitator = facilitator.offering.all()
     sum_of_avg_ratings = 0
-    for i in all_course_of_facilitator:
+    for i in all_course_of_facilitator: 
         sum_of_avg_ratings += i.avg_rating()
     if all_course_of_facilitator.count() != 0:
         facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
-    print(facilitator_rating)
+    print(star_list[4])
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
     similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
