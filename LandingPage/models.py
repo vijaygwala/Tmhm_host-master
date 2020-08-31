@@ -6,6 +6,8 @@ from django.db.models.signals import post_delete
 from django.core.validators import RegexValidator
 from facilitators.models import Facilitator
 from django.utils import timezone
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 #this table contain all the councelling releted details
 class OnlineCounsellingDetails(models.Model):
     councelling_id = models.AutoField(primary_key=True)
@@ -78,15 +80,74 @@ class Course(models.Model):
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
     
+    def no_of_ratings(self):
+        ratings = Rating.objects.filter(course=self)
+        return len(ratings)
+
+    def avg_rating(self):
+        sum = 0
+        ratings = Rating.objects.filter(course=self)
+        for r in ratings:
+            sum += r.stars
+        if len(ratings)>0:
+            return sum/len(ratings)
+        else:
+            return 0
+    def star_count(self):
+        star1 = 0
+        star2 = 0
+        star3 = 0
+        star4 = 0
+        star5 = 0
+        ratings = Rating.objects.filter(course=self)
+        for r in ratings:
+            if r.stars == 1:
+                star1 += 1
+            elif r.stars == 2:
+                star2 +=1
+            elif r.stars == 3:
+                star3 += 1
+            elif r.stars == 4:
+                star4 += 1
+            elif r.stars == 5:
+                star5 += 1 
+        if len(ratings)>0:
+            percent = []
+            percent.append((star1/len(ratings))*100)
+            percent.append((star2/len(ratings))*100)
+            percent.append((star3/len(ratings))*100)
+            percent.append((star4/len(ratings))*100)
+            percent.append((star5/len(ratings))*100)
+            return percent
+        else:
+            return [0,0,0,0,0]
+    def rating_by_me(self, ler):
+        try:
+            ratings = Rating.objects.get(course=self, lerner=ler)
+            return ratings.stars
+        except:
+            return 0
+
     def __str__(self):
         return self.title
     class Meta:
         verbose_name='Courses'
         verbose_name_plural='Courses'
+
 def content_file_name(instance, filename):
     return '/'.join(['LiveSessions', instance.course.title, filename])
 def content_Rfile_name(instance, filename):
     return '/'.join(['RecordedSession', instance.course.title, filename])
+
+
+class Rating(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    lerner = models.ForeignKey(to='learners.Learners', on_delete=models.CASCADE) 
+    stars = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+
+    class Meta:
+        unique_together = (('lerner', 'course'), )
+        index_together = (('lerner', 'course'), )  
 
 #contain all the recorded videos to the particuler course
 class CourseVideo(models.Model):
