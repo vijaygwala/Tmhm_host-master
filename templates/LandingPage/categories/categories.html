@@ -251,28 +251,12 @@ Categories
                                 <div class="sidebar_categories">
                                     <ul>
 
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">Python</a></h2>
-                                        </li>
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">C++</a></h2>
-                                        </li>
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">Flutter</a></h2>
-                                        </li>
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">Django</a></h2>
-                                        </li>
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">Ruby</a></h2>
-                                        </li>
-
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">Flask</a></h2>
-                                        </li>
-                                        <li class="card" style="padding-left:2rem;">
-                                            <h2 class="course_title"><a href="#">VScode</a></h2>
-                                        </li>
+                                            {% for subcat in categories %}
+                                            <li class="card" style="padding-left:2rem;">
+                                            <h2 class="course_title"><a href='{% url 'category' %}?id={{subcat.subCat_id | urlencode}}'>{{subcat.name}}</a></h2>
+                                                </li>
+                                            {% endfor %}
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -307,15 +291,17 @@ Categories
                             </form>
                         </div>
                         <div class="courses_container">
-                            <div class="row courses_row">
-
+                            
+                             {% for course in courses %}
+  				            {% cycle "<div class='row courses_row'>" "" %}
+    			                
                                 <!-- Course -->
                                 <div class="col-lg-6 course_col">
                                     <div class="course">
                                         <div class="course_image"><img src="{% static 'LandingPage/images/course_4.jpg' %}" alt=""></div>
                                         <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Software Training</a></h3>
-                                            <div class="course_teacher">Mr. John Taylor</div>
+                                            <h3 class="course_title"><a href="course.html">{{course.title}}</a></h3>
+                                            <div class="course_teacher">{{course.offering.}}</div>
                                             <div class="course_text">
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
                                             </div>
@@ -335,146 +321,16 @@ Categories
                                         </div>
                                     </div>
                                 </div>
+                            {% cycle "" "</div>" %}
+				            {% endfor %}
 
-                                <!-- Course -->
-                                <div class="col-lg-6 course_col">
-                                    <div class="course">
-                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_5.jpg' %}" alt=""></div>
-                                        <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Developing Mobile Apps</a></h3>
-                                            <div class="course_teacher">Ms. Lucius</div>
-                                            <div class="course_text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                                            </div>
-                                        </div>
-                                        <div class="course_footer">
-                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">Free</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Course -->
-                                <div class="col-lg-6 course_col">
-                                    <div class="course">
-                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_6.jpg' %}" alt=""></div>
-                                        <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Starting a Startup</a></h3>
-                                            <div class="course_teacher">Mr. Charles</div>
-                                            <div class="course_text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                                            </div>
-                                        </div>
-                                        <div class="course_footer">
-                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto"><span>$320</span>$220</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Course -->
-                                <div class="col-lg-6 course_col">
-                                    <div class="course">
-                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_7.jpg' %}" alt=""></div>
-                                        <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Learn Basic German Fast</a></h3>
-                                            <div class="course_teacher">Mr. John Taylor</div>
-                                            <div class="course_text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                                            </div>
-                                        </div>
-                                        <div class="course_footer">
-                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">$130</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Course -->
-                                <div class="col-lg-6 course_col">
-                                    <div class="course">
-                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_8.jpg' %}" alt=""></div>
-                                        <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Business Groud Up</a></h3>
-                                            <div class="course_teacher">Ms. Lucius</div>
-                                            <div class="course_text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                                            </div>
-                                        </div>
-                                        <div class="course_footer">
-                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">Free</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Course -->
-                                <div class="col-lg-6 course_col">
-                                    <div class="course">
-                                        <div class="course_image"><img src="{% static 'LandingPage/images/course_9.jpg' %}" alt=""></div>
-                                        <div class="course_body">
-                                            <h3 class="course_title"><a href="course.html">Java Technology</a></h3>
-                                            <div class="course_teacher">Mr. Charles</div>
-                                            <div class="course_text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                                            </div>
-                                        </div>
-                                        <div class="course_footer">
-                                            <div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-                                                <div class="course_info">
-                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                                    <span>20 Student</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto"><span>$320</span>$220</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                               
 
                             </div>
 
                         </div>
-                    </div>
+                    
 
 
                 </div>

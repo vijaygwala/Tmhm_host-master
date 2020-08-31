@@ -74,7 +74,16 @@ def contact(request):
 
 #Landing page categories page
 def category(request):
-    return render(request, 'LandingPage/categories/categories.html')
+    categories=SubCategory.objects.all()[:7]
+    pk=request.GET.get('id')
+    if pk is None:
+        cat = SubCategory.objects.get(subCat_id=categories[0].subCat_id)
+    else:
+        cat = SubCategory.objects.get(subCat_id=pk)
+    
+    courses=Course.objects.filter(subCat_id=cat)
+    context={'categories':categories,'courses':courses}
+    return render(request, 'LandingPage/categories/categories.html',context)
 
 #Landing page tems and services page
 def termsandservices(request):
