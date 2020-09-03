@@ -79,9 +79,10 @@ def CoursePage(request,pk):
     year=course.updated.strftime('%Y')
     similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id).exclude(Cid=course.Cid)[:3]
     print(similer)
-    val=0
+    val=[]
     try:
         val=course.rating_by_me(request.user.learner)
+        print(val)
     except:
         pass
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
@@ -137,8 +138,8 @@ def rate_course(request, pk=None):
     print(strs)
     crse = Course.objects.get(pk=pk)
     print(crse)
-    similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
-    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
+    similer=Course.objects.filter(subCat_id=crse.subCat_id).exclude(Cid=crse.Cid)[:3]
+    # context={'course':crse,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
     try:
         obj = Rating.objects.get(course=crse, lerner=request.user.learner)
         obj.stars = int(strs)
@@ -168,7 +169,7 @@ def rate_course(request, pk=None):
         sum_of_avg_ratings += i.avg_rating()
     if all_course_of_facilitator.count() != 0:
         facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
-    val=0
+    val=[]
     try:
         val=course.rating_by_me(request.user.learner)
     except:
