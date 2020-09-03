@@ -76,6 +76,7 @@ def CoursePage(request,pk):
 
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
+<<<<<<< HEAD
     similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id).exclude(Cid=course.Cid)[:3]
     print(similer)
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
@@ -102,6 +103,13 @@ def rate_course(request, pk=None):
     print(strs)
     crse = Course.objects.get(pk=pk)
     print(crse)
+=======
+    similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
+    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
+    user=0
+    fac_user=0
+    userenrolled=Learners.objects.filter(enrolled=Course.objects.get(Cid=pk))
+>>>>>>> 101f8f26f9de5159061f445e46bc62597ca7203a
     try:
         obj = Rating.objects.get(course=crse, lerner=request.user.learner)
         obj.stars = int(strs)
@@ -109,6 +117,7 @@ def rate_course(request, pk=None):
         print("OLD")
         print(obj)
     except:
+<<<<<<< HEAD
         new_obj = Rating(course=crse, lerner=request.user.learner, stars=int(strs))
         new_obj.save()
         print('NEW')
@@ -145,6 +154,25 @@ def rate_course(request, pk=None):
     'total_leaners_for_this_course': course.enroll.all().count(),
     'facilitator_rating': int(facilitator_rating),
     'float_facilitator_rating': round(facilitator_rating, 1),
+=======
+        pass
+    try:
+        if str(offer.objects.get(Cid=pk).Fid.user) == str(request.user):
+            fac_user=1
+    except:
+        pass
+    rev=request.POST.get('reply1')
+    print(rev)
+    if rev!=None:
+        freply=request.POST.get('reply')
+        data=Reply.objects.create(Rid=Reviews.objects.get(pk=int(rev)),replies=freply)
+        print(data)
+        data.save()
+    reviews=Reviews.objects.filter(Cid=Course.objects.get(Cid=pk))
+    context.update({'reviews':reviews,'user':user,'fac_user':fac_user})
+    print(context)
+    return render(request, 'LandingPage/course/course.html',context)
+>>>>>>> 101f8f26f9de5159061f445e46bc62597ca7203a
 
     }
 

@@ -514,10 +514,39 @@ Course Details
                                                             <div class="comment_text">
                                                                 <p>{{ rev.reviews }}</p>
                                                             </div>
-                                                            <!-- <div class="comment_extras d-flex flex-row align-items-center justify-content-start">
-                                                                <div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div>
-                                                                <div class="comment_extra comment_reply"><a href="#"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
-                                                            </div> -->
+                                                            <div class="comment_extras d-flex flex-row align-items-center justify-content-start">
+                                                                <!-- <div class="comment_extra comment_likes"><a href="#"><i class="fa fa-heart" aria-hidden="true"></i><span>15</span></a></div> -->
+                                                                <div class="comment_extra comment_reply"><a class="on-reply" id="{{ rev.id }}"><i class="fa fa-reply" aria-hidden="true"></i><span>Reply</span></a></div>
+                                                                
+                                                            </div>
+                                                            <br>
+                                                            <div class="reply{{ rev.id }}" id="{{ rev.id }}" name="{{ rev.id }}" style="display:none;">
+                                                                {% for rep in rev.reply_set.all %}
+                                                                <div class="d-flex flex-row align-items-start jutify-content-start">
+                                                                    <div class="comment_image">
+                                                                        <div><img src={{ facilitator.profile.url }} alt=""></div>
+                                                                    </div>
+                                                                    <div class="comment_content">
+                                                                        <div class="comment_title_container d-flex flex-row align-items-center justify-content-start">
+                                                                            <div class="comment_author"><a href="#">{{ facilitator.name }}</a></div>
+                                                                        </div>
+                                                                        <div class="comment_text">
+                                                                            <p>{{ rep.replies }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                                {% if fac_user == 1 %}
+                                                                <form method="POST" id="reply-form{{ rev.id }}">
+                                                                    {% csrf_token %}
+                                                                    <div class="form-group">
+                                                                        <textarea class="form-control" id="exampleFormControlTextarea1{{ rev.id }}" rows="3" name="Reply"
+                                                                            placeholder="Reply"></textarea>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                </form>
+                                                                {% endif %}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -703,6 +732,27 @@ Course Details
             } else {
             input.attr("type", "password");
             }
+        });
+
+        $(document).ready(function () {
+            $(".on-reply").click(function (e) {
+                e.preventDefault()
+                var idstr = this.id.toString();
+                var id = $(this).attr('id');
+                $(".reply"+idstr).slideToggle();
+                $("#reply-form"+idstr).submit(function (e) {
+                    console.log(id)
+                    $.ajax({
+                    type: "POST",
+                    url: "{% url 'course' 1 %}",
+                    data: {
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                        'reply1': id,
+                        'reply':$('#exampleFormControlTextarea1'+idstr).val()
+                        },
+                    });
+                });  
+            });
         });
 
         function check_ephone(phno, email){
