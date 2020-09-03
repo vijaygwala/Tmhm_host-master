@@ -60,8 +60,8 @@ def CoursePage(request,pk):
     similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
     user=0
+    fac_user=0
     userenrolled=Learners.objects.filter(enrolled=Course.objects.get(Cid=pk))
-    print(userenrolled)
     try:
         login_user=Learners.objects.get(user=request.user)
         if Learners.objects.get(user=request.user) in userenrolled:
@@ -73,8 +73,20 @@ def CoursePage(request,pk):
             return redirect('course',pk)
     except:
         pass
+    try:
+        if str(offer.objects.get(Cid=pk).Fid.user) == str(request.user):
+            fac_user=1
+    except:
+        pass
+    rev=request.POST.get('reply1')
+    print(rev)
+    if rev!=None:
+        freply=request.POST.get('reply')
+        data=Reply.objects.create(Rid=Reviews.objects.get(pk=int(rev)),replies=freply)
+        print(data)
+        data.save()
     reviews=Reviews.objects.filter(Cid=Course.objects.get(Cid=pk))
-    context.update({'reviews':reviews,'user':user})
+    context.update({'reviews':reviews,'user':user,'fac_user':fac_user})
     print(context)
     return render(request, 'LandingPage/course/course.html',context)
 

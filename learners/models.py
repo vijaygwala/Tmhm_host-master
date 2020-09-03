@@ -51,11 +51,17 @@ class Reviews(models.Model):
     Lid=models.ForeignKey(Learners,on_delete=models.CASCADE)
     reviews=models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.Lid.name
         
     class Meta:
         verbose_name='Course Reviews'
         verbose_name_plural='Course Reviews'
-    
 
+class Reply(models.Model):
+    Rid=models.ForeignKey(Reviews,on_delete=models.CASCADE)
+    replies=models.CharField(max_length=2000)
+    
+    def __str__(self):
+        return self.replies
