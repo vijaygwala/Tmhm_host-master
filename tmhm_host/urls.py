@@ -21,6 +21,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('', include('LandingPage.api.urls')),
      path('', include('myauth.urls')),
     path('', include('facilitators.api.urls')),
     path('', include('myauth.api.urls')),

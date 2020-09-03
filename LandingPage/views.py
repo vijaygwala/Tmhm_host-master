@@ -8,6 +8,11 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.contrib.auth.decorators import login_required
 from myauth.decoraters import *
 from django.http import JsonResponse
+from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404, get_list_or_404, reverse
+from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
+
+
 # Landing  page
 def home(request):
     return render(request,'LandingPage/index.html')
@@ -53,9 +58,6 @@ def aboutus(request):
 #this is course page
 def CoursePage(request,pk):
     course=Course.objects.get(Cid=pk)
-    
-    # learner = Learners.objects.get()
-    # print(request.user.learner)
     total_rating = 0
     
     if course.no_of_ratings() != 0:
@@ -74,12 +76,8 @@ def CoursePage(request,pk):
 
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
-<<<<<<< HEAD
     similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id).exclude(Cid=course.Cid)[:3]
     print(similer)
-    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
-=======
-    similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
     'avg_rating': course.avg_rating(),
     'int_avg_rating': int(course.avg_rating()),
@@ -94,8 +92,7 @@ def CoursePage(request,pk):
     'total_leaners_for_this_course': course.enroll.all().count(),
     'facilitator_rating': int(facilitator_rating),
     'float_facilitator_rating': round(facilitator_rating, 1),
-    }
->>>>>>> e6028bf94039efe47b8cce33e7956880549648c4
+    } 
     return render(request, 'LandingPage/course/course.html',context)
 
 def rate_course(request, pk=None):
@@ -119,7 +116,39 @@ def rate_course(request, pk=None):
     data = {
         'success': succ
     }
-    return JsonResponse(data)
+    
+    course=crse
+    total_rating = 0
+    
+    if course.no_of_ratings() != 0:
+        total_rating = course.no_of_ratings()
+
+    star_list = course.star_count()
+    facilitator=course.offering.all()[0]
+    all_course_of_facilitator = facilitator.offering.all()
+    sum_of_avg_ratings = 0
+    for i in all_course_of_facilitator: 
+        sum_of_avg_ratings += i.avg_rating()
+    if all_course_of_facilitator.count() != 0:
+        facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
+    context={
+    'avg_rating': course.avg_rating(),
+    'int_avg_rating': int(course.avg_rating()),
+    'total_rating': total_rating,
+    'str5': star_list[4],
+    'str4': star_list[3],
+    'str3': star_list[2],
+    'str2': star_list[1],
+    'str1': star_list[0],
+    'rated_by_me': course.rating_by_me(request.user.learner),
+    'pk': pk,
+    'total_leaners_for_this_course': course.enroll.all().count(),
+    'facilitator_rating': int(facilitator_rating),
+    'float_facilitator_rating': round(facilitator_rating, 1),
+
+    }
+
+    return JsonResponse(context)
 #Landing page Contact us page
 def contact(request):
     if request.method=='POST':
@@ -136,13 +165,18 @@ def contact(request):
 def category(request):
     categories=SubCategory.objects.all()[:7]
     pk=request.GET.get('id')
-    if pk is None:
+    page_number=request.GET.get('page')
+
+    if pk is None and page_number is None:
         cat = SubCategory.objects.get(subCat_id=categories[0].subCat_id)
     else:
         cat = SubCategory.objects.get(subCat_id=pk)
     
     courses=Course.objects.filter(subCat_id=cat)
-    context={'categories':categories,'courses':courses}
+    paginator=Paginator(courses,6,orphans=1)
+    page_obj=paginator.get_page(page_number)
+
+    context={'categories':categories,'courses':page_obj}
     return render(request, 'LandingPage/categories/categories.html',context)
 
 #Landing page tems and services page

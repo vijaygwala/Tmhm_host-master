@@ -78,6 +78,7 @@ class Course(models.Model):
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    language=models.CharField(max_length=100,null=False,blank=False)
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
     
     def no_of_ratings(self):

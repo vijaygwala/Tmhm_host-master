@@ -253,10 +253,10 @@ Course Details
                             <div class="course_title" style="margin-top: 30px">{{course.title}}</div>
                             <h5 style="color: white">{{course.description}}</h5>
                             
-                            <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button>{{avg_rating}}
-                            <span class="rating_r rating_r_{{int_avg_rating}}"><i></i><i></i><i></i><i></i><i></i></span>({{total_rating}} ratings) {{total_leaners_for_this_course}} students
+                            <button class="btn btn-info btn-sm" style="margin-right: 10px">Highest rated</button><span id='avg_rating_card'>{{avg_rating}}</span>
+                            <span class="rating_r rating_r_{{int_avg_rating}}"><i></i><i></i><i></i><i></i><i></i></span>(<span id='total_rating_card'>{{ total_rating}}</span> ratings) {{total_leaners_for_this_course}} students
                             <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">{{facilitator.name}}</a></h6>
-                            <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> English </h6>
+                            <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> {{course.language}} </h6>
                             <div style="margin-top: 10px">
                                 <button type="button" class="btn btn-outline-info" style="margin-right: 30px">Wishlist <i class="fa fa-heart" aria-hidden="true"></i></button>
                                 <button type="button" class="btn btn-outline-info">Share <i class="fa fa-share" aria-hidden="true"></i></button>
@@ -444,7 +444,7 @@ Course Details
                                         <!-- Rating -->
                                         <div class="review_rating_container">
                                                 <div class="review_rating">
-                                                    <div class="review_rating_num">{{avg_rating}}</div>
+                                                            <div id='review_rating_num'class="review_rating_num">{{avg_rating}}</div>
                                                     <div class="review_rating_stars">
                                                         <div class="rating_r rating_r_{{int_avg_rating}}"><i></i><i></i><i></i><i></i><i></i></div>
                                                     </div>
@@ -454,27 +454,27 @@ Course Details
                                                     <ul>
                                                         <li><span>5 Star</span>
                                                             <div class="review_rating_bar">
-                                                                <div style="width:{{str5}}%;"></div>
+                                                                <div id='str5' style="width:{{str5}}%;" ></div>
                                                             </div>
                                                         </li>
                                                         <li><span>4 Star</span>
                                                             <div class="review_rating_bar">
-                                                                <div style="width:{{str4}}%;"></div>
+                                                                <div id='str4'style="width:{{str4}}%;"></div>
                                                             </div>
                                                         </li>
                                                         <li><span>3 Star</span>
                                                             <div class="review_rating_bar">
-                                                                <div style="width:{{str3}}%;"></div>
+                                                                <div id='str3' style="width:{{str3}}%;"></div>
                                                             </div>
                                                         </li>
                                                         <li><span>2 Star</span>
                                                             <div class="review_rating_bar">
-                                                                <div style="width:{{str2}}%;"></div>
+                                                                <div id='str2'style="width:{{str2}}%;" ></div>
                                                             </div>
                                                         </li>
                                                         <li><span>1 Star</span>
                                                             <div class="review_rating_bar">
-                                                                <div style="width:{{str1}}%;"></div>
+                                                                <div id='str1' style="width:{{str1}}%;"></div>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -616,7 +616,7 @@ Course Details
                                         <!-- Teacher Rating -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
                                             <div class="teacher_meta_title">Average Review:</div>
-                                            <div class="teacher_meta_text ml-auto"><span>{{float_facilitator_rating}}</span><i class="fa fa-star" aria-hidden="true"></i></div>
+                                            <div class="teacher_meta_text ml-auto"><span id='float_facilitator_rating'></span><i class="fa fa-star" aria-hidden="true"></i></div>
                                         </div>
                                         <!-- Teacher Review -->
                                         <div class="teacher_meta d-flex flex-row align-items-center justify-content-start">
@@ -639,10 +639,12 @@ Course Details
 
                             <!-- Latest Course -->
                             <div class="sidebar_section" style="margin-bottom: -100px">
+                             {% if similer %}
                                 <div class="sidebar_section_title">Similar Courses</div>
                                 <div class="sidebar_latest">
 
                                     <!-- Latest Course -->
+                                   
                                     {% for courses in similer %}
                                     <div class="latest d-flex flex-row align-items-start justify-content-start">
                                         <div class="latest_image">
@@ -654,11 +656,12 @@ Course Details
                                         </div>
                                     </div>
                                     {% endfor %}
+                                   
 
                                    
                                 </div>
                             </div>
-
+                             {% endif %}
                         </div>
                     </div>
                 </div>
@@ -752,7 +755,7 @@ Course Details
                      }
                  })
                  stars[i].addEventListener("click",function(){
-                 ratingValue=i+1;
+                 ratingValue=i+1; 
                  index=i;
                  $.ajax({
                     url: "{% url 'rate_course' pk %}",
@@ -761,15 +764,17 @@ Course Details
                     },
                     dataType: 'json',
                     success: function (data) {
-                        if (data.success) {
-                         //alert("Course Rated!");
-                         setTimeout(function() {
-                             window.location.reload();
-                         }, 50);
-                        }
-                        else {
-                          alert("Something went wrong, Try again");
-                        }
+                       $('#review_rating_num').text(data.avg_rating.toFixed(1));
+                        $('#float_facilitator_rating').text(data.float_facilitator_rating);
+                         $('#avg_rating_card').text(data.avg_rating.toFixed(1));
+                         $('#total_rating_card').text(data.total_rating);
+                        
+                        $("#str1").css("width", data.str1+'%');
+                        $("#str2").css("width", data.str2+'%');
+                        $("#str3").css("width", data.str3+'%');
+                        $("#str4").css("width", data.str4+'%');
+                        $("#str5").css("width", data.str5+'%');
+                       
                     }
                 });
                  console.log(ratingValue);

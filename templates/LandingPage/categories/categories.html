@@ -284,8 +284,8 @@ Categories
                     <!-- Courses Main Content -->
                     <div class="col-lg-8">
                         <div class="courses_search_container">
-                            <form action="#" id="courses_search_form" class="courses_search_form d-flex flex-row align-items-center ">
-                                <input type="search" class="courses_search_input" placeholder="Search Courses" required="required">
+                            <form action='{% url 'search' %}' id="courses_search_form" method="GET"class="courses_search_form d-flex flex-row align-items-center ">
+                                <input type="search" class="courses_search_input" placeholder="Search Courses" name="query" required="required">
 
                                 <button action="submit" class="courses_search_button ml-auto">search now</button>
                             </form>
@@ -324,7 +324,24 @@ Categories
                             {% cycle "" "</div>" %}
 				            {% endfor %}
 
+                                 <div class="container" style="margin-top: -30px">
+                        <div class="row">
+                            <div class="col-sm" align="center" style="margin-left: -20px">
+                              
+									<ul class="pagination_list">
+                                    {% if courses.has_previous %}
+										<li class="active"><a href="?page={{ courses.privious_page_number }}&id={{courses.0.subCat_id.subCat_id}}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+									{% endif %}	
+                                        <li><a href="#">{{ courses.number }}</a></li>
+										
+                                    {% if courses.has_next %}
+										<li><a href="?page={{ courses.next_page_number }}&id={{courses.0.subCat_id.subCat_id}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+									{% endif %}
+                                    </ul>
                                 
+                            </div>
+                            </div>
+                            </div>
                                
 
                             </div>
