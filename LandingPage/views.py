@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from LandingPage.models import *    
 from facilitators.models import *
+from learners.models import *
 from math import ceil
 from django.contrib import messages
 from .forms import *
@@ -76,9 +77,13 @@ def CoursePage(request,pk):
 
     month =course.updated.strftime('%b')
     year=course.updated.strftime('%Y')
-<<<<<<< HEAD
     similer=Course.objects.filter(subCat_id=course.subCat_id.subCat_id).exclude(Cid=course.Cid)[:3]
     print(similer)
+    val=0
+    try:
+        val=course.rating_by_me(request.user.learner)
+    except:
+        pass
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
     'avg_rating': course.avg_rating(),
     'int_avg_rating': int(course.avg_rating()),
@@ -88,12 +93,41 @@ def CoursePage(request,pk):
     'str3': star_list[2],
     'str2': star_list[1],
     'str1': star_list[0],
-    'rated_by_me': course.rating_by_me(request.user.learner),
+    'rated_by_me': val,
     'pk': pk,
     'total_leaners_for_this_course': course.enroll.all().count(),
     'facilitator_rating': int(facilitator_rating),
     'float_facilitator_rating': round(facilitator_rating, 1),
     } 
+    user=0
+    fac_user=0
+    userenrolled=Learners.objects.filter(enrolled=Course.objects.get(Cid=pk))
+    try:
+        login_user=Learners.objects.get(user=request.user)
+        if Learners.objects.get(user=request.user) in userenrolled:
+            user=1
+        if request.method=='POST':
+            review=request.POST['review']
+            data=Reviews.objects.create(Cid=Course.objects.get(Cid=pk),Lid=Learners.objects.get(user=request.user),reviews=review)
+            data.save()
+            return redirect('course',pk)
+    except:
+        pass
+    try:
+        if str(offer.objects.get(Cid=pk).Fid.user) == str(request.user):
+            fac_user=1
+    except:
+        pass
+    rev=request.POST.get('reply1')
+    print(rev)
+    if rev!=None:
+        freply=request.POST.get('reply')
+        data=Reply.objects.create(Rid=Reviews.objects.get(pk=int(rev)),replies=freply)
+        print(data)
+        data.save()
+    reviews=Reviews.objects.filter(Cid=Course.objects.get(Cid=pk))
+    context.update({'reviews':reviews,'user':user,'fac_user':fac_user})
+    print(context)
     return render(request, 'LandingPage/course/course.html',context)
 
 def rate_course(request, pk=None):
@@ -103,13 +137,8 @@ def rate_course(request, pk=None):
     print(strs)
     crse = Course.objects.get(pk=pk)
     print(crse)
-=======
     similer=Course.objects.filter(subCat_id=course.subCat_id).exclude(Cid=course.Cid)[:3]
     context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
-    user=0
-    fac_user=0
-    userenrolled=Learners.objects.filter(enrolled=Course.objects.get(Cid=pk))
->>>>>>> 101f8f26f9de5159061f445e46bc62597ca7203a
     try:
         obj = Rating.objects.get(course=crse, lerner=request.user.learner)
         obj.stars = int(strs)
@@ -117,7 +146,6 @@ def rate_course(request, pk=None):
         print("OLD")
         print(obj)
     except:
-<<<<<<< HEAD
         new_obj = Rating(course=crse, lerner=request.user.learner, stars=int(strs))
         new_obj.save()
         print('NEW')
@@ -140,6 +168,11 @@ def rate_course(request, pk=None):
         sum_of_avg_ratings += i.avg_rating()
     if all_course_of_facilitator.count() != 0:
         facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
+    val=0
+    try:
+        val=course.rating_by_me(request.user.learner)
+    except:
+        pass
     context={
     'avg_rating': course.avg_rating(),
     'int_avg_rating': int(course.avg_rating()),
@@ -149,34 +182,14 @@ def rate_course(request, pk=None):
     'str3': star_list[2],
     'str2': star_list[1],
     'str1': star_list[0],
-    'rated_by_me': course.rating_by_me(request.user.learner),
+    'rated_by_me': val,
     'pk': pk,
     'total_leaners_for_this_course': course.enroll.all().count(),
     'facilitator_rating': int(facilitator_rating),
-    'float_facilitator_rating': round(facilitator_rating, 1),
-=======
-        pass
-    try:
-        if str(offer.objects.get(Cid=pk).Fid.user) == str(request.user):
-            fac_user=1
-    except:
-        pass
-    rev=request.POST.get('reply1')
-    print(rev)
-    if rev!=None:
-        freply=request.POST.get('reply')
-        data=Reply.objects.create(Rid=Reviews.objects.get(pk=int(rev)),replies=freply)
-        print(data)
-        data.save()
-    reviews=Reviews.objects.filter(Cid=Course.objects.get(Cid=pk))
-    context.update({'reviews':reviews,'user':user,'fac_user':fac_user})
-    print(context)
-    return render(request, 'LandingPage/course/course.html',context)
->>>>>>> 101f8f26f9de5159061f445e46bc62597ca7203a
-
-    }
-
+    'float_facilitator_rating': round(facilitator_rating, 1),}
     return JsonResponse(context)
+
+
 #Landing page Contact us page
 def contact(request):
     if request.method=='POST':

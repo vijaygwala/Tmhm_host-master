@@ -45,9 +45,7 @@ class LQueries(models.Model):
     def __str__(self):
         return self.Lid.name
 
-<<<<<<< HEAD
     
-=======
 # Reviews of Courses
 class Reviews(models.Model):
     Cid=models.ForeignKey(Course,on_delete=models.CASCADE)
@@ -61,7 +59,6 @@ class Reviews(models.Model):
     class Meta:
         verbose_name='Course Reviews'
         verbose_name_plural='Course Reviews'
->>>>>>> 101f8f26f9de5159061f445e46bc62597ca7203a
 
 class Reply(models.Model):
     Rid=models.ForeignKey(Reviews,on_delete=models.CASCADE)
