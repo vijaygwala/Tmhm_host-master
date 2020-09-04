@@ -7,9 +7,11 @@
 1. Vars and Inits
 2. Set Header
 3. Init Menu
-4. Init Header Search
-5. Init Home Slider
-6. Initialize Milestones
+4. Init Home Slider
+5. Init Scrolling
+6. Init Isotope
+7. Init Testimonials Slider
+8. Init Input
 
 
 ******************************/
@@ -25,16 +27,21 @@ $(document).ready(function()
 	*/
 
 	var header = $('.header');
-	var menuActive = false;
+	var headerSocial = $('.header_social');
 	var menu = $('.menu');
+	var menuActive = false;
 	var burger = $('.hamburger');
-	var ctrl = new ScrollMagic.Controller();
 
 	setHeader();
 
 	$(window).on('resize', function()
 	{
 		setHeader();
+
+		setTimeout(function()
+		{
+			$(window).trigger('resize.px.parallax');
+		}, 375);
 	});
 
 	$(document).on('scroll', function()
@@ -43,9 +50,11 @@ $(document).ready(function()
 	});
 
 	initMenu();
-	initHeaderSearch();
 	initHomeSlider();
-	initMilestones();
+	initIsotope();
+	initTestimonialsSlider();
+	initScrolling();
+	initInput();
 
 	/* 
 
@@ -55,19 +64,21 @@ $(document).ready(function()
 
 	function setHeader()
 	{
-		if($(window).scrollTop() > 100)
+		if($(window).scrollTop() > 127)
 		{
 			header.addClass('scrolled');
+			headerSocial.addClass('scrolled');
 		}
 		else
 		{
 			header.removeClass('scrolled');
+			headerSocial.removeClass('scrolled');
 		}
 	}
 
 	/* 
 
-	3. Init Menu
+	3. Set Menu
 
 	*/
 
@@ -87,21 +98,20 @@ $(document).ready(function()
 					else
 					{
 						openMenu();
-
-						$(document).one('click', function cls(e)
-						{
-							if($(e.target).hasClass('menu_mm'))
-							{
-								$(document).one('click', cls);
-							}
-							else
-							{
-								closeMenu();
-							}
-						});
 					}
 				});
 			}
+		}
+		if($('.menu_close').length)
+		{
+			var close = $('.menu_close');
+			close.on('click', function()
+			{
+				if(menuActive)
+				{
+					closeMenu();
+				}
+			});
 		}
 	}
 
@@ -119,27 +129,7 @@ $(document).ready(function()
 
 	/* 
 
-	4. Init Header Search
-
-	*/
-
-	function initHeaderSearch()
-	{
-		if($('.search_button').length)
-		{
-			$('.search_button').on('click', function()
-			{
-				if($('.header_search_container').length)
-				{
-					$('.header_search_container').toggleClass('active');
-				}
-			});
-		}
-	}
-
-	/* 
-
-	5. Init Home Slider
+	4. Init Home Slider
 
 	*/
 
@@ -151,88 +141,134 @@ $(document).ready(function()
 			homeSlider.owlCarousel(
 			{
 				items:1,
+				autoplay:false,
 				loop:true,
-				autoplay:true,
 				nav:false,
 				dots:false,
 				smartSpeed:1200
 			});
-
-			if($('.home_slider_prev').length)
-			{
-				var prev = $('.home_slider_prev');
-				prev.on('click', function()
-				{
-					homeSlider.trigger('prev.owl.carousel');
-				});
-			}
-
-			if($('.home_slider_next').length)
-			{
-				var next = $('.home_slider_next');
-				next.on('click', function()
-				{
-					homeSlider.trigger('next.owl.carousel');
-				});
-			}
 		}
 	}
 
 	/* 
 
-	6. Initialize Milestones
+	5. Init Scrolling
 
 	*/
 
-	function initMilestones()
+	function initScrolling()
 	{
-		if($('.milestone_counter').length)
+		if($('.home_page_nav ul li a').length)
 		{
-			var milestoneItems = $('.milestone_counter');
-
-	    	milestoneItems.each(function(i)
+			var links = $('.home_page_nav ul li a');
+	    	links.each(function()
 	    	{
 	    		var ele = $(this);
-	    		var endValue = ele.data('end-value');
-	    		var eleValue = ele.text();
-
-	    		/* Use data-sign-before and data-sign-after to add signs
-	    		infront or behind the counter number */
-	    		var signBefore = "";
-	    		var signAfter = "";
-
-	    		if(ele.attr('data-sign-before'))
+	    		var target = ele.data('scroll-to');
+	    		ele.on('click', function(e)
 	    		{
-	    			signBefore = ele.attr('data-sign-before');
-	    		}
-
-	    		if(ele.attr('data-sign-after'))
-	    		{
-	    			signAfter = ele.attr('data-sign-after');
-	    		}
-
-	    		var milestoneScene = new ScrollMagic.Scene({
-		    		triggerElement: this,
-		    		triggerHook: 'onEnter',
-		    		reverse:false
-		    	})
-		    	.on('start', function()
-		    	{
-		    		var counter = {value:eleValue};
-		    		var counterTween = TweenMax.to(counter, 4,
-		    		{
-		    			value: endValue,
-		    			roundProps:"value", 
-						ease: Circ.easeOut, 
-						onUpdate:function()
-						{
-							document.getElementsByClassName('milestone_counter')[i].innerHTML = signBefore + counter.value + signAfter;
-						}
-		    		});
-		    	})
-			    .addTo(ctrl);
+	    			e.preventDefault();
+	    			$(window).scrollTo(target, 1500, {offset: -90, easing: 'easeInOutQuart'});
+	    		});
 	    	});
+		}	
+	}
+
+	/* 
+
+	6. Init Isotope
+
+	*/
+
+	function initIsotope()
+	{
+		if($('.item_grid').length)
+		{
+			var grid = $('.item_grid').isotope({
+				itemSelector: '.item',
+	            getSortData:
+	            {
+	            	price: function(itemElement)
+	            	{
+	            		var priceEle = $(itemElement).find('.destination_price').text().replace( 'From $', '' );
+	            		return parseFloat(priceEle);
+	            	},
+	            	name: '.destination_title a'
+	            },
+	            animationOptions:
+	            {
+	                duration: 750,
+	                easing: 'linear',
+	                queue: false
+	            }
+	        });
 		}
 	}
 
+	/* 
+
+	7. Init Testimonials Slider
+
+	*/
+
+	function initTestimonialsSlider()
+	{
+		if($('.testimonials_slider').length)
+		{
+			var testSlider = $('.testimonials_slider');
+			testSlider.owlCarousel(
+			{
+				animateOut: 'fadeOut',
+    			animateIn: 'flipInX',
+				items:1,
+				autoplay:true,
+				loop:true,
+				smartSpeed:1200,
+				dots:false,
+				nav:false
+			});
+		}
+	}
+
+	/* 
+
+	8. Init Input
+
+	*/
+
+	function initInput()
+	{
+		if($('.newsletter_input').length)
+		{
+			var inpt = $('.newsletter_input');
+			inpt.each(function()
+			{
+				var ele = $(this);
+				var border = ele.next();
+
+				ele.focus(function()
+				{
+					border.css({'visibility': "visible", 'opacity': "1"});
+				});
+				ele.blur(function()
+				{
+					border.css({'visibility': "hidden", 'opacity': "0"});
+				});
+
+				ele.on("mouseenter", function()
+				{
+					border.css({'visibility': "visible", 'opacity': "1"});
+				});
+
+				ele.on("mouseleave", function()
+				{
+					if(!ele.is(":focus"))
+					{
+						border.css({'visibility': "hidden", 'opacity': "0"});
+					}
+				});
+				
+			});
+		}
+	}
 });
