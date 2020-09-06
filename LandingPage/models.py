@@ -66,6 +66,10 @@ class Course(models.Model):
         ('Enterpreners','Enterpreners'),
         ('Others','Others')
         )
+    Level=(
+        ('Beginner','Beginner'),
+        ('Advanced','Advanced')
+    )
     Cid=models.AutoField(primary_key=True)
     code=models.CharField(max_length=100,null=False,blank=False)
     title=models.CharField(max_length=100,null=False,blank=False)
@@ -81,7 +85,7 @@ class Course(models.Model):
     price = models.IntegerField()
     language=models.CharField(max_length=100,null=False,blank=False)
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
-    
+    level = models.CharField(choices=Level,max_length=50,default='Beginner')
     def no_of_ratings(self):
         ratings = Rating.objects.filter(course=self)
         return len(ratings)
