@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, get_list_or_404, reverse
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
+from payment_gateway.models import *
 
 
 # Landing  page
@@ -19,7 +20,19 @@ def home(request):
     return render(request,'LandingPage/index.html')
 
 def cart(request):
-    return render(request,'LandingPage/cart/cart.html')
+    if request.user.is_authenticated:
+        customer = request.user
+        order , created = Order.objects.get_or_create(customer=customer, status=False)   
+        items = order.ordercourses_set.all()
+        #cartItems = order.get_cart_items
+    else:
+        #cookieData = cookieCart(request)
+        #cartItems = cookieData['cartItems']
+        
+        items = {}
+        order ={'get_cart_total':0,'get_cart_items':0}
+    context={ 'items':items,'order':order}
+    return render(request,'LandingPage/cart/cart.html',context)
 
 
 #free content avialable for users here 

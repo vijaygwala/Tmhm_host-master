@@ -441,7 +441,7 @@ var formData = new FormData();
 let csrftoken = getCookie('csrftoken');
  $.ajaxSetup({async: false});
 $.ajax({
-    url: '{% url 'register' %}',
+    url: '{% url 'facilitator-register' %}',
     async: false,
     data: formData,
     contentType: false,

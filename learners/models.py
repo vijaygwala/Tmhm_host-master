@@ -20,7 +20,7 @@ class Learners(models.Model):
     state=models.CharField(max_length=100,blank=True,null=True)
     zipcode=models.CharField(max_length=7,blank=True,null=True)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE,null=True,related_name='learner')
-    enrolled=models.ManyToManyField(Course, related_name = 'enroll')
+    enrolled=models.ManyToManyField(Course, through='enrollment',related_name = 'enroll')
     status=models.CharField(max_length=100,null=True,blank=True,default='Active')
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
@@ -31,6 +31,14 @@ class Learners(models.Model):
         verbose_name_plural='Learners'
     def __str__(self):
         return self.name
+
+class enrollment(models.Model):
+    Lid = models.ForeignKey(Learners, on_delete=models.CASCADE)
+    Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
+    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated = models.DateTimeField(blank=True,null=True)
+    def __str__(self):
+        return self.Lid.name
 
 class LQueries(models.Model):
     Lid=models.ForeignKey(Learners,on_delete=models.CASCADE)
@@ -45,7 +53,6 @@ class LQueries(models.Model):
     def __str__(self):
         return self.Lid.name
 
-    
 # Reviews of Courses
 class Reviews(models.Model):
     Cid=models.ForeignKey(Course,on_delete=models.CASCADE)

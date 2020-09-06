@@ -25,6 +25,8 @@ Course Details
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
         <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.carousel.css'%}'>
         <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.theme.default.min.css'%}'>
+        <link rel="stylesheet" href='{% static 'payment_gateway/js/cart.js'%}'>
+        
 {% endblock header %}
 <!---------------------------------- -->
 
@@ -603,7 +605,7 @@ Course Details
                                         <h5 class="card-title">$180 <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">$500 </span><span style="font-size: 15px;"> 30% Off </span> </h5>
                                     </div>
                                     <button type="button" class="btn btn-primary" style="margin: 10px;">Buy Now</button>
-                                    <a href='{% url 'cart'%}' class="btn btn-outline-primary" style="margin: 10px">Add to cart</a>
+                                    <a href='{% url 'cart'%}' data-product="{{product.id}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</a>
                                     <div class="card-title" style="margin-left: 20px;margin-top: 10px">
                                         <h5>Course Feature</h5>
                                     </div>
@@ -716,6 +718,10 @@ Course Details
 <!-------------------------- -->
 
 {% block javascript %}
+
+<script>
+var user = '{{request.user}}'
+</script>
     <script>
 
         $(".custom-file-input").on("change", function() {
@@ -780,6 +786,12 @@ Course Details
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
     <script>
+
+
+
+
+
+
             const stars=document.querySelector(".rate").children;
             let ratingValue = 0;
              let index;
