@@ -15,13 +15,14 @@ from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, get_list_or_404, reverse
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-<<<<<<< HEAD
-from payment_gateway.models import *
 
-=======
+
 from django.template.loader import render_to_string
 from facilitators.api.views import CourseSerializers,offerSerializers
->>>>>>> 3b4781a873950808599d1d33cc1f519595f44e9f
+from payment_gateway.models import *
+from django.core import serializers
+
+
 
 # Landing  page
 def home(request):
@@ -60,20 +61,23 @@ def exploreCourses(request):
         course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
     if query is not None:
         course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
-    # print(course)
+    print(course)
     paginator=Paginator(course,6,orphans=1)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     context={
         'cat':cat,
         'subcat':subcat,
-        'page_obj':page_obj,
+        'page_obj':page_obj
+        
     }
+    
+    #return JsonResponse(context,safe=False)
     print(course)
     if request.is_ajax() and op!="All Categories":
         data=CourseSerializers(page_obj,many=True).data
         print(CourseSerializers(page_obj,many=True).data)
-        # print(course)
+        print(data)
         return JsonResponse(data,safe=False)
     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
 
