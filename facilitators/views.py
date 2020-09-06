@@ -57,7 +57,7 @@ def facilitator_Dashboard_Landing_page(request):
     # o = instance.learner.all()
     # print('leaner', o)
     
-    
+    facilitator_rating = 0
     obj = instance.user.facilitator
     all_course_of_facilitator = obj.offering.all()
     sum_of_avg_ratings = 0
@@ -65,7 +65,6 @@ def facilitator_Dashboard_Landing_page(request):
         sum_of_avg_ratings += i.avg_rating()
     if all_course_of_facilitator.count() != 0:
         facilitator_rating = sum_of_avg_ratings/all_course_of_facilitator.count()
-    print(facilitator_rating)
     total_queries = Queries.objects.filter(Fid=obj.Fid).count()
     # print(total_queries)
     pro = instance.user
