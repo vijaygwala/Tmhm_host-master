@@ -1,18 +1,22 @@
+import json
 from django.shortcuts import render,redirect
 from LandingPage.models import *    
 from facilitators.models import *
 from learners.models import *
+from django.db.models import Q
 from math import ceil
 from django.contrib import messages
 from .forms import *
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from myauth.decoraters import *
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, get_list_or_404, reverse
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
-
+from django.template.loader import render_to_string
+from facilitators.api.views import CourseSerializers,offerSerializers
 
 # Landing  page
 def home(request):
@@ -26,31 +30,31 @@ def freecontent(request):
 
 # users can expolore the courses from explore courses
 def exploreCourses(request):
-    course=offer.objects.all()
-    course1=[]
-    context={}
-    if len(course)==0:
-        context.update({'count':0})
-        return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
-    for i in range(0,len(course)):
-        subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
-        context.setdefault('subcategory',set()).add(subcategory)
-        course1.append(course[i].Cid)
-    category=[]
-    for cat in context['subcategory']:
-        val=Course.objects.filter(subCat_id=cat.subCat_id)
-        val1=[]
-        for c in val:
-            if c in course1:
-                val1.append(c)
-        n=len(val1)
-        nSlides=(n//3)+ceil(n/3-n//3)
-        l=[val1,range(1,nSlides),n]
-        category.append(l)
-    print(context)
-    context.update({'category':category})
+    cat=Category.objects.all()
+    subcat=SubCategory.objects.all()
+    course=Course.objects.all()
+    query = request.GET.get('query')
+    op=request.GET.get('op')
+    if op!=None and op!="All Categories":
+        course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
+    if query is not None:
+        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+    # print(course)
+    paginator=Paginator(course,6,orphans=1)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+    context={
+        'cat':cat,
+        'subcat':subcat,
+        'page_obj':page_obj,
+    }
+    print(course)
+    if request.is_ajax() and op!="All Categories":
+        data=CourseSerializers(page_obj,many=True).data
+        print(CourseSerializers(page_obj,many=True).data)
+        # print(course)
+        return JsonResponse(data,safe=False)
     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
-
 
 #Landing page about us page
 def aboutus(request):
@@ -224,3 +228,28 @@ def category(request):
 #Landing page tems and services page
 def termsandservices(request):
     return render(request, 'LandingPage/terms/terms.html')
+
+
+    # course=offer.objects.all()
+    # course1=[]
+    # context={}
+    # if len(course)==0:
+    #     context.update({'count':0})
+    #     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
+    # for i in range(0,len(course)):
+    #     subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
+    #     context.setdefault('subcategory',set()).add(subcategory)
+    #     course1.append(course[i].Cid)
+    # category=[]
+    # for cat in context['subcategory']:
+    #     val=Course.objects.filter(subCat_id=cat.subCat_id)
+    #     val1=[]
+    #     for c in val:
+    #         if c in course1:
+    #             val1.append(c)
+    #     n=len(val1)
+    #     nSlides=(n//3)+ceil(n/3-n//3)
+    #     l=[val1,range(1,nSlides),n]
+    #     category.append(l)
+    # print(context)
+    # context.update({'category':category})
