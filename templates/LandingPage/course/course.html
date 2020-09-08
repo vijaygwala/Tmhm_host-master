@@ -25,8 +25,56 @@ Course Details
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400">
         <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.carousel.css'%}'>
         <link rel="stylesheet" href='{% static 'LandingPage/LandingPage/css/owl.theme.default.min.css'%}'>
-        <link rel="stylesheet" href='{% static 'payment_gateway/js/cart.js'%}'>
         
+        <script>
+var user = '{{request.user}}'
+function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+
+        	function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+</script>
 {% endblock header %}
 <!---------------------------------- -->
 
@@ -260,7 +308,7 @@ Course Details
                             <h6 style="color: white;margin-top: 10px">Created by <a href="#" style="color:#14bdee">{{facilitator.name}}</a></h6>
                             <h6 style="color: white;margin-top: 10px"><i class="fa fa-globe" aria-hidden="true"></i> {{course.language}} </h6>
                             <div style="margin-top: 10px">
-                                <button type="button" class="btn btn-outline-info" style="margin-right: 30px">Wishlist <i class="fa fa-heart" aria-hidden="true"></i></button>
+                                <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-info update-cart" style="margin-right: 30px">Wishlist <i class="fa fa-heart" aria-hidden="true"></i></button>
                                 <button type="button" class="btn btn-outline-info">Share <i class="fa fa-share" aria-hidden="true"></i></button>
                             </div>
 
@@ -604,8 +652,8 @@ Course Details
                                     <div class="card-body" style="margin-bottom:-30px">
                                         <h5 class="card-title">$180 <span style="text-decoration-line: line-through;font-size: 15px;" class="text-muted">$500 </span><span style="font-size: 15px;"> 30% Off </span> </h5>
                                     </div>
-                                    <button type="button" class="btn btn-primary" style="margin: 10px;">Buy Now</button>
-                                    <a href='{% url 'cart'%}' data-product="{{product.id}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</a>
+                                    <button data-product="{{course.Cid}}" data-action="add" class="btn btn-primary update-cart" style="margin: 10px;">Buy Now</button>
+                                    <button data-product="{{course.Cid}}" data-action="add" class="btn btn-outline-primary update-cart" style="margin: 10px">Add to cart</button>
                                     <div class="card-title" style="margin-left: 20px;margin-top: 10px">
                                         <h5>Course Feature</h5>
                                     </div>
@@ -719,9 +767,7 @@ Course Details
 
 {% block javascript %}
 
-<script>
-var user = '{{request.user}}'
-</script>
+
     <script>
 
         $(".custom-file-input").on("change", function() {
@@ -785,6 +831,7 @@ var user = '{{request.user}}'
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+    <script type="text/javascript" src="{% static 'payment_gateway/js/cart.js' %}"></script>
     <script>
 
 
@@ -826,6 +873,7 @@ var user = '{{request.user}}'
                     },
                     dataType: 'json',
                     success: function (data) {
+                        console.log(data)
                        $('#review_rating_num').text(data.avg_rating.toFixed(1));
                         $('#float_facilitator_rating').text(data.float_facilitator_rating);
                          $('#avg_rating_card').text(data.avg_rating.toFixed(1));

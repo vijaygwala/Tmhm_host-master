@@ -90,8 +90,8 @@ class user_login(View):
                     
                 if user.is_active:
                     login(request, user)
-                    if request.GET.get('next', None):
-                        return HttpResponseRedirect(request.GET['next'])
+                    # if request.GET.get('next', None):
+                    #     return HttpResponseRedirect(request.GET['next'])
                     if user.groups.filter(name='Facilitators').exists():
                         return HttpResponseRedirect(reverse('dashboard'))
                     elif user.groups.filter(name='Learners').exists():

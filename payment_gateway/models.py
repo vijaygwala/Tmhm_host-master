@@ -29,4 +29,4 @@ class OrderCourses(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     @property
     def get_total(self):
-        return self.order.price
+        return self.course.price
