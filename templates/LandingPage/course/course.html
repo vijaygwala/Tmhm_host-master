@@ -796,7 +796,7 @@ function getToken(name) {
                     console.log(id)
                     $.ajax({
                     type: "POST",
-                    url: "{% url 'course' 1 %}",
+                    url: "{% url 'course' pk %}",
                     data: {
                         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
                         'reply1': id,
