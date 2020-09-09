@@ -10,49 +10,49 @@ def learner_page(request):
 
 #learners dashboard certificate page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def certicate(request):
     return render(request,'learners/dashboard/certificate.html')
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def chat(request):
     return render(request,'learners/dashboard/chat1.html')
 
 #learners dashboard Landing Page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def index(request):
     return render(request,'learners/dashboard/index.html')
 
 #learners dashboard internship page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def internships(request):
     return render(request,'learners/dashboard/internships.html')
 
 #learners dashboard liveclasses page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def liveclasses(request):
     return render(request,'learners/dashboard/liveclasses.html')
 
 #learners dashboard certificate page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def profile(request):
     return render(request,'learners/dashboard/profile.html')
 
 #learners dashboard Account setting page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def settings(request):
     return render(request,'learners/dashboard/settings.html')
 
 
 #learners dashboard support section page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def support(request):
     learner=Learners.objects.get(Lid=1)
     if request.method=='POST':
@@ -65,7 +65,7 @@ def support(request):
     return render(request,'learners/dashboard/Support.html',context)
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
-@allowed_users(['Learners'])
+@allowed_users(['Learners','Visiters'])
 def tte(request):
     return render(request,'learners/dashboard/tte.html')
 

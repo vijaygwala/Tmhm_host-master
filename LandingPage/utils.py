@@ -47,8 +47,8 @@ def cartData(request):
     context={}
     if request.user.is_authenticated:
         customer = request.user
-        order, created = Order.objects.get_or_create(customer=customer, Status=False)
-        items = order.orderitem_set.all()
+        order, created = Order.objects.get_or_create(customer=customer, status=False)
+        items = order.ordercourses_set.all()
         cartItems = order.get_cart_items
         name = request.user.first_name+" "+request.user.last_name
     

@@ -406,7 +406,7 @@ Explore Courses
                                     <div class="course">
                                         <div class="course_image"><img src="{% static 'LandingPage/images/course_7.jpg' %}" alt=""></div>
                                         <div class="course_body">
-                                            <h3 class="course_title"><a href="{% url 'course' crse.pk %}">{{ crse.title}}</a></h3>
+                                            <h3 class="course_title"><a href="{% url "course" crse.Cid %}">{{ crse.title}}</a></h3>
                                             <div class="course_teacher">{{ crse.offering.all.0.name }}</div>
                                             <div class="course_text">
                                                 <p>{{ crse.description }}</p>
@@ -505,17 +505,13 @@ Explore Courses
                     console.log(op);
                     $.ajax({
                         type: "GET",
-                        url: "{% url 'Lexplorecourses' %}",
+                        url: "{% url "Lexplorecourses" %}",
                         data: {
                             'op': op,
                         },
                         success: function (data) {
                             // $(".courses_container").html(data);
-                            for(var i=0 ;i<data.length;i++)
-                            {
-                            var page_obj={
-
-                            }
+                           
 
                         }
                     });
