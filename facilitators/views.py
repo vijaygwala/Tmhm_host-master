@@ -61,6 +61,7 @@ def facilitator_Dashboard_Landing_page(request):
     obj = instance.user.facilitator
     all_course_of_facilitator = obj.offering.all()
     sum_of_avg_ratings = 0
+    facilitator_rating=0
     for i in all_course_of_facilitator:
         sum_of_avg_ratings += i.avg_rating()
     if all_course_of_facilitator.count() != 0:

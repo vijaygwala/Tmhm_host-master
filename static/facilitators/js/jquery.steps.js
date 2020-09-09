@@ -278,11 +278,12 @@ function destroy(wizard, options)
 function finishStep(wizard, state)
 {
     var currentStep = wizard.find(".steps li").eq(state.currentIndex);
-
+    
     if (wizard.triggerHandler("finishing", [state.currentIndex]))
     {
         currentStep.addClass("done").removeClass("error");
-        wizard.triggerHandler("finished", [state.currentIndex]);
+        
+        
     }
     else
     {
@@ -786,6 +787,7 @@ function paginationClickHandler(event)
         options = getOptions(wizard),
         state = getState(wizard),
         href = anchor.attr("href");
+        id=anchor.attr("id");
 
     switch (href.substring(href.lastIndexOf("#") + 1))
     {
@@ -821,7 +823,7 @@ function refreshPagination(wizard, options, state)
 {
     if (options.enablePagination)
     {
-        var finish = wizard.find(".actions a[href$='#finish']").parent(),
+        var finish = wizard.find(".actions a[href$='#'] ").parent(),
             next = wizard.find(".actions a[href$='#next']").parent();
 
         if (!options.forceMoveForward)
@@ -860,6 +862,7 @@ function refreshStepNavigation(wizard, options, state, oldIndex)
     var currentOrNewStepAnchor = getStepAnchor(wizard, state.currentIndex),
         currentInfo = $("<span class=\"current-info audible\">" + options.labels.current + " </span>"),
         stepTitles = wizard.find(".content > .title");
+   
 
     if (oldIndex != null)
     {
@@ -1055,24 +1058,24 @@ function renderPagination(wizard, options, state)
     if (options.enablePagination)
     {
         var pagination = "<{0} class=\"actions {1}\"><ul role=\"menu\" aria-label=\"{2}\">{3}</ul></{0}>",
-            buttonTemplate = "<li><a href=\"#{0}\" role=\"menuitem\">{1}</a></li>",
+            buttonTemplate = "<li><a href=\"#{0}\" role=\"menuitem\" id=\"{2}\">{1}</a></li>",
             buttons = "";
 
         if (!options.forceMoveForward)
         {
-            buttons += buttonTemplate.format("previous", options.labels.previous);
+            buttons += buttonTemplate.format("previous", options.labels.previous,"");
         }
 
-        buttons += buttonTemplate.format("next", options.labels.next);
+        buttons += buttonTemplate.format("next", options.labels.next,"");
 
         if (options.enableFinishButton)
         {
-            buttons += buttonTemplate.format("finish", options.labels.finish);
+            buttons += buttonTemplate.format("", options.labels.finish, "finish");
         }
 
         if (options.enableCancelButton)
         {
-            buttons += buttonTemplate.format("cancel", options.labels.cancel);
+            buttons += buttonTemplate.format("cancel", options.labels.cancel,"");
         }
 
         wizard.append(pagination.format(options.actionContainerTag, options.clearFixCssClass,

@@ -173,7 +173,7 @@ body {
 <div class="container">
     <div class="row">
         <div class="col-md-7" id="facilitator-form">
-            <form id="msform" method="POST" enctype="multipart/form-data" action="{% url 'facilitator-register' %}" >
+            <form id="msform" method="POST" enctype="multipart/form-data" action="{% url 'register' %}" >
                     {% csrf_token %}
                 <ul id="progressbar">
                     <li class="active">Personal Details</li>
@@ -441,7 +441,7 @@ var formData = new FormData();
 let csrftoken = getCookie('csrftoken');
  $.ajaxSetup({async: false});
 $.ajax({
-    url: '{% url 'register' %}',
+    url: '{% url "register" %}',
     async: false,
     data: formData,
     contentType: false,
@@ -457,7 +457,7 @@ $.ajax({
     },
     success: function(response) {
       if (response.redirect) {
-                window.location.href ='{% url "facilitator-register" %}';
+                window.location.href ='{% url "register" %}';
             } 
     }
 });

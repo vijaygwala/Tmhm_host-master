@@ -125,7 +125,7 @@
       </div>
     </div>
     </div>
-<div class="container d-flex flex-row align-items-center justify-content-start" style="margin-top:-50px;margin-bottom: 50px">
+    <div class="container d-flex flex-row align-items-center justify-content-start" style="margin-top:-50px;margin-bottom: 50px">
       <div class="container">
       <div class="row">
         <div class="col-sm-8">
@@ -149,11 +149,11 @@
 						
 							
 							<!-- Course -->
-                            {% for course in courses %}
-  				            {% cycle "<div class='row courses_row'>" "" %}
-    			                
-  					           
-
+                            
+  				            <!-- {% cycle "<div class='row courses_row'>" "" %} -->
+                                  <div class="row courses_row ">
+                                    {% for course in courses %}
+                            
 		                    <div class="col-lg-6 course_col">
 								<div class="card course">
 									<div class="course_image"><img src='{% static 'LandingPage/images/course_8.jpg'%}' alt=""></div>
@@ -177,14 +177,15 @@
 											<div class="course_price ml-auto">$130</div>
 										</div>
 									</div>
-                                   
 								</div>
-							</div>
-
-							
-						 {% cycle "" "</div>" %}
-				            {% endfor %}
-                            <div class="container" style="margin-top: -30px">
+                            </div>	
+                            
+                         <!-- {% cycle "" "</div>" %} -->
+                         {% endfor %}
+                        </div>
+                        
+                        
+                        <div class="container" style="margin-top: -30px">
                           <div class="row">
                             <div class="col-sm" align="center" style="margin-left: -20px">
                               
@@ -218,11 +219,12 @@
                         </div>
 						
 					</div>
-                    </div>
+        </div>
 
                     
-                </div>    
-                <div class="col-sm-4">
+                  
+        </div>
+        <div class="col-sm-4">
                 
             <div style="font-family: 'Raleway',sans-serif" align="center"> 
                   {% if faci.user.experience.Website_Url %}  <div>     
@@ -240,13 +242,13 @@
             {% if faci.user.experience.Youtube_Url %}
             <div><a href='{{faci.user.experience.Youtube_Url}}'><button type="button" class="btn btn-outline-info" style="padding-left:50px;padding-right:50px;width:200px;font-weight:700;margin-top:10px"><i class="fa fa-youtube" aria-hidden="true"></i> Youtube</button></a></div>
              {% endif %}
-        </div>
+            </div>
                         
         </div>
         </div>
       </div>
     </div>
-    </div>
+</div>
     
     
     <!-- footer start  -->

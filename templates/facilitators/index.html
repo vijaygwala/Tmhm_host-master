@@ -28,6 +28,8 @@
   <!-- Template Main CSS File -->
   <link href="{% static 'facilitators/css/style.css'%}" rel="stylesheet">
   <link href="{% static 'facilitators/css/fontawesome.css'%}" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   
   <style>
 body,html {
@@ -235,7 +237,7 @@ footer #social i:hover{
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/facilitator-register" class="btn btn-primary rounded" style="color: white">Register <i class="icofont-circled-right"></i></a>
+                        <a href="{% url 'register' %}" class="btn btn-primary rounded" style="color: white">Register <i class="icofont-circled-right"></i></a>
                     </li>
                    
                 </ul>
@@ -1034,7 +1036,10 @@ footer #social i:hover{
   <script src="{% static 'facilitators/vendor/owl.carousel/owl.carousel.min.js'%}"></script>
   <script src="{% static 'facilitators/vendor/aos/aos.js'%}"></script>
   <script src="{% static 'facilitators/js/main.js'%}"></script>
-  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   <script>
     function change() {
       var elem = document.getElementById("mybtn");
@@ -1063,6 +1068,7 @@ footer #social i:hover{
             }
         });
   </script>
+  
 </body>
 
 </html>
