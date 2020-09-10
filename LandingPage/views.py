@@ -37,16 +37,7 @@ def UpdateCart(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
-    print('Action:', action)
-    print('Product:', productId)
-
-    customer = request.user
-    product = Course.objects.get(Cid=productId)
-    order, created = Order.objects.get_or_create(customer=customer, status=False)
-    orderItem, created = OrderCourses.objects.get_or_create(order=order, course=product)
-    orderItem.save()
-    if action == 'remove':
-        orderItem.delete()
+    CreateOrder(request,productId,action)
     return JsonResponse('Item was added', safe=False)
 
 

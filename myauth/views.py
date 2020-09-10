@@ -42,6 +42,9 @@ def signup(request):
             group = Group.objects.get(name='Visiters')
             user.groups.add(group)
             login(request, user)
+            payment=request.GET.get('payment',None)
+            if payment is not None:
+                return redirect('/Courses/Cart/')
             return redirect('/')
     else:
         form = UserForm()

@@ -3,6 +3,19 @@ from LandingPage.models import *
 import json
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
+def CreateOrder(request,productId,action=None):
+    customer = request.user
+    product = Course.objects.get(Cid=productId)
+    order, created = Order.objects.get_or_create(customer=customer, status=False)
+    orderItem, created = OrderCourses.objects.get_or_create(order=order, course=product)
+    orderItem.save()
+    if action == 'remove':
+        orderItem.delete()
+def CreateOrderWithAnonymousCart(request,cart):
+    for productId in cart:
+        CreateOrder(request,productId)
+
+
 
 def cookieCart(request):
     
@@ -11,10 +24,10 @@ def cookieCart(request):
 		cart = json.loads(request.COOKIES['cart'])
 	except:
 		cart = {}
-		print('CART:', cart)
+		
 
 	items = []
-	order = {'get_cart_total':0, 'get_cart_items':0, 'shipping':False}
+	order = {'get_cart_total':0, 'get_cart_items':0}
 	cartItems = order['get_cart_items']
 
 	for i in cart:
@@ -45,7 +58,15 @@ def cookieCart(request):
 
 def cartData(request):
     context={}
+   
     if request.user.is_authenticated:
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart = {}
+        if bool(cart):
+            CreateOrderWithAnonymousCart(request,cart)
+
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, status=False)
         items = order.ordercourses_set.all()
@@ -90,3 +111,4 @@ def cartData(request):
     context['order']=order
     context['items']=items
     return context
+
