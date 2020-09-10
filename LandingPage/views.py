@@ -17,7 +17,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404, reverse
 from django.http import HttpResponse, HttpResponseNotFound, Http404,  HttpResponseRedirect
 
 
-from django.template.loader import render_to_string
+from django.template.loader import render_to_string,get_template
 from facilitators.api.views import CourseSerializers,offerSerializers
 from payment_gateway.models import *
 from django.core import serializers
@@ -253,28 +253,3 @@ def category(request):
 #Landing page tems and services page
 def termsandservices(request):
     return render(request, 'LandingPage/terms/terms.html')
-
-
-    # course=offer.objects.all()
-    # course1=[]
-    # context={}
-    # if len(course)==0:
-    #     context.update({'count':0})
-    #     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
-    # for i in range(0,len(course)):
-    #     subcategory=SubCategory.objects.get(name=course[i].Cid.subCat_id)
-    #     context.setdefault('subcategory',set()).add(subcategory)
-    #     course1.append(course[i].Cid)
-    # category=[]
-    # for cat in context['subcategory']:
-    #     val=Course.objects.filter(subCat_id=cat.subCat_id)
-    #     val1=[]
-    #     for c in val:
-    #         if c in course1:
-    #             val1.append(c)
-    #     n=len(val1)
-    #     nSlides=(n//3)+ceil(n/3-n//3)
-    #     l=[val1,range(1,nSlides),n]
-    #     category.append(l)
-    # print(context)
-    # context.update({'category':category})
