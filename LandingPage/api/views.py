@@ -27,3 +27,16 @@ def SearchFilters(request):
     page_obj=paginator.get_page(page_number)   
     context={'categories':categories,'courses':queryset}
     return render(request, 'LandingPage/categories/categories.html',context)
+
+# def SearchFiltersexplore(request):
+#     query = request.GET.get('query', None)
+#     cat=Category.objects.all()
+#     subcat=SubCategory.objects.all()
+#     page_number=request.GET.get('page',None)
+#     queryset=None
+#     if query is not None:
+#         queryset = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+#     paginator=Paginator(queryset,6,orphans=1)
+#     page_obj=paginator.get_page(page_number)   
+#     context={'subcat':subcat,'page_obj':page_obj,'cat':cat}
+#     return render(request, 'LandingPage/exploreCourses/exploreCourses.html',context)

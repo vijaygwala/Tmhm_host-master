@@ -66,6 +66,10 @@ class Course(models.Model):
         ('Enterpreners','Enterpreners'),
         ('Others','Others')
         )
+    Level=(
+        ('Beginner','Beginner'),
+        ('Advanced','Advanced')
+    )
     Cid=models.AutoField(primary_key=True)
     code=models.CharField(max_length=100,null=False,blank=False)
     title=models.CharField(max_length=100,null=False,blank=False)
@@ -78,9 +82,10 @@ class Course(models.Model):
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
+    price = models.IntegerField()
     language=models.CharField(max_length=100,null=False,blank=False)
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
-    
+    level = models.CharField(choices=Level,max_length=50,default='Beginner')
     def no_of_ratings(self):
         ratings = Rating.objects.filter(course=self)
         return len(ratings)
@@ -195,13 +200,12 @@ class offer(models.Model):
     #     verbose_name_plural='Details about Courses and Facilitators'
 
 class Queries(models.Model):
-    Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE)
+    Fid=models.ForeignKey(Facilitator, on_delete=models.CASCADE,null=True)
     query=models.TextField(max_length=500)
     reply=models.TextField(max_length=500,blank=True, null=True)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
-    def __str__(self):
-        return self.Fid.name
+    
 
     class Meta:
         verbose_name='Support For Facilitators'

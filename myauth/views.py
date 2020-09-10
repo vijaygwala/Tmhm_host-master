@@ -9,6 +9,26 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth import logout
 from rest_framework.authtoken.models import Token
+from passlib.hash import django_pbkdf2_sha256 as handler
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+import random
+import string
+from django.contrib import messages
+from django.http.response import HttpResponseRedirect, HttpResponse
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+import json
+from math import ceil
+from rest_framework.authtoken.models import Token
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+import threading
+import datetime
+from django.template import RequestContext
+from django.contrib import messages
+from django.contrib.messages import get_messages
 
 # global signup system
 def signup(request):
@@ -22,6 +42,9 @@ def signup(request):
             group = Group.objects.get(name='Visiters')
             user.groups.add(group)
             login(request, user)
+            payment=request.GET.get('payment',None)
+            if payment is not None:
+                return redirect('/Courses/Cart/')
             return redirect('/')
     else:
         form = UserForm()
@@ -46,12 +69,10 @@ class user_login(View):
                 return HttpResponseRedirect(reverse('login'))
 
         print(context)
-
-            
         return render(request,'facilitators/index.html', context)
 
 
-    
+
     def post(self, request):
         if request.method == "POST":
             email1 =  request.POST['email']
@@ -72,8 +93,8 @@ class user_login(View):
                     
                 if user.is_active:
                     login(request, user)
-                    if request.GET.get('next', None):
-                        return HttpResponseRedirect(request.GET['next'])
+                    # if request.GET.get('next', None):
+                    #     return HttpResponseRedirect(request.GET['next'])
                     if user.groups.filter(name='Facilitators').exists():
                         return HttpResponseRedirect(reverse('dashboard'))
                     elif user.groups.filter(name='Learners').exists():
@@ -133,3 +154,102 @@ def user_logout(request):
         logout(request)
         return HttpResponseRedirect(reverse('home'))
 
+
+# for handling ajax request for change password form of setting section of profile
+@login_required(login_url='/facilitator/login/')
+def ChangePassword(request):
+    suc_res = ''
+    err_res = ''
+    current = request.GET.get('currentPassword', None)
+    newp = request.GET.get('newPassword', None)
+    confirmp = request.GET.get('confirmNewPassword', None)
+
+
+    try:
+        obj = get_object_or_404(CustomUser, email=request.user)
+        # print(obj.password)
+    except:
+        print('NO USER FOUND')
+        # print(handler.verify(current, obj.password))
+    if handler.verify(current, obj.password):
+        obj.set_password(confirmp)
+        obj.save()
+        suc_res = 'Password changed successfully!'
+    else:
+        err_res = "Invalid current Password!"
+
+    msg = { 'err_res':err_res,
+            'suc_res': suc_res
+        }
+
+    data = {
+            'msg': msg
+        }
+    return JsonResponse(data)
+
+
+
+
+#forgot password view ------------------------------- By Saurabh Gujjar
+# @allowed_users(['Facilitators','Visiters','Learners'])
+def forgot_password(request, pk=None):
+    print('AYYYYYA')
+    if request.method == 'GET':
+        print('GETTTTTTTTTTTT')
+        print(pk)
+        u = CustomUser.objects.get(id=pk)
+        print(u)
+        #get_object_or_404(CustomUser, pk=pk)
+        otp = random.randrange(1234, 99999, 3)
+        print(otp)
+        print(u)
+        receiver = 'vijaygwala73@gmail.com'
+        subject = 'OTP from Learnopad' + ' : ' + str(otp)
+        text = 'Hi '+ receiver+' Your OTP from Learnopad.com is: ' + str(otp) + 'This OTP is valid for 7 minutes only!'
+        send_mail(str(subject), text, 'vijaygwala97@gmail.com', [receiver,], fail_silently=False)
+        print('mail sent')
+        def expire():
+            try:
+                o = get_object_or_404(OTP, sender=u.email)
+                print(o.value)
+                print('Deleting OTP...')
+                o.delete()
+            except:
+                print('Already deleted')
+        try:
+            o = get_object_or_404(OTP, sender=u.email)
+            o.value = otp
+            o.save()
+            threading.Timer(420.0, expire).start()
+        except:
+            o = OTP.objects.create(sender=u.email, value=otp)
+            threading.Timer(420.0, expire).start()
+
+
+    if request.method == 'POST':
+        print('POSTTTTTT')
+        u = get_object_or_404(CustomUser, pk=pk)
+        o = get_object_or_404(OTP, sender=u.email)
+        otp =  request.POST['otp']
+        newpassword =  request.POST['newpassword']
+        confirmpassword =  request.POST['confirmpassword']
+        if str(newpassword) == str(confirmpassword):
+
+            if str(o.value) == str(otp):
+                u.set_password(confirmpassword)
+                u.save()
+                print('password_recovered')
+                messages.add_message(request, messages.INFO, 'password_recovered')
+                return HttpResponseRedirect(reverse('login'))  
+            else:
+                print('invalid otp')
+                messages.add_message(request, messages.INFO, 'invalid_otp')
+                return HttpResponseRedirect(reverse('login'))      
+        else:
+            print('pswwrd must be same')
+            messages.add_message(request, messages.INFO, 'password_not_same')
+            return HttpResponseRedirect(reverse('login'))     
+    else:
+        print('somthing went wrong')
+        messages.add_message(request, messages.INFO, 'password_not_same')
+        return HttpResponseRedirect(reverse('login'))

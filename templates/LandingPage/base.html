@@ -129,42 +129,25 @@ $(document).ready(function() {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle parent-toggle" data-toggle="" href="{% url 'category'  %}" >Categories</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"> Dropdown item 1 </a></li>
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> Dropdown item 2 </a>
+                            {% for c in cat %}
+                            <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c }} </a>
                                 <ul class="submenu dropdown-menu">
-                                  <li><a class="dropdown-item" href="" >Submenu item 1</a></li>
-                                  <li><a class="dropdown-item dropdown-toggle" href="#" >Submenu item 2</a>
+                                    {% for subcat in c.subcategory_set.all %}
+                                    {% if subcat.course_set.all|length == 0 %}
+                                    <li><a class="dropdown-item" href="#">{{ subcat }}</a></li>
+                                    {% else %}
+                                    <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat }}</a>
+                                    {% endif %}
                                         <ul class="submenu dropdown-menu">
-                                            <li><a class="dropdown-item" href="">Multi level 1</a></li>
-                                            <li><a class="dropdown-item" href="">Multi level 2</a></li>
+                                            {% for course in subcat.course_set.all %}
+                                            <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course }}</a></li>
+                                            {% endfor %}
                                         </ul>
                                     </li>
-                                    <li><a class="dropdown-item" href="">Submenu item 3</a></li>
-                               </ul>
+                                    {% endfor %}
+                                </ul>
                             </li>
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> Free Content </a>
-                                 <ul class="submenu dropdown-menu">
-                                  <li><a class="dropdown-item" href="">Another submenu 1</a></li>
-                                  <li><a class="dropdown-item" href="">Another submenu 2</a></li>
-                                  <li><a class="dropdown-item" href="">Another submenu 3</a></li>
-                                  <li><a class="dropdown-item  dropdown-toggle" href="">Another submenu 4</a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li><a class="dropdown-item" href="">Multi level 1</a></li>
-                                        <li><a class="dropdown-item" href="">Multi level 2</a></li>
-                                    </ul>
-                                </li>
-                               </ul>
-                            </li>
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> Dropdown item 4 </a>
-                                 <ul class="submenu dropdown-menu">
-                                  <li><a class="dropdown-item" href="">Another submenu 1</a></li>
-                                  <li><a class="dropdown-item" href="">Another submenu 2</a></li>
-                                  <li><a class="dropdown-item" href="">Another submenu 3</a></li>
-                                  <li><a class="dropdown-item" href="">Another submenu 4</a></li>
-                               </ul>
-                            </li>
-                            <li><a class="dropdown-item" href="#"> Dropdown item 4 </a></li>
-                            <li><a class="dropdown-item" href="#"> Dropdown item 5 </a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                    
