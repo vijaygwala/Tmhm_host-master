@@ -397,7 +397,7 @@ Explore Courses
                                 <button action="submit" class="courses_search_button ml-auto">search now</button>
                             </form>
                         </div>
-                        <div class="courses_container">
+                        <div class="courses_container" id="try">
                             {% for crse in page_obj %}
                             {% cycle "<div class='row courses_row'>" "" %}
                                 <!-- Course -->
@@ -406,9 +406,13 @@ Explore Courses
                                     <div class="course">
                                         <div class="course_image"><img src="{% static 'LandingPage/images/course_7.jpg' %}" alt=""></div>
                                         <div class="course_body">
+<<<<<<< HEAD
                                             <h3 class="course_title"><a href="{% url "course" crse.Cid %}">{{ crse.title}}</a></h3>
+=======
+                                            <h3 class="course_title{{ crse.Cid }}"><a href="{% url 'course' crse.pk %}">{{ crse.title}}</a></h3>
+>>>>>>> b42bc721fbd75c606b8d59b9ccbd11ca97a973a2
                                             <div class="course_teacher">{{ crse.offering.all.0.name }}</div>
-                                            <div class="course_text">
+                                            <div class="course_text{{ crse.Cid }}">
                                                 <p>{{ crse.description }}</p>
                                             </div>
                                         </div>
@@ -510,8 +514,21 @@ Explore Courses
                             'op': op,
                         },
                         success: function (data) {
+<<<<<<< HEAD
                             // $(".courses_container").html(data);
                            
+=======
+                            // document.getElementById("try").style.visibility = "hidden";
+                            page_obj=data
+                            console.log(data)
+                            // $(".figure").html(data);
+                        //    for(var i=0;i<data.length;i++)
+                        //    {
+                        //        ("#course_title"+data[i].Cid).val=(data[i].title);
+                        //        ("#course_text"+data[i].Cid).val=(data[i].description);
+                        //    }
+                    
+>>>>>>> b42bc721fbd75c606b8d59b9ccbd11ca97a973a2
 
                         }
                     });
