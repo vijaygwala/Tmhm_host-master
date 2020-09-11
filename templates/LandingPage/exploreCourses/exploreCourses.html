@@ -254,6 +254,7 @@ Explore Courses
                         <div class="sidebar" style="margin-top: 0;">
 
                             <!-- Categories -->
+                            <form method="GET">
                             <div class="sidebar_section">
                                 <div class="sidebar_section_title">Filter</div>
                                 <div class="sidebar_categories">
@@ -263,8 +264,8 @@ Explore Courses
                                                 <div class="card-header" id="headingtwo">
                                                     <h2 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo" style="border:none">
-                                        Level
-                                        </button>
+                                                        Level
+                                                        </button>
                                                     </h2>
                                                 </div>
 
@@ -272,11 +273,11 @@ Explore Courses
                                                     <div class="card-body">
 
                                                         <label class="container">
-                                                            <input type="checkbox" checked="checked">
+                                                            <input type="checkbox" name="level" value="Beginner">
                                                             <span class="checkmark"></span>Beginner
                                                           </label>
                                                         <label class="container">
-                                                            <input type="checkbox">
+                                                            <input type="checkbox" name="level" value="Advanced">
                                                             <span class="checkmark"></span>Advanced
                                                           </label>
                                                     </div>
@@ -286,8 +287,8 @@ Explore Courses
                                                 <div class="card-header" id="headingthree">
                                                     <h2 class="mb-0">
                                                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsethree" aria-expanded="true" aria-controls="collapsethree" style="border:none">
-                                        Sub-Categories
-                                        </button>
+                                                        Sub-Categories
+                                                        </button>
                                                     </h2>
                                                 </div>
 
@@ -295,7 +296,7 @@ Explore Courses
                                                     <div class="card-body">
                                                         {% for cat in subcat %}
                                                         <label class="container">
-                                                            <input type="checkbox">
+                                                            <input type="checkbox" name="subcat" value="{{ cat }}">
                                                             <span class="checkmark"></span>{{ cat }}
                                                           </label>
                                                         {% endfor %}
@@ -313,11 +314,11 @@ Explore Courses
                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <label class="container">
-                                                            <input type="checkbox">
+                                                            <input type="checkbox" name="lang" value="Hindi">
                                                             <span class="checkmark"></span>Hindi
                                                           </label>
                                                         <label class="container">
-                                                            <input type="checkbox">
+                                                            <input type="checkbox" name="lang" value="English">
                                                             <span class="checkmark"></span>English
                                                           </label>
                                                     </div>
@@ -334,23 +335,26 @@ Explore Courses
                                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <label class="container">
-                                                            <input type="checkbox">
-                                                            <span class="checkmark"></span>Web Development
+                                                            <input type="checkbox" name="price" value="300">
+                                                            <span class="checkmark"></span>300
                                                           </label>
                                                         <label class="container">
+                                                            <input type="checkbox" name="price" value="500">
+                                                            <span class="checkmark"></span>500
+                                                          </label>
+                                                        <label class="container" name="price" value="800">
                                                             <input type="checkbox">
-                                                            <span class="checkmark"></span>Web Development
+                                                            <span class="checkmark"></span>800
                                                           </label>
                                                         <label class="container">
-                                                            <input type="checkbox">
-                                                            <span class="checkmark"></span>Web Development
-                                                          </label>
-                                                        <label class="container">
-                                                            <input type="checkbox">
-                                                            <span class="checkmark"></span>Web Development
+                                                            <input type="checkbox" name="price" value="1000">
+                                                            <span class="checkmark"></span>1000
                                                           </label>
 
                                                     </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <center><button type="submit" class="btn btn-link"><b>Apply</b></a></center>
                                                 </div>
                                             </div>
                                         </div>
@@ -358,7 +362,7 @@ Explore Courses
                                 </div>
                             </div>
 
-
+                        </form>
 
                             <!-- Tags -->
                             <div class="sidebar_section">
@@ -519,13 +523,12 @@ Explore Courses
                         //        ("#course_title"+data[i].Cid).val=(data[i].title);
                         //        ("#course_text"+data[i].Cid).val=(data[i].description);
                         //    }
-                    
-
                         }
                     });
                 }
             });
         });
+           
 
         function check_ephone(phno, email) {
             var regex = /^[0-9]{10}$/;

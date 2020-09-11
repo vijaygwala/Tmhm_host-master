@@ -56,11 +56,26 @@ def exploreCourses(request):
     subcat=SubCategory.objects.all()
     course=Course.objects.all()
     query = request.GET.get('query')
+    filter_level = request.GET.getlist('level')
+    filter_subcat = request.GET.getlist('subcat')
+    filter_lang = request.GET.getlist('lang')
+    filter_price = request.GET.getlist('price')
     op=request.GET.get('op')
+    # Categories Filter
     if op!=None and op!="All Categories":
         course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
+    # Search Filter
     if query is not None:
         course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+    # Side Filters
+    if filter_level:
+        course=Course.objects.filter(level__in=filter_level) & course
+    if filter_subcat:
+        course=Course.objects.filter(subCat_id__name__in=filter_subcat) & course
+    if filter_lang:
+        course=Course.objects.filter(language__in=filter_lang) & course
+    if filter_price:
+        course=Course.objects.filter(price__in=filter_price) & course
     print(course)
     paginator=Paginator(course,6,orphans=1)
     page_number=request.GET.get('page')
@@ -69,15 +84,10 @@ def exploreCourses(request):
         'cat':cat,
         'subcat':subcat,
         'page_obj':page_obj
-        
     }
-    
-    #return JsonResponse(context,safe=False)
-    print(course)
     if request.is_ajax() and op!="All Categories":
         data=CourseSerializers(page_obj,many=True).data
         print(CourseSerializers(page_obj,many=True).data)
-        print(data)
         return JsonResponse(data,safe=False)
     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
 
