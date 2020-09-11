@@ -8,6 +8,7 @@ $(function(){
         autoFocus: true,
         transitionEffectSpeed: 500,
         titleTemplate : '<div class="title">#title#</div>',
+        
         labels: {
             previous : 'Back Step',
             next : '<i class="zmdi zmdi-arrow-right"></i>',

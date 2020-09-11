@@ -291,12 +291,14 @@ Categories
                             </form>
                         </div>
                         <div class="courses_container">
-                            
+                            {% if courses  %}
+                                
                              {% for course in courses %}
   				            {% cycle "<div class='row courses_row'>" "" %}
     			                
                                 <!-- Course -->
                                 <div class="col-lg-6 course_col">
+                                    <a href='{% url 'course' course.Cid %}' class="stretched-link">
                                     <div class="course">
                                         <div class="course_image"><img src="{% static 'LandingPage/images/course_4.jpg' %}" alt=""></div>
                                         <div class="course_body">
@@ -320,28 +322,38 @@ Categories
                                             </div>
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
-                            {% cycle "" "</div>" %}
-				            {% endfor %}
 
-                                 <div class="container" style="margin-top: -30px">
-                        <div class="row">
-                            <div class="col-sm" align="center" style="margin-left: -20px">
-                              
-									<ul class="pagination_list">
-                                    {% if courses.has_previous %}
-										<li class="active"><a href="?page={{ courses.privious_page_number }}&id={{courses.0.subCat_id.subCat_id}}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-									{% endif %}	
-                                        <li><a href="#">{{ courses.number }}</a></li>
-										
-                                    {% if courses.has_next %}
-										<li><a href="?page={{ courses.next_page_number }}&id={{courses.0.subCat_id.subCat_id}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-									{% endif %}
-                                    </ul>
+                            {% cycle "" "</div>" %}
+                            
+                            {% endfor %}
                                 
-                            </div>
-                            </div>
-                            </div>
+                            <div class="container" style="margin-top: -30px">
+                                <div class="row">
+                                    <div class="col-sm" align="center" style="margin-left: -20px">
+                                      
+                                            <ul class="pagination_list">
+                                            {% if courses.has_previous %}
+                                                <li class="active"><a href="?page={{ courses.privious_page_number }}&id={{courses.0.subCat_id.subCat_id}}"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+                                            {% endif %}	
+                                                <li><a href="#">{{ courses.number }}</a></li>
+                                                
+                                            {% if courses.has_next %}
+                                                <li><a href="?page={{ courses.next_page_number }}&id={{courses.0.subCat_id.subCat_id}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                                            {% endif %}
+                                            </ul>
+                                        
+                                    </div>
+                                </div>
+                                    </div>
+                            {% else %}
+                                <div>
+                                    <p>No Coursers available</p>
+                                </div>
+                            {% endif %}
+
+                        
                                
 
                             </div>
