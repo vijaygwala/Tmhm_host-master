@@ -21,27 +21,26 @@ from django.template.loader import render_to_string,get_template
 from facilitators.api.views import CourseSerializers,offerSerializers
 from payment_gateway.models import *
 from django.core import serializers
+from .utils import *
 
 
 
 # Landing  page
 def home(request):
+    
     return render(request,'LandingPage/index.html')
 
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user
-        order , created = Order.objects.get_or_create(customer=customer, status=False)   
-        items = order.ordercourses_set.all()
-        #cartItems = order.get_cart_items
-    else:
-        #cookieData = cookieCart(request)
-        #cartItems = cookieData['cartItems']
-        
-        items = {}
-        order ={'get_cart_total':0,'get_cart_items':0}
-    context={ 'items':items,'order':order}
+    context = cartData(request)
     return render(request,'LandingPage/cart/cart.html',context)
+
+def UpdateCart(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+    CreateOrder(request,productId,action)
+    return JsonResponse('Item was added', safe=False)
+
 
 
 #free content avialable for users here 
@@ -77,14 +76,16 @@ def exploreCourses(request):
     if filter_price:
         course=Course.objects.filter(price__in=filter_price) & course
     print(course)
-    paginator=Paginator(course,6,orphans=1)
+    paginator=Paginator(course.values(),6,orphans=1)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     context={
-        'cat':cat,
-        'subcat':subcat,
+        'cat':cat.values(),
+        'subcat':subcat.values(),
         'page_obj':page_obj
     }
+
+    print(course)
     if request.is_ajax() and op!="All Categories":
         data=CourseSerializers(page_obj,many=True).data
         print(CourseSerializers(page_obj,many=True).data)
@@ -177,7 +178,7 @@ def rate_course(request, pk=None):
     print(strs)
     crse = Course.objects.get(pk=pk)
     print(crse)
-    similer=Course.objects.filter(subCat_id=crse.subCat_id).exclude(Cid=crse.Cid)[:3]
+    #similer=Course.objects.filter(subCat_id=crse.subCat_id).exclude(Cid=crse.Cid)[:3]
     # context={'course':crse,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer}
     try:
         obj = Rating.objects.get(course=crse, lerner=request.user.learner)

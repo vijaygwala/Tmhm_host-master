@@ -17,8 +17,8 @@ class Order(models.Model):
 
     @property
     def get_cart_items(self):
-        orderitems = self.ordercourses_set.all()
-        total = sum([item.quantity for item in orderitems])
+        total = self.ordercourses_set.all().count()
+        
         return total    
    
 
@@ -29,4 +29,4 @@ class OrderCourses(models.Model):
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     @property
     def get_total(self):
-        return self.order.price
+        return self.course.price

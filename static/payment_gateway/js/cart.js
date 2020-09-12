@@ -18,7 +18,7 @@ for (i = 0; i < updateBtns.length; i++) {
 function updateUserOrder(productId, action){
 	console.log('User is authenticated, sending data...')
 
-		var url = '/update_item/'
+		var url="/update_item/"
 
 		fetch(url, {
 			method:'POST',
@@ -32,7 +32,7 @@ function updateUserOrder(productId, action){
 		   return response.json();
 		})
 		.then((data) => {
-		    location.reload()
+		    window.location.href='/Courses/Cart/';
 		});
 }
 
@@ -43,8 +43,6 @@ function addCookieItem(productId, action){
 		if (cart[productId] == undefined){
 		cart[productId] = {'quantity':1}
 
-		}else{
-			cart[productId]['quantity'] += 1
 		}
 	}
 
@@ -59,5 +57,5 @@ function addCookieItem(productId, action){
 	console.log('CART:', cart)
 	document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 	
-	location.reload()
+	window.location.href='/Courses/Cart/'
 }

@@ -14,6 +14,8 @@
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b5dc9b9c74.js" crossorigin="anonymous"></script>
+
 <script>
 $(document).ready(function() {
 	// jQuery code
@@ -54,6 +56,29 @@ $(document).ready(function() {
     </script>
     
     <style>
+        .cart{
+            padding: 0 30px;
+           
+        }
+        .cart .fas{
+            font-size: 30px;
+            color: #000 ;
+            position: relative;
+            padding:  10px;
+
+        }
+        .cart .cart-qty{
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            right: 0;
+            background-color: #007bff  ;
+            color: #fff;
+            font-size: 12px;
+            border-radius: 50%;
+            padding: 5px 7px;
+
+        }
         @media (min-width: 992px){
 		.dropdown-menu .dropdown-toggle:after{
 			border-top: .3em solid transparent;
@@ -185,7 +210,14 @@ $(document).ready(function() {
                     {% endif %}
 
                 </ul>
+
+                
             </div>
+        </div>
+        <div class="cart">
+            <a href='{% url 'cart'%}'><i class="fas fa-shopping-cart"> {% if order.get_cart_items > 0 %}<span class="cart-qty">{{order.get_cart_items}}</span>{% endif %}</i>
+                
+            </a>
         </div>
     </nav>
 <!-- Modal -->
