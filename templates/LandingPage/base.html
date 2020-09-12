@@ -215,7 +215,7 @@ $(document).ready(function() {
             </div>
         </div>
         <div class="cart">
-            <a href="#"><i class="fas fa-shopping-cart"> <span class="cart-qty">0</span></i>
+            <a href='{% url 'cart'%}'><i class="fas fa-shopping-cart"> {% if order.get_cart_items > 0 %}<span class="cart-qty">{{order.get_cart_items}}</span>{% endif %}</i>
                 
             </a>
         </div>

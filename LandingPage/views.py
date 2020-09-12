@@ -27,6 +27,7 @@ from .utils import *
 
 # Landing  page
 def home(request):
+    
     return render(request,'LandingPage/index.html')
 
 def cart(request):
