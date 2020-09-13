@@ -57,7 +57,7 @@ $(document).ready(function() {
     
     <style>
         .cart{
-            padding: 0 30px;
+            padding: 0 20px;
            
         }
         .cart .fas{
@@ -210,15 +210,16 @@ $(document).ready(function() {
                     {% endif %}
 
                 </ul>
-
-                
-            </div>
-        </div>
-        <div class="cart">
+                 <div class="cart">
             <a href='{% url 'cart'%}'><i class="fas fa-shopping-cart"> {% if order.get_cart_items > 0 %}<span class="cart-qty">{{order.get_cart_items}}</span>{% endif %}</i>
                 
             </a>
         </div>
+
+                
+            </div>
+        </div>
+       
     </nav>
 <!-- Modal -->
 
