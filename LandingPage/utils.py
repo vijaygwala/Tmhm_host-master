@@ -59,7 +59,7 @@ def cookieCart(request):
 def cartData(request):
     context={}
    
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and  request.user.groups.filter(name=['Visiters','Learners','Facilitators']).exists():
         try:
             cart = json.loads(request.COOKIES['cart'])
         except:
@@ -86,7 +86,9 @@ def cartData(request):
             'Shipping address': ''}
 
         # CREAING ORDER
+        
         response = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0'))
+
         order_id = response['id']
         order_status = response['status']
 
