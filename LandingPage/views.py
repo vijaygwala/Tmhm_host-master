@@ -251,3 +251,9 @@ def category(request):
 #Landing page tems and services page
 def termsandservices(request):
     return render(request, 'LandingPage/terms/terms.html')
+def VideoPage(request):
+    Cid=request.GET.get('Cid')
+    course=Course.objects.get(Cid=Cid)
+    videos=course.course_video.all()
+    context={'videos':videos}
+    return render(request, 'video_page/index.html',context) 
