@@ -7,5 +7,7 @@ from LandingPage.utils import *
 def base(request):
     context = cartData(request)
     
+    # context = cartData(request)
+    context = {}
     context['cat']=Category.objects.all()
     return context
