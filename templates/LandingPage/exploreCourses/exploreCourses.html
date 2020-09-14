@@ -387,11 +387,15 @@ Explore Courses
                         <div class="courses_search_container">
                             <form action="{% url 'Lexplorecourses' %}" id="courses_search_form" method="GET" class="courses_search_form d-flex flex-row align-items-center justify-content-start">
                                 <input type="search" class="courses_search_input" placeholder="Search Courses" name="query">
-                                <select id="courses_search_select" class="courses_search_select courses_search_input" name="queryselect" method="GET">
+                                <select class="courses_search_select courses_search_input" name="cat" onchange='findCat(this.value)'>
+                                {% if selected_cat %}
+                                <option value="{{selected_cat}}">{{selected_cat}}</option> 
+                                {% else %}       
                                 <option selected>All Categories</option>
+                                {% endif %}
+                                <option>All Categories</option>
                                 {% for c in cat %}
-                                
-                                <option>{{ c }}</option>
+                                <option>{{ c.name }}</option>
                                 {% endfor %}
 							    </select>
                                 <button action="submit" class="courses_search_button ml-auto">search now</button>
@@ -497,27 +501,7 @@ Explore Courses
             }
         });
 
-        $(document).ready(function () {
-            $("#courses_search_select").click(function(){
-                var op=$(this).val();
-                if(op!="All Categories")
-                {
-                    console.log(op);
-                    $.ajax({
-                        type: "GET",
-                        url: "{% url "Lexplorecourses" %}",
-                        data: {
-                            'op': op,
-                        },
-                        success: function (data) {
-                            // $(".courses_container").html(data);
-                           
 
-                        }
-                    });
-                }
-            });
-        });
 
         function check_ephone(phno, email) {
             var regex = /^[0-9]{10}$/;
@@ -540,4 +524,32 @@ Explore Courses
             }
         }
     </script>
+    <script>
+        function findCat(val){
+            window.location.href=`/explore/courses?cat=${val}`;
+        }
+    </script>
+    <!-- <script>
+        $(document).ready(function () {
+            $("#courses_search_select").click(function(){
+                var op=$(this).val();
+                if(op!="All Categories")
+                {
+                    console.log(op);
+                    $.ajax({
+                        type: "GET",
+                        url: "{% url "Lexplorecourses" %}",
+                        data: {
+                            'op': op,
+                        },
+                        success: function (data) {
+                            // $(".courses_container").html(data);
+                           
+
+                        }
+                    });
+                }
+            });
+        });
+    </script> -->
 {% endblock javascript %}

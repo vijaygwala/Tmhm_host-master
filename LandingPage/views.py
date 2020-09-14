@@ -50,34 +50,34 @@ def freecontent(request):
     return render(request,'LandingPage/freeContent/index.html')
 
 # users can expolore the courses from explore courses
-def exploreCourses(request):
-    cat=Category.objects.all()
-    subcat=SubCategory.objects.all()
-    course=Course.objects.all()
-    query = request.GET.get('query')
-    op=request.GET.get('op')
-    if op!=None and op!="All Categories":
-        course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
-    if query is not None:
-        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
-    print(course)
-    paginator=Paginator(course.values(),6,orphans=1)
-    page_number=request.GET.get('page')
-    page_obj=paginator.get_page(page_number)
-    context={
-        'cat':cat.values(),
-        'subcat':subcat.values(),
-        'page_obj':page_obj
+# def exploreCourses(request):
+#     cat=Category.objects.all()
+#     subcat=SubCategory.objects.all()
+#     course=Course.objects.all()
+#     query = request.GET.get('query')
+#     op=request.GET.get('op')
+#     if op!=None and op!="All Categories":
+#         course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
+#     if query is not None:
+#         course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+#     print(course)
+#     paginator=Paginator(course.values(),6,orphans=1)
+#     page_number=request.GET.get('page')
+#     page_obj=paginator.get_page(page_number)
+#     context={
+#         'cat':cat.values(),
+#         'subcat':subcat.values(),
+#         'page_obj':page_obj
         
-    }
+#     }
 
-    print(course)
-    if request.is_ajax() and op!="All Categories":
-        data=CourseSerializers(page_obj,many=True).data
-        print(CourseSerializers(page_obj,many=True).data)
-        print(data)
-        return JsonResponse(data,safe=False)
-    return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
+#     print(course)
+#     if request.is_ajax() and op!="All Categories":
+#         data=CourseSerializers(page_obj,many=True).data
+#         print(CourseSerializers(page_obj,many=True).data)
+#         print(data)
+#         return JsonResponse(data,safe=False)
+#     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
 
 #Landing page about us page
 def aboutus(request):
@@ -257,3 +257,33 @@ def VideoPage(request):
     videos=course.course_video.all()
     context={'videos':videos}
     return render(request, 'video_page/index.html',context) 
+
+
+
+# By Saurabh 
+def exploreCourses(request):
+    cat=Category.objects.all()
+    print('CAT',cat[0].name)
+    subcat=SubCategory.objects.all()
+    course=Course.objects.all()
+    query = request.GET.get('query')
+    option=request.GET.get('cat')
+    print('OPPPP',option)
+    selected_cat = option
+    if option!=None:
+        if option == "All Categories":
+            course=Course.objects.all()
+        else:
+            course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=option))
+    if query is not None:
+        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+    paginator=Paginator(course.values(),6,orphans=1)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+    context={
+        'cat':cat.values(),
+        'subcat':subcat.values(),
+        'page_obj':page_obj,
+        'selected_cat': selected_cat
+    }
+    return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
