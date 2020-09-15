@@ -1,16 +1,24 @@
-<!doctype html>
+{% extends 'LandingPage/base.html' %}
 {% load static %}
-<html lang="en">
-  <head>
+<!--------------------------------- -->
+
+{% block title %}
+Your Cart || Learnopad
+{% endblock title %}
+<!---------------------------------- -->
+
+{% block header %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock header %}
+<!------------------------------ -->
 
-    <title>Your Cart || Learnopad</title>
-      <style>
+{% block stylesheet %}
+<style>
           /*
 *
 * ==========================================
@@ -18,75 +26,56 @@
 * ==========================================
 *
 */
-
-body {
-/*  background: #eecda3;*/
-/*  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);*/
-/*  background: linear-gradient(to right, #eecda3, #ef629f);*/
-  min-height: 100vh;
-}
+body,
+        html {
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-x: hidden;
+            font-family: Raleway;
+            min-height: 100vh;
+        }
+footer {
+            background: #eeeeee;
+            color: #757575;
+            font-size: 13px;
+            line-height: 1.2
+        }
+        
+        footer h6 {
+            color: #9e9e9e;
+        }
+        
+        footer a {
+            color: black;
+        }
+        
+        footer a:link {
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: #757575;
+        }
+        
+        footer #social i {
+            color: black;
+            font-size: 1.2rem;
+        }
+        
+        footer #social i:hover {
+            color: #3db166;
+        }
 
       </style>
-  </head>
-  <body>
-    <figure class="figure" style="margin: 11px;">
-        <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;">
-        <figcaption class="figure-caption text-center">LearnOpad</figcaption>
-    </figure>
-      
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e0e0e0;">
-        <a class="navbar-brand" href="/home"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{% endblock stylesheet %}
+<!--------------------------------------- -->
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampl">
-                    Free Content
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="nav justify-content-end text-sm-left" id="navbar-left">
-                <li class="nav-item">
-                    <form class="form-inline my-2 my-lg-0">
-                    
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn my-sm-0" type="submit" style="color: black;s"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/signup" class="btn btn-primary rounded" style="color: white">Sign Up</a>
-                </li>
-                
-            </ul>
-        </div>
-    </nav>
-      
+{% block content %}
+          
       <br><br>
       
       <div class="px-4 px-lg-0">
-  <!-- For demo purpose -->
- <!--  <div class="container text-white py-5 text-center">
-  <h1 class="display-4">Bootstrap 4 shopping cart</h1>    <p class="lead mb-0">Build a fully structred shopping cart page using Bootstrap 4. </p>
-    <p class="lead">Snippet by <a href="https://bootstrapious.com/snippets" class="text-white font-italic">
-            <u>Bootstrapious</u></a>
-    </p>
-  </div> -->
-  <!-- End -->
-
   <div class="pb-5">
     <div class="container">
       <div class="row">
@@ -211,66 +200,10 @@ document.getElementById('rzp-button1').onclick = function(e){
     </div>
   </div>
 </div>
-      
-      
-      <div class="row text-center text-md-left pb-3" style="background: #EEEEEE;">
+{% endblock content %}      
+<!------------------------------ -->
 
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
-                <figure class="figure" style="margin: 11px;">
-                    <img src="LandingPage/img/logotiny.png" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 60px; height: 40px;">
-                    <figcaption class="figure-caption text-center">LearnOpad</figcaption>
-                </figure>
-            </div>
-
-            <hr class="w-100 clearfix d-md-none">
-
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3" id="footer-left">
-                <p>
-                <a href="#!">About Us</a>
-                </p>
-                <p>
-                <a href="#!">Career</a>
-                </p>
-                <p>
-                <a href="contact.html">Contact Us</a>
-                </p>
-                <p>
-                <a href="#!">Terms/Services</a>
-                </p>
-            </div>
-
-            <hr class="w-100 clearfix d-md-none">
-
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto" id="footer-left">
-                <br>
-                <p>
-                <a href="#!">Learners</a>
-                </p>
-                <p>
-                <a href="{% url 'facilitator' %}">Facilitators</a>
-                </p>
-                <p>
-                <a href="#!">Campus</a>
-                </p>
-                <p>
-                <a href="#!">Corporates</a>
-                </p>
-            </div>
-        
-            <hr class="w-100 clearfix d-md-none">
-    
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 social" id="footer-left">
-            <h6 class="text-uppercase font-weight-bold">Our App</h6>
-            <hr class="mb-2 mt-0 d-inline-block mx-auto" style="width: 20px;">
-            <p>
-            <a href="https://www.apple.com/ios/app-store/"><i class="fab fa-apple mr-1" style="font-size: 20px;" aria-hidden="true"></i> IOS Store</a>
-            </p>
-            <p>
-            <a href="https://play.google.com/store"><img class="mr-1" src="LandingPage/img/play-store.svg" width="20px" height="20px"> Andriod Store</a>
-            </p>
-        </div>
-
-    </div>
+{% block javascript %}
      <script>
 var user = '{{request.user}}'
 function getToken(name) {
@@ -328,6 +261,4 @@ function getToken(name) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
  <script type="text/javascript" src="{% static 'payment_gateway/js/cart.js' %}"></script>
      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-  </body>
-</html>
+{% endblock javascript %}

@@ -1,9 +1,12 @@
-<!doctype html>
+{% extends 'LandingPage/base.html' %}
 {% load static %}
-<html lang="en">
+<!------------------------------ -->
+{% block title %}
+    Corporate Training Courses Page
+{% endblock title %}
+<!------------------------------- -->
 
-<head>
-    <title>Corporate Training Courses Page</title>
+{% block header %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -21,6 +24,10 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{% static 'LandingPage/css/style.css' %}">
+{% endblock header %}
+<!------------------------------ -->
+
+{% block stylesheet %}
     <style>
         .caption {
             color: #f7f7f7;
@@ -106,12 +113,11 @@
         
         @media only screen and (max-width: 480px) {}
     </style>
-</head>
+{% endblock stylesheet %}
+<!-------------------------------- -->
 
-<body>
-
-
-    <div class="site-wrap" id="home-section">
+{% block content %}
+<div class="site-wrap" id="home-section">
 
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
@@ -121,50 +127,6 @@
             </div>
             <div class="site-mobile-menu-body"></div>
         </div>
-        <!-- navbar  -->
-        <figure class="figure" style="margin-right: 11px;margin-top: 18px;margin-bottom: 11px;margin-left: 15px;">
-            <img src="images/ss.jpg" class="figure-img img-fluid rounded" alt="LearnOpad" style="margin-bottom: 0;width: 40px;margin-left: 15px;">
-            <figcaption class="figure-caption text-center">LearnOpad</figcaption>
-        </figure>
-
-        <nav class="navbar navbar-expand-lg navbar-light" style="background: #f7f7f7;">
-            <a class="navbar-brand" href="/home"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <!--                     <li class="nav-item">
-                        <a class="nav-link" href="#categories">Categories</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#free">
-              Free Content
-              </a>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">
-            Contact
-            </a>
-                        </li>
-                </ul>
-
-                <ul class="nav justify-content-end text-sm-left" id="navbar-left">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/signup" class="btn btn-primary rounded" style="color: white">Sign Up</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
         <!-- navbar end  -->
 
         <!-- content begins  -->
@@ -214,22 +176,22 @@
 
                     <div class="row">
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4images">
-                            <img src="images/company-logo1.jpg">
+                            <img src="{% static 'corporates/images/company-logo1.jpg' %}">
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 images">
-                            <img src="images/company-logo2.jpg">
+                            <img src="{% static 'corporates/images/company-logo2.jpg' %}">
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4images">
-                            <img src="images/company-logo3.jpg">
+                            <img src="{% static 'corporates/images/company-logo3.jpg' %}">
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4images">
-                            <img src="images/company-logo4.png">
+                            <img src="{% static 'LandingPage/images/company-logo4.png' %}">
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 images">
-                            <img src="images/company-logo3.jpg">
+                            <img src="{% static 'corporates/images/company-logo3.jpg' %}">
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 images">
-                            <img src="images/company-logo4.png">
+                            <img src="{% static 'LandingPage/images/company-logo4.png' %}">
                         </div>
                     </div>
 
@@ -320,7 +282,7 @@
 
                     <div class=" card tutorial-item mb-4 " style="margin:2rem 0rem; ">
                         <div class="img-wrap ">
-                            <a href="# "><img src="images/hh.png" alt="Image " class="img-fluid "></a>
+                            <a href="# "><img src={% static "corporates/images/hh.png" %} alt="Image " class="img-fluid "></a>
                         </div>
                         <div>
                             <h3><a href="# ">Microsoft Python Certifiction</a></h3>
@@ -345,7 +307,7 @@
 
                     <div class="card tutorial-item mb-4 ">
                         <div class="img-wrap ">
-                            <a href="# "><img src="images/hh.png " alt="Image " class="img-fluid "></a>
+                            <a href="# "><img src={% static "corporates/images/hh.png" %} alt="Image " class="img-fluid "></a>
                         </div>
                         <div>
                             <h3><a href="# ">Harvard ML course</a></h3>
@@ -412,121 +374,10 @@
             <!-- content ends  -->
 
 
-            <!-- Footer -->
-            <footer id="contact " class="page-footer font-small pt-4 ">
-                <div class="container text-center text-md-left ">
-                    <div class="row text-center text-md-left pb-3 " style="background: transparent; ">
+{% endblock content %}
+<!---------------------------- -->
 
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 " id="footer-left ">
-                            <figure class="figure " style="margin: 11px; ">
-                                <img src="images/ss.jpg " class="figure-img img-fluid rounded " alt="LearnOpad " style="margin-bottom: 0;width: 60px; height: 40px; ">
-                                <figcaption class="figure-caption text-center ">LearnOpad</figcaption>
-                            </figure>
-                        </div>
-
-                        <hr class="w-100 clearfix d-md-none ">
-
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 " id="footer-left ">
-                            <p>
-                                <a href="#! ">About Us</a>
-                            </p>
-                            <p>
-                                <a href="#! ">Career</a>
-                            </p>
-                            <p>
-                                <a href="#! ">Contact Us</a>
-                            </p>
-                            <p>
-                                <a href="#! ">Terms/Services</a>
-                            </p>
-                        </div>
-
-                        <hr class="w-100 clearfix d-md-none ">
-
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto " id="footer-left ">
-                            <br>
-                            <p>
-                                <a href="#! ">Learners</a>
-                            </p>
-                            <p>
-                                <a href="/facilitator ">Facilitators</a>
-                            </p>
-                            <p>
-                                <a href="#! ">Campus</a>
-                            </p>
-                            <p>
-                                <a href="#! ">Corporates</a>
-                            </p>
-                        </div>
-
-                        <hr class="w-100 clearfix d-md-none ">
-
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 social " id="footer-left ">
-                            <h6 class="text-uppercase font-weight-bold ">Our App</h6>
-                            <hr class="mb-2 mt-0 d-inline-block mx-auto " style="width: 20px; ">
-                            <p>
-                                <a href="https://www.apple.com/ios/app-store/ "><i class="fab fa-apple mr-1 " style="font-size: 20px; "></i> IOS Store</a>
-                            </p>
-                            <p>
-                                <a href="https://play.google.com/store "><img class="mr-1 " src="{% static 'LandingPage/img/play-store.svg' %} " width="20px " height="20px "> Andriod Store</a>
-                            </p>
-                        </div>
-
-                    </div>
-
-
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto text-sm-lef " style="width: 100%; height: 1px; background-color: #3db166; ">
-
-                    <div class="row d-flex align-items-center ">
-
-                        <div class="col-md-7 col-lg-8 ">
-                            <p class="text-center text-md-left text-sm-left ">© 2020 Copyright:
-                                <a href="# " style="font-size:11px ">
-                                    <strong> TMHM Consulting Services Pvt.Ltd</strong>
-                                </a>
-                            </p>
-                        </div>
-                        <div class="col-md-5 col-lg-4 ml-lg-0 ">
-                            <div class="text-center text-md-right text-sm-left " id="social ">
-
-                                <ul class="list-unstyled list-inline ">
-                                    <li class="list-inline-item ">
-                                        <a class="btn-floating btn-sm rgba-white-slight mx-1 ">
-                                            <i class="fab fa-wordpress-simple "></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item ">
-                                        <a class="btn-floating btn-sm rgba-white-slight mx-1 ">
-                                            <i class="fab fa-youtube "></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item ">
-                                        <a class="btn-floating btn-sm rgba-white-slight mx-1 ">
-                                            <i class="fab fa-instagram "></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item ">
-                                        <a class="btn-floating btn-sm rgba-white-slight mx-1 ">
-                                            <i class="fab fa-linkedin-in "></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item ">
-                                        <a class="btn-floating btn-sm rgba-white-slight mx-1 ">
-                                            <i class="fab fa-facebook-f "></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </footer>
-
-        </div>
-
+{% block javascript %}
         <script>
             var acc = document.getElementsByClassName("accordion ");
             var i;
@@ -557,8 +408,4 @@
 <script src="{% static 'LandingPage/js/aos.js' %}"></script>
 
 <script src="{% static 'LandingPage/js/main.js' %}"></script>
-
-
-</body>
-
-</html>
+{% endblock javascript %}
