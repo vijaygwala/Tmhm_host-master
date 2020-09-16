@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.css">
     <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 
         .nav-tabs>li>a {
@@ -189,10 +190,7 @@
                                             controls :true,
                                             
                                         });
-                                        $(document).ready(function() {
-                                        var id = $("ul.list a:first").attr("href");
-                                        $(id).addClass("active");
-                                        });
+                                       
                                         
                                         videojs('my-video-{{video.Vid}}').videoJsResolutionSwitcher()
  
@@ -251,7 +249,7 @@
 
 
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     
@@ -261,6 +259,11 @@
     });
     </script>
     <script>
+         $(document).ready(function() {
+                                        var id = $("ul.list a:first").attr("href");
+                                        $(id).addClass("active");
+                                        $("ul.list li:first").addClass("active");
+                                    });
         
         videojs('my-video').videoJsResolutionSwitcher()
         // var player = videojs('my-video2',{
