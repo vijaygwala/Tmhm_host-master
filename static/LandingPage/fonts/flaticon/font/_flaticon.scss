@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 26/01/2019 10:34
+    Creation date: 19/06/2020 04:39
     */
 
     @font-face {
@@ -37,20 +37,18 @@
   font-smoothing: antialiased;
     }
 
-    .flaticon-teacher:before { content: "\f100"; }
-.flaticon-books:before { content: "\f101"; }
-.flaticon-diploma:before { content: "\f102"; }
-.flaticon-reading:before { content: "\f103"; }
-.flaticon-security:before { content: "\f104"; }
-.flaticon-education:before { content: "\f105"; }
-.flaticon-jigsaw:before { content: "\f106"; }
-.flaticon-kids:before { content: "\f107"; }
+    .flaticon-test-tube:before { content: "\f100"; }
+.flaticon-compass:before { content: "\f101"; }
+.flaticon-microscope:before { content: "\f102"; }
+.flaticon-globe:before { content: "\f103"; }
+.flaticon-book:before { content: "\f104"; }
+.flaticon-atom:before { content: "\f105"; }
+.flaticon-pencil-cup:before { content: "\f106"; }
     
-    $font-Flaticon-teacher: "\f100";
-    $font-Flaticon-books: "\f101";
-    $font-Flaticon-diploma: "\f102";
-    $font-Flaticon-reading: "\f103";
-    $font-Flaticon-security: "\f104";
-    $font-Flaticon-education: "\f105";
-    $font-Flaticon-jigsaw: "\f106";
-    $font-Flaticon-kids: "\f107";
+    $font-Flaticon-test-tube: "\f100";
+    $font-Flaticon-compass: "\f101";
+    $font-Flaticon-microscope: "\f102";
+    $font-Flaticon-globe: "\f103";
+    $font-Flaticon-book: "\f104";
+    $font-Flaticon-atom: "\f105";
+    $font-Flaticon-pencil-cup: "\f106";

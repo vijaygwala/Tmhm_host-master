@@ -8,9 +8,15 @@ def CreateOrder(request,productId,action=None):
     product = Course.objects.get(Cid=productId)
     order, created = Order.objects.get_or_create(customer=customer, status=False)
     orderItem, created = OrderCourses.objects.get_or_create(order=order, course=product)
-    orderItem.save()
+    if action == 'add':
+        orderItem.save()
     if action == 'remove':
+        #print(orderItem)
         orderItem.delete()
+        #print(orderItem)
+        
+        
+    
 def CreateOrderWithAnonymousCart(request,cart):
     for productId in cart:
         CreateOrder(request,productId)
@@ -19,7 +25,7 @@ def CreateOrderWithAnonymousCart(request,cart):
 
 def cookieCart(request):
     
-	#Create empty cart for now for non-logged in user
+	# Create empty cart for now for non-logged in user
 	try:
 		cart = json.loads(request.COOKIES['cart'])
 	except:
@@ -59,14 +65,15 @@ def cookieCart(request):
 def cartData(request):
     context={}
    
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and  request.user.groups.filter(name='Visiters').exists():
         try:
             cart = json.loads(request.COOKIES['cart'])
         except:
             cart = {}
         if bool(cart):
+            print(cart,"c 1") 
             CreateOrderWithAnonymousCart(request,cart)
-
+        print(cart," c 2")
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, status=False)
         items = order.ordercourses_set.all()
@@ -78,29 +85,31 @@ def cartData(request):
         amount =order.get_cart_total
 
         order_amount = amount*100
+        checkout=request.GET.get('checkout',None)
        
+        if checkout=='true':
+            order_currency = 'INR'
+            order_receipt = str(order.id)
+            notes = {
+                'Shipping address': ''}
 
-        order_currency = 'INR'
-        order_receipt = str(order.id)
-        notes = {
-            'Shipping address': ''}
-
-        # CREAING ORDER
-        response = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0'))
-        order_id = response['id']
-        order_status = response['status']
-
-        if order_status=='created':
-
-            # Server data for user convinience
+            # CREAING ORDER
             
-            context['total'] = order_amount
-            context['name'] = name
-           
-            context['email'] = email
+            response = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0'))
 
-            # data that'll be send to the razorpay for
-            context['order_id'] = order_id
+            order_id = response['id']
+            order_status = response['status']
+
+            if order_status=='created':
+
+                # Server data for user convinience
+                
+                context['total'] = order_amount
+                context['name'] = name
+                context['email'] = email
+
+                # data that'll be send to the razorpay for
+                context['order_id'] = order_id
 
     else:
         cookieData = cookieCart(request)

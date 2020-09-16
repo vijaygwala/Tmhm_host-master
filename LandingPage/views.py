@@ -27,6 +27,7 @@ from .utils import *
 
 # Landing  page
 def home(request):
+    
     return render(request,'LandingPage/index.html')
 
 def cart(request):
@@ -44,39 +45,40 @@ def UpdateCart(request):
 
 #free content avialable for users here 
 @login_required(login_url='/home')
-@allowed_users(['Visiters','Learners','Facilitators'])
+# @allowed_users(['Visiters','Learners','Facilitators'])
 def freecontent(request):
     return render(request,'LandingPage/freeContent/index.html')
 
 # users can expolore the courses from explore courses
-def exploreCourses(request):
-    cat=Category.objects.all()
-    subcat=SubCategory.objects.all()
-    course=Course.objects.all()
-    query = request.GET.get('query')
-    op=request.GET.get('op')
-    if op!=None and op!="All Categories":
-        course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
-    if query is not None:
-        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
-    print(course)
-    paginator=Paginator(course.values(),6,orphans=1)
-    page_number=request.GET.get('page')
-    page_obj=paginator.get_page(page_number)
-    context={
-        'cat':cat.values(),
-        'subcat':subcat.values(),
-        'page_obj':page_obj
+# def exploreCourses(request):
+#     cat=Category.objects.all()
+#     subcat=SubCategory.objects.all()
+#     course=Course.objects.all()
+#     query = request.GET.get('query')
+#     op=request.GET.get('op')
+#     if op!=None and op!="All Categories":
+#         course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
+#     if query is not None:
+#         course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+#     print(course)
+#     paginator=Paginator(course.values(),6,orphans=1)
+#     page_number=request.GET.get('page')
+#     page_obj=paginator.get_page(page_number)
+#     context={
+#         'cat':cat.values(),
+#         'subcat':subcat.values(),
+#         'page_obj':page_obj
         
-    }
+#     }
 
-    print(course)
-    if request.is_ajax() and op!="All Categories":
-        data=CourseSerializers(page_obj,many=True).data
-        print(CourseSerializers(page_obj,many=True).data)
-        print(data)
-        return JsonResponse(data,safe=False)
-    return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
+#     print(course)
+#     if request.is_ajax() and op!="All Categories":
+#         data=CourseSerializers(page_obj,many=True).data
+#         print(CourseSerializers(page_obj,many=True).data)
+#         print(data)
+#         return JsonResponse(data,safe=False)
+#     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
+
 
 #Landing page about us page
 def aboutus(request):
@@ -250,3 +252,52 @@ def category(request):
 #Landing page tems and services page
 def termsandservices(request):
     return render(request, 'LandingPage/terms/terms.html')
+def VideoPage(request):
+    Cid=request.GET.get('Cid')
+    course=Course.objects.get(Cid=Cid)
+    videos=course.course_video.all()
+    context={'videos':videos}
+    return render(request, 'video_page/index.html',context) 
+
+
+
+# By Saurabh 
+def exploreCourses(request):
+    cat=Category.objects.all()
+    subcat=SubCategory.objects.all()
+    course=Course.objects.all()
+    query = request.GET.get('query')
+    option=request.GET.get('cat')
+    filter_level = request.GET.getlist('level')
+    filter_subcat = request.GET.getlist('subcat')
+    filter_lang = request.GET.getlist('lang')
+    filter_price = request.GET.getlist('price')
+    selected_cat = option
+    # Categories
+    if option!=None:
+        if option == "All Categories":
+            course=Course.objects.all()
+        else:
+            course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=option))
+    # Search Filter
+    if query is not None:
+        course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
+    # Side Filters
+    if filter_level:
+        course=Course.objects.filter(level__in=filter_level) & course
+    if filter_subcat:
+        course=Course.objects.filter(subCat_id__name__in=filter_subcat) & course
+    if filter_lang:
+        course=Course.objects.filter(language__in=filter_lang) & course
+    if filter_price:
+        course=Course.objects.filter(price__in=filter_price) & course
+    paginator=Paginator(course.values(),6,orphans=1)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+    context={
+        'cat':cat.values(),
+        'subcat':subcat.values(),
+        'page_obj':page_obj,
+        'selected_cat': selected_cat
+    }
+    return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
