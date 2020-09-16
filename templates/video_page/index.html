@@ -147,18 +147,20 @@
                         <div class="row">
                             <div class="tabs-left col-md-12 col-sm-12">
                                 <!-- tab navigation -->
-                                <ul class="nav nav-tabs nav-tabs-light pull-left">
+                                <ul class="nav list nav-tabs nav-tabs-light pull-left">
                                     {% for video in videos %}
-                                    <li ><a href="#tab5_sec1" data-toggle="tab">{{video.title}}</a></li>
+                                    <li ><a href="#tab5_sec1-{{video.Vid}}"  data-toggle="tab">{{video.title}}</a></li>
                                     {% endfor %}
                                 </ul>
                                 <!-- end tab navigation -->
                                 <!-- tab content section -->
+                               
                                 <div class="tab-content position-relative overflow-hidden">
                                     <!-- tab content -->
-                                    <div class="tab-pane med-text fade in active" id="tab5_sec1">
+                                    {% for video in videos %}
+                                    <div class="tab-pane med-text fade in " id="tab5_sec1-{{video.Vid}}">
                                         <video
-                                        id="my-video"
+                                        id="my-video-{{video.Vid}}"
                                         class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid "
                                       
                                         poster="1.jpg"
@@ -168,9 +170,9 @@
                                         }'
                                          >
                                         
-                                        <source src="MY_VIDEO.mp4" type="video/mp4"  label='360p' res='360'/>
-                                        <source src="MY_VIDEO.mp4" type="video/mp4"  label='480p' res='480'/>
-                                        <source src="MY_VIDEO.mp4" type="video/mp4"  label='720p' res='720'/>
+                                        <source src="{{video.video.url}}" type="video/mp4"  label='360p' res='360'/>
+                                        <source src="{{video.video.url}}" type="video/mp4"  label='480p' res='480'/>
+                                        <source src="{{video.video.url}}" type="video/mp4"  label='720p' res='720'/>
 
                                        
                                         <p class="vjs-no-js">
@@ -182,17 +184,25 @@
                                         </video>
 
                                         <script>
-                                             var player = videojs('my-video',{
+                                             var player = videojs('my-video-{{video.Vid}}',{
                                             //autoplay : 'muted',
                                             controls :true,
                                             
                                         });
+                                        $(document).ready(function() {
+                                        var id = $("ul.list a:first").attr("href");
+                                        $(id).addClass("active");
+                                        });
+                                        
+                                        videojs('my-video-{{video.Vid}}').videoJsResolutionSwitcher()
+ 
                                         </script>
                                        
                                     </div>
+                                    {% endfor %}
                                     <!-- end tab content -->
                                     <!-- tab content -->
-                                    <div class="tab-pane fade in" id="tab5_sec2">
+                                    <!-- <div class="tab-pane fade in" id="tab5_sec2">
                                         <video
                                         id="my-video"
                                         class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid "
@@ -220,17 +230,13 @@
                                            
                                        });
                                        </script>
-                                    </div>
+                                    </div> -->
                                     <!-- end tab content -->
                                     <!-- tab content -->
-                                    <div class="tab-pane fade in" id="tab5_sec3">
-                                       
-                                    </div>
+                                   
                                     <!-- end tab content -->
                                     <!-- tab content -->
-                                    <div class="tab-pane fade in" id="tab5_sec4">
-                                       
-                                    </div>
+                                   
                                     <!-- end tab content -->
                                 </div>
                                 <!-- end tab content section -->
