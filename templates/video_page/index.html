@@ -8,9 +8,10 @@
     <title>Video</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.css">
-    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+    <script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
@@ -22,7 +23,7 @@
         .tab-style5 .tabs-left .nav-tabs {
             border-right: none;
             float: left;
-            width: 250px;
+            max-width: 100%;
             margin: 0
         }
 
@@ -66,6 +67,7 @@
 
         .tab-style5 .tab-content {
             padding: 30px;
+            
             border: 2px solid #ececec;
 
         }
@@ -146,7 +148,7 @@
                 <div class="col-md-12 col-sm-12 center-col">
                     <div class="tab-style5">
                         <div class="row">
-                            <div class="tabs-left col-md-12 col-sm-12">
+                            <div class="tabs-left col-lg-2 col-md-3 col-sm-4 col-12">
                                 <!-- tab navigation -->
                                 <ul class="nav list nav-tabs nav-tabs-light pull-left">
                                     {% for video in videos %}
@@ -155,24 +157,25 @@
                                 </ul>
                                 <!-- end tab navigation -->
                                 <!-- tab content section -->
-                               
+                            </div>
+                            <div class=" col-lg-10 col-md-9 col-sm-8 col-12">
                                 <div class="tab-content position-relative overflow-hidden">
                                     <!-- tab content -->
                                     {% for video in videos %}
                                     <div class="tab-pane med-text fade in " id="tab5_sec1-{{video.Vid}}">
                                         <video
                                         id="my-video-{{video.Vid}}"
-                                        class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid "
-                                      
+                                        class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid  "
                                         poster="1.jpg"
+                                        preload="none"
                                         data-setup='{
                                             "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],
                                             "preload":"auto"
                                         }'
-                                         >
+                                        >
                                         
                                         <source src="{{video.video.url}}" type="video/mp4"  label='360p' res='360'/>
-                                        <source src="{{video.video.url}}" type="video/mp4"  label='480p' res='480'/>
+                                        <source src="{{video.video.url}}" type="video/mp4"   label='480p' res='480'/>
                                         <source src="{{video.video.url}}" type="video/mp4"  label='720p' res='720'/>
 
                                        
@@ -189,52 +192,27 @@
                                             //autoplay : 'muted',
                                             controls :true,
                                             
-                                        });
+                                            plugins: {
+                                                videoJsResolutionSwitcher: {
+                                                default: 'low',
+                                                dynamicLabel: true
+                                                },
+                                                hotkeys: {
+                                                        volumeStep: 0.1,
+                                                        seekStep: 10,
+                                                        enableModifiersForNumbers: false
+                                                }
+                                            }
+                                            
+                                            });
+                                           
                                        
-                                        
-                                        videojs('my-video-{{video.Vid}}').videoJsResolutionSwitcher()
  
                                         </script>
                                        
                                     </div>
                                     {% endfor %}
-                                    <!-- end tab content -->
-                                    <!-- tab content -->
-                                    <!-- <div class="tab-pane fade in" id="tab5_sec2">
-                                        <video
-                                        id="my-video"
-                                        class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid "
-                                        
-                                        data-setup='{
-                                            "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],
-                                            "preload":"auto"
-                                        }'
-                                        >
-                                        <source src="4.mp4" type="video/mp4"  label='360p' res='360'/>
-                                        <source src="4.mp4" type="video/mp4"  label='480p' res='480'/>
-                                        <source src="4.mp4" type="video/mp4"  label='720p' res='720'/>
-                                        
-                                        <p class="vjs-no-js">
-                                          To view this video please enable JavaScript, and consider upgrading to a
-                                          web browser that
-                                          <a href="https://videojs.com/html5-video-support/" target="_blank"
-                                            >supports HTML5 video</a>
-                                        </p>
-                                        </video>
-                                        <script>
-                                            var player = videojs('my-video',{
-                                           //autoplay : 'muted',
-                                           controls :true,
-                                           
-                                       });
-                                       </script>
-                                    </div> -->
-                                    <!-- end tab content -->
-                                    <!-- tab content -->
-                                   
-                                    <!-- end tab content -->
-                                    <!-- tab content -->
-                                   
+                                    
                                     <!-- end tab content -->
                                 </div>
                                 <!-- end tab content section -->
@@ -265,7 +243,7 @@
                                         $("ul.list li:first").addClass("active");
                                     });
         
-        videojs('my-video').videoJsResolutionSwitcher()
+        
         // var player = videojs('my-video2',{
         //     // autoplay : 'muted',
         //     controls :true,
