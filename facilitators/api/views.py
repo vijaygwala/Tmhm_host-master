@@ -38,7 +38,7 @@ class CreateCourseApi(APIView):
         file=request.FILES['file']
         details=json.loads(request.data.pop('data')[0])
         print(details)
-        print(request.user)
+    
         subcategory_detail=details.pop('subcategory')
         course_detail=details.pop('course')
         video_detail=details.pop('video')

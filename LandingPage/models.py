@@ -53,8 +53,14 @@ class Audience(models.Model):
     audience=models.CharField(max_length=100,null=True,blank=True)
     def __str__(self):
         return self.audience
+def content_Rfile_name(instance, filename):
+    return '/'.join(['RecordedSession', instance.course.title, filename])
+
 
 #this relation contains all the courses releted to particuler subcategory
+def video_course_path(instance, filename):
+    return 'course/{0}'.format(instance.title)
+    
 class Course(models.Model):
     Audience=(
         ('Students','Students'),
@@ -76,13 +82,14 @@ class Course(models.Model):
     description=models.TextField(blank=False,null=True)
     days=models.CharField(max_length=100,null=True,blank=True)
     months=models.CharField(max_length=100,null=True,blank=True)
-    thumbnail=models.ImageField(upload_to='courses/',blank=True, null=True)
+    thumbnail=models.ImageField(upload_to='courses/',default='default/course_thumbnail.png',blank=True, null=True)
     audience=models.CharField(choices=Audience,max_length=100,null=True,blank=True)
     takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
-    price = models.IntegerField()
+    price = models.IntegerField(default=2000,blank=True,null=True)
+    video=models.FileField(upload_to =video_course_path,null=True,blank=True)
     language=models.CharField(max_length=100,null=False,blank=False)
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
     level = models.CharField(choices=Level,max_length=50,default='Beginner')
@@ -136,15 +143,13 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    
     class Meta:
         verbose_name='Courses'
         verbose_name_plural='Courses'
 
 def content_file_name(instance, filename):
     return '/'.join(['LiveSessions', instance.course.title, filename])
-def content_Rfile_name(instance, filename):
-    return '/'.join(['RecordedSession', instance.course.title, filename])
-
 
 class Rating(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -155,6 +160,8 @@ class Rating(models.Model):
         unique_together = (('lerner', 'course'), )
         index_together = (('lerner', 'course'), )  
 
+def video_path(instance, filename):
+    return 'courses/{0}'.format(instance.course.title)
 #contain all the recorded videos to the particuler course
 class CourseVideo(models.Model):
     Vid=models.AutoField(primary_key=True)
@@ -162,11 +169,13 @@ class CourseVideo(models.Model):
     description=models.TextField(blank=True,null=True)
     session_duration=models.CharField(max_length=100,null=True,blank=True)
     video=models.FileField(upload_to =content_Rfile_name,null=True,blank=True)
+    thumbnail=models.ImageField(upload_to=video_path,blank=True, null=True)
     course=models.ForeignKey(Course, on_delete=models.CASCADE,related_name='course_video')
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     def __str__(self):
         return self.title
+    
     
 #contain all the liveSessions to the particuler course
 class LiveSession(models.Model):
