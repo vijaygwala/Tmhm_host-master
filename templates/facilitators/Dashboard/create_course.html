@@ -482,9 +482,7 @@ Create Courses
 
                                                                         </div>
 
-                                                                       <div class="container text-center mt-2">
-                            <button class="btn btn-secondary" type="submit" >submit</button>
-                                    </div>
+                                                                       
                                                                     </div>
 
                                                                 </div>
@@ -675,7 +673,7 @@ Create Courses
     $(document).ready(function(){
   
     var $myForm = $('#msform')
-    $myForm.submit(function(event){
+    $("#finish").click(function(event){
         event.preventDefault()  
          var cat_list = $('#category option:selected').toArray().map(item => item.text);      
     var session= 'false'//document.getElementById('session').getAttribute('aria-selected');
@@ -743,7 +741,7 @@ var formData = new FormData();
 
  $.ajaxSetup({async: false});
 $.ajax({
-    url: '{% url 'createcourseapi' %}',
+    url: "{% url 'createcourseapi' %}",
     async: false,
     data: formData,
     contentType: false,

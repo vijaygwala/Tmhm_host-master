@@ -27,13 +27,14 @@ Free content LearnOpad
     <link rel="stylesheet" href="{% static 'LandingPage/css/style.css' %}">
 {% endblock header %}
 
+
 {% block stylesheet %}
 
 {% endblock stylesheet %}
 
     
         <!-- navbar  -->
-        
+       
 
         <div class="site-wrap" id="home-section">
 
@@ -199,14 +200,25 @@ Free content LearnOpad
             </div>
             <div class="row">
                 <div class="col-lg-6">
+                  <style>
+                    .card-img-free{
+                      width: 100%;
+                      height: auto;
+                    }
+                    @media (max-width: 767px) {
+                      .card-img-free{
+                      width: 30%;
+                      height: auto;
+                    }
+                    }
+                  </style>
 
 
-
-                    <div class="d-flex tutorial-item mb-4 row">
-                        <div class="img-wrap col-sm">
-                            <a href="#"><img src={% static "LandingPage/images/img_1.jpg" %} alt="Image" class="img-fluid"></a>
+                    <div class=" tutorial-item mb-4 row">
+                        <div class=" col-lg-6 col-md-6 col-12">
+                            <a href="#"><img src={% static "LandingPage/images/img_1.jpg" %} alt="Image" class="card-img-free"></a>
                         </div>
-                        <div class="col-sm">
+                        <div class=" col-lg-6 col-md-6 col-12">
                             <h3><a href="#">Learning React Native</a></h3>
                             <p> Learn React native totally free with this crash course.Taught by the best of our facilitators.
                             </p>
@@ -225,11 +237,11 @@ Free content LearnOpad
                         </div>
                     </div>
 
-                    <div class="d-flex tutorial-item mb-4 row">
-                        <div class="img-wrap col-sm">
-                            <a href="#"><img src={% static "LandingPage/images/img_2.jpg" %} alt="Image" class="img-fluid"></a>
+                    <div class=" tutorial-item mb-4 row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <a href="#"><img src={% static "LandingPage/images/img_2.jpg" %} alt="Image" class="card-img-free"></a>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-lg-6 col-md-6 col-12">
                             <h3><a href="#">Learning Angular 101</a></h3>
                             <p> Learn Angular totally free with this crash course.Taught by the best of our facilitators.
                             </p>
@@ -247,11 +259,11 @@ Free content LearnOpad
                         </div>
                     </div>
 
-                    <div class="d-flex tutorial-item mb-4 row">
-                        <div class="img-wrap col-sm">
-                            <a href="#"><img src={% static "LandingPage/images/img_3.jpg" %} alt="Image" class="img-fluid"></a>
+                    <div class=" tutorial-item mb-4 row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <a href="#"><img src={% static "LandingPage/images/img_3.jpg" %} alt="Image" class="card-img-free"></a>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-lg-6 col-md-6 col-12">
                             <h3><a href="#">Learning Photoshop</a></h3>
                             <p> Learn React native totally free with this crash course.Taught by the best of our facilitators.
                             </p>
