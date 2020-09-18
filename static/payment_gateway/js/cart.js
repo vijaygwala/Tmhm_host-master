@@ -36,7 +36,7 @@ function updateUserOrder(productId, action){
 		.then((data) => {
 			console.log(cart)
 			if (action == 'remove'){
-				cart[productId]['quantity'] -= 1
+	
 		
 				
 				delete cart[productId];
