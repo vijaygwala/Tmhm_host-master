@@ -262,5 +262,13 @@ class CorporatesTalks(models.Model):
         verbose_name='Corporate Talks'
         verbose_name_plural='Corporate Talks'
 
+class Partners(models.Model):
+    Cid=models.ForeignKey(Course,on_delete=models.CASCADE)
+    name=models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name="Corporates"
+        verbose_name_plural="Corporates"
 
