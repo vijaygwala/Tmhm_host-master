@@ -62,15 +62,18 @@ My Earnings|Facilitator
             }
             #content {
                 left: auto;
-                right: 224px;
+               
                 width: 100%;
                 width: calc(100% - 0px);
+            }
+            .content-wrapper {
+                padding:0;
             }
         }
         
         @media only screen and (max-width: 1800px) {
             #content {
-                margin-left: 113px;
+                padding: 20px 30px;
             }
         }
     </style>
@@ -80,7 +83,7 @@ My Earnings|Facilitator
     {% block content %}
 
                 <!-- Begin Page Content -->
-                <div class="outer-container-that-is-relative bg-white" style="margin-top:70px; position: relative;font-family: 'Raleway';" id="content">
+                <div class="outer-container-that-is-relative bg-white" style=" position: relative;font-family: 'Raleway';" id="content">
 
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
@@ -203,7 +206,7 @@ My Earnings|Facilitator
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>
+    <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
     <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
