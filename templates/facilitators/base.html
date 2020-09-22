@@ -54,15 +54,15 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{% url 'profile' request.user.user.facilitator.Fid %}" >
                   <i class="fas fa-user-circle text-primary"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{% url 'settings' %}" >
                   <i class="fas fa-user-cog text-primary"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="">
+                <a class="dropdown-item" href="{% url 'logout' %}" >
                   <i class="mdi mdi-logout text-primary"></i>
                   Logout
                 </a>
