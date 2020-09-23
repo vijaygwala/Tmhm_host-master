@@ -90,7 +90,7 @@ class Course(models.Model):
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     price = models.IntegerField(default=2000,blank=True,null=True)
     video=models.FileField(upload_to =video_course_path,null=True,blank=True)
-    language=models.CharField(max_length=100,null=False,blank=False)
+    language=models.CharField(max_length=100,null=False,blank=False,default='English')
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
     level = models.CharField(choices=Level,max_length=50,default='Beginner')
     def no_of_ratings(self):
