@@ -11,49 +11,6 @@ import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
 from mailing.views import *
 
-# def course_order(request):
-#     context = {}
-#     if request.method == 'POST':
-        
-#         name = request.user.first_name+" "+last_name
-    
-#         email = request.user.email
-    
-#         amount =
-
-#         order_amount = amount*100
-       
-
-#         order_currency = 'INR'
-#         order_receipt = 'id'
-#         notes = {
-#             'Shipping address': ''}
-
-#         # CREAING ORDER
-#         response = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0'))
-#         order_id = response['id']
-#         order_status = response['status']
-
-#         if order_status=='created':
-
-#             # Server data for user convinience
-            
-#             context['price'] = order_amount
-#             context['name'] = name
-           
-#             context['email'] = email
-
-#             # data that'll be send to the razorpay for
-#             context['order_id'] = order_id
-
-
-#             return render(request, 'confirm_order.html', context)
-
-
-#         # print('\n\n\nresponse: ',response, type(response))
-#     return HttpResponse('<h1>Error in  create order function</h1>')
-
-
     
 #facilitator order subscription 
 def create_order(request):
@@ -96,12 +53,7 @@ def create_order(request):
         order_status = response['status']
         data['order_id']=order_id
         data['order_status']=order_status
-        form=OrderForm(data)
-        if form.is_valid():
-            form.save()
-        else:
-            return HttpResponse('<h1>Invalid Form</h1>')
-        
+       
         if order_status=='created':
     
             # Server data for user convinience

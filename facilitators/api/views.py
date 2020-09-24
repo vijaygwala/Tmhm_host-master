@@ -52,7 +52,7 @@ class CreateCourseApi(APIView):
         course_detail['months']=months
         course_detail['video']=cvideo
         course_detail['thumbnail']=cthumbnail
-        course_detail['subCat_id'] =subcategory_obj
+        course_detail['subCat_id'] =subcategory_obj.subCat_id
         course_obj = CourseSerializers(data=course_detail)
         if course_obj.is_valid(raise_exception=True):
             course_obj.save()
