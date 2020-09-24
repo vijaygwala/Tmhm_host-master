@@ -16,58 +16,45 @@ Create Courses
 
 <!-- Latest compiled and minified JavaScript -->
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-   
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
-    
-    <link rel="stylesheet" href="https://rawgit.com/silviomoreto/bootstrap-select/master/dist/css/bootstrap-select.css">
-    <script src="https://rawgit.com/silviomoreto/bootstrap-select/master/dist/js/bootstrap-select.js"></script>
 
 
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <!-- Bootstrap core CSS -->
-    
-    <!-- Material Design Bootstrap -->
-    
 
-    <!-- Custom fonts for this template-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  
+    <!-- <link rel="stylesheet" href="https://rawgit.com/silviomoreto/bootstrap-select/master/dist/css/bootstrap-select.css"> -->
+    <!-- <script src="https://rawgit.com/silviomoreto/bootstrap-select/master/dist/js/bootstrap-select.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"  />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js" ></script> -->
     <link href="{% static 'facilitators/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-
-
-    
-    <!-- Icons font CSS-->
-    <link href="{% static 'facilitators/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'facilitators/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
-    <!-- Font special for pages-->
-
-    <!-- Vendor CSS-->
-    <link href="{% static 'facilitators/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
-    <link href="{% static 'facilitators/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link rel="stylesheet" type="text/css" href="{% static 'facilitators/css/opensans-font.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'facilitators/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+    <link href="css2/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Main Style Css --> 
-    <link rel="stylesheet" href="{% static 'facilitators/css/create_course.css'%}" />
+    <!-- <link rel="stylesheet" href="{% static 'facilitators/css/create_course.css'%}" /> -->
 
 
     <!-- Custom styles for this template-->
-    <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet">
+    <!-- <link href="{% static 'facilitators/css/main.css'%}" rel="stylesheet"> -->
     {% endblock header %}
 <!-- ------------------------------------------- -->
    
     {% block stylesheet %}
     <style>
+        .bootstrap-select>.dropdown-toggle {
+            border: 1px solid;
+        }
         .open>.dropdown-menu {
     display: block;
         }
@@ -114,7 +101,23 @@ Create Courses
             vertical-align: top;
             left: 224px;
         }
-        
+        .deletevid ul li{
+            display: flex;
+            justify-content: space-between;
+        }
+        .deletevid .delete-btn{
+            padding: 5px 20px;
+            background-color: red;
+            color: #fff;
+            border-radius: 5px;
+
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        /* .uploadform,.deletevid{
+            display : none;
+        } */
         @media only screen and (max-width: 400px) {
             #topbar {
                 left: 0;
@@ -133,16 +136,18 @@ Create Courses
             }
             #content {
                 left: auto;
+               
                 width: 100%;
                 width: calc(100% - 0px);
+            }
+            .content-wrapper {
+                padding:0;
             }
         }
         
         @media only screen and (max-width: 1800px) {
             #content {
-                margin-right: 30px;
-                margin-left: 30px;
-                padding-right: 60px;
+                padding: 20px 30px;
             }
         }
     </style>
@@ -155,476 +160,193 @@ Create Courses
     swal("Created", "{{success}}", "success");
     </script>
   {% endif %}
+    
+  <script type="text/javascript">
+    window.onload = function() {
+        document.getElementById('uploadform').style.display = 'none';
+        document.getElementById('deletevid').style.display = 'none';
+    }
+    function videoupdtdel() {
+        
+        if ($('#updvid').is(':checked')) {
+            $('#uploadform').show();
+            $('#deletevid').hide();
+            // document.getElementById('dltvid').removeAttribute("checked");
+            // document.getElementById('dltvid').checked = false;
+
+        }
+        else if( $('#dltvid').is(':checked')){ 
+            $('#deletevid').show();
+            $('#uploadform').hide();
+            // document.getElementById('updvid').removeAttribute("checked");
+            // document.getElementById('updvid').checked = false;
+        }
+        // else{
+        //     document.getElementById('uploadform').style.display = 'none';
+        //     document.getElementById('deletevid').style.display = 'none';
+        // }
+    }
+    
+</script>
+  
+     
                 <!-- page content begin  -->
-                <div class="page-content" style="">
-                    <div id="contentdone" class="form-v1-content">
-                        <div class="wizard-form">
-                            <form class="form-register"id="msform" action="" method="post">
-                                <div id="form-total">
-                                    <!-- SECTION 1 -->
-                                    <h2>
-                                        <p class="step-icon"><span>01</span></p>
-                                        <span class="step-text">Course Details</span>
-                                    </h2>
-                                    <section>
-                                        <div class="inner">
-                                            <div class="wizard-header">
+                
+                
+                <div class=" bg-white" style="position: relative;font-family: 'Raleway';  color: #000; padding: 20px 30px;" id="content">
+                    <div class="container-fluid " >
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class=" nav-item active"><a class="nav-link active" href="#createcourse" data-toggle="tab" role="tab" aria-controls="createcourse" aria-selected="true">Create course</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#updtcrs" data-toggle="tab" role="tab" aria-controls="updtcrs" aria-selected="false">Update/Delete course</a></li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div id="createcourse" class="tab-pane fade in active show" role="tabpanel" aria-labelledby="createcourse-tab">
+                                <!-- <h1>Hello</h1> -->
+                                
+                                    <div class="container">
+                                            <div>
                                                 <h3 class="heading">Overview</h3>
-                                                <p>Please enter the necessary information and proceed forward for content creation. </p>
+                                                    <p>Please enter the necessary information and proceed forward for content creation. </p>
                                             </div>
+                                        <form action="" method="post">
                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <fieldset>
-                                                        <legend>Code</legend>
-                                                        <input type="text" class="form-control" id="id_code" name="code" placeholder="Course Code" required>
-                                                    </fieldset>
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputEmail4">Code</label>
+                                                  <input type="text" class="form-control" id="inputEmail4" placeholder="code">
                                                 </div>
-
-                                            </div>
-
-                                             <div class="form-row">
-                                                <div class="form-holder">
-                                                    <fieldset>
-                                                        <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="id_title" name="title" placeholder="Title of course" required>
-                                                    </fieldset>
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputPassword4">Title</label>
+                                                  <input type="text" class="form-control" id="inputPassword4" placeholder="Title">
                                                 </div>
-
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <fieldset>
-                                                        <legend>Description</legend>
-                                                        <textarea id="id_description" name="description" placeholder="" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="inputAddress">Description</label>
+                                                <input type="text" class="form-control" id="inputAddress" placeholder="Description">
+                                              </div>
+                                              
+                                              <div class="form-row">
+                                                <!-- <div class="form-group col-md-6">
+                                                  <label for="inputCity">City</label>
+                                                  <input type="text" class="form-control" id="inputCity">
+                                                </div> -->
+                                                <div class="form-group col-md-6">
+                                                  <label for="inputState">Target Audience</label>
+                                                  <select id="inputState" class="form-control">
+                                                    {% for obj in audience_list %}
+                                                                <option value="{{obj.audience}}">{{obj.audience}}</option>
+                                                                {% endfor %}      
+                                                  </select>
                                                 </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder">
-                                                    <fieldset>
-                                                        <legend>Target Audience</legend>
-                                                        <select id="id_audience" name="audience">
-                                                            {% for obj in audience_list %}
-                                                            <option value="{{obj.audience}}">{{obj.audience}}</option>
-                                                              {% endfor %}                       
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <fieldset>
-                                                        <legend>Takeaway/Learning</legend>
-                                                        <textarea id="id_takeway" name="takeway" placeholder="Less than 300 words" rows="3" cols="40" class="form-control"></textarea> </fieldset>
-                                                </div>
-                                            </div>
-                                            <!-- <div class="form-row form-row-date">
-                                                <div class="form-holder form-holder-2">
-                                                    <label class="special-label">Birth Date:</label>
-                                                    <select name="month" id="month">
-                                                        <option value="MM" disabled selected>MM</option>
-                                                        <option value="16">16</option>
-                                                        <option value="17">17</option>
-                                                        <option value="18">18</option>
-                                                        <option value="19">19</option>
-                                                    </select>
-                                                    <select name="date" id="date">
-                                                        <option value="DD" disabled selected>DD</option>
-                                                        <option value="Feb">Feb</option>
-                                                        <option value="Mar">Mar</option>
-                                                        <option value="Apr">Apr</option>
-                                                        <option value="May">May</option>
-                                                    </select>
-                                                    <select name="year" id="year">
-                                                        <option value="YYYY" disabled selected>YYYY</option>
-                                                        <option value="2017">2017</option>
-                                                        <option value="2016">2016</option>
-                                                        <option value="2015">2015</option>
-                                                        <option value="2014">2014</option>
-                                                        <option value="2013">2013</option>
-                                                    </select>
-                                                </div>
-                                            </div> -->
-                                            <!-- <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <input type="text" class="form-control input-border" id="ssn" name="ssn" placeholder="SSN" required>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                    </section>
-                                    <!-- SECTION 2 -->
-                                    <h2>
-                                        <p class="step-icon"><span>02</span></p>
-                                        <span class="step-text">Course Categories</span>
-                                    </h2>
-                                    <section>
-                                        <div class="inner">
-                                            <div class="wizard-header">
-                                                <h3 class="heading">Details</h3>
-                                                <p>Please enter the infomation and proceed to the next step.</p>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-holder form-holder-1">
-                                                    <input type="text" name="find_category" placeholder="Select the category" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                          <div class="form-group mt-auto">
-                                            
-                                                <span>
-                                                    <select class="selectpicker " title="Choose Your Course" name="course" id="category" multiple>
-
-                                                        {% for cat in category %}
-                                                        <optgroup label="{{cat.name}}">
-                                                            {% for sub in subcategory %}
-                                                            {% if sub.cat_id.cat_id == cat.cat_id %}
-                                                            <option value="{{sub.subCat_id}}">{{sub.name}}</option>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                        </optgroup>
-                                                        {% endfor %}
-                                                    
-                                                    </select>
-                                                    </span>
-                                                    <br>
-                                                    <i id="fwcourse-error" aria-hidden="true"></i><span id="course-error" class="text-danger"></span>
-                                                </div>
-                                                 </div>
-                                                </div>
-                                           
-                                            </div>
-                                    </section>
-                                   
-                                    <!-- SECTION 3 -->
-                                    <h2>
-                                        <p class="step-icon"><span>03</span></p>
-                                        <span class="step-text">Course Duration</span>
-                                    </h2>
-                                    <section>
-                                        <div class="inner">
-                                            <div class="wizard-header">
-                                                <h3 class="heading">Final Step</h3>
-                                                <p>Proceed to build your course/session.</p>
-                                            </div>
-
-                                            <div class="container register" style="margin:0px;padding: 0px;">
-                                                <div class="row">
-
-                                                    <div class="col register-right">
-
-                                                        {% comment %} <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link active" id="course" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Course</a>
-
-                                                            </li>
-                                                            <li class="nav-item">
-                                                        <a class="nav-link " id="session" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Sessions</a>
-
-                                                            </li> 
-                                                        </ul> {% endcomment %}
-{% comment %} 
-
-                                                        <div class="tab-content" id="myTabContent">
-                                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                                                <h3 class="register-heading" style="color:rgb(20, 153, 214);">Here to address learners and share your experience? Share an interactive Session Video!</h3>
-                                                                <div class="row register-form">
-                                                                    <div class="col">
-                                                                         <div class="form-row">
-                                                <div class="form-holder">
-                                                    <fieldset>
-                                                        <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="stitle" name="htitle" placeholder="Title of Video" >
-                                                    </fieldset>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-row">
-                                                <fieldset>
-                                            <label class="special-label">Description</label>
-                                            <textarea id="sdescription" name="sdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
                                                 
-                                            </div>
-             
-                                                                        <label class="special-label">Session Duration:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-                                                                                    <legend>Hour/min</legend>
-                                                                                    <input type="time" id="ltime" name="ltime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
-                                                                            </div>
+                                              </div>
+                                              <div class="form-row">
+                                                <div class="form-group col-md-6" style="
+                                                margin-top: auto;
+                                                margin-bottom: auto;
+                                            ">
+                                              
+                                                <select class="selectpicker " title="Choose Your Course" name="course" id="category" multiple style="width: 100%;">
 
-                                                                        </div>
-
-                                                                        <label class="special-label">Starting From:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-                                                                                    <legend>Date</legend>
-                                                                                    <input type="date" id="ldate" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
-
-                                                                        </div>
-                                                                        <!-- 
-                                                                        <label class="special-label">Hours of Session/Day:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-
-                                                                                    <input type="number" id="" name="" min="1" max="24">
-                                                                            </div>
-
-                                                                        </div> -->
-
-                                                                        <label class="special-label">Session Timings:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-                                                                                    <legend>From</legend>
-                                                                                    <input type="time" id="lstime"  name="lstime"min="00:00" max="24:00" > </fieldset>
-                                                                            </div>
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-                                                                                    <legend>To</legend>
-                                                                                    <input type="time" id="letime" name="letime" min="00:00" max="24:00" > </fieldset>
-                                                                            </div>
-
-                                                                        </div>
-
-
-                                                                        <label class="special-label">Days:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-                                                                                    <input type="text" name="days"  id="ldays" /> </div>
-
-                                                                        </div>
-
-
-                                                                        <div class="form-holder form-holder-2">
-                                                                            <label class="special-label">Upload:</label>
-
-                                                                            
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input"  accept=".pdf,.doc">
-                                                                                    <label class="custom-file-label" for="customFile">Session Video</label>
-                                                                                </div>
-
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div> {% endcomment %}
-                                                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                                                <h3 class="register-heading" style="color:rgb(20, 153, 214);">Want to impact people through your teachings? Start here by uploading Course videos!</h3>
-                                                                <div class="row register-form">
-                                                                    <div class="col">
-                                                                               <div class="form-row">
-                                                <div class="form-holder">
-                                                    <fieldset>
-                                                        <legend>Title</legend>
-                                                        <input type="text" class="form-control" id="ctitle" name="title" placeholder="Title of Video">
-                                                    </fieldset>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-row">
-                                                <fieldset>
-                                            <legend class="special-label">Description</legend>
-                                            <textarea id="cdescription" name="cdescription" placeholder="Description" rows="3" cols="50" class="form-control"></textarea> </fieldset>
+                                                    {% for cat in category %}
+                                                    <optgroup label="{{cat.name}}">
+                                                        {% for sub in subcategory %}
+                                                        {% if sub.cat_id.cat_id == cat.cat_id %}
+                                                        <option value="{{sub.subCat_id}}">{{sub.name}}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    </optgroup>
+                                                    {% endfor %}
                                                 
+                                                </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="exampleFormControlFile1">Upload</label>
+                                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                                </div>
                                             </div>
-             
-                                                                        {% comment %} <label class="special-label">Course Video Duration:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-                                                                                    <legend>Hour/min</legend>
-                                                                                    <input type="time" id="ctime" name="ctime"class="without_ampm" min="00:00" max="24:00" > </fieldset>
-                                                                            </div>
+                                               <div class="form-group">
+                                                            <label for="exampleFormControlTextarea1">Takeaway/Learning</label>
+                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                </div>
+                                              <button type="submit" class="btn btn-primary">Submit</button>
 
-                                                                        </div> {% endcomment %}
-
-
-
-
-
-                                                                        <label class="special-label">Days:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-
-                                                                                    <input type="number" id="cdays" name="cdays" min="1" max="999">
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <label class="special-label">Months:</label>
-                                                                        <div class="form-row">
-                                                                            <div class="form-holder">
-                                                                                <fieldset>
-
-                                                                                    <input type="number" id="cmonths" name="cmonths" min="1" max="12">
-                                                                            </div>
-
-                                                                        </div>
-
-
-
-                                                                        <div class="form-holder form-holder-2">
-                                                                            <label class="special-label">Upload:</label>
-
-                                                                            
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="coursevideo" accept="video/*">
-                                                                                    <label class="custom-file-label" for="customFile">Course Video</label>
-                                                                                </div>
-
-
-                                                                        </div>
-
-                                                                       <div class="container text-center mt-2">
-                            <button class="btn btn-secondary" type="submit" >submit</button>
+                                        </form>
                                     </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-
-
-
-                                            <!-- <div class="form-row form-row-date">
-                                                <div class="form-holder form-holder-2">
-                                                    <label class="special-label">Course Duration:</label>
-                                                    <div class="form-row">
-                                                        <div class="form-holder">
-                                                            <fieldset>
-                                                                <legend>Hours</legend>
-                                                                <input type="time" id="appt" name="appt" min="00:00" max="24:00" required> </fieldset>
-                                                        </div>
-
-                                                    </div>
-                                                    <label class="special-label">Start Date:</label>
-                                                    <div class="form-row">
-                                                        <div class="form-holder">
-                                                            <fieldset>
-                                                                <legend>Start Date</legend>
-                                                                <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01"> </div>
-
-                                                    </div>
-
-                                            <label class="special-label">Months:</label>
-
-                                                    <select name="" id="">
-                                                        <option value="MM" disabled selected>Months</option>
-                                                        <option value="">0</option>
-                                                        <option value="">1</option>
-                                                        <option value="">2</option>
-                                                        <option value="">3</option>
-                                                        <option value="">4</option>
-                                                        <option value="">5</option>
-                                                        <option value="">6</option>
-                                                        <option value="">7</option>
-
-                                                        <option value="">8</option>
-                                                        <option value="">9</option>
-                                                        <option value="">10</option>
-                                                        <option value="">11</option>
-                                                        <option value="">12</option>
-                                                       
-
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-holder form-holder-2">
-                                                    <label class="special-label">No.of Hours/Day:</label>
-                                                    <select name="" id="">
-                                                        <option value="" disabled selected>Hours</option>
-                                                        <option value="">1</option>
-                                                        <option value="">2</option>
-                                                        <option value="">3</option>
-                                                        <option value="">4</option>
-                                                        <option value="">5</option>
-                                                        <option value="">6</option>
-                                                        <option value="">7</option>
-
-                                                        <option value="">8</option>
-                                                        <option value="">9</option>
-                                                        <option value="">10</option>
-                                                        <option value="">11</option>
-                                                        <option value="">12+</option>
-
-
-
-                                                    </select>
-                                                </div>
-                                                <div class="form-holder form-holder-2">
-                                                    <label class="special-label">Upload:</label>
-
-                                                    <form>
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="customFile">
-                                                            <label class="custom-file-label" for="customFile">Upload Video</label>
-                                                        </div>
-                                                        <hr><label class="special-label">OR</label></hr>
-
-                                                        <div class="form-holder">
-                                                            <label class="special-label">URL Link:</label>
-
-                                                            <fieldset>
-                                                                <input type="text" class="form-control" id="" name="" placeholder="https://example.com" required>
-                                                            </fieldset>
-                                                        </div>
-                                                </div>
-
-
-                                            </div> -->
-                                        </div>
-                                        <!-- <div class="form-row">
-                                                <div class="form-holder form-holder-2">
-                                                    <input type="radio" class="radio" name="radio1" id="plan-1" value="plan-1">
-                                                    <label class="plan-icon plan-1-label" for="plan-1">
-                                                        <img src="images/form-v1-icon-2.png" alt="pay-1">
-                                                    </label>
-                                                    <div class="plan-total">
-                                                        <span class="plan-title">Specific Plan</span>
-                                                        <p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
-                                                    </div>
-                                                    <input type="radio" class="radio" name="radio1" id="plan-2" value="plan-2">
-                                                    <label class="plan-icon plan-2-label" for="plan-2">
-                                                            <img src="images/form-v1-icon-2.png" alt="pay-1">
-                                                    </label>
-                                                    <div class="plan-total">
-                                                        <span class="plan-title">Medium Plan</span>
-                                                        <p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
-                                                    </div>
-                                                    <input type="radio" class="radio" name="radio1" id="plan-3" value="plan-3" checked>
-                                                    <label class="plan-icon plan-3-label" for="plan-3">
-                                                        <img src="images/form-v1-icon-3.png" alt="pay-2">
-                                                    </label>
-                                                    <div class="plan-total">
-                                                        <span class="plan-title">Special Plan</span>
-                                                        <p class="plan-text">Pellentesque nec nam aliquam sem et volutpat consequat mauris nunc congue nisi.</p>
-                                                    </div>
-                                                </div>
-                                            </div> -->
-                                 
-                                        </div>
-                                    </section>
-                                </div>
+                                
+                            </div>
+                            <div id="updtcrs" class="tab-pane fade in " role="tabpanel" aria-labelledby="updtcrs-tab">
+                                <!-- <h1>Hello world</h1> -->
+                                <div class="mt-3" >
+                                <form action="" method="post">
+                                    <div class="form-group ">
+                                        <label for="inputEmail4">Course Code</label>
+                                        <input type="text" class="form-control" id="inputEmail4" placeholder="code">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="" type="radio" name="updvid" id="updvid" value="update" onclick="videoupdtdel()" >
+                                        <label class="form-check-label" for="exampleRadios1">
+                                         Update
+                                        </label>
+                                      </div>
+                                    <div class="form-group">
+                                        <input class="" type="radio" name="updvid" id="dltvid" value="delete"  onclick="videoupdtdel()" >
+                                        <label class="form-check-label" for="exampleRadios1">
+                                          Delete
+                                        </label>
+                                    </div>
+                                    </div>
                                 </form>
+                                <div class="uploadform mt-3" id="uploadform">
+                                    <h2>Upload A video</h2>
+                                    <form action="" method="post">
+                                        <div class="form-group ">
+                                            <label for="inputEmail4">Title</label>
+                                            <input type="text" class="form-control" id="inputEmail4" placeholder="Title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress">Description</label>
+                                            <input type="text" class="form-control" id="inputAddress" placeholder="Description">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleFormControlFile1">Upload Video</label>
+                                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="videoup">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleFormControlFile1">Upload Thumbnail</label>
+                                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="thumbailup">
+                                            </div>
+                                        </div>
+                                            <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="coursevid">
+                                            <label class="form-check-label" for="inlineCheckbox1">Course Video</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="livevid">
+                                            <label class="form-check-label" for="inlineCheckbox2">Live Video</label>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                                <div class="deletevid" id="deletevid">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">Video 1 : <a href="" class="delete-btn"> Delete</a> </li>
+                                        <li class="list-group-item">Video 2 : <a href="" class="delete-btn"> Delete</a> </li>
+                                        <li class="list-group-item">Video 3 : <a href="" class="delete-btn"> Delete</a> </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+               
 
                 <!-- page content end  -->
-
+                </div>
 
 
               
@@ -638,34 +360,28 @@ Create Courses
     </div>
     <!-- End of Page Wrapper -->
 
-
-
-    
-   
-    <!-- JQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-
-   
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script>
+     <!-- <script src="{% static 'facilitators/vendor/jquery/jquery.min.js'%}"></script> -->
     <script src="{% static 'facilitators/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{% static 'facilitators/vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+    
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'facilitators/js/sb-admin-2.min.js'%}"></script>
 
     <!-- Page level plugins -->
-    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script> 
+    <script src="{% static 'facilitators/vendor/chart.js/Chart.min.js'%}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{% static 'facilitators/js/demo/chart-area-demo.js'%}"></script>
     <script src="{% static 'facilitators/js/demo/chart-pie-demo.js'%}"></script>
-    <script src="{% static 'facilitators/js/jquery-3.3.1.min.js'%}"></script>
-    <script src="{% static 'facilitators/js/jquery.steps.js'%}"></script>
-    <script src="{% static 'facilitators/js/main.js'%}"></script>
+
+
+    
+   
+  
+    
 
 {% endblock content %}
 
@@ -675,7 +391,7 @@ Create Courses
     $(document).ready(function(){
   
     var $myForm = $('#msform')
-    $myForm.submit(function(event){
+    $("#finish").click(function(event){
         event.preventDefault()  
          var cat_list = $('#category option:selected').toArray().map(item => item.text);      
     var session= 'false'//document.getElementById('session').getAttribute('aria-selected');
@@ -743,7 +459,7 @@ var formData = new FormData();
 
  $.ajaxSetup({async: false});
 $.ajax({
-    url: '{% url 'createcourseapi' %}',
+    url: "{% url 'createcourseapi' %}",
     async: false,
     data: formData,
     contentType: false,

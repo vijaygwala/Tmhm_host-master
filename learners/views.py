@@ -54,9 +54,9 @@ def settings(request):
 @login_required(login_url='/learner_page')
 @allowed_users(['Learners'])
 def support(request):
-    learner=Learners.objects.get(Lid=1)
+    learner=Learners.objects.get(user=request.user)
     if request.method=='POST':
-        query=request.POST['Queries']
+        query=request.POST['message']
         LQueries.objects.create(Lid=learner,query=query)
         return redirect('learner_support')
     context={

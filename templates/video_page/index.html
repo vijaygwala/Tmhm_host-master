@@ -7,11 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video</title>
     <!-- CSS only -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'facilitators/assets/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'facilitators/assets/css/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'facilitators/assets/css/bootstrap-datepicker.min.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'facilitators/assets/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.css">
-    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+    <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+    <script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/videojs-resolution-switcher-vjs7@1.0.0/videojs-resolution-switcher.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
     <style>
 
         .nav-tabs>li>a {
@@ -21,7 +34,7 @@
         .tab-style5 .tabs-left .nav-tabs {
             border-right: none;
             float: left;
-            width: 250px;
+            max-width: 100%;
             margin: 0
         }
 
@@ -65,6 +78,7 @@
 
         .tab-style5 .tab-content {
             padding: 30px;
+            
             border: 2px solid #ececec;
 
         }
@@ -137,117 +151,237 @@
     </style>
 </head>
 
-<body>
-    <section class="video-sec">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- tab -->
-                <div class="col-md-12 col-sm-12 center-col">
-                    <div class="tab-style5">
-                        <div class="row">
-                            <div class="tabs-left col-md-12 col-sm-12">
-                                <!-- tab navigation -->
-                                <ul class="nav nav-tabs nav-tabs-light pull-left">
-                                    {% for video in videos %}
-                                    <li ><a href="#tab5_sec1" data-toggle="tab">{{video.title}}</a></li>
-                                    {% endfor %}
-                                </ul>
-                                <!-- end tab navigation -->
-                                <!-- tab content section -->
-                                <div class="tab-content position-relative overflow-hidden">
-                                    <!-- tab content -->
-                                    <div class="tab-pane med-text fade in active" id="tab5_sec1">
-                                        <video
-                                        id="my-video"
-                                        class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid "
-                                      
-                                        poster="1.jpg"
-                                        data-setup='{
-                                            "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],
-                                            "preload":"auto"
-                                        }'
-                                         >
-                                        
-                                        <source src="MY_VIDEO.mp4" type="video/mp4"  label='360p' res='360'/>
-                                        <source src="MY_VIDEO.mp4" type="video/mp4"  label='480p' res='480'/>
-                                        <source src="MY_VIDEO.mp4" type="video/mp4"  label='720p' res='720'/>
+<body class="sidebar-light sidebar-icon-only ">
 
-                                       
-                                        <p class="vjs-no-js">
-                                          To view this video please enable JavaScript, and consider upgrading to a
-                                          web browser that
-                                          <a href="https://videojs.com/html5-video-support/" target="_blank"
-                                            >supports HTML5 video</a>
-                                        </p>
-                                        </video>
+    <style>
+        .content-wrapper{
+            padding: 20px 0;
+        }
+        .tabs-left,.tabs-right{
+            padding:0;
+        }
+        .fa{
+            margin-right: 1.125rem;
+            color:#5e2572;
+        }
+        .active .fa{
+            color: #fff!important;
+        }
+    </style>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+        <ul class="navbar-nav mr-lg-2 d-none d-lg-flex">
+          <li class="nav-item nav-toggler-item">
+            <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </li>
+          
+        </ul>
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp; LearnOpad</a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp;LearnOpad</a>
+        </div>
+        <ul class="navbar-nav navbar-nav-right">
+          
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <span class="nav-profile-name">Vishal Gupta</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="">
+                <i class="fas fa-user-circle text-primary"></i>
+                Profile
+              </a>
+              <a class="dropdown-item" href="">
+                <i class="fas fa-user-cog text-primary"></i>
+                Settings
+              </a>
+              <a class="dropdown-item" href="">
+                <i class="mdi mdi-logout text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          
+          <li class="nav-item nav-toggler-item-right d-lg-none">
+            <button class="navbar-toggler align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard' %}">
+              <i class="mdi mdi-view-quilt menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'createcourse' %}">
+              <i class="fa fa-globe"></i>
+              <span class="menu-title">Create courses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'earnings' %}">
+              <i class="fa fa-bar-chart "></i>
+              <span class="menu-title">My Earnings</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'explorecourses' %}">
+              <i class="fa fa-globe "></i>
+              <span class="menu-title">Explore Courses</span>
+            </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'support'%}">
+                  <i class="fa fa-heart "></i>
+                <span class="menu-title">Support</span>
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
 
-                                        <script>
-                                             var player = videojs('my-video',{
-                                            //autoplay : 'muted',
-                                            controls :true,
+            <section class="video-sec">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- tab -->
+                        <div class="col-md-12 col-sm-12 center-col">
+                            <div class="tab-style5">
+                                <div class="row">
+                                    <div class="tabs-left col-lg-2 col-md-3 col-sm-4 col-12">
+                                        <!-- tab navigation -->
+                                        <ul class="nav list nav-tabs  pull-left" role="tablist">
+                                            {% for video in videos %}
+                                            <li class="" ><a href="#tab5_sec1-{{video.Vid}}"  data-toggle="tab">{{video.title}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                        <!-- end tab navigation -->
+                                        <!-- tab content section -->
+                                    </div>
+                                    <div class="tabs-right col-lg-10 col-md-9 col-sm-8 col-12">
+                                        <div class="tab-content position-relative overflow-hidden">
+                                            <!-- tab content -->
+                                            {% for video in videos %}
+                                            <div class="tab-pane med-text fade in " id="tab5_sec1-{{video.Vid}}">
+                                                <video
+                                                id="my-video-{{video.Vid}}"
+                                                class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid  "
+                                                poster="1.jpg"
+                                                preload="none"
+                                                data-setup='{
+                                                    "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],
+                                                    "preload":"auto"
+                                                }'
+                                                >
+                                                
+                                                <source src="{{video.video.url}}" type="video/mp4"  label='360p' res='360'/>
+                                                <source src="{{video.video.url}}" type="video/mp4"   label='480p' res='480'/>
+                                                <source src="{{video.video.url}}" type="video/mp4"  label='720p' res='720'/>
+
                                             
-                                        });
-                                        </script>
-                                       
+                                                <p class="vjs-no-js">
+                                                To view this video please enable JavaScript, and consider upgrading to a
+                                                web browser that
+                                                <a href="https://videojs.com/html5-video-support/" target="_blank"
+                                                    >supports HTML5 video</a>
+                                                </p>
+                                                </video>
+
+                                                <script>
+                                                    var player = videojs('my-video-{{video.Vid}}',{
+                                                    //autoplay : 'muted',
+                                                    controls :true,
+                                                    
+                                                    plugins: {
+                                                        videoJsResolutionSwitcher: {
+                                                        default: 'low',
+                                                        dynamicLabel: true
+                                                        },
+                                                        hotkeys: {
+                                                                volumeStep: 0.1,
+                                                                seekStep: 10,
+                                                                enableModifiersForNumbers: false
+                                                        }
+                                                    }
+                                                    
+                                                    });
+                                                
+                                            
+        
+                                                </script>
+                                            
+                                            </div>
+                                            {% endfor %}
+                                            
+                                            <!-- end tab content -->
+                                        </div>
+                                        <!-- end tab content section -->
                                     </div>
-                                    <!-- end tab content -->
-                                    <!-- tab content -->
-                                    <div class="tab-pane fade in" id="tab5_sec2">
-                                        <video
-                                        id="my-video"
-                                        class="video-js vjs-big-play-centered  vjs-default-skin  vjs-fluid "
-                                        
-                                        data-setup='{
-                                            "playbackRates" : [0.7, 0.8, 0.9, 1, 1.2, 1.5],
-                                            "preload":"auto"
-                                        }'
-                                        >
-                                        <source src="4.mp4" type="video/mp4"  label='360p' res='360'/>
-                                        <source src="4.mp4" type="video/mp4"  label='480p' res='480'/>
-                                        <source src="4.mp4" type="video/mp4"  label='720p' res='720'/>
-                                        
-                                        <p class="vjs-no-js">
-                                          To view this video please enable JavaScript, and consider upgrading to a
-                                          web browser that
-                                          <a href="https://videojs.com/html5-video-support/" target="_blank"
-                                            >supports HTML5 video</a>
-                                        </p>
-                                        </video>
-                                        <script>
-                                            var player = videojs('my-video',{
-                                           //autoplay : 'muted',
-                                           controls :true,
-                                           
-                                       });
-                                       </script>
-                                    </div>
-                                    <!-- end tab content -->
-                                    <!-- tab content -->
-                                    <div class="tab-pane fade in" id="tab5_sec3">
-                                       
-                                    </div>
-                                    <!-- end tab content -->
-                                    <!-- tab content -->
-                                    <div class="tab-pane fade in" id="tab5_sec4">
-                                       
-                                    </div>
-                                    <!-- end tab content -->
                                 </div>
-                                <!-- end tab content section -->
                             </div>
                         </div>
+                        <!-- end tab -->
                     </div>
-                </div>
-                <!-- end tab -->
+            </section>
             </div>
-    </section>
 
+        </div>
+    </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.tmhm.com/" target="_blank">TMHM</a>. All rights reserved.</span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+ 
+  <!-- plugins:js -->
+  <script src="{% static 'facilitators/assets/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{% static 'facilitators/assets/js/Chart.min.js' %}"></script>
+  <script src="{% static 'facilitators/assets/js/bootstrap-datepicker.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="{% static 'facilitators/assets/js/off-canvas.js' %}"></script>
+  <script src="{% static 'facilitators/assets/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'facilitators/assets/js/template.js' %}"></script>
+  <script src="{% static 'facilitators/assets/js/settings.js' %}"></script>
+  <script src="{% static 'facilitators/assets/js/todolist.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'facilitators/assets/js/dashboard.js' %}"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <!-- End custom js for this page-->
 
 
     <!-- JS, Popper.js, and jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    
+  
     
     <script>
          $(' .nav-tabs a[data-toggle="tab"]').click(function (e) {
@@ -255,8 +389,13 @@
     });
     </script>
     <script>
+         $(document).ready(function() {
+                                        var id = $("ul.list a:first").attr("href");
+                                        $(id).addClass("active show");
+                                        $("ul.list li:first").addClass("active");
+                                    });
         
-        videojs('my-video').videoJsResolutionSwitcher()
+        
         // var player = videojs('my-video2',{
         //     // autoplay : 'muted',
         //     controls :true,

@@ -31,13 +31,7 @@
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">My Courses</span>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'learner_live' %}">
-                            <i class="ni ni-planet text-orange"></i>
-                            <span class="nav-link-text">Live Classes</span>
-                        </a>
-                    </li>
+                    </li>                    
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'learner_certi' %}">
                             <i class="fa fa-certificate"></i>
@@ -57,7 +51,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="{% url 'freecontent' %}">
                             <i class="ni ni-key-25 text-info"></i>
                             <span class="nav-link-text">FREE Content</span>
                         </a>
@@ -151,6 +145,7 @@
                     <!-- Footer -->
                 </div>
                     <footer class="footer pt-0">
+                        <div class="container-fluid">
                         <div class="row align-items-center justify-content-lg-between">
                             <div class="col-lg-6">
                                 <div class="copyright text-center  text-lg-left  text-muted">
@@ -171,6 +166,7 @@
                                 </ul>
                             </div>
                         </div>
+                    </div>
                     </footer>
     
     <!-- End of Page Wrapper -->

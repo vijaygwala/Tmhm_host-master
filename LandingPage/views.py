@@ -44,7 +44,7 @@ def UpdateCart(request):
 
 
 #free content avialable for users here 
-@login_required(login_url='/home')
+@login_required(login_url='/LandingPage/signup')
 # @allowed_users(['Visiters','Learners','Facilitators'])
 def freecontent(request):
     return render(request,'LandingPage/freeContent/index.html')
