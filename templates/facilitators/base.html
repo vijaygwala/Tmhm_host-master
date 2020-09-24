@@ -21,7 +21,7 @@
   
   <body class="sidebar-light">
       <style>
-          .fa{
+          .fa,.fas{
               
               margin-right: 1.125rem;
               color:#5e2572;
@@ -43,26 +43,27 @@
             
           </ul>
           <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp; LearnOpad</a>
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp;LearnOpad</a>
+            <a class="navbar-brand brand-logo" href="index.html"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp; <p> LearnOpad</p></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html" style="padding-left: 60px;"><img src="{% static 'facilitators/assets/images/logotiny.png' %}" alt="logo" style="width: 70px; height: auto;"/>&nbsp;LearnOpad</a>
           </div>
           <ul class="navbar-nav navbar-nav-right">
             
             <li class="nav-item nav-profile dropdown">
+              <img class="img-profile rounded-circle" src="{{request.user.user.facilitator.profile.url}}">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                <span class="nav-profile-name">Vishal Gupta</span>
+                <span class="nav-profile-name">{{request.user.user.facilitator.name}}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'profile' request.user.user.facilitator.Fid %}" >
+                <a class="dropdown-item" href="{% url 'profile' request.user.user.facilitator.Fid %}">
                   <i class="fas fa-user-circle text-primary"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="{% url 'settings' %}" >
+                <a class="dropdown-item" href="{% url 'settings'%}">
                   <i class="fas fa-user-cog text-primary"></i>
                   Settings
                 </a>
-                <a class="dropdown-item" href="{% url 'logout' %}" >
+                <a class="dropdown-item" href="{% url 'logout' %}">
                   <i class="mdi mdi-logout text-primary"></i>
                   Logout
                 </a>
@@ -86,7 +87,7 @@
           <ul class="nav">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard' %}">
-                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <i class="fas fa-id-card"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
             </li>

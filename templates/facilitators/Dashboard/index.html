@@ -106,11 +106,7 @@
                                             <span class="badge badge-info tags">CSS3</span>
                                             <span class="badge badge-info tags">nodejs</span>
                                         </p> -->
-                                    </div>
-                                    <div class="col-12 col-lg-4 col-md-6 text-center">
-                                        <img src="{{ request.user.user.facilitator.profile.url }}" alt="" class=" rounded-circle img-fluid" style="width: 100px; height: 100px;">
-                                        <br>
-                                        <ul class="list-inline ratings text-center" title="Ratings">
+                                        <ul class="list-inline ratings" title="Ratings">
                                             <div class="rate">
                                                 <span>&#9733</span>
                                                 <span>&#9733</span>
@@ -122,7 +118,12 @@
                                             </li>
                                         </ul>
                                         
-                                        <a href="{% url 'profile' profile_id %}" style="text-decoration: none;"><button class="btn btn-outline-info btn-block"><span class="fa fa-user"></span>View Profile</button></a>
+                                        <a href="{% url 'profile' profile_id %}" style="text-decoration: none;"><button class="btn btn-outline-info "><span class="fa fa-user"></span>View Profile</button></a>
+                                    </div>
+                                    <div class="col-12 col-lg-4 col-md-6 text-center">
+                                        <img src="{{ request.user.user.facilitator.profile.url }}" alt="" class=" rounded-circle img-fluid" style="max-width: 200px; height: auto;">
+                                        <br>
+                                        
                                     </div>
 
                                     <!--/col-->

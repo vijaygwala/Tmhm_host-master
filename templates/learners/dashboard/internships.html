@@ -11,6 +11,10 @@ Internships
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta name="author" content="Priya">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 
@@ -87,6 +91,23 @@ Internships
                 width: 50.3333%;
             }
         }
+        @media only screen and (max-width: 767px) {
+                    #topbar {
+                        left: 0;
+                    }
+                    #accordionSidebar {
+                        top: 65px;
+                    }
+                    #content {
+                        left: auto;
+                       
+                        width: 100%;
+                        width: calc(100% - 0px);
+                    }
+                    .content-wrapper {
+                        padding:0;
+                    }
+                }
         
         .card {
             background-color: white;
@@ -155,8 +176,8 @@ Internships
                     <div class="col col-lg-3">
         
                         <div class="card text-light " style="left:-20px;" id="col2">
-                            <div class="card-header bg-info" style="color: black">Filter</div>
-                            <div class="card-body bg-secondary">
+                            <div class="card-header bg-info" style="color: #fff">Filter</div>
+                            <div class="card-body ">
                                 <h5 class="card-title">Category</h5>
                                 <div class="input-group mb-3">
                                     <select class="custom-select" id="inputGroupSelect01">
@@ -350,7 +371,7 @@ Internships
             </div>
         
         </div>
-    </div>
+    
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="{% static 'learners/jquery/jquery.min.js' %}"></script>
