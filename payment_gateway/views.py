@@ -22,8 +22,10 @@ def create_order(request):
         data["email"]=request.POST.get('email')
         data["phone"]=request.POST.get('phone')
         data['course']=request.POST.getlist('course')
+        data["plan"]=request.POST.get('plan')
+
         
-        
+        print(data['plan'])
 
        
         course=data['course']
