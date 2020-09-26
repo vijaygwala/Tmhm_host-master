@@ -13,6 +13,7 @@ def learner_page(request):
 @allowed_users(['Learners'])
 def certicate(request):
     return render(request,'learners/dashboard/certificate.html')
+    
 #learners dashboard talk to expert page
 @login_required(login_url='/learner_page')
 @allowed_users(['Learners'])
