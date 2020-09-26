@@ -43,6 +43,9 @@ def signup(request):
             user.groups.add(group)
             login(request, user)
             payment=request.GET.get('payment',None)
+            subscription=request.GET.get('subscription',None)
+            if subscription is not None:
+                return redirect('/create_course')
             if payment is not None:
                 return redirect('/Courses/Cart/')
             return redirect('/')

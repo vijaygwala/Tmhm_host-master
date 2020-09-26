@@ -208,20 +208,20 @@ Create Courses
                                                 <h3 class="heading">Overview</h3>
                                                     <p>Please enter the necessary information and proceed forward for content creation. </p>
                                             </div>
-                                        <form action="" method="post">
+                                        <form action="" id="courseForm"method="post">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                   <label for="inputEmail4">Code</label>
-                                                  <input type="text" class="form-control" id="inputEmail4" placeholder="code">
+                                                  <input type="text" name="code"class="form-control" id="id_ccode" placeholder="code">
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                   <label for="inputPassword4">Title</label>
-                                                  <input type="text" class="form-control" id="inputPassword4" placeholder="Title">
+                                                  <input type="text" name="ctitle"class="form-control" id="id_ctitle" placeholder="Title">
                                                 </div>
                                               </div>
                                               <div class="form-group">
                                                 <label for="inputAddress">Description</label>
-                                                <input type="text" class="form-control" id="inputAddress" placeholder="Description">
+                                                <input type="text" class="form-control" id="id_cdescription" name="cdescription"placeholder="Description">
                                               </div>
                                               
                                               <div class="form-row">
@@ -231,21 +231,24 @@ Create Courses
                                                 </div> -->
                                                 <div class="form-group col-md-6">
                                                   <label for="inputState">Target Audience</label>
-                                                  <select id="inputState" class="form-control">
+                                                  <select id="id_caudience" class="form-control">
                                                     {% for obj in audience_list %}
                                                                 <option value="{{obj.audience}}">{{obj.audience}}</option>
                                                                 {% endfor %}      
                                                   </select>
                                                 </div>
-                                                
+                                                <div class="form-group col-md-6">
+                                                    <label >Duration</label>
+                                                    <input type="text" name="cdays"class="form-control" placeholder="days" id="id_cdays">
+                                                </div>
                                               </div>
                                               <div class="form-row">
-                                                <div class="form-group col-md-6" style="
+                                                <div class="form-group col-md-4" style="
                                                 margin-top: auto;
                                                 margin-bottom: auto;
                                             ">
                                               
-                                                <select class="selectpicker " title="Choose Your Course" name="course" id="category" multiple style="width: 100%;">
+                                                <select class="selectpicker " title="Choose Your Course" name="course" id="id_ccategory" multiple style="width: 100%;">
 
                                                     {% for cat in category %}
                                                     <optgroup label="{{cat.name}}">
@@ -259,16 +262,20 @@ Create Courses
                                                 
                                                 </select>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="exampleFormControlFile1">Upload</label>
-                                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleFormControlFile1">Course outline</label>
+                                                    <input type="file" name="cvideo"class="form-control-file" id="id_cvideo">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleFormControlFile1">Course Thumbnail</label>
+                                                    <input type="file" class="form-control-file" id="id_cthumbnail" name="thumbailup">
                                                 </div>
                                             </div>
                                                <div class="form-group">
                                                             <label for="exampleFormControlTextarea1">Takeaway/Learning</label>
-                                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                            <textarea class="form-control" name="takaway" id="id_ctakeaway" rows="3"></textarea>
                                                 </div>
-                                              <button type="submit" class="btn btn-primary">Submit</button>
+                                              <button type="submit" id="course_create" class="btn btn-primary">Submit</button>
 
                                         </form>
                                     </div>
@@ -280,7 +287,7 @@ Create Courses
                                 <form action="" method="post">
                                     <div class="form-group ">
                                         <label for="inputEmail4">Course Code</label>
-                                        <input type="text" class="form-control" id="inputEmail4" placeholder="code">
+                                        <input type="text"  class="form-control" id="id_code" placeholder="code">
                                     </div>
                                     <div class="form-group">
                                         <input class="" type="radio" name="updvid" id="updvid" value="update" onclick="videoupdtdel()" >
@@ -390,71 +397,40 @@ Create Courses
  
     $(document).ready(function(){
   
-    var $myForm = $('#msform')
-    $("#finish").click(function(event){
+    
+    $("#course_create").click(function(event){
         event.preventDefault()  
-         var cat_list = $('#category option:selected').toArray().map(item => item.text);      
-    var session= 'false'//document.getElementById('session').getAttribute('aria-selected');
-   var course= 'true'//document.getElementById('course').getAttribute('aria-selected');
-   var coursevideo;
-   var sessionvideo;
+         var cat_list = $('#id_ccategory option:selected').toArray().map(item => item.text);      
+
    var $video;
    var data = {};
+   var $thumbnail;
    var course_details={
-       "code":$('#id_code').val(),
-       "title":$('#id_title').val(),
-       "description":$('#id_description').val(),
-       "audience":$('#id_audience').val(),
-       "takeway":$('#id_takeway').val(),
-        "days":$('#cdays').val(),
-        "months":$('#cmonths').val()
+       "code":$('#id_ccode').val(),
+       "title":$('#id_ctitle').val(),
+       "description":$('#id_cdescription').val(),
+       "audience":$('#id_caudience').val(),
+       "takeway":$('#id_ctakeway').val(),
+        "days":$('#cdays').val()
  
    };
-   if(course=='true')
-   {
-        coursevideo={
-                "title":$('#ctitle').val(),
-                "description":$('#cdescription').val(),
-                "session_duration":$('#ctime').val()
-               }
-        $video=$('#coursevideo').get(0).files[0];
+   
+$video=$('#id_cvideo').get(0).files[0];
+$thumbnail=$('#id_cthumbnail').get(0).files[0];
 data={
-    "rvideo":"true",
-    "svideo":"false",
-    "video":coursevideo,
+
+
     "course":course_details,
     "subcategory":cat_list
 }
-   }
-   else {
-sessionvideo={
-               "title":$('#stime').val(),
-                "description":$('#sdescription').val(),
-                "session_duration":$('#ltime').val(),
-                "session_start":$('#lstime').val(),
-                "session_end":$('#letime').val(),
-                "date":$('#ldate').val(),
-                "days":$('#ldays').val()
-
-       
-       }
-
- $video=$('#livevideo').get(0).files[0]
-
- data={
-    "rvideo":"false",
-    "svideo":"true",
-    "video":sessionvideo,
-    "course":course_details,
-    "subcategory":cat_list
-}
-   }
+  
 
 
 console.log(data);
 
 var formData = new FormData();
-  formData.append('file',$video)
+  formData.append('cvideo',$video)
+  formData.append('cthumbnail',$thumbnail)
   formData.append('data',JSON.stringify(data))
 
  $.ajaxSetup({async: false});

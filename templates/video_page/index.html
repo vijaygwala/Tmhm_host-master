@@ -160,7 +160,7 @@
         .tabs-left,.tabs-right{
             padding:0;
         }
-        .fa{
+        .fa ,.fas{
             margin-right: 1.125rem;
             color:#5e2572;
         }
@@ -224,7 +224,7 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="{% url 'dashboard' %}">
-              <i class="mdi mdi-view-quilt menu-icon"></i>
+              <i class="fas fa-id-card"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
@@ -261,7 +261,12 @@
 
             <section class="video-sec">
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row text-center">
+                      <div class="text-center" style="width: 100%; text-align: center;">
+                        <h1>Video Title</h1>
+                        <h3>description</h3>
+                      </div>
+                      
                         <!-- tab -->
                         <div class="col-md-12 col-sm-12 center-col">
                             <div class="tab-style5">
@@ -342,9 +347,9 @@
                     </div>
             </section>
             </div>
-
-        </div>
-    </div>
+      
+        
+     
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
