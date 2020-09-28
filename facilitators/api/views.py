@@ -55,7 +55,9 @@ class CreateCourseApi(APIView):
         course_detail['subCat_id'] =subcategory_obj.subCat_id
         course_obj = CourseSerializers(data=course_detail)
         if course_obj.is_valid(raise_exception=True):
-            course_obj.save()
+            obj=course_obj.save()
+            offering=offer.objects.create(Cid=obj,Fid=request.user.user.facilitator)
+            offering.save()
         return Response({'success':'recorded Video is created'},status=201)
         
         # print(subcat)

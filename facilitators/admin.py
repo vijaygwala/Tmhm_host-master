@@ -39,7 +39,7 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 facilitator.save()
                 user.status='Approved'
                 group = Group.objects.get(name='Facilitators')
-                user.groups.add(group)
+                user.user.groups.add(group)
                 user.save()
                 successOnRegistration(user.user.email,'finalstep.png')
                 messages.success(request, (user.name+' is approved !'))
