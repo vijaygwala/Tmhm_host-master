@@ -32,6 +32,7 @@ def home(request):
 
 def cart(request):
     context = cartData(request)
+    #print(context['total'])
     return render(request,'LandingPage/cart/cart.html',context)
 
 def UpdateCart(request):

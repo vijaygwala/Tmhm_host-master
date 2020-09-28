@@ -18,14 +18,14 @@ def create_order(request):
     if request.method=='POST':
         
         data={}
-        data["name"]=request.POST.get('name')
-        data["email"]=request.POST.get('email')
-        data["phone"]=request.POST.get('phone')
+        data["name"]=request.user.first_name+" "+request.user.last_name
+        data["email"]=request.user.email
+        
         data['course']=request.POST.getlist('course')
         data["plan"]=request.POST.get('plan')
 
+       
         
-        print(data['plan'])
 
        
         course=data['course']
@@ -33,15 +33,21 @@ def create_order(request):
         for id in course:
             subcat=SubCategory.objects.get(subCat_id=id)
             catlist.append(subcat.name)
-           
-        data['order_amount']=1000
+        if(data['plan']==1):
+            data['order_amount']=4999
+        elif(data['plan']==2):
+            data['order_amount']=7499
+        else:
+            data['order_amount']=9999
+
+        
         order_amount=len(catlist)*data['order_amount']*100
         context['total']=order_amount/100
         data[order_amount]=context['total']
         print("checkpoint 1")
         name=data['name']
         email=data['email']
-        phone=data['phone']
+        
                     
         order_currency = 'INR'
         order_receipt = 'order_rcptid_11'
@@ -63,7 +69,7 @@ def create_order(request):
                 
             context['price'] = order_amount
             context['name'] = name
-            context['phone'] = phone
+            context['phone'] = ''
             context['email'] = email
 
             context['intrest']=catlist

@@ -31,6 +31,8 @@ from django.contrib import messages
 from django.contrib.messages import get_messages
 
 # global signup system
+def login_page(request):
+    return render(request,'login/login.html')
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -98,6 +100,9 @@ class user_login(View):
                     login(request, user)
                     # if request.GET.get('next', None):
                     #     return HttpResponseRedirect(request.GET['next'])
+                    subscription=request.GET.get('subscription',None)
+                    if subscription is not None:
+                        return redirect('/create_order')
                     if user.groups.filter(name='Facilitators').exists():
                         return HttpResponseRedirect(reverse('dashboard'))
                     elif user.groups.filter(name='Learners').exists():
@@ -110,6 +115,9 @@ class user_login(View):
                     context = { 'notification': notification,
                             'clss': 'alert-danger'
                             }
+                    subscription=request.GET.get('subscription',None)
+                    if subscription is not None:
+                        return redirect('/create_order')
                     if user.groups.filter(name='Facilitators').exists():
                         return render(request, 'facilitators/index.html', context)
                     elif user.groups.filter(name='Learners').exists():
