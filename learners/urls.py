@@ -12,4 +12,5 @@ urlpatterns = [
     path('learner/settings/', views.settings, name='learner_settings'),
     path('learner/support/', views.support, name='learner_support'),
     path('learner/tte/', views.tte, name='learner_tte'),
+    path('learner/<id>/', views.GeneratePDF.as_view(), name="pdf_download"),
 ]

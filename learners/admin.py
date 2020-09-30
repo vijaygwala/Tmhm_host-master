@@ -12,8 +12,8 @@ class enrollinline(admin.StackedInline):
     model = enrollment
     verbose_name_plural = 'enrollment details'
     extra = 1
-    list_display=('Lid','Cid','added')
-    list_display_links=['Lid','Cid','added']
+    list_display=('Lid','Cid','addedenroll','updatedenroll')
+    list_display_links=['Lid','Cid','addedenroll','updatedenroll']
 
 class LearnersAdmin(admin.ModelAdmin):
     list_display=('Lid','name','DOB','phone','status','user')

@@ -78,26 +78,29 @@ Index
                     </div>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="row">
+                            {% for course,perc in ongoing %}
                             <div class="card" style="width: 18rem; margin: 10px 10px 10px 0;">
                                 <img class="card-img-top"
-                                    src="https://www.360edukraft.com/wp-content/uploads/2018/08/Python-Certification-Training-Course.jpg"
+                                    src="{{ course.thumbnail.url }}"
                                     alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title" style="font-size: large;">Course Title</h5>
-                                    <p class="card-text">Course Description. Some quick example text to build on the card title
-                                        and make up content.</p>
+                                    <h5 class="card-title" style="font-size: large;">{{ course.title }}</h5>
+                                    <p class="card-text">{{ course.description }}</p>
                                     <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ perc }}%"
+                                            aria-valuenow="{{perc}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <a href="#" class="btn btn-primary" style="color: white;">Go to Course</a>
                                 </div>
                             </div>
+                            {% endfor %}
+                            </div>
                         </div>
-        
+                        
         
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="card" style="max-width: 18rem; margin: 10px 10px 10px 0;">
+                            <!-- <div class="card" style="max-width: 18rem; margin: 10px 10px 10px 0;">
                                 <img class="card-img-top" src="https://img-a.udemycdn.com/course/750x422/1382702_a351.jpg"
                                     alt="Card image cap">
                                 <div class="card-body">
@@ -110,18 +113,19 @@ Index
                                     </div>
                                     <a href="#" class="btn btn-primary" style="color: white;">Go to course</a>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-        
-        
+
+                        
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <div class="row">
+                            {% for course in completed %}
                             <div class="card" style="max-width: 18rem; margin: 10px 10px 10px 0;">
-                                <img class="card-img-top" src="https://img-a.udemycdn.com/course/750x422/766592_66ac_4.jpg"
+                                <img class="card-img-top" src="{{ course.thumbnail.url }}"
                                     alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-title" style="font-size: large;">Course Title</h5>
-                                    <p class="card-text">Course Description. Some quick example text to build on the card title
-                                        and make up content.</p>
+                                    <h5 class="card-title" style="font-size: large;">{{ course.title }}</h5>
+                                    <p class="card-text">{{ course.description }}</p>
                                     <div class="progress" style="height: 20px;">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 100%;"
                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div>
@@ -129,8 +133,10 @@ Index
                                     <a href="#" class="btn btn-primary" style="color: white;">Go to course</a>
                                 </div>
                             </div>
+                            {% endfor %}
+                            </div>
                         </div>
-        
+                        
         
                     </div>
                     
