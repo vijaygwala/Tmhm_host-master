@@ -35,68 +35,81 @@ class CreateCourseApi(APIView):
             return render(request, 'facilitators/register/mysignup.html', context)
 
     def post(self, request, *args, **kwargs):
-        file=request.FILES['file']
-        details=json.loads(request.data.pop('data')[0])
-        print(details)
-    
-        subcategory_detail=details.pop('subcategory')
-        course_detail=details.pop('course')
-        video_detail=details.pop('video')
-        video_detail['video']=file
-        subc=subcategory_detail[0]
-        subcat=SubCategory.objects.get(name=subc)
-        print(subcat)
-        ofr={}
-        offering=None
-        course_detail['subCat_id'] =subcat.subCat_id
-        c_code=course_detail.get('code')
-        try:
-            course=Course.objects.get(code=c_code)
-        except Course.DoesNotExist:
-            course=None
-        if details['svideo']=='true':
-            if course is None:
-                cs = CourseSerializers(data=course_detail)
-                if cs.is_valid(raise_exception=True):
-                    ins=cs.save()
-                    video_detail['course']=ins.Cid
-                    ofr['Cid']=ins.Cid
-                    ofr['Fid']=request.user.user.facilitator
-                    offering=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
-                    offering.save()
+        cvideo=request.FILES['cvideo'] # take a course 1 minute video
+        cthumbnail=request.FILES['cthumbnail'] # take course thumbnail
+        details=json.loads(request.data.pop('data')[0]) # take the other course detail
+        subcategory_detail=details.pop('subcategory') # take the all the list of subcategories 
+        course_detail=details.pop('course') #take the course detain in dictionary
+        # make  subategory objects
+        subcat= subcategory_detail[0]
+        subcategory_obj=SubCategory.objects.get(name=subcat)
+        # calculate the duration in month + days
+        days=int(course_detail.get('days','50'))
+        month=days//30
+        day=int(days % 30)
+        months=str(month)+" month "+str(day)+" days"
+        #collect all the details in one dictionry "course_detail"
+        course_detail['months']=months
+        course_detail['video']=cvideo
+        course_detail['thumbnail']=cthumbnail
+        course_detail['subCat_id'] =subcategory_obj.subCat_id
+        course_obj = CourseSerializers(data=course_detail)
+        if course_obj.is_valid(raise_exception=True):
+            obj=course_obj.save()
+            offering=offer.objects.create(Cid=obj,Fid=request.user.user.facilitator)
+            offering.save()
+        return Response({'success':'recorded Video is created'},status=201)
+        
+        # print(subcat)
+        # ofr={}
+        # offering=None
+        # course_detail['subCat_id'] =subcat.subCat_id
+        # c_code=course_detail.get('code')
+        # try:
+        #     course=Course.objects.get(code=c_code)
+        # except Course.DoesNotExist:
+        #     course=None
+        # if details['svideo']=='true':
+        #     if course is None:
+               
+        #             video_detail['course']=ins.Cid
+        #             ofr['Cid']=ins.Cid
+        #             ofr['Fid']=request.user.user.facilitator
+        #             offering=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
+        #             offering.save()
                 
-                vs= LiveSessionsSerializer(data=video_detail)
-                if vs.is_valid(raise_exception=True):
-                    vs.save()
-                return Response({'success':'live session is created with new course'},status=201)
-            else:
-                video_detail['course']=course.Cid
-                vs= LiveSessionsSerializer(data=video_detail)
-                if vs.is_valid(raise_exception=True):
-                    vs.save()
-                return Response({'success':'live session is created'},status=201)
-        else:
-            if course is None:
-                cs = CourseSerializers(data=course_detail)
-                if cs.is_valid(raise_exception=True):
-                    ins=cs.save()
-                    video_detail['course']=ins.Cid
-                    ofr['Cid']=ins
-                    ofr['Fid']=request.user.user.facilitator
-                    offering=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
-                    offering.save()
+        #         vs= LiveSessionsSerializer(data=video_detail)
+        #         if vs.is_valid(raise_exception=True):
+        #             vs.save()
+        #         return Response({'success':'live session is created with new course'},status=201)
+        #     else:
+        #         video_detail['course']=course.Cid
+        #         vs= LiveSessionsSerializer(data=video_detail)
+        #         if vs.is_valid(raise_exception=True):
+        #             vs.save()
+        #         return Response({'success':'live session is created'},status=201)
+        # else:
+        #     if course is None:
+        #         cs = CourseSerializers(data=course_detail)
+        #         if cs.is_valid(raise_exception=True):
+        #             ins=cs.save()
+        #             video_detail['course']=ins.Cid
+        #             ofr['Cid']=ins
+        #             ofr['Fid']=request.user.user.facilitator
+        #             offering=offer.objects.create(Cid=ofr['Cid'],Fid=ofr['Fid'])
+        #             offering.save()
                     
                 
-                vs= VideoRecordedSerializer(data=video_detail)
-                if vs.is_valid(raise_exception=True):
-                    vs.save()
-                return Response({'success':'recorded video is created with new course'},status=201)
-            else:
-                video_detail['course']=course.Cid
-                vs= VideoRecordedSerializer(data=video_detail)
-                if vs.is_valid(raise_exception=True):
-                    vs.save()
-                return Response({'success':'recorded Video is created'},status=201)
+        #         vs= VideoRecordedSerializer(data=video_detail)
+        #         if vs.is_valid(raise_exception=True):
+        #             vs.save()
+        #         return Response({'success':'recorded video is created with new course'},status=201)
+        #     else:
+        #         video_detail['course']=course.Cid
+        #         vs= VideoRecordedSerializer(data=video_detail)
+        #         if vs.is_valid(raise_exception=True):
+        #             vs.save()
+        #         return Response({'success':'recorded Video is created'},status=201)
 
 # Considering request.user has Fid=2.
 

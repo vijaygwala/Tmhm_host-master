@@ -59,7 +59,9 @@ def content_Rfile_name(instance, filename):
 
 #this relation contains all the courses releted to particuler subcategory
 def video_course_path(instance, filename):
-    return 'course/{0}'.format(instance.title)
+    return '/'.join(['course', instance.title, filename])
+
+
     
 class Course(models.Model):
     Audience=(
@@ -90,7 +92,7 @@ class Course(models.Model):
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     price = models.IntegerField(default=2000,blank=True,null=True)
     video=models.FileField(upload_to =video_course_path,null=True,blank=True)
-    language=models.CharField(max_length=100,null=False,blank=False)
+    language=models.CharField(max_length=100,null=False,blank=False,default='English')
     offering=models.ManyToManyField(Facilitator,through='offer',related_name='offering')
     level = models.CharField(choices=Level,max_length=50,default='Beginner')
     def no_of_ratings(self):
@@ -161,7 +163,7 @@ class Rating(models.Model):
         index_together = (('lerner', 'course'), )  
 
 def video_path(instance, filename):
-    return 'courses/{0}'.format(instance.course.title)
+    return 'courses/{0}/{1}'.format(instance.course.title,filename)
 #contain all the recorded videos to the particuler course
 class CourseVideo(models.Model):
     Vid=models.AutoField(primary_key=True)

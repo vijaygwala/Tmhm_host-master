@@ -65,7 +65,7 @@ def cookieCart(request):
 def cartData(request):
     context={}
    
-    if request.user.is_authenticated and  request.user.groups.filter(name='Visiters').exists():
+    if request.user.is_authenticated:
         try:
             cart = json.loads(request.COOKIES['cart'])
         except:
@@ -86,8 +86,8 @@ def cartData(request):
 
         order_amount = amount*100
         checkout=request.GET.get('checkout',None)
-       
-        if checkout=='true':
+        print(order_amount)
+        if checkout is not None:
             order_currency = 'INR'
             order_receipt = str(order.id)
             notes = {
@@ -99,7 +99,7 @@ def cartData(request):
 
             order_id = response['id']
             order_status = response['status']
-
+            print(order_status)
             if order_status=='created':
 
                 # Server data for user convinience

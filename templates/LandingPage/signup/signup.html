@@ -84,7 +84,7 @@ body{
                 </div>
 
                 <div class="form-group">
-                    <p style="font-size: 8.5px">By clicking Sign In, you agree to our <a href="/hpme">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
+                    <p style="font-size: 8.5px">By clicking  <a href="{% url 'login_page' %}{% if request.GET.subscription %}?subscription='continue'{% endif %}">Sign In</a> , you agree to our <a href="/hpme">Terms of Use</a> and our <a href="/home">Privacy Policy.</a></p>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block" style="font-size: 12px">SIGN UP</button>
             </form>
