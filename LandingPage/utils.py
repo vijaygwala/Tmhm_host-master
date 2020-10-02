@@ -87,7 +87,7 @@ def cartData(request):
         order_amount = amount*100
         checkout=request.GET.get('checkout',None)
         print(order_amount)
-        if checkout is not None:
+        if checkout is not None and order.get_cart_items > 0:
             order_currency = 'INR'
             order_receipt = str(order.id)
             notes = {
