@@ -37,6 +37,8 @@ class CourseAdmin(admin.ModelAdmin):
     list_display_links=['code','title']
 # class offerAdmin(admin.ModelAdmin):
 #     list_display=('Fid','Cid')
+class PartnersAdmin(admin.ModelAdmin):
+    list_display=('Cid','name')
 
 class CouncellingAdmin(admin.ModelAdmin):
     list_display=('councelling_id','name','email','phone_number')
@@ -65,3 +67,4 @@ admin.site.register(Audience,AudienceAdmin)
 admin.site.register(ContactUs,ContactAdmin)
 admin.site.register(CorporatesTalks,CorporateTalksAdmin)
 admin.site.register(Rating)
+admin.site.register(Partners,PartnersAdmin)

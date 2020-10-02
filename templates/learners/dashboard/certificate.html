@@ -67,35 +67,21 @@ Certificate
                         <div class="row">
     
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                {% for course in completed %}
                                 <div class="card" style="width: 18rem; margin: 10px 10px 10px 10px;">
                                     <img class="card-img-top"
-                                        src="https://www.360edukraft.com/wp-content/uploads/2018/08/Python-Certification-Training-Course.jpg"
+                                        src="{{ course.thumbnail.url }}"
                                         alt="Card image cap">
                                     <div class="card-body">
-                                        <h5 class="card-title" style="font-size: large;">Course Title</h5>
-                                        <p class="card-text">Course Description. Some quick example text to build on the card
-                                            title and make up content.</p>
+                                        <h5 class="card-title" style="font-size: large;">{{ course.title }}</h5>
+                                        <p class="card-text">{{ course.description }}</p>
         
-                                        <a href="#" class="btn btn-primary" style="color: white;">View/Download Certificate</a>
+                                        <a href="#" onClick="location.href='{% url 'pdf_download' course.Cid %}'" class="btn btn-primary" style="color: white;">Download Certificate</a>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
         
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <div class="card" style="width: 18rem; margin: 10px 10px 10px 10px;">
-                                    <img class="card-img-top"
-                                        src="https://www.360edukraft.com/wp-content/uploads/2018/08/Python-Certification-Training-Course.jpg"
-                                        alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title" style="font-size: large;">Course Title</h5>
-                                        <p class="card-text">Course Description. Some quick example text to build on the card
-                                            title and make up content.</p>
-        
-                                        <a href="#" class="btn btn-primary" style="color: white;">Download Certificate</a>
-                                    </div>
-                                </div>
-                            </div>
-    
                         </div>
         
                     </div>

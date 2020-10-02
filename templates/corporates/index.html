@@ -137,17 +137,17 @@
 
         <div id="free" class="site-section bg-dark">
             <div class="container">
-                <div class="row mb-5 align-items-center">
+                <!-- <div class="row mb-5 align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0">
-                        <!-- <form action="#" class="d-flex search-form">
+                         <form action="#" class="d-flex search-form">
                             <span class="icon-"></span>
                             <input type="search" class="form-control mr-2" placeholder="Search ">
                             <input type="submit" class="btn btn-primary px-4" value="Search">
-                        </form> -->
+                        </form> 
                         <br>
                     </div>
 
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-12">
                         <div class="heading mb-4">
@@ -204,61 +204,50 @@
         </div><br><br><br><br>
         <div class="container-fluid">
             <div class="row justify-content-md-center" id="col1">
+                
                 <div class="col col-lg-3">
-
                     <div class="card text-light " id="col2">
                         <div class="card-header bg-info" style="color: black">Filter</div>
+                        <form method="GET">
                         <div class="card-body bg-secondary">
                             <h5 class="card-title" style="color:#fff;">Category</h5>
+                            
                             <div class="input-group mb-3">
-                                <select class="custom-select" id="inputGroupSelect01">
-                                                  <option selected>Choose...</option>
-                                                              <option value="1">Web Development</option>
-                                                <option value="2">Graphics Designing</option>
-                                                   <option value="3">Python Development</option>
-                                                  <option value="4">Content Writing</option>
-                                                    <option value="5">Visualizer</option>
-                                                  <option value="6">Marketing and Sales</option>
-                                              <option value="7">Accounts</option>
-                                                         <option value="8">Android app Development</option>
-                                                      <option value="9">Cloud Computing</option>
+                                <select class="custom-select" id="inputGroupSelect01" name="subcat">
+                                                <option selected value="None">Choose...</option>
+                                                {% for sub in subcat %}
+                                                    <option value="{{ sub.name }}" name="subcat">{{ sub.name }}</option>
+                                                {% endfor %}
                                               </select>
+                                              
                             </div>
                             <h5 class="card-title" style="color:#fff;">Partner</h5>
                             <div class="input-group mb-3">
 
-                                <select class="custom-select" id="inputGroupSelect01">
-                                             <option selected>Choose...</option>
-                                           <option value="1">google</option>
-                                            <option value="2">Apple</option>
-                                          <option value="3">Microdoft Certifications</option>
-        
+                                <select class="custom-select" id="inputGroupSelect01" name="partner">
+                                             <option selected value="None">Choose...</option>
+                                             {% for part in partners %}
+                                           <option value="{{ part.name }}">{{ part.name }}</option>
+                                            {% endfor %}
         
                                     </select>
                             </div>
                         </div>
                         <div class="input-group mb-3 mt-3">
 
-                            <select class="custom-select" id="inputGroupSelect01">
+                            <select class="custom-select" id="inputGroupSelect01" name="lang">
                                  <br> 
-                                               <option selected>Language</option>
-                                   <option value="1">English</option>
-                                    <option value="2">Hindi</option>
-                             <option value="3">Tamil</option>
-                                 <option value="4">German</option>
-        
-          
+                                               <option selected value="None">Language</option>
+                                   <option value="{{ English }}">English</option>
+                                    <option value="{{ Hindi }}">Hindi</option>
                    </select>
                         </div>
                         <div class="input-group mb-5">
 
-                            <select class="custom-select" id="inputGroupSelect01">
-                       <option selected>Level</option>
-                          <option value="1">Beginner</option>
-                   <option value="2">Intermediate</option>
-                    <option value="3">Professional</option>
-        
-          
+                            <select class="custom-select" id="inputGroupSelect01" name="level">
+                       <option selected value="None">Level</option>
+                          <option value="{{ Beginner }}">Beginner</option>
+                   <option value="{{ Advanced }}">Advanced</option>
                    </select>
                         </div>
 
@@ -275,22 +264,27 @@
                             <label class="custom-control-label" for="customSwitch4"><h5>Training with offers</h5></label>
                             <br> <br></div> -->
 
-
+                        <div class="card-body">
+                            <center><button type="submit" class="btn btn-link"><b>Apply</b></a></center>
+                        </div>
+                        
                     </div>
+                    </form>
                     
 
                 </div>
+                    
                 <div class=" col-lg-7" id="col1">
 
 
-
+                    {% for crse in course %}
                     <div class=" card tutorial-item mb-4 " style="margin:2rem 0rem; ">
                         <div class="img-wrap ">
-                            <a href="# "><img src={% static "corporates/images/hh.png" %} alt="Image " class="img-fluid "></a>
+                            <img src="{% static 'corporates/images/hh.png' %}" alt="Image" class="img-fluid " style="border-radius:50% ">
                         </div>
                         <div>
-                            <h3><a href="# ">Microsoft Python Certifiction</a></h3>
-                            <p> Learn React native totally free with this crash course.Taught by the best of our facilitators.
+                            <h3><a href="# ">{{ crse.title }}</a></h3>
+                            <p> {{ crse.description }}
                             </p>
 
                             <p class="mb-0 ">
@@ -298,45 +292,27 @@
                                 <span class="brand-javascript h5 "></span>
                             </p>
                             <p class="meta ">
-                                <span class="mr-2 mb-2 ">1hr 24m</span>
-                                <span class="mr-2 mb-2 ">Advanced</span>
+                                <span class="mr-2 mb-2 ">{{ crse.duration }}</span>
+                                <span class="mr-2 mb-2 ">{{ crse.level }}</span>
                                 <span class="mr-2 mb-2 ">Jun 18, 2020</span>
                             </p>
 
-                            <p><a href="tutorial-single.html " class="btn btn-primary custom-btn ">View</a></p>
+                            <p><a href="{% url 'course' crse.Cid %}" class="btn btn-primary custom-btn ">View</a></p>
                         </div>
                     </div>
-
-
-
-                    <div class="card tutorial-item mb-4 ">
-                        <div class="img-wrap ">
-                            <a href="# "><img src={% static "corporates/images/hh.png" %} alt="Image " class="img-fluid "></a>
-                        </div>
-                        <div>
-                            <h3><a href="# ">Harvard ML course</a></h3>
-                            <p> Learn React native totally free with this crash course.Taught by the best of our facilitators.
-                            </p>
-                            <p class="mb-0 ">
-                                <span class="brand-adobephotoshop h5 "></span>
-                            </p>
-                            <p class="meta ">
-                                <span class="mr-2 mb-2 ">1hr 24m</span>
-                                <span class="mr-2 mb-2 ">Advanced</span>
-                                <span class="mr-2 mb-2 ">Jun 18, 2020</span>
-                            </p>
-                            <p><a href="tutorial-single.html " class="btn btn-primary custom-btn ">View</a></p>
-                        </div>
-                    </div>
-
+                        {% endfor %}    
 
                     <div class="custom-pagination ">
-                        <ul class="list-unstyled ">
-                            <li><a href="# "><span>1</span></a></li>
-                            <li><span>2</span></li>
-                            <li><a href="# "><span>3</span></a></li>
-                            <li><a href="# "><span>4</span></a></li>
-                            <li><a href="# "><span>5</span></a></li>
+                        <ul class="pagination_list">
+                            {% if page_obj.has_previous %}
+                            <li class="active"><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"
+                                        aria-hidden="true"></i></a></li>
+                            {% endif %}
+                            <li><a href="#">{{ page_obj.number }}</a></li>
+                        
+                            {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
