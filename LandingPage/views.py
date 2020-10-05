@@ -35,6 +35,7 @@ def cart(request):
     #print(context['total'])
     return render(request,'LandingPage/cart/cart.html',context)
 
+
 def UpdateCart(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -84,6 +85,8 @@ def freecontent(request):
 #Landing page about us page
 def aboutus(request):
     return render(request, 'LandingPage/aboutus/aboutus.html')
+def careers(request):
+    return render(request,'LandingPage/careers/careers.html')
 
 #this is course page
 def CoursePage(request,pk):
