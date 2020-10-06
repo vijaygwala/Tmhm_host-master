@@ -102,7 +102,33 @@ def liveclasses(request):
 @login_required(login_url='/learner_page')
 @allowed_users(['Learners'])
 def profile(request):
-    return render(request,'learners/dashboard/profile.html')
+    if request.method == 'GET':
+        ourdata = Learners.objects.get(user=request.user)
+        ourname = ourdata.name.split()
+        firstname = ourname[0]
+        lastname = ourname[1]
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
+        return render(request, 'learners/Dashboard/profile.html',context)
+
+    if request.method == 'POST':
+        ourdata=Learners.objects.get(user=request.user)
+        if request.FILES:
+            ourdata.profile=request.FILES['profile']
+        else:
+            ourdata.profile='default/profile.png'
+        firstname = request.POST.get('firstName')
+        lastname = request.POST.get('lastName')
+        ourdata.name=str(firstname)+" "+str(lastname)
+        ourdata.phone = request.POST.get('phone')
+        ourdata.DOB = request.POST.get('dob')
+        ourdata.state = request.POST.get('state')
+        ourdata.country = request.POST.get('country')
+        ourdata.Paddress = request.POST.get('addressLine1')
+        ourdata.Taddress = request.POST.get('addressLine2')
+        ourdata.zipcode = request.POST.get('zipCode')
+        ourdata.save()
+        context = {'ourdata':ourdata, 'firstname':firstname, 'lastname':lastname}
+        return render(request, 'learners/Dashboard/profile.html', context)
 
 #learners dashboard Account setting page
 @login_required(login_url='/learner_page')
@@ -140,6 +166,7 @@ def render_to_pdf(template_src, context_dict={}):
 		return HttpResponse(result.getvalue(), content_type='application/pdf')
 	return None
 
+<<<<<<< HEAD
 class GeneratePDF(View):
     def get(self, request, id,*args, **kwargs):
         template = get_template('learners/dashboard/cert.html')
@@ -160,3 +187,5 @@ class GeneratePDF(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
+=======
+>>>>>>> e16a2ecaa368a0bf8c4503717f2d37af0d867be8
