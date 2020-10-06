@@ -166,7 +166,6 @@ def render_to_pdf(template_src, context_dict={}):
 		return HttpResponse(result.getvalue(), content_type='application/pdf')
 	return None
 
-<<<<<<< HEAD
 class GeneratePDF(View):
     def get(self, request, id,*args, **kwargs):
         template = get_template('learners/dashboard/cert.html')
@@ -187,5 +186,3 @@ class GeneratePDF(View):
             response['Content-Disposition'] = content
             return response
         return HttpResponse("Not found")
-=======
->>>>>>> e16a2ecaa368a0bf8c4503717f2d37af0d867be8
