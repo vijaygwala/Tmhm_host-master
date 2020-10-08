@@ -68,7 +68,7 @@ def CoursePage(request,pk):
 
     star_list = course.star_count()
     print('LALALA',int(course.avg_rating()))
-    course_video=course.course_video.all()[0]
+    
     facilitator=course.offering.all()[0]
     all_course_of_facilitator = facilitator.offering.all()
     sum_of_avg_ratings = 0
@@ -87,7 +87,7 @@ def CoursePage(request,pk):
         print(val)
     except:
         pass
-    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
+    context={'course':course,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
     'avg_rating': course.avg_rating(),
     'int_avg_rating': int(course.avg_rating()),
     'total_rating': total_rating,
