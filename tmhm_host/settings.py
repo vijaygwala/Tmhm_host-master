@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+#hello
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 '''
@@ -32,16 +33,12 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-<<<<<<< HEAD
 #DEBUG = True
 DEBUG = False
 
 ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '139.59.42.126', '127.0.0.1']
 
 
-=======
-ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.42.126']
->>>>>>> e80aec81e31632ca5d2a78533a3bc9476c4a99ba
 
 # Application definition
 
@@ -56,16 +53,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'LandingPage.apps.LandingpageConfig',
-    'facilitators.apps.FacilitatorsConfig',
+    'LandingPage',
+    'facilitators',
     'learners',
     'campus',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     # By vijay
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
 <<<<<<< HEAD
@@ -74,19 +71,36 @@ INSTALLED_APPS = [
 
 =======
     'rest_framework',
-    'payment_gateway'
+    'payment_gateway',
+    'mailing',
     # endVijay
+<<<<<<< HEAD
 >>>>>>> e80aec81e31632ca5d2a78533a3bc9476c4a99ba
     
 
+=======
+    #amir
+    'rest_framework.authtoken',
+    'wkhtmltopdf',
+>>>>>>> 723e16753899ba835f9f8ce0a2e9673a86793b95
 ]
 # for go
 # By vijay
-SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-X_FRAME_OPTIONS='SAMEORIGIN'
+# SITE_ID = 1
+# LOGIN_REDIRECT_URL = '/'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 # endvijay
 
+# REST_FRAMEWORK = {
+#    'DEFAULT_AUTHENTICATION_CLASSES': (
+#               'rest_framework.authentication.TokenAuthentication',
+#    ),
+#    'DEFAULT_PERMISSION_CLASSES':(
+#                'rest_framework.permissions.IsAuthenticated',
+#     ),
+
+# }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -96,6 +110,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'tmhm_host.urls'
@@ -111,6 +126,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'LandingPage.context_processors.base',
             ],
         },
     },
@@ -223,7 +240,7 @@ AUTH_USER_MODEL = 'myauth.CustomUser'
 
 # By Vijay
 #STATIC_URL = '/static/'
-#MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 #MEDIA_URL = '/media/'
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
@@ -231,3 +248,13 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR, 'static'),]
 #MEDIA_URL='/img/'
 #MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 #django_heroku.settings(locals())
+
+
+#By vijay
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'learnopad@gmail.com'
+EMAIL_HOST_PASSWORD = 'learnOpad@2020'
+

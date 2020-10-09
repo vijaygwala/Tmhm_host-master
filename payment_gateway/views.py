@@ -6,24 +6,25 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
-
+# razor pay account setup
 import razorpay
 client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
-
-
+from mailing.views import *
 
     
-
+#facilitator order subscription 
 def create_order(request):
     context={}
     if request.method=='POST':
         
         data={}
-        data["name"]=request.POST.get('name')
-        data["email"]=request.POST.get('email')
-        data["phone"]=request.POST.get('phone')
-        data['course']=request.POST.getlist('course')
+        data["name"]=request.user.first_name+" "+request.user.last_name
+        data["email"]=request.user.email
         
+        data['course']=request.POST.getlist('course')
+        data["plan"]=request.POST.get('plan')
+
+       
         
 
        
@@ -32,15 +33,21 @@ def create_order(request):
         for id in course:
             subcat=SubCategory.objects.get(subCat_id=id)
             catlist.append(subcat.name)
-           
-        data['order_amount']=1000
+        if(data['plan']==1):
+            data['order_amount']=4999
+        elif(data['plan']==2):
+            data['order_amount']=7499
+        else:
+            data['order_amount']=9999
+
+        
         order_amount=len(catlist)*data['order_amount']*100
         context['total']=order_amount/100
         data[order_amount]=context['total']
         print("checkpoint 1")
         name=data['name']
         email=data['email']
-        phone=data['phone']
+        
                     
         order_currency = 'INR'
         order_receipt = 'order_rcptid_11'
@@ -54,12 +61,7 @@ def create_order(request):
         order_status = response['status']
         data['order_id']=order_id
         data['order_status']=order_status
-        form=OrderForm(data)
-        if form.is_valid():
-            form.save()
-        else:
-            return HttpResponse('<h1>Invalid Form</h1>')
-        
+       
         if order_status=='created':
     
             # Server data for user convinience
@@ -67,7 +69,7 @@ def create_order(request):
                 
             context['price'] = order_amount
             context['name'] = name
-            context['phone'] = phone
+            context['phone'] = ''
             context['email'] = email
 
             context['intrest']=catlist
@@ -87,7 +89,7 @@ def create_order(request):
 
 
 
-
+#Razor pay payment status after successfull payment
 def payment_status(request):
     print(request.POST)
     response = request.POST
@@ -98,10 +100,11 @@ def payment_status(request):
         'razorpay_signature' : response['razorpay_signature']
     }
 
-
+    print("payment ho gai ")
     # VERIFYING SIGNATURE
     try:
         status = client.utility.verify_payment_signature(params_dict)
+        successOnRegistration(request.user.email,'Afterpayment.png')
         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Successful'})
     except:
         return render(request, 'payment_gateway/order_summary.html', {'status': 'Payment Faliure!!!'})

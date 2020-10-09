@@ -21,16 +21,23 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+     path('', include('LandingPage.api.urls')),
+     path('', include('myauth.urls')),
+    path('', include('facilitators.api.urls')),
     path('', include('myauth.api.urls')),
 <<<<<<< HEAD
 
 =======
     path('', include('payment_gateway.urls')),
+<<<<<<< HEAD
 >>>>>>> e80aec81e31632ca5d2a78533a3bc9476c4a99ba
     path('accounts/', include('allauth.urls')),
+=======
+    path('', include('corporates.urls')),
+>>>>>>> 723e16753899ba835f9f8ce0a2e9673a86793b95
     path('', include('LandingPage.urls')),
     path('', include('facilitators.urls')),
     path('', include('learners.urls')),
     path('', include('campus.urls')),
+    path('', include('mailing.urls')),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

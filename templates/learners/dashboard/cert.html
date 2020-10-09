@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <title>Certificate</title>
+  <style>
+    hr {
+      background-color: black;
+      height: 3px;
+      margin: 5px;
+    }
+
+    div.cert-footer {
+      /*top: 485px;*/
+      text-align: center;
+    }
+
+    .cert-stamp,
+    .cert-ceo-sign {
+      width: 60%;
+      /*display: inline-block;*/
+    }
+
+    div#cert-issued-by,
+    div#cert-ceo-design {
+      width: 40%;
+      display: inline-block;
+    }
+
+    div#cert-ceo-design {
+      margin-left: 10%;
+    }
+
+    h1 {
+      font-family: 'Saira Condensed', sans-serif;
+      margin: 5px 0px;
+    }
+
+    body {
+      width: 950px;
+      height: 690px;
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      /* border: 3px solid; */
+    }
+
+    p {
+      font-family: 'Arial', sans-serif;
+      font-size: 18px;
+      margin: 5px 0px;
+    }
+
+    html {
+      display: inline-block;
+      width: 1024px;
+      height: 768px;
+      /* border: 2px solid; */
+      background: #eee url("https://paralegal.com.au/wp-content/uploads/2019/04/certificate-background-template-blue-copy-simple-powerpoint-templates-interest-p-16.jpg") no-repeat;
+      background-size: 100%;
+    }
+
+    h1#cert-holder {
+      font-size: 50px;
+      color: #34C3FF;
+    }
+
+    p.smaller {
+      font-size: 17px !important;
+    }
+
+    p#cert-from {
+      color: #34C3FF;
+      font-family: 'Saira Condensed', sans-serif;
+    }
+
+    div#cert-verify {
+      opacity: 1;
+      position: absolute;
+      top: 680px;
+      left: 60%;
+      font-size: 12px;
+      color: grey;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <h1 id="cert-title" style="display: flex;
+    justify-content: center;">
+    Certificate of Proficiency
+  </h1>
+  <br>
+
+  <p class="smaller" id="cert-declaration" style="display: flex;
+    justify-content: center;">
+    THIS IS TO CERTIFY THAT
+  </p>
+<br>
+  <h1 id="cert-holder" style="display: flex;
+    justify-content: center;">
+    {{ name }}
+  </h1>
+<br>
+  <p class="smaller" id='cert-completed-line' style="display: flex;
+    justify-content: center;">
+    has successfully completed the
+  </p>
+<br>
+  <h2 id="cert-course" style="display: flex;
+    justify-content: center;">
+    {{ title }}
+  </h2>
+
+  <div id="cert-desc">
+    <p class="smaller" id='cert-details' style="margin: 15px;
+    text-align: center;">
+      which includes the {{ description }}
+    </p>
+  </div>
+
+  <br>
+  <p id="cert-from" class="smaller" style="margin-left: 15px;
+">
+    &nbsp; from www.learnopad.com
+  </p>
+
+  <p class="smaller" id='cert-issued' style="margin-left: 19px;
+">
+    <b>Issued on:</b> 6th September 2020.
+  </p>
+
+
+  <br><br>
+
+
+  <div id="cert-footer">
+    <div id="cert-issued-by">
+      <img id="cert-stamp" src="https://keymancollectibles.com/autographs/images/mannyr4.gif">
+      <hr>
+      <p>Issued by<br>THE COMPANY TMHM</p>
+    </div>
+    <div id="cert-ceo-design">
+      <img id="cert-ceo-sign" src="https://keymancollectibles.com/autographs/images/mannyr4.gif">
+      <hr>
+      <p>Company Ceo<br>Paige Haddy</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

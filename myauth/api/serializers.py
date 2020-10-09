@@ -3,25 +3,22 @@ from myauth.models import *
 from django.contrib.auth import get_user_model
 from facilitators.models import *
 from LandingPage.models import *
-# User Serializer
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        fields = ('id', 'email','first_name','last_name')
-# Register Serializer
+
+
+# Councelling  section Serializer
 
 class onlinecounsellingSerializer(serializers.ModelSerializer):
     class Meta:
         model=OnlineCounsellingDetails
         fields=('email','phone_number','name')
     
-   
+ #Facilitator queries serializer  
 class FacilitatorQueriesFormSerializer(serializers.ModelSerializer):
     class Meta:
         model=FacilitatorQueries
         fields=('query','user')
    
-
+# personal section serializer
 class RegisterSerializer(serializers.ModelSerializer):
     
     #user_query=FacilitatorQueriesFormSerializer(many=True)
@@ -50,7 +47,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         # f=Experience.objects.create(facilitator=user, **f_data)
         
 
-        
+ #experience details serializer       
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience

@@ -20,8 +20,10 @@ from django.views import View
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import FileUploadParser
 from django.core import serializers
+from mailing.views import *
+from django.contrib.auth.models import Group
 
-# Register API
+# Facilitator Register API
 class FacilitatorRegisterAPI(APIView):
     def get(self, request, *args, **kwargs):
         category=Category.objects.all()
@@ -31,40 +33,42 @@ class FacilitatorRegisterAPI(APIView):
 
     def post(self, request, *args, **kwargs):
         file=request.FILES['file']
-        print(file)
-        print(type(file))
-        print(request.data)
         personal_detail=json.loads(request.data.pop('data')[0])
-        print(personal_detail)
         exp_form=personal_detail.pop('facilitator')
         facilitator_query=personal_detail.pop('fquery')
         expform = ExperienceSerializer(data=exp_form)
         form = RegisterSerializer(data=personal_detail)
-        
         phone=personal_detail.get('phone')
         fquery=FacilitatorQueriesFormSerializer(data=facilitator_query)
         course=personal_detail.get('course')
-        print(course)
+        
         catlist=""
         for cat in course: 
-             catlist+=cat+","
-        print(course)
+            if cat!=course[len(course)-1]: 
+                catlist+=cat+","
+            else:
+                catlist+=cat
         user=None
-        profile=None
-        
-        if form.is_valid(raise_exception=True):
-            user=form.save()
-            exp_form["facilitator"]=user.id
-            facilitator_query['user']=user.id
-            profile=Profile.objects.get(user=user.id)
-            profile.portfolio=file
-            profile.phone=phone
-            #profile.portfolio=portfolio
-            profile.role=2
-            profile.intrest=catlist
-            profile.save()
-           
-        
+        try:
+            user=CustomUser.objects.get(email=personal_detail['email'])
+        except:
+            user=None
+        if user is None:
+            try:
+                if form.is_valid(raise_exception=True):
+                    user=form.save()
+                    group = Group.objects.get(name='Visiters')
+                    user.groups.add(group)
+                    user.save()
+                                
+            except:
+                messages.error(request, ('Email is already exist !'))
+                return redirect('facilitator-register')
+        applicant=Applicants.objects.create(name=personal_detail['first_name']+" "+personal_detail['last_name'],phone=phone,user=user,intrest=catlist,portfolio=file,status="Due For Review")
+        applicant.save()
+        exp_form["facilitator"]=applicant.Aid
+        facilitator_query['user']=applicant.Aid
+  
         
         if expform.is_valid(raise_exception=True):
             expform.save()
@@ -77,25 +81,16 @@ class FacilitatorRegisterAPI(APIView):
             else:
                 messages.error(request, ('Invalid Query Deatails !'))
                 return redirect('register')
-       
+        
+        successOnRegistration(user.email,'Registration.png')
+        RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
         messages.success(request, ('Your profile was successfully Created!'))
         return Response({'redirect':'{% url "facilitator-register" %}'},status=201)
 
-class FileView(APIView):
-    parser_classes = [FileUploadParser]
-
-    def post(self, request,filename):
-        
-        file_obj = request.data['file']
-        
-        
-        # ...
-        # do some stuff with uploaded file
-        # ...
-        return file_obj 
 
 
 from rest_framework.generics import CreateAPIView
+# councelling section api
 class OnlineCouncelling(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'LandingPage/index.html'
@@ -110,12 +105,3 @@ class OnlineCouncelling(APIView):
             messages.error(self.request, 'Invalid Form Detail')
             # redirect('/')
             return Response({'error':"something went wrong"})
-# class LoginAPI(KnoxLoginView):
-#     permission_classes = (permissions.AllowAny,)
-
-#     def post(self, request):
-#         serializer = AuthTokenSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.validated_data['user']
-#         login(request, user)
-#         return super(LoginAPI, self).post(request, format=None)
