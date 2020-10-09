@@ -44,6 +44,8 @@ class ApplicantsAdmin(admin.ModelAdmin):
                 successOnRegistration(user.user.email,'finalstep.png')
                 messages.success(request, (user.name+' is approved !'))
             else:
+                user.status='Approved'
+                user.save()
                 messages.info(request, (check.name+' is already approved !'))
         
     def shortlisted_facilitator(self,request , queryset):
