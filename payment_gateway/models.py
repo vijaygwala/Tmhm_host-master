@@ -26,7 +26,7 @@ class Order(models.Model):
 class OrderCourses(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    course = models.ForeignKey(to='LandingPage.Course',on_delete=models.CASCADE)
     @property
     def get_total(self):
         return self.course.price

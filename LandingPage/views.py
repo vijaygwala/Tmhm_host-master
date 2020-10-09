@@ -210,15 +210,18 @@ def category(request):
     categories=SubCategory.objects.all()[:7]
     pk=request.GET.get('id')
     page_number=request.GET.get('page')
-
-    if pk is None and page_number is None:
-        cat = SubCategory.objects.get(subCat_id=categories[0].subCat_id)
-    else:
-        cat = SubCategory.objects.get(subCat_id=pk)
+    if categories:
+        if pk is None and page_number is None:
+            cat = SubCategory.objects.get(subCat_id=categories[0].subCat_id)
+        else:
+            cat = SubCategory.objects.get(subCat_id=pk)
     
-    courses=Course.objects.filter(subCat_id=cat)
-    paginator=Paginator(courses,6,orphans=1)
-    page_obj=paginator.get_page(page_number)
+        courses=Course.objects.filter(subCat_id=cat)
+        paginator=Paginator(courses,6,orphans=1)
+        page_obj=paginator.get_page(page_number)
+    else:
+        categories=None
+        page_obj=None
 
     context={'categories':categories,'courses':page_obj}
     return render(request, 'LandingPage/categories/categories.html',context)

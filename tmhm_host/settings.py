@@ -33,12 +33,13 @@ SECRET_KEY = '5w^7@844)#j4!=w*8_sd_mr(0!q42n3@3@)gab91r!opc32t^9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#DEBUG = True
-DEBUG = False
+# production
+# DEBUG = False
+# ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '139.59.42.126', '127.0.0.1']
 
-ALLOWED_HOSTS = ['www.learnopad.com', 'learnopad.com', '68.183.81.120', '139.59.42.126', '127.0.0.1']
-
-
+#Development
+DEBUG = True
+ALLOWED_HOSTS = ['128.199.219.129', '127.0.0.1','139.59.42.126']
 
 # Application definition
 
@@ -57,7 +58,7 @@ INSTALLED_APPS = [
     'facilitators',
     'learners',
     'campus',
-    #'django.contrib.sites',
+    'django.contrib.sites',
     # By vijay
     # 'allauth',
     # 'allauth.account',
@@ -65,24 +66,14 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'myauth',
-<<<<<<< HEAD
 
-    'rest_framework'
-
-=======
     'rest_framework',
     'payment_gateway',
     'mailing',
     # endVijay
-<<<<<<< HEAD
->>>>>>> e80aec81e31632ca5d2a78533a3bc9476c4a99ba
-    
 
-=======
     #amir
-    'rest_framework.authtoken',
     'wkhtmltopdf',
->>>>>>> 723e16753899ba835f9f8ce0a2e9673a86793b95
 ]
 # for go
 # By vijay

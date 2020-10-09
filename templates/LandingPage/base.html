@@ -154,6 +154,7 @@ $(document).ready(function() {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle parent-toggle" data-toggle="" href="{% url 'category'  %}" >Categories</a>
                         <ul class="dropdown-menu">
+                            {% if cat %}
                             {% for c in cat %}
                             <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c }} </a>
                                 <ul class="submenu dropdown-menu">
@@ -173,6 +174,10 @@ $(document).ready(function() {
                                 </ul>
                             </li>
                             {% endfor %}
+                            {% else %}
+                            <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a>
+
+                            {% endif %}
                         </ul>
                     </li>
                    

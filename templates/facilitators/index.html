@@ -237,7 +237,7 @@ footer #social i:hover{
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a href='{% url 'facilitator-register'%}' class="btn btn-primary rounded" style="color: white">Register <i class="icofont-circled-right"></i></a>
+                        <a href='{% url 'facilitator-register' %}' class="btn btn-primary rounded" style="color: white">Register <i class="icofont-circled-right"></i></a>
                     </li>
                    
                 </ul>
@@ -423,7 +423,7 @@ footer #social i:hover{
     <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
       <h1>Be a <a href="/facilitator-register"> Philanthropist</a></h1>
       <h2>Learn more, Do-better, Get smarter</h2>
-      <a href="/facilitator-register" class="btn-get-started">Become A Facilitator</a>
+      <a href='{% url 'facilitator-register' %}' class="btn-get-started">Become A Facilitator</a>
     </div>
   </section>
   <!-- End Hero -->
@@ -541,7 +541,7 @@ footer #social i:hover{
                   From there onwards, our team experts will evaluate your content, manner of teaching, communication of information and on the basis of that, you will be selected as our facilitator to help us spread the knowledge.<br>
                   Link to the Application form :-<br>
 
-                  <button class="btn btn-primary" onclick="window.location.href='/facilitator-register';"> Join Us <i class="icofont-location-arrow"></i></button>
+                  <button class="btn btn-primary" onclick="window.location.href='{% url 'facilitator-register' %}';"> Join Us <i class="icofont-location-arrow"></i></button>
                 </div>
                 <div class="tab-pane fade" id="v-pills-Courses" role="tabpanel" aria-labelledby="v-pills-Courses-tab"> 
                   <p><strong>Variety of Courses</strong></p>

@@ -3,7 +3,6 @@ from myauth.models import *
 # Create your models here.
 from django.db.models.signals import post_delete
 #from django.dispatch import receive
-
 from django.core.validators import RegexValidator
 from facilitators.models import Facilitator
 from django.utils import timezone
