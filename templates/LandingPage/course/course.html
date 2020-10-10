@@ -1,5 +1,6 @@
 {% extends 'LandingPage/base.html' %}
 {% load static %}
+{% load filters %}
 <!--------------------------------- -->
 
 {% block title %}
@@ -500,6 +501,7 @@ function getToken(name) {
                                                     </div>
                                                     <div class="review_rating_text">({{total_rating}} Ratings)</div>
                                                 </div>
+                                                
                                                 <div class="review_rating_bars">
                                                     <ul>
                                                         <li><span>5 Star</span>
@@ -529,11 +531,13 @@ function getToken(name) {
                                                         </li>
                                                     </ul>
                                                 </div>
+                                                
                                                 <br>
                                                 <br>
                                                 <br>
                                               
                                                 <div style="text-align: center;">
+                                                    {% if request.user|has_group:"Learners" %} 
                                                 <p>Rate this Course!</p>
                                                 <div class="rate">
                                                         <span>&#9733</span>
@@ -543,6 +547,7 @@ function getToken(name) {
                                                         <span>&#9733</span>
                                                      </div>
                                                     </div>
+                                                    {% endif %}
                                             </div>
                                         <!-- Comments -->
                                         <div class="comments_container">
