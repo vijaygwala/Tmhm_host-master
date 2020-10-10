@@ -84,6 +84,7 @@ class FacilitatorRegisterAPI(APIView):
         
 
 
+
        
        
 
@@ -91,7 +92,10 @@ class FacilitatorRegisterAPI(APIView):
        
 
 
-        successOnRegistration(user.email,'Registration.png')
+       
+
+        #successOnRegistration(user.email,'Registration.png')
+
         RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
 
         messages.success(request, ('Your profile was successfully Created!'))
