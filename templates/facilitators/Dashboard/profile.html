@@ -823,7 +823,7 @@
                 /* $('#bio').val(quill.container.firstChild.innerHTML); */
                 $.ajax({
                     type:"POST",
-                    url:"{% url 'profile' pk %}",
+                    url:"{% url 'profile' request.user.user.facilitator.Fid %}",
                     headers:{'X-CSRFToken': csrftoken},
                     data:{'bio': text},
                     dataType: 'json',

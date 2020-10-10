@@ -202,10 +202,10 @@ def facilitator_Dashboard_settings_page(request):
 @login_required(login_url='/facilitator/login/')
 @allowed_users(['Facilitators'])
 @api_view(['GET', 'POST'])
-def facilitator_Profile_page(request):
+def facilitator_Profile_page(request,pk):
 
     if request.method == 'GET':
-        ourdata = Facilitator.objects.get(user=request.user)   
+        ourdata = Facilitator.objects.get(Fid=pk)   
         ourname = ourdata.name.split()
         firstname = ourname[0]
         lastname = ourname[1]
@@ -213,7 +213,7 @@ def facilitator_Profile_page(request):
         return render(request, 'facilitators/Dashboard/profile.html',context)
 
     if request.method == 'POST':
-        ourdata=Facilitator.objects.get(user=request.user)
+        ourdata=Facilitator.objects.get(Fid=pk)
         #profileimg = request.FILES
         #for i in request.FILES:
         if request.FILES:
