@@ -82,6 +82,7 @@ class FacilitatorRegisterAPI(APIView):
                 messages.error(request, ('Invalid Query Deatails !'))
                 return redirect('register')
         
+<<<<<<< HEAD
 
 
 
@@ -94,7 +95,10 @@ class FacilitatorRegisterAPI(APIView):
 
        
 
-        #successOnRegistration(user.email,'Registration.png')
+        
+
+
+        successOnRegistration(user.email,'Registration.png')
 
         RegistrationSuccessAdminEmail(personal_detail['first_name']+" "+personal_detail['last_name'],catlist)
 
