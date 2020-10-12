@@ -2,10 +2,12 @@ from django.forms import ModelForm
 from  facilitators.models import *
 from myauth.models import *
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 from  LandingPage.models import *
 
 # form of personal details 
+
 class UserForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -13,10 +15,16 @@ class UserForm(UserCreationForm):
     class Meta: 
         model = CustomUser
         fields = ( 'first_name', 'last_name', 'email', 'password1', 'password2' )
+       
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].help_text = "Password must contain at least 8 character and not completely numeric"
-       
+        self.fields['password1'].help_text = "Password must contain at least 8 character and should contain numbers and alphabet"
+        self.fields['password1'].widget.attrs.update({'placeholder': 'Password *'})
+        self.fields['email'].widget.attrs.update({'placeholder': 'Email *'})
+        self.fields['first_name'].widget.attrs.update({'placeholder':_('First Name *')})
+        self.fields['last_name'].widget.attrs.update({'placeholder':_('Last Name *')})
+        self.fields['password2'].widget.attrs.update({'placeholder':_('Confirm password *')})
+
     def save(self, commit = True): 
         user = super(UserForm, self).save(commit = False)
         user.set_password(self.cleaned_data["password1"])
@@ -31,7 +39,7 @@ class ExperienceForm(ModelForm):
         fields = ['Linkedin_Url', 'Website_Url', 'Youtube_Url','RExperience','TExperience']
     def __init__(self, *args, **kwargs):
         super(ExperienceForm, self).__init__(*args, **kwargs)
-        self.fields['Linkedin_Url'].widget.attrs.update({'placeholder': 'Linkedin Url'})
+        self.fields['Linkedin_Url'].widget.attrs.update({'placeholder': 'Linkedin Url *'})
         self.fields['Website_Url'].widget.attrs.update({'placeholder': 'Website Url'})
         self.fields['Youtube_Url'].widget.attrs.update({'placeholder': 'Youtube Url'})
         
@@ -42,4 +50,4 @@ class FacilitatorQueriesForm(ModelForm):
         fields=('query',)
     def __init__(self, *args, **kwargs):
         super(FacilitatorQueriesForm, self).__init__(*args, **kwargs)
-        self.fields['query'].widget.attrs.update({'placeholder': 'Ask Your Question','id':'autoresizing'})
+        self.fields['query'].widget.attrs.update({'placeholder': 'Ask Your Question(optional)','id':'autoresizing'})
