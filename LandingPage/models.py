@@ -88,7 +88,7 @@ class Course(models.Model):
     audience=models.CharField(choices=Audience,max_length=100,null=True,blank=True)
     takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
-    categories= models.ForeignKey(Category, on_delete=models.CASCADE)
+    categorie= models.ForeignKey(Category, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     price = models.IntegerField(default=2000,blank=True,null=True)
