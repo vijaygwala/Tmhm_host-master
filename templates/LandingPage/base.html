@@ -129,6 +129,18 @@ $(document).ready(function() {
             right: 0;
          }
     }
+    .input-group-addon {
+    padding: .5rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+}
     </style>
 </head>
 
@@ -239,12 +251,10 @@ $(document).ready(function() {
                 <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address / Phone Number">
             </div>
             <div class="form-group">
-                <div class="input-group">
+                <div class="input-group" id="show_hide_password">
                     <input type="password" class="form-control" name="password" data-toggle="password" placeholder="Password" id="password-field">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                        </div>
+                    <div class="input-group-addon">
+                        <a href="" id="some"><i class="fa fa-eye-slash"  aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -373,9 +383,25 @@ $(document).ready(function() {
     </div>
 
 </footer>
-
+<script>
+    $(document).ready(function() {
+        $("#show_hide_password #some").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password input').attr("type") == "text"){
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass( "fa-eye-slash" );
+                $('#show_hide_password i').removeClass( "fa-eye" );
+            }else if($('#show_hide_password input').attr("type") == "password"){
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                $('#show_hide_password i').addClass( "fa-eye" );
+            }
+        });
+    });
+</script>
 
 {% block javascript %}
+
 {% endblock javascript%}
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </body>
