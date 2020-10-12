@@ -537,17 +537,20 @@ function getToken(name) {
                                                 <br>
                                               
                                                 <div style="text-align: center;">
-                                                    {% if request.user|has_group:"Learners" %} 
-                                                <p>Rate this Course!</p>
+                                                   
+                                                
                                                 <div class="rate">
+                                                    {% if request.user|has_group:"Learners" %} 
+                                                    <p>Rate this Course!</p>
                                                         <span>&#9733</span>
                                                         <span>&#9733</span>
                                                         <span>&#9733</span>
                                                         <span>&#9733</span>
                                                         <span>&#9733</span>
+                                                        {% endif %}
                                                      </div>
                                                     </div>
-                                                    {% endif %}
+                                                    
                                             </div>
                                         <!-- Comments -->
                                         <div class="comments_container">
