@@ -155,7 +155,7 @@ $(document).ready(function() {
                         <a class="nav-link dropdown-toggle parent-toggle" data-toggle="" href="{% url 'category'  %}" >Categories</a>
                         <ul class="dropdown-menu">
                             {% for c in cat %}
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c }} </a>
+                            <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
                                     <!-- {% if subcat.course_set.all|length == 0 %}
