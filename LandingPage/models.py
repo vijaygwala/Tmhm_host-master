@@ -88,6 +88,7 @@ class Course(models.Model):
     audience=models.CharField(choices=Audience,max_length=100,null=True,blank=True)
     takeaway=models.TextField(null=True,blank=True)
     subCat_id = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    categories= models.ForeignKey(Category, on_delete=models.CASCADE)
     added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     updated = models.DateTimeField(auto_now=True,blank=True,null=True)
     price = models.IntegerField(default=2000,blank=True,null=True)
@@ -273,5 +274,13 @@ class CorporatesTalks(models.Model):
         verbose_name='Corporate Talks'
         verbose_name_plural='Corporate Talks'
 
+class Partners(models.Model):
+    Cid=models.ForeignKey(Course,on_delete=models.CASCADE)
+    name=models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name="Corporates"
+        verbose_name_plural="Corporates"
 

@@ -262,10 +262,10 @@
             <section class="video-sec">
                 <div class="container-fluid">
                     <div class="row text-center">
-                      <div class="text-center" style="width: 100%; text-align: center;">
-                        <h1>Video Title</h1>
-                        <h3>description</h3>
-                      </div>
+                      <!-- <div class="text-center" style="width: 100%; text-align: center;">
+                        <h1 id="vtitle"></h1>
+                        <h3 id="vdescription"></h3>
+                      </div> -->
                       
                         <!-- tab -->
                         <div class="col-md-12 col-sm-12 center-col">
@@ -311,6 +311,10 @@
                                                 </video>
 
                                                 <script>
+
+                                                  // $("#vtitle").text('{{ video.title }}');
+                                                  // $("#vdescription").text('{{video.description}}');
+
                                                     var player = videojs('my-video-{{video.Vid}}',{
                                                     //autoplay : 'muted',
                                                     controls :true,

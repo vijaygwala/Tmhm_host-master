@@ -407,7 +407,7 @@ Explore Courses
                             </form>
                         </div>
                         <div class="courses_container">
-                            {% for crse in page_obj%}
+                            {% for crse in page_obj %}
                             {% cycle "<div class='row courses_row'>" "" %}
                                 <!-- Course -->
                                 
@@ -506,37 +506,6 @@ Explore Courses
             }
         });
 
-        $(document).ready(function () {
-            $("#courses_search_select").click(function(){
-                var op=$(this).val();
-                if(op!="All Categories")
-                {
-                    console.log(op);
-                    $.ajax({
-                        type: "GET",
-                        url: "{% url "Lexplorecourses" %}",
-                        data: {
-                            'op': op,
-                        },
-                        success: function (data) {
-                            // document.getElementById("try").style.visibility = "hidden";
-                            page_obj=data
-                            console.log(data)
-                            // $(".figure").html(data);
-                        //    for(var i=0;i<data.length;i++)
-                        //    {
-                        //        ("#course_title"+data[i].Cid).val=(data[i].title);
-                        //        ("#course_text"+data[i].Cid).val=(data[i].description);
-                        //    }
-                            // $(".courses_container").html(data);
-                           
-
-                        }
-                    });
-                }
-            });
-        });
-           
 
         function check_ephone(phno, email) {
             var regex = /^[0-9]{10}$/;

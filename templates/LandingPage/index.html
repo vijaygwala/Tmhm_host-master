@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="{% static 'LandingPage/css/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'LandingPage/css/owl.theme.default.min.css' %}">
     {% endblock header %}
@@ -30,7 +30,7 @@
         min-height: 250px;
 
         border-radius: 10px;
-        border:2px solid black;
+       
     }
     .label{
         color: white;
@@ -112,7 +112,110 @@
     footer #social i:hover{
         color: #3db166;
     }
+    .explore-ul{
+        display: flex;
+    justify-content: center;
+    background-color: #ececec;
+    }
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active  {
+        background-color: #ececec;
+        /* border-bottom: 1px solid blue; */
+        border-color: #ececec #ececec blue;
+        color: #000;
+    }
+    .nav-pills .nav-link {
+    border-radius: 0;
+    }
+    .nav-link{
+        color: #000;
+    }
+    .carousel-wrap {
+  margin: 90px auto;
+  padding: 0 5%;
+  width: 80%;
+  position: relative;
+}
+
+/* fix blank or flashing items on carousel */
+.owl-carousel .item {
+  position: relative;
+  z-index: 100; 
+  -webkit-backface-visibility: hidden; 
+}
+
+/* end fix */
+.owl-nav > div {
+  margin-top: -26px;
+  position: absolute;
+  top: 50%;
+  color: #cdcbcd;
+}
+
+.owl-nav i {
+  font-size: 52px;
+}
+
+.owl-nav .owl-prev {
+  left: -30px;
+}
+
+.owl-nav .owl-next {
+  right: -30px;
+}
+.course_footer{
+    border-top: 1px solid #ececec;
+}
+.course_col{
+    border-radius: 6px;
+}
+.course {
+    width: 100%;
+    border-radius: 6px;
+    background: #FFFFFF;
+   
+    box-shadow: 0px 1px 10px rgba(29,34,47,0.1);
+}
+.item>.course-card:hover{
+    box-shadow: 2px 10px 10px rgba(29,34,47,0.1);
+}
+.course_body,.course_footer{
+    margin: 0 10px;
+}
+.land_co{
+    margin: 10px 0;
+}
+.item{
+    height: 100%;
+}
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+}
+a:hover{
+    text-decoration: none;
+}
+.land-cards{
+    margin:0 50px;
+}
+
     @media (max-width: 768px) {
+        .land-cards{
+        margin:0 20px;
+    }
+        .card-footer{
+            background-color: #fff;
+            border-top: none;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 0;
+
+        }
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px ;
+        }
         #navbar-left{
             display: block;
         }
@@ -161,12 +264,16 @@
             font-size: 7.2px;
         }
     }
-    @media (max-width: 375px){
+    @media (max-width: 389px){
         #query{
             margin-left: 0 !important;
         }
+        .alumni_logo{
+            width: 100px!important;
+        }
     }
     @media all and (max-width: 765px){
+        
         footer{
             font-size: 1rem;
         }
@@ -187,7 +294,71 @@
             text-align:center;
         }
     }
+    /* .tab-content .tab-pane {display: block;height:0}
+    .tab-content .active {height:auto} */
 
+ .land_co   .owl-dots .owl-dot {
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background:rgb(0 0 0 / 52%);
+}
+ .land_co .owl-dots .owl-dot.active{
+    background-color: blue;
+}
+.company_logo .owl-dots .owl-dot {
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background:#534c4c;
+}
+.company_logo  .owl-dots .owl-dot.active{
+    background-color: blue;
+}
+
+.alumni_logo{
+    margin:30px;
+    width: 130px!important;
+    height: auto;
+}
+.tab-content .card-body{
+    padding: 5px ;
+}
+.circle {
+                    border-radius: 50%;
+                    
+                    overflow: hidden;
+                    object-fit: cover;
+                    width: 80px!important;
+                    height: 80px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    background-color: #555;
+                }
+.alumuni_det{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.alumuni_det p{
+    margin-bottom: 3px;
+}
+.alumuni_card .owl-dots .owl-dot{
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background:#534c4c;
+}
+.alumuni_card  .owl-dots .owl-dot.active{
+    background-color: blue;
+}
+.cor_slider{
+    padding:0 100px;
+}
     </style>
     {% endblock stylesheet %}
 <!------------------------------------------>
@@ -225,12 +396,458 @@
         </div>
     </div>
 
-        <div class="container text-center">
+        <div class="container-fluid   text-center">
             <center><h2 style="color:black;font-family:'Raleway'"> Explore what excites you! </h2></center>
-            <div class='container-fluid'>
-                <figure class="figure">
+            <div class='container-fluid cor_slider'>
+                <!-- <figure class="figure">
                     <img src="{% static 'LandingPage/img/coming1.png' %}" class="figure-img img-fluid rounded" alt="" style="margin-left: 20px">
-                </figure>
+                </figure> -->
+                <div class="text-center" style="text-align: center;">
+                    <ul class="nav nav-tabs explore-ul" id="myTab" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">course1</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">course2</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">course3</a>
+                        </li>
+                    </ul>
+
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        
+                        <div class="owl-carousel land_co ftco-owl"  id="owl1">
+                                <div class="item">
+                                    
+                                        <a class=" course-card"  href="#">
+                                            <div class="card border">
+                                                <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                               
+                                                    
+                                                <!-- background-color:gainsboro -->
+                                                <div class="card-body" >
+                                                    <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                    <p>Web course </p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="course_info">
+                                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                        <span>230</span>
+                                                    </div>
+                                                    <div class="course_info">
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <span>5 Ratings</span>
+                                                    </div>
+                                                    <div class="course_price ml-auto">$130</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    
+                                </div>
+                                <div class="item">
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                <p>Web course </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>230</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                <p>Web course </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>230</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            
+                                <div class="item">
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                <p>Web course </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>230</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                        </div>
+                           
+                         
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="owl-carousel land_co ftco-owl"  id="owl2">
+                            <div class="item">
+                                
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >XYZ</h5>
+                                                <p>Web course </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>230</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                            </div>
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >XYZ</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >XYZ</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >XYZ</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                    
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >XYZ</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                    
+                        </div>  
+                        
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="owl-carousel land_co ftco-owl"  id="owl3">
+                            <div class="item">
+                                
+                                    <a class=" course-card"  href="#">
+                                        <div class="card border">
+                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                           
+                                                
+                                            <!-- background-color:gainsboro -->
+                                            <div class="card-body" >
+                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                                <p>Web course </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="course_info">
+                                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                    <span>230</span>
+                                                </div>
+                                                <div class="course_info">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <span>5 Ratings</span>
+                                                </div>
+                                                <div class="course_price ml-auto">$130</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                
+                            </div>
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                            <div class="item">
+                                <a class=" course-card"  href="#">
+                                    <div class="card border">
+                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                       
+                                            
+                                        <!-- background-color:gainsboro -->
+                                        <div class="card-body" >
+                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                            <p>Web course </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="course_info">
+                                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                                <span>230</span>
+                                            </div>
+                                            <div class="course_info">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <span>5 Ratings</span>
+                                            </div>
+                                            <div class="course_price ml-auto">$130</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                        <div class="item">
+                            <a class=" course-card"  href="#">
+                                <div class="card border">
+                                    <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                   
+                                        
+                                    <!-- background-color:gainsboro -->
+                                    <div class="card-body" >
+                                        <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
+                                        <p>Web course </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="course_info">
+                                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                                            <span>230</span>
+                                        </div>
+                                        <div class="course_info">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <span>5 Ratings</span>
+                                        </div>
+                                        <div class="course_price ml-auto">$130</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    
+                    </div>
+                    </div>
+                  </div>
+                </div>
             </div>
 
             <div class="container-fluid mt-4">
@@ -283,7 +900,83 @@
                 </div>
             </div>
         </div>
-        
+        <div class="container">
+            <div class="text-center">
+                <h1>Where our alumni work?</h1>
+                </div>
+            <div class="row">
+                
+                <div class="col-lg-6 col-md-6 col-12 text-center">
+                    <div class="company_logo owl-carousel  ftco-owl text-center">
+                        <div class="item" style="display: flex; flex-wrap: wrap;justify-content: center; align-items: center;">
+                            <img src="{% static 'LandingPage/img/amazon.webp' %}"    class="alumni_logo"  >
+                            <img src="{% static 'LandingPage/img/adobe.png' %}"    class="alumni_logo"  >
+                            <img src="{% static 'LandingPage/img/visa.png' %}"    class="alumni_logo"  >
+                            <img src="{% static 'LandingPage/img/flipkart.png' %}"    class="alumni_logo"  >
+                        </div>
+                        <div class="item" style="display: flex; flex-wrap: wrap;justify-content: center; align-items: center;">
+                            <img src="{% static 'LandingPage/img/ibm.webp' %}"    class="alumni_logo"  >
+                            <img src="{% static 'LandingPage/img/ola.png' %}"    class="alumni_logo"  >
+                            <img src="{% static 'LandingPage/img/swiggy.png' %}"    class="alumni_logo"  >
+                            <img src="{% static 'LandingPage/img/micro.webp' %}"    class="alumni_logo"  >
+                        </div>
+                        <div class="item" style="display: flex; flex-wrap: wrap;justify-content: center; align-items: center;">
+                        <img src="{% static 'LandingPage/img/company4.png' %}"    class="alumni_logo"  >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="alumuni_card  owl-carousel  ftco-owl text-center">
+                        <div class="item d-flex">
+                            <div class=" alumuni_det pt-3 ">
+                                <div class="text-center">
+                                <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                </div>
+                                    
+                                <!-- background-color:gainsboro -->
+                                <div class="card-body" >
+                                    <h5 class="card-title" style="color:red;" >Kamal Pabba</h5>
+                                    <p>Designation </p>
+                                    <p>Company</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="item d-flex">
+                            <div class=" alumuni_det pt-3 ">
+                                <div class="text-center">
+                                <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                </div>
+                                    
+                                <!-- background-color:gainsboro -->
+                                <div class="card-body" >
+                                    <h5 class="card-title" style="color:red;" >Vijay Gwala</h5>
+                                    <p>Designation </p>
+                                    <p>Company</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="item d-flex">
+                            <div class=" alumuni_det pt-3 ">
+                                <div class="text-center">
+                                <img class="card-img-top circle " src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                </div>
+                                    
+                                <!-- background-color:gainsboro -->
+                                <div class="card-body" >
+                                    <h5 class="card-title" style="color:red;" >Nazia </h5>
+                                    <p>Designation </p>
+                                    <p>Company</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <div class="container-fluid" style="background-color:  #eeeeee; max-height: 80%;">
             <div class="container1">
@@ -355,14 +1048,138 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/da956b6924.js" crossorigin="anonymous"></script>
-    <script src="{% static '/LandingPage/js/owl.carousel.js' %}"></script>
+    <script src="{% static 'campus/js/jquery.easing.1.3.js'%}"></script>
+    <script src="{% static 'campus/js/jquery.waypoints.min.js'%}"></script>
+    <!-- <script src="{% static '/LandingPage/js/owl.carousel.js' %}"></script>	 -->
+    <script src="{% static '/LandingPage/LandingPage/js/owl.carousel.min.js' %}"></script>	
+    <script src="{% static '/LandingPage/js/aos.js' %}"></script>
+    <script src="{% static 'LandingPage/js/main.js'%}"></script>
 
     {% endblock content %}
 
     {% block javascript %}
+
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+        initialize_owl($('#owl1'));
+  
+        let tabs = [
+            { target: '#home', owl: '#owl1' },
+            { target: '#profile', owl: '#owl2' },
+            { target: '#contact', owl: '#owl3' }
+            
+        ];
+
+        // Setup 'bs.tab' event listeners for each tab
+        tabs.forEach((tab) => {
+            $(`a[href="${ tab.target }"]`)
+            .on('shown.bs.tab', () => initialize_owl($(tab.owl)));
+           
+        });
+    });
+
+    function initialize_owl(el) {
+        el.owlCarousel({
+                autoplay: true,
+                autoHeight: true,
+                // items:1,
+                margin: 30,
+                stagePadding: 0,
+                autoplayHoverPause:true,
+                nav: true,
+                dots: true,
+                autoplay:3000,
+                navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+                responsive:{
+                0:{
+                    items: 2
+                },
+                600:{
+                    items: 3
+                },
+                768:{
+                    items: 3
+                },
+                1000:{
+                    items: 5
+                }
+                }
+                
+        });
+    }
+       
+    
+    $('.company_logo').owlCarousel({
+                autoplay: true,
+                autoHeight: true,
+                // items:1,
+                loop:true,
+                margin: 30,
+                stagePadding: 0,
+                autoplayHoverPause:true,
+                nav: true,
+                dots: true,
+                autoplay:3000,
+                navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+                responsive:{
+                0:{
+                    items: 1
+                },
+                600:{
+                    items: 1
+                },
+                768:{
+                    items: 1
+                },
+                1000:{
+                    items: 1
+                }
+                }
+                
+        });
+        
+        $('.alumuni_card').owlCarousel({
+                autoplay: true,
+                autoHeight: true,
+                // items:1,
+                loop:true,
+                margin: 30,
+                stagePadding: 0,
+                autoplayHoverPause:true,
+                nav: true,
+                dots: true,
+                autoplay:3000,
+                navText: ['<span class="ion-ios-arrow-back">', '<span class="ion-ios-arrow-forward">'],
+                responsive:{
+                0:{
+                    items: 1
+                },
+                600:{
+                    items: 1
+                },
+                768:{
+                    items: 2
+                },
+                1000:{
+                    items: 2
+                }
+                }
+                
+        });
+
+        
+    
+    
+        
+    </script>
+   
     <script>
+   
+
 
  function getCookie(name) {
     var cookieValue = null;
@@ -430,7 +1247,7 @@ $.ajaxSetup({
         console.log(errorThrown)
         console.log($("#msform").serialize());
     }
- })
+ });
   
 
 
@@ -449,6 +1266,7 @@ $.ajaxSetup({
             input.attr("type", "password");
             }
         });
+
 
         function check_ephone(phno, email){
             var regex = /^[0-9]{10}$/;

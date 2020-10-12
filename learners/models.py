@@ -35,8 +35,8 @@ class Learners(models.Model):
 class enrollment(models.Model):
     Lid = models.ForeignKey(Learners, on_delete=models.CASCADE)
     Cid = models.ForeignKey(Course, on_delete=models.CASCADE)
-    added = models.DateTimeField(auto_now_add=True,blank=True,null=True)
-    updated = models.DateTimeField(blank=True,null=True)
+    addedenroll = models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updatedenroll = models.DateTimeField(auto_now_add=True,blank=True,null=True)
     def __str__(self):
         return self.Lid.name
 

@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     # endVijay
     #amir
     'rest_framework.authtoken',
+    'wkhtmltopdf',
 ]
 # for go
 # By vijay

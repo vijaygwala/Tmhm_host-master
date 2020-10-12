@@ -35,6 +35,7 @@ def cart(request):
     #print(context['total'])
     return render(request,'LandingPage/cart/cart.html',context)
 
+
 def UpdateCart(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -45,45 +46,17 @@ def UpdateCart(request):
 
 
 #free content avialable for users here 
-@login_required(login_url='/home')
+@login_required(login_url='/LandingPage/signup')
 # @allowed_users(['Visiters','Learners','Facilitators'])
 def freecontent(request):
     return render(request,'LandingPage/freeContent/index.html')
-
-# users can expolore the courses from explore courses
-# def exploreCourses(request):
-#     cat=Category.objects.all()
-#     subcat=SubCategory.objects.all()
-#     course=Course.objects.all()
-#     query = request.GET.get('query')
-#     op=request.GET.get('op')
-#     if op!=None and op!="All Categories":
-#         course=Course.objects.filter(Q(subCat_id__cat_id__name__icontains=op))
-#     if query is not None:
-#         course = Course.objects.filter(Q(title__icontains=query) or Q(subCat_id__name__icontains= query)).order_by('Cid')
-#     print(course)
-#     paginator=Paginator(course.values(),6,orphans=1)
-#     page_number=request.GET.get('page')
-#     page_obj=paginator.get_page(page_number)
-#     context={
-#         'cat':cat.values(),
-#         'subcat':subcat.values(),
-#         'page_obj':page_obj
-        
-#     }
-
-#     print(course)
-#     if request.is_ajax() and op!="All Categories":
-#         data=CourseSerializers(page_obj,many=True).data
-#         print(CourseSerializers(page_obj,many=True).data)
-#         print(data)
-#         return JsonResponse(data,safe=False)
-#     return render(request,'LandingPage/exploreCourses/exploreCourses.html',context)
 
 
 #Landing page about us page
 def aboutus(request):
     return render(request, 'LandingPage/aboutus/aboutus.html')
+def careers(request):
+    return render(request,'LandingPage/careers/careers.html')
 
 #this is course page
 def CoursePage(request,pk):
@@ -95,7 +68,7 @@ def CoursePage(request,pk):
 
     star_list = course.star_count()
     print('LALALA',int(course.avg_rating()))
-    course_video=course.course_video.all()[0]
+    
     facilitator=course.offering.all()[0]
     all_course_of_facilitator = facilitator.offering.all()
     sum_of_avg_ratings = 0
@@ -114,7 +87,7 @@ def CoursePage(request,pk):
         print(val)
     except:
         pass
-    context={'course':course,'course_video':course_video,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
+    context={'course':course,'facilitator':facilitator,'month':month,'year':year,'similer':similer,
     'avg_rating': course.avg_rating(),
     'int_avg_rating': int(course.avg_rating()),
     'total_rating': total_rating,
