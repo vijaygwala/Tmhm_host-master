@@ -168,7 +168,7 @@ $(document).ready(function() {
                         <ul class="dropdown-menu">
                             {% if cat %}
                             {% for c in cat %}
-                            <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c }} </a>
+                            <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
                                 <ul class="submenu dropdown-menu">
                                     {% for subcat in c.subcategory_set.all %}
                                     <!-- {% if subcat.course_set.all|length == 0 %}
