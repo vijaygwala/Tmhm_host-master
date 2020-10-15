@@ -241,7 +241,7 @@ def exploreCourses(request):
     subcat=SubCategory.objects.all()
     course=Course.objects.all()
     query = request.GET.get('query')
-    option=request.GET.get('cat')
+    option=request.GET.get('categ')
     filter_level = request.GET.getlist('level')
     filter_subcat = request.GET.getlist('subcat')
     filter_lang = request.GET.getlist('lang')
