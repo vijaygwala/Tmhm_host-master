@@ -269,8 +269,8 @@ def exploreCourses(request):
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     context={
-        'cat':cat.values(),
-        'subcat':subcat.values(),
+        'categ':cat.values(),
+        'subcateg':subcat.values(),
         'page_obj':page_obj,
         'selected_cat': selected_cat
     }

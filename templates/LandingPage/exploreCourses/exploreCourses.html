@@ -294,10 +294,10 @@ Explore Courses
 
                                                 <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        {% for cat in subcat %}
+                                                        {% for cat in subcateg %}
                                                         <label class="container">
-                                                            <input type="checkbox" name="subcat" value="{{ cat.name }}">
-                                                            <span class="checkmark"></span>{{ cat.name }}
+                                                            <input type="checkbox" name="subcat" value="{{ categ.name }}">
+                                                            <span class="checkmark"></span>{{ categ.name }}
                                                           </label>
                                                         {% endfor %}
                                                     </div>
@@ -399,7 +399,7 @@ Explore Courses
                                 <option selected>All Categories</option>
                                 {% endif %}
                                 <option>All Categories</option>
-                                {% for c in cat %}
+                                {% for c in categ %}
                                 <option>{{ c.name }}</option>
                                 {% endfor %}
 							    </select>
@@ -530,7 +530,7 @@ Explore Courses
     </script>
     <script>
         function findCat(val){
-            window.location.href=`/explore/courses?cat=${val}`;
+            window.location.href=`/explore/courses?categ=${val}`;
         }
     </script>
     <!-- <script>
