@@ -220,9 +220,35 @@ footer #social i:hover{
                     <li class="nav-item">
                         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categories">Categories</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle parent-toggle" data-toggle="" href="{% url 'category'  %}" >Categories</a>
+                      <ul class="dropdown-menu">
+                          {% if cat %}
+                          {% for c in cat %}
+                          <li><a class="dropdown-item dropdown-toggle" href="#"> {{ c.name }} </a>
+                              <ul class="submenu dropdown-menu">
+                                  {% for subcat in c.subcategory_set.all %}
+                                  <!-- {% if subcat.course_set.all|length == 0 %}
+                                  <li><a class="dropdown-item" href="#">{{ subcat }}</a></li>
+                                  {% else %} -->
+                                  <li><a class="dropdown-item dropdown-toggle" href="#">{{ subcat }}</a>
+                                  <!-- {% endif %} -->
+                                      <ul class="submenu dropdown-menu">
+                                          {% for course in subcat.course_set.all %}
+                                          <li><a class="dropdown-item" href="{% url 'course' course.Cid %}">{{ course }}</a></li>
+                                          {% endfor %}
+                                      </ul>
+                                  </li>
+                                  {% endfor %}
+                              </ul>
+                          </li>
+                          {% endfor %}
+                          {% else %}
+                          <li><a class="dropdown-item dropdown-toggle" href="#"> No Courses  </a>
+
+                          {% endif %}
+                      </ul>
+                  </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Free">
                         Free Content
@@ -231,7 +257,13 @@ footer #social i:hover{
                 </ul>
 
                 <ul class="nav justify-content-end text-sm-left" id="navbar-left">
-                    
+                  <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0">
+                        {% csrf_token %}
+                        <input class="form-control" type="search" placeholder="Search by domain or course" aria-label="Search">
+                        <button class="btn my-sm-0" type="submit" style="color: black;"><i class="fa fa-search"></i></button>
+                    </form>
+                </li>
                    
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal" style="padding-left: 0;">Login</a>

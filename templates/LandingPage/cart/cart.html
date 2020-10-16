@@ -36,7 +36,7 @@ body,
             min-height: 100vh;
         }
 footer {
-            background: #eeeeee;
+           
             color: #757575;
             font-size: 13px;
             line-height: 1.2
@@ -66,6 +66,11 @@ footer {
         footer #social i:hover {
             color: #3db166;
         }
+        .probt{
+          width: 70%;
+          margin-left: auto;
+          margin-right: auto;
+        }
 
       </style>
 {% endblock stylesheet %}
@@ -77,9 +82,10 @@ footer {
       
       <div class="px-4 px-lg-0">
   <div class="pb-5">
+    {%if items %}
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" style="background: linear-gradient(45deg, #14BDEE, transparent);">
+        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" style="background: #fff; border: 1px solid;">
 
           <!-- Shopping cart table -->
           <div class="table-responsive">
@@ -121,32 +127,16 @@ footer {
         </div>
       </div>
 
-      <div class="row py-5 p-4 bg-white rounded shadow-sm" style="background: linear-gradient(45deg, #14BDEE, transparent);">
-        <div class="col-lg-6">
-          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
-          <div class="p-4">
-            <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
-            <div class="input-group mb-4 border rounded-pill p-2">
-              <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
-              <div class="input-group-append border-0">
-                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
-              </div>
-            </div>
-          </div>
-          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
-          <div class="p-4">
-            <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-            <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-          </div>
-        </div>
-        <div class="col-lg-6">
+      <div class="row py-5 p-4 bg-white rounded shadow-sm" style="background:#fff;border: 1px solid;">
+        
+        <div class="col-lg-12">
           <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
           <div class="p-4">
             <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
             <ul class="list-unstyled mb-4">
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>{{order.get_cart_total}}</strong></li>
               
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+              <!-- <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li> -->
               <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                 <h5 class="font-weight-bold">{{order.get_cart_total}}</h5>
               </li>
@@ -155,7 +145,7 @@ footer {
              {% if request.user.is_authenticated %}
             <button id="rzp-button1" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</button>
             {% else %}
-            <a href='{% url 'signup' %}?payment="continue"' class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+            <a href='{% url 'signup' %}?payment="continue"' class="btn btn-dark rounded-pill py-2 btn-block probt">Procceed to checkout</a>
             {% endif %}
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
@@ -198,6 +188,11 @@ document.getElementById('rzp-button1').onclick = function(e){
       </div>
 
     </div>
+    {% else %}
+        <div style="width: 100%; text-align: center;  ">
+          <p style="font-weight: 700;">No items added to cart</p>
+        </div>
+    {% endif %}
   </div>
 </div>
 {% endblock content %}      
