@@ -31,6 +31,22 @@ class UserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    from django.forms import ValidationError
+
+    def clean(self):
+        super(UserForm, self).clean() 
+        email = self.cleaned_data['email']
+        user=None
+        try:
+            user=CustomUser.objects.get(email=email)
+        except:
+            user=None
+        if user is not None:
+            self._errors['emailerror'] = self.error_class([ 
+                'Email is already exist']) 
+        return self.cleaned_data 
+
+        
     
 # Form of experience details  
 class ExperienceForm(ModelForm):
