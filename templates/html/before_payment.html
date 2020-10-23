@@ -1,284 +1,479 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-{% load static %}
-<head>
-<!-- If you delete this tag, the sky will fall on your head -->
-<meta name="viewport" content="width=device-width" />
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
-<title>experiment</title>
-	
-<style type="text/css">
-	/* ------------------------------------- 
-		GLOBAL 
-------------------------------------- */
-* { 
-	margin:0;
-	padding:0;
-}
-* { font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; }
-
-img { 
-	max-width: 100%; 
-}
-.collapse {
-	margin:0;
-	padding:0;
-}
-body {
-	-webkit-font-smoothing:antialiased; 
-	-webkit-text-size-adjust:none; 
-	width: 100%!important; 
-	height: 100%;
-}
-
-
-/* ------------------------------------- 
-		ELEMENTS 
-------------------------------------- */
-a { color: #2BA6CB;}
-
-.btn {
-	text-decoration:none;
-	color: #FFF;
-	background-color: #666;
-	padding:10px 16px;
-	font-weight:bold;
-	margin-right:10px;
-	text-align:center;
-	cursor:pointer;
-	display: inline-block;
-}
-
-p.callout {
-	padding:15px;
-	background-color:#ECF8FF;
-	margin-bottom: 15px;
-}
-.callout a {
-	font-weight:bold;
-	color: #2BA6CB;
-}
-
-table.social {
-/* 	padding:15px; */
-	background-color: #ebebeb;
-	
-}
-.social .soc-btn {
-	padding: 3px 7px;
-	font-size:12px;
-	margin-bottom:10px;
-	text-decoration:none;
-	color: #FFF;font-weight:bold;
-	display:block;
-	text-align:center;
-}
-a.fb { background-color: #3B5998!important; }
-a.tw { background-color: #1daced!important; }
-a.gp { background-color: #DB4A39!important; }
-a.ms { background-color: #000!important; }
-
-.sidebar .soc-btn { 
-	display:block;
-	width:100%;
-}
-
-/* ------------------------------------- 
-		HEADER 
-------------------------------------- */
-table.head-wrap { width: 100%;}
-
-.header.container table td.logo { padding: 15px; }
-.header.container table td.label { padding: 15px; padding-left:0px;}
-
-
-/* ------------------------------------- 
-		BODY 
-------------------------------------- */
-table.body-wrap { width: 100%;}
-
-
-/* ------------------------------------- 
-		FOOTER 
-------------------------------------- */
-table.footer-wrap { width: 100%;	clear:both!important;
-}
-.footer-wrap .container td.content  p { border-top: 1px solid rgb(215,215,215); padding-top:15px;}
-.footer-wrap .container td.content p {
-	font-size:10px;
-	font-weight: bold;
-	
-}
-
-
-/* ------------------------------------- 
-		TYPOGRAPHY 
-------------------------------------- */
-h1,h2,h3,h4,h5,h6 {
-font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; line-height: 1.1; margin-bottom:15px; color:#000;
-}
-h1 small, h2 small, h3 small, h4 small, h5 small, h6 small { font-size: 60%; color: #6f6f6f; line-height: 0; text-transform: none; }
-
-h1 { font-weight:200; font-size: 44px;}
-h2 { font-weight:200; font-size: 37px;}
-h3 { font-weight:500; font-size: 27px;}
-h4 { font-weight:500; font-size: 23px;}
-h5 { font-weight:900; font-size: 17px;}
-h6 { font-weight:900; font-size: 14px; text-transform: uppercase; color:#444;}
-
-.collapse { margin:0!important;}
-
-p, ul { 
-	margin-bottom: 10px; 
-	font-weight: normal; 
-	font-size:14px; 
-	line-height:1.6;
-}
-p.lead { font-size:17px; }
-p.last { margin-bottom:0px;}
-
-ul li {
-	margin-left:5px;
-	list-style-position: inside;
-}
-
-/* ------------------------------------- 
-		SIDEBAR 
-------------------------------------- */
-ul.sidebar {
-	background:#ebebeb;
-	display:block;
-	list-style-type: none;
-}
-ul.sidebar li { display: block; margin:0;}
-ul.sidebar li a {
-	text-decoration:none;
-	color: #666;
-	padding:10px 16px;
-/* 	font-weight:bold; */
-	margin-right:10px;
-/* 	text-align:center; */
-	cursor:pointer;
-	border-bottom: 1px solid #777777;
-	border-top: 1px solid #FFFFFF;
-	display:block;
-	margin:0;
-}
-ul.sidebar li a.last { border-bottom-width:0px;}
-ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.sidebar li a h5,ul.sidebar li a h6,ul.sidebar li a p { margin-bottom:0!important;}
-
-
-
-/* --------------------------------------------------- 
-		RESPONSIVENESS
-		Nuke it from orbit. It's the only way to be sure. 
------------------------------------------------------- */
-
-/* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
-.container {
-	display:block!important;
-	max-width:600px!important;
-	margin:0 auto!important; /* makes it centered */
-	clear:both!important;
-}
-
-/* This should also be a block element, so that it will fill 100% of the .container */
-.content {
-	padding:15px;
-	max-width:600px;
-	margin:0 auto;
-	display:block; 
-}
-
-/* Let's make sure tables in the content area are 100% wide */
-.content table { width: 100%; }
-
-
-/* Odds and ends */
-.column {
-	width: 300px;
-	float:left;
-}
-.column tr td { padding: 15px; }
-.column-wrap { 
-	padding:0!important; 
-	margin:0 auto; 
-	max-width:600px!important;
-}
-.column table { width:100%;}
-.social .column {
-	width: 280px;
-	min-width: 279px;
-	float:left;
-}
-
-/* Be sure to place a .clear element after each set of columns, just to be safe */
-.clear { display: block; clear: both; }
-
-
-/* ------------------------------------------- 
-		PHONE
-		For clients that support media queries.
-		Nothing fancy. 
--------------------------------------------- */
-@media only screen and (max-width: 600px) {
-	
-	a[class="btn"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}
-
-	div[class="column"] { width: auto!important; float:none!important;}
-	
-	table.social div[class="column"] {
-		width:auto!important;
-	}
-
-}
-</style>
-
-</head>
- 
-<body bgcolor="#FFFFFF">
-
-<!-- HEADER -->
-
-
-<!-- BODY -->
-<table class="body-wrap">
-	<tr>
-		<td></td>
-		<td class="container" bgcolor="#FFFFFF">
-
-			<div class="content">
-			<table>
-				<tr>
-					<td>
+		<html>
+		  <head>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta name="x-apple-disable-message-reformatting" />
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+			<title></title>
+			<style type="text/css" rel="stylesheet" media="all">
+			/* Base ------------------------------ */
+			
+			@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap");
+			body {
+			  width: 100% !important;
+			  height: 100%;
+			  margin: 0;
+			  -webkit-text-size-adjust: none;
+			}
+			
+			a {
+			  color: #3869D4;
+			}
+			
+			a img {
+			  border: none;
+			}
+			
+			td {
+			  word-break: break-word;
+			}
+			
+			.preheader {
+			  display: none !important;
+			  visibility: hidden;
+			  mso-hide: all;
+			  font-size: 1px;
+			  line-height: 1px;
+			  max-height: 0;
+			  max-width: 0;
+			  opacity: 0;
+			  overflow: hidden;
+			}
+			/* Type ------------------------------ */
+			
+			body,
+			td,
+			th {
+			  font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+			}
+			
+			h1 {
+			  margin-top: 0;
+			  color: #333333;
+			  font-size: 22px;
+			  font-weight: bold;
+			  text-align: left;
+			}
+			
+			h2 {
+			  margin-top: 0;
+			  color: #333333;
+			  font-size: 16px;
+			  font-weight: bold;
+			  text-align: left;
+			}
+			
+			h3 {
+			  margin-top: 0;
+			  color: #333333;
+			  font-size: 14px;
+			  font-weight: bold;
+			  text-align: left;
+			}
+			
+			td,
+			th {
+			  font-size: 16px;
+			}
+			
+			p,
+			ul,
+			ol,
+			blockquote {
+			  margin: .4em 0 1.1875em;
+			  font-size: 16px;
+			  line-height: 1.625;
+			}
+			
+			p.sub {
+			  font-size: 13px;
+			}
+			/* Utilities ------------------------------ */
+			
+			.align-right {
+			  text-align: right;
+			}
+			
+			.align-left {
+			  text-align: left;
+			}
+			
+			.align-center {
+			  text-align: center;
+			}
+			/* Buttons ------------------------------ */
+			
+			.button {
+			  background-color: #3869D4;
+			  border-top: 10px solid #3869D4;
+			  border-right: 18px solid #3869D4;
+			  border-bottom: 10px solid #3869D4;
+			  border-left: 18px solid #3869D4;
+			  display: inline-block;
+			  color: #FFF;
+			  text-decoration: none;
+			  border-radius: 3px;
+			  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+			  -webkit-text-size-adjust: none;
+			  box-sizing: border-box;
+			}
+			
+			.button--green {
+			  background-color: #22BC66;
+			  border-top: 10px solid #22BC66;
+			  border-right: 18px solid #22BC66;
+			  border-bottom: 10px solid #22BC66;
+			  border-left: 18px solid #22BC66;
+			}
+			
+			.button--red {
+			  background-color: #FF6136;
+			  border-top: 10px solid #FF6136;
+			  border-right: 18px solid #FF6136;
+			  border-bottom: 10px solid #FF6136;
+			  border-left: 18px solid #FF6136;
+			}
+			
+			@media only screen and (max-width: 500px) {
+			  .button {
+				width: 100% !important;
+				text-align: center !important;
+			  }
+			}
+			/* Attribute list ------------------------------ */
+			
+			.attributes {
+			  margin: 0 0 21px;
+			}
+			
+			.attributes_content {
+			  background-color: #F4F4F7;
+			  padding: 16px;
+			}
+			
+			.attributes_item {
+			  padding: 0;
+			}
+			/* Related Items ------------------------------ */
+			
+			.related {
+			  width: 100%;
+			  margin: 0;
+			  padding: 25px 0 0 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			}
+			
+			.related_item {
+			  padding: 10px 0;
+			  color: #CBCCCF;
+			  font-size: 15px;
+			  line-height: 18px;
+			}
+			
+			.related_item-title {
+			  display: block;
+			  margin: .5em 0 0;
+			}
+			
+			.related_item-thumb {
+			  display: block;
+			  padding-bottom: 10px;
+			}
+			
+			.related_heading {
+			  border-top: 1px solid #CBCCCF;
+			  text-align: center;
+			  padding: 25px 0 10px;
+			}
+			/* Discount Code ------------------------------ */
+			
+			.discount {
+			  width: 100%;
+			  margin: 0;
+			  padding: 24px;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			  background-color: #F4F4F7;
+			  border: 2px dashed #CBCCCF;
+			}
+			
+			.discount_heading {
+			  text-align: center;
+			}
+			
+			.discount_body {
+			  text-align: center;
+			  font-size: 15px;
+			}
+			/* Social Icons ------------------------------ */
+			
+			.social {
+			  width: auto;
+			}
+			
+			.social td {
+			  padding: 0;
+			  width: auto;
+			}
+			
+			.social_icon {
+			  height: 20px;
+			  margin: 0 8px 10px 8px;
+			  padding: 0;
+			}
+			/* Data table ------------------------------ */
+			
+			.purchase {
+			  width: 100%;
+			  margin: 0;
+			  padding: 35px 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			}
+			
+			.purchase_content {
+			  width: 100%;
+			  margin: 0;
+			  padding: 25px 0 0 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			}
+			
+			.purchase_item {
+			  padding: 10px 0;
+			  color: #51545E;
+			  font-size: 15px;
+			  line-height: 18px;
+			}
+			
+			.purchase_heading {
+			  padding-bottom: 8px;
+			  border-bottom: 1px solid #EAEAEC;
+			}
+			
+			.purchase_heading p {
+			  margin: 0;
+			  color: #85878E;
+			  font-size: 12px;
+			}
+			
+			.purchase_footer {
+			  padding-top: 15px;
+			  border-top: 1px solid #EAEAEC;
+			}
+			
+			.purchase_total {
+			  margin: 0;
+			  text-align: right;
+			  font-weight: bold;
+			  color: #333333;
+			}
+			
+			.purchase_total--label {
+			  padding: 0 15px 0 0;
+			}
+			
+			body {
+			  background-color: #F4F4F7;
+			  color: #51545E;
+			}
+			
+			p {
+			  color: #51545E;
+			}
+			
+			p.sub {
+			  color: #6B6E76;
+			}
+			
+			.email-wrapper {
+			  width: 100%;
+			  margin: 0;
+			  padding: 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			  background-color: #F4F4F7;
+			}
+			
+			.email-content {
+			  width: 100%;
+			  margin: 0;
+			  padding: 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			}
+			/* Masthead ----------------------- */
+			
+			.email-masthead {
+			  padding: 25px 0;
+			  text-align: center;
+			}
+			
+			.email-masthead_logo {
+			  width: 94px;
+			}
+			
+			.email-masthead_name {
+			  font-size: 16px;
+			  font-weight: bold;
+			  color: #A8AAAF;
+			  text-decoration: none;
+			  text-shadow: 0 1px 0 white;
+			}
+			/* Body ------------------------------ */
+			
+			.email-body {
+			  width: 100%;
+			  margin: 0;
+			  padding: 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			  background-color: #FFFFFF;
+			}
+			
+			.email-body_inner {
+			  width: 570px;
+			  margin: 0 auto;
+			  padding: 0;
+			  -premailer-width: 570px;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			  background-color: #FFFFFF;
+			}
+			
+			.email-footer {
+			  width: 570px;
+			  margin: 0 auto;
+			  padding: 0;
+			  -premailer-width: 570px;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			  text-align: center;
+			}
+			
+			.email-footer p {
+			  color: #6B6E76;
+			}
+			
+			.body-action {
+			  width: 100%;
+			  margin: 30px auto;
+			  padding: 0;
+			  -premailer-width: 100%;
+			  -premailer-cellpadding: 0;
+			  -premailer-cellspacing: 0;
+			  text-align: center;
+			}
+			
+			.body-sub {
+			  margin-top: 25px;
+			  padding-top: 25px;
+			  border-top: 1px solid #EAEAEC;
+			}
+			
+			.content-cell {
+			  padding: 35px;
+			}
+			.logo-img{
+				max-width:150px;
+			}
+			/*Media Queries ------------------------------ */
+			
+			@media only screen and (max-width: 600px) {
+			  .email-body_inner,
+			  .email-footer {
+				width: 100% !important;
+			  }
+			}
+			
+			@media (prefers-color-scheme: dark) {
+			  body,
+			  .email-body,
+			  .email-body_inner,
+			  .email-content,
+			  .email-wrapper,
+			  .email-masthead,
+			  .email-footer {
+				background-color: #333333 !important;
+				color: #FFF !important;
+			  }
+			  p,
+			  ul,
+			  ol,
+			  blockquote,
+			  h1,
+			  h2,
+			  h3 {
+				color: #FFF !important;
+			  }
+			  .attributes_content,
+			  .discount {
+				background-color: #222 !important;
+			  }
+			  .email-masthead_name {
+				text-shadow: none !important;
+			  }
+			}
+			</style>
+			<!--[if mso]>
+			<style type="text/css">
+			  .f-fallback  {
+				font-family: Arial, sans-serif;
+			  }
+			</style>
+		  <![endif]-->
+		  </head>
+		  <body>
+			<span class="preheader">This is an '.FRONT_SITE_NAME.'</span>
+			<table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+			  <tr>
+				<td align="center">
+				  <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+					<tr>
+					  <td class="email-masthead">
 						
-				
-            	
-						
-						<!-- A Real Hero (and a real human being) -->
-						<p><img src='cid:{{image_name}}' /></p><!-- /hero -->
-						
-							
-												
-						<!-- social & contact -->
-											
-					</td>
-				</tr>
+                        <a href="https://imgbb.com/" class="f-fallback email-masthead_name"><img src="https://i.ibb.co/GWxj91c/logotiny.png" alt="logotiny" border="0"></a>
+                        <p>Learnopad</p>
+					  </td>
+					</tr>
+					<!-- Email Body -->
+					<tr>
+					  <td class="email-body" width="100%" cellpadding="0" cellspacing="0">
+						<table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+						  <!-- Body content -->
+						  <tr>
+							<td class="content-cell">
+							  <div class="f-fallback">
+								<h1>Hi John doe,</h1>
+								
+								<div style="text-align:cenetr;">
+										<p>Thanks for subscibing to our newsletter, will update you with the latest.</p>
+								</div>
+								
+								
+								<p>If you have any questions about this invoice, simply reply to this email or reach out to our <a href="">support team</a> for help.</p>
+								<p>Cheers,
+								  <br>Learnopad </p>
+								<!-- Sub copy -->
+								
+							  </div>
+							</td>
+						  </tr>
+						</table>
+					  </td>
+					</tr>
+					
+				  </table>
+				</td>
+			  </tr>
 			</table>
-			</div>
-									
-		</td>
-		<td></td>
-	</tr>
-</table><!-- /BODY -->
-
-<!-- FOOTER -->
-
-</body>
-</html>
+		  </body>
+		</html>

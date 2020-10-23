@@ -1265,7 +1265,7 @@ $(document).ready(function() {
       
        var $thisURL = $myForm.attr('action')
        $.ajax({
-           url: {% url 'councelling' %},
+           url: "{% url 'councelling' %}",
           type: "POST",
            
             
@@ -1286,7 +1286,7 @@ $(document).ready(function() {
 
     function handleFormError(jqXHR, textStatus, errorThrown){
         console.log(jqXHR)
-         console.log(textStatus)
+        console.log(textStatus)
         console.log(errorThrown)
         console.log($("#msform").serialize());
     }
