@@ -312,7 +312,7 @@
 			/* Masthead ----------------------- */
 			
 			.email-masthead {
-			  padding: 25px 0;
+			  padding: 15px 0;
 			  text-align: center;
 			}
 			
@@ -432,7 +432,7 @@
 		  <![endif]-->
 		  </head>
 		  <body>
-			<span class="preheader">This is an '.FRONT_SITE_NAME.'</span>
+			<span class="preheader">Learnopad</span>
 			<table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 			  <tr>
 				<td align="center">
@@ -440,7 +440,7 @@
 					<tr>
 					  <td class="email-masthead">
 						
-                        <a href="https://imgbb.com/" class="f-fallback email-masthead_name"><img src="https://i.ibb.co/GWxj91c/logotiny.png" alt="logotiny" border="0"></a>
+                        <a href="https://imgbb.com/" class="f-fallback email-masthead_name"><img src="https://i.ibb.co/nn4W7JP/logotiny.png"  alt="logotiny" border="0"></a>
                         <p>Learnopad</p>
 					  </td>
 					</tr>
@@ -452,16 +452,19 @@
 						  <tr>
 							<td class="content-cell">
 							  <div class="f-fallback">
-								<h1>Hi John doe,</h1>
+								<h1>Hi {{name}},</h1>
 								
 								<div style="text-align:cenetr;">
-										<p>Thanks for subscibing to our newsletter, will update you with the latest.</p>
+										<p>{{msg}}</p>
+										{% if link %}
+										<a href="{{link}}">{{link}}</a>
+										{% endif %}
 								</div>
 								
 								
-								<p>If you have any questions about this invoice, simply reply to this email or reach out to our <a href="">support team</a> for help.</p>
-								<p>Cheers,
-								  <br>Learnopad </p>
+								<!-- <p>If you have any questions about this invoice, simply reply to this email or reach out to our <a href="">support team</a> for help.</p> -->
+								<p>Regards,
+								  <br>Team TMHM </p>
 								<!-- Sub copy -->
 								
 							  </div>

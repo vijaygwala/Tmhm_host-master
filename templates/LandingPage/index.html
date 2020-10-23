@@ -431,159 +431,35 @@ a:hover{
                     <div class="tab-pane fade " id="c-{{c.cat_id}}" role="tabpanel" aria-labelledby="{{c.name}}">
                         
                         <div class="owl-carousel land_co ftco-owl"  id="owl-{{c.cat_id}}">
+                            {% for course in c.course_set.all %}
                                 <div class="item">
-                                    
+                
                                         <a class=" course-card"  href="#">
                                             <div class="card border">
-                                                <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
+                                                <img class="card-img-top" src="{{course.thumbnail.url}}" alt="Card image cap" height="150px">
                                                
                                                     
                                                 <!-- background-color:gainsboro -->
                                                 <div class="card-body" >
-                                                    <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
-                                                    <p>Beginner </p>
+                                                    <h5 class="card-title" style="color:#4e73df;" >{{course.title}}</h5>
+                                                    <p>{{course.level}} </p>
                                                 </div>
                                                 <div class="card-footer">
                                                     <div class="course_info">
                                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                        <span>15</span>
+                                                        <span>{{course.months}}</span>
                                                     </div>
                                                     <div class="course_info">
                                                         <i class="fa fa-star" aria-hidden="true"></i>
                                                         <span>5 Ratings</span>
                                                     </div>
-                                                    <div class="course_price ml-auto">$130</div>
+                                                    <div class="course_price ml-auto">{{course.price}} INR</div>
                                                 </div>
                                             </div>
                                         </a>
                                     
                                 </div>
-                                <div class="item">
-                                    <a class=" course-card"  href="#">
-                                        <div class="card border">
-                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                                           
-                                                
-                                            <!-- background-color:gainsboro -->
-                                            <div class="card-body" >
-                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
-                                                <p>Beginner </p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="course_info">
-                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>15</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">$130</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <a class=" course-card"  href="#">
-                                        <div class="card border">
-                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                                           
-                                                
-                                            <!-- background-color:gainsboro -->
-                                            <div class="card-body" >
-                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
-                                                <p>Beginner </p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="course_info">
-                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>15</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">$130</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            
-                                <div class="item">
-                                    <a class=" course-card"  href="#">
-                                        <div class="card border">
-                                            <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                                            <!-- background-color:gainsboro -->
-                                            <div class="card-body" >
-                                                <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
-                                                <p>Beginner </p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="course_info">
-                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                    <span>15</span>
-                                                </div>
-                                                <div class="course_info">
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <span>5 Ratings</span>
-                                                </div>
-                                                <div class="course_price ml-auto">$130</div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            
-                            <div class="item">
-                                <a class=" course-card"  href="#">
-                                    <div class="card border">
-                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                                       
-                                            
-                                        <!-- background-color:gainsboro -->
-                                        <div class="card-body" >
-                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
-                                            <p>Beginner </p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="course_info">
-                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                <span>15</span>
-                                            </div>
-                                            <div class="course_info">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <span>5 Ratings</span>
-                                            </div>
-                                            <div class="course_price ml-auto">$130</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a class=" course-card"  href="#">
-                                    <div class="card border">
-                                        <img class="card-img-top" src="{% static 'LandingPage/images/course_4.jpg' %}" alt="Card image cap" height="150px">
-                                       
-                                            
-                                        <!-- background-color:gainsboro -->
-                                        <div class="card-body" >
-                                            <h5 class="card-title" style="color:#4e73df;" >ABC</h5>
-                                            <p>Beginner </p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <div class="course_info">
-                                                <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                <span>15</span>
-                                            </div>
-                                            <div class="course_info">
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <span>5 Ratings</span>
-                                            </div>
-                                            <div class="course_price ml-auto">$130</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        
+                               {% endfor %}
                         </div>
                     <script>
                         $("#owl-{{c.cat_id}}").owlCarousel({
