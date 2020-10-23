@@ -244,7 +244,7 @@ def exploreCourses(request):
     subcat=SubCategory.objects.all()
     course=Course.objects.all()
     query = request.GET.get('query')
-    option=request.GET.get('cat')
+    option=request.GET.get('categ')
     filter_level = request.GET.getlist('level')
     filter_subcat = request.GET.getlist('subcat')
     filter_lang = request.GET.getlist('lang')
@@ -272,8 +272,8 @@ def exploreCourses(request):
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     context={
-        'cat':cat.values(),
-        'subcat':subcat.values(),
+        'categ':cat.values(),
+        'subcateg':subcat.values(),
         'page_obj':page_obj,
         'selected_cat': selected_cat
     }

@@ -72,9 +72,6 @@ def successOnRegistration(to,template):
     sender =settings.EMAIL_HOST_USER # 
     image_path = Path.cwd() / 'static' / 'email'/template
     image_name = Path(image_path).name
-    
-
-    subject = "Thankyou for Becoming a ChangeMaker"
     context={
         'image_name':image_name
      }
@@ -91,9 +88,6 @@ def successOnShortlisted(recipient_list,template):
     sender =settings.EMAIL_HOST_USER # 
     image_path = Path.cwd() / 'static' / 'email'/template
     image_name = Path(image_path).name
-    
-
-    subject = "Thankyou for Becoming a ChangeMaker"
     context={
         'image_name':image_name
      }

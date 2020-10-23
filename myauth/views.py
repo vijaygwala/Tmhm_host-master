@@ -34,6 +34,7 @@ from django.contrib.messages import get_messages
 def login_page(request):
     return render(request,'login/login.html')
 def signup(request):
+    exist=False
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -51,9 +52,15 @@ def signup(request):
             if payment is not None:
                 return redirect('/Courses/Cart/')
             return redirect('/')
+        else:
+            exist=True
+              
+
+            
+
     else:
         form = UserForm()
-    return render(request, 'LandingPage/signup/signup.html', {'form': form})
+    return render(request, 'LandingPage/signup/signup.html', {'form': form,'exist':exist})
 
 class user_login(View):
     
