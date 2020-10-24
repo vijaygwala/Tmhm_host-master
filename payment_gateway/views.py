@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.serializers.json import DjangoJSONEncoder
 # razor pay account setup
 import razorpay
-client = razorpay.Client(auth=("rzp_test_0G5HtLCg0WpC26", "y8iPiSBFRf8w2Y1W0L6Q7F55"))
+client = razorpay.Client(auth=("rzp_live_9InLer7hkxhkys", "iPBsUF4R0HvK2rqGdAKpzAl5"))
 from mailing.views import *
 
     
@@ -33,15 +33,16 @@ def create_order(request):
         for id in course:
             subcat=SubCategory.objects.get(subCat_id=id)
             catlist.append(subcat.name)
-        if(data['plan']==1):
-            data['order_amount']=4999
-        elif(data['plan']==2):
-            data['order_amount']=7499
+        print(data['plan'])
+        if(data['plan']=='1'):
+            data['order_amount']=1
+        elif(data['plan']=='2'):
+            data['order_amount']=10
         else:
-            data['order_amount']=9999
+            data['order_amount']=100
 
-        
-        order_amount=len(catlist)*data['order_amount']*100
+        print(data['order_amount'])
+        order_amount=data['order_amount']*100
         context['total']=order_amount/100
         data[order_amount]=context['total']
         print("checkpoint 1")
